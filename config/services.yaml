@@ -4,6 +4,9 @@
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
+    app.w3c_api_url: '%env(resolve:W3C_API_URL)%'
+    app.w3c_api_token: '%env(resolve:W3C_API_KEY)%'
+    app.craftcms_api_url: '%env(resolve:CRAFTCMS_API_URL)%'
 
 services:
     # default configuration for services in *this* file
