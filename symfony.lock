@@ -59,6 +59,9 @@
     "league/commonmark": {
         "version": "1.6.0"
     },
+    "masterminds/html5": {
+        "version": "2.7.4"
+    },
     "monolog/monolog": {
         "version": "2.2.0"
     },
