@@ -17,7 +17,7 @@ class DefaultController extends AbstractController
     {
         // @todo Set cache (set in service)
         // Please note ping() does not use cache, all other requests will
-        $cache = new FilesystemTagAwareAdapter('cache', 0, __DIR__ . '/var/cache/');
+        $cache = new FilesystemTagAwareAdapter('cache', 0, __DIR__ . '/../../var/cache/');
         $w3CApi->setCache($cache);
 
         $response = $w3CApi->getSpecifications();

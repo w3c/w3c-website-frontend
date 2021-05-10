@@ -11,6 +11,8 @@
 <div class="example-wrapper">
     <h1>Hello! ✅</h1>
 
-    <p>Found {{ specifications.total }} specifications in W3C API ({{ specifications_cache_hit ? 'cache hit' : 'live request' }})</p>
+    <p>W3C API available: {{ w3c_available ? 'yes' : 'no' }}</p>
+    <p>Craft CMS API available: {{ craft_available ? 'yes' : 'no' }}</p>
+    <p>Found {{ specifications.total | number_format }} specifications in W3C API ({{ specifications_cache_hit ? 'cache hit' : 'live request' }})</p>
 </div>
 {% endblock %}
