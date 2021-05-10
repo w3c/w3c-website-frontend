@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\Service;
 
 use Strata\Frontend\Repository\CraftCms\CraftCms;
-use Strata\Frontend\Schema\Schema;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 
 class CraftCmsApi extends CraftCms
@@ -25,6 +24,10 @@ class CraftCmsApi extends CraftCms
         $contentSchema = null;
 
         parent::__construct($baseUrl, $contentSchema);
+
+        // Set default auth token (read access only)
+        $token = $parameters->get('app.craftcms_api_read_token');
+        $this->setAuthorization($token);
     }
 
 }

@@ -25,8 +25,8 @@ class W3CApi extends ContentRepository implements RepositoryInterface
         $baseUrl = $parameters->get('app.w3c_api_url');
         $this->provider = new Rest($baseUrl);
 
-        $token = $parameters->get('app.w3c_api_token');
-        $this->setAuthorization($token);
+        $key = $parameters->get('app.w3c_api_key');
+        $this->setAuthorization($key);
     }
 
     /**
@@ -53,7 +53,7 @@ class W3CApi extends ContentRepository implements RepositoryInterface
     }
 
     /**
-     * Check the API is available
+     * Check the API is available (never uses the cache)
      *
      * @return bool
      * @throws \Strata\Data\Exception\DecoderException
@@ -66,12 +66,23 @@ class W3CApi extends ContentRepository implements RepositoryInterface
      */
     public function ping(): bool
     {
+        $result = false;
+        $cacheEnabled = $this->isCacheEnabled();
+        if ($cacheEnabled) {
+            $this->disableCache();
+        }
+
         $response = $this->getProvider()->get('healthcheck');
         $data = $this->getProvider()->decode($response);
         if ($data['app'] === true && $data['database'] === true) {
-            return true;
+            $result = true;
         }
-        return false;
+
+        if ($cacheEnabled) {
+            $this->enableCache();
+        }
+
+        return $result;
     }
 
     /**
