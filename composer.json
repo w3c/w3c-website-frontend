@@ -1,4 +1,6 @@
 {
+    "name": "w3c/website-frontend",
+    "description": "W3C Website frontend application",
     "type": "project",
     "license": "proprietary",
     "minimum-stability": "dev",

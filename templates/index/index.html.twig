@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello IndexController!{% endblock %}
+{% block title %}{{ 'title'|trans }}{% endblock %}
 
 {% block body %}
 <style>
@@ -9,10 +9,10 @@
 </style>
 
 <div class="example-wrapper">
-    <h1>Hello! ✅</h1>
+    <h1>{{ block('title') }}</h1>
 
-    <p>W3C API available: {{ w3c_available ? 'yes' : 'no' }}</p>
-    <p>Craft CMS API available: {{ craft_available ? 'yes' : 'no' }}</p>
-    <p>Found {{ specifications.total | number_format }} specifications in W3C API ({{ specifications_cache_hit ? 'cache hit' : 'live request' }})</p>
+    <p>{{ 'api_available.w3c'|trans({'available': w3c_available}) }}</p>
+    <p>{{ 'api_available.craft'|trans({'available': craft_available}) }}</p>
+    <p>{{ 'specifications_found'|trans({'total': specifications.total, 'cache': specifications_cache_hit}) }}</p>
 </div>
 {% endblock %}

@@ -1,0 +1,22 @@
+welcome: Welcome!
+title: Hello IndexController!
+api_available:
+    w3c: >-
+        W3C API available: {available, select,
+                1 {yes}
+            other {no}
+        }
+    craft: >-
+        Craft CMS API available: {available, select,
+                1 {yes}
+            other {no}
+        }
+specifications_found: >-
+    Found {total, plural,
+           =0 {no specifications}
+          one {# specification}
+        other {# specifications}
+    } in W3C API ({cache, select,
+            1 {cache hit}
+        other {live request}
+    })

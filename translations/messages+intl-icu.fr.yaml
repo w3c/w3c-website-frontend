@@ -1,0 +1,22 @@
+welcome: Bienvenue !
+title: Bonjour IndexController !
+api_available:
+    w3c: >-
+        Disponibilité de l'API W3C: {available, select,
+                1 {oui}
+            other {non}
+        }
+    craft: >-
+        Disponibilité de l'API Craft CMS: {available, select,
+                1 {oui}
+            other {non}
+        }
+specifications_found: >-
+    {total, plural,
+           =0 {Pas de spécification trouvée}
+          one {# spécification trouvée}
+        other {# spécifications trouvées}
+    } dans l'API W3C ({cache, select,
+            1 {depuis le cache}
+        other {requête directe}
+    })
