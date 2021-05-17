@@ -14,5 +14,12 @@
     <p>{{ 'api_available.w3c'|trans({'available': w3c_available}) }}</p>
     <p>{{ 'api_available.craft'|trans({'available': craft_available}) }}</p>
     <p>{{ 'specifications_found'|trans({'total': specifications.total, 'cache': specifications_cache_hit}) }}</p>
+
+    <dl>
+        <dt>Lang:</dt>
+        <dd id="lang">{{ app.request.locale }}</dd>
+        <dt>Route:</dt>
+        <dd id="route">{{ route }}</dd>
+    </dl>
 </div>
 {% endblock %}
