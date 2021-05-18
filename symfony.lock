@@ -638,6 +638,9 @@
     "twig/twig": {
         "version": "v3.3.0"
     },
+    "w3c/website-templates-bundle": {
+        "version": "dev-main"
+    },
     "webmozart/assert": {
         "version": "1.10.0"
     }
