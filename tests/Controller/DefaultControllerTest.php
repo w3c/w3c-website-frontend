@@ -6,13 +6,20 @@ use Symfony\Component\Panther\PantherTestCase;
 
 class DefaultControllerTest extends PantherTestCase
 {
+    protected $client;
+
+    public function setUp(): void
+    {
+        $browser = array_key_exists('PANTHER_BROWSER', $_SERVER) ? $_SERVER['PANTHER_BROWSER'] : self::CHROME;
+        $this->client  = static::createPantherClient(['browser' => $browser]);
+    }
+
     /**
      * @dataProvider provider
      */
     public function testIndex(string $lang, string $langPrefix, string $path): void
     {
-        $client = static::createPantherClient();
-        $crawler = $client->request('GET', $langPrefix . $path);
+        $crawler = $this->client->request('GET', $langPrefix . $path);
 
         $this->assertSelectorAttributeContains('html', 'lang', $lang);
         $this->assertSelectorTextSame('#lang', $lang);
