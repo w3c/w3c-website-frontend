@@ -14,7 +14,8 @@ use Symfony\Component\Routing\Annotation\Route;
 class DefaultController extends AbstractController
 {
     /**
-     * @Route("/{route}", requirements={"route"=".+"}, defaults={"route"=""})
+     * @Route("/{route}", requirements={"route"=".+"}, defaults={"route"=""}, priority=-1)
+     * @todo route priority is temporarily set to -1 as it's extremely greedy because of the {route} parameter.
      */
     public function index(string $route, W3CApi $w3CApi, CraftCmsApi $craftApi): Response
     {
