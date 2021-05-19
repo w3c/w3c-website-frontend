@@ -29,6 +29,19 @@ You can pass arguments to the translation via:
 
 Read more on [selecting different messages based on a condition](https://symfony.com/doc/current/translation/message_format.html#selecting-different-messages-based-on-a-condition). 
 
+## Messages from w3c/website-templates-bundle
+
+[w3c/website-templates-bundle](https://github.com/w3c/website-templates-bundle) also defines and uses some translatable
+strings for messages that are common to all templates. They are defined in a different translation domain named
+`w3c_website_templates_bundle` as recommended
+in [Symfony best practices](https://symfony.com/doc/current/bundles/best_practices.html#translation-files).
+Those strings are defined in the [bundle's translations directory](https://github.com/w3c/w3c-website-templates-bundle/tree/main/translations).
+
+To use those strings you need to pass the domain as a parameter of the trans filter or tag:
+```html
+{{ 'w3c.description'|trans([], 'w3c_website_templates_bundle') }}
+```
+
 ### Outputting messages in JavaScript
 
 There is a need to display localized messages on the front-end via JavaScript. We use JSON messages file to help 
