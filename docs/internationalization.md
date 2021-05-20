@@ -11,7 +11,16 @@ on the page (e.g. microcopy such as 'Displaying 100 results').
 
 Translations are stored in `translations/` and use the [ICU message format](https://symfony.com/doc/current/translation/message_format.html).
 
-It's important for messages to have
+It's important for messages to have clear and understandable keywords that represent what the message is for. We can 
+also use nested groups to help indicate where the content is used. 
+
+E.g.
+
+```
+footer.copyright_message: Copyright © 2020 W3C <sup>®</sup>
+```
+
+See https://symfony.com/doc/current/translation.html#using-real-or-keyword-messages
 
 ### Outputting messages in Twig
 
