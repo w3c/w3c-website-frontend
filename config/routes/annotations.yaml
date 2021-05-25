@@ -1,6 +1,11 @@
 controllers:
     resource: ../../src/Controller/
     type: annotation
+    prefix:
+        fr: '/fr'
+        ja: '/ja'
+        zh-hans: '/zh-hans'
+        en: '' # safety net: this is last to ensure a URL containing a locale is not considered as a parameter for an English route
 
 kernel:
     resource: ../../src/Kernel.php

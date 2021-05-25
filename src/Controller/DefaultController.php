@@ -9,11 +9,15 @@ use App\Service\W3CApi;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Cache\Adapter\FilesystemTagAwareAdapter;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
 
 class DefaultController extends AbstractController
 {
-
-    public function index(W3CApi $w3CApi, CraftCmsApi $craftApi): Response
+    /**
+     * @Route("/{route}", requirements={"route"=".+"}, defaults={"route"=""}, priority=-1)
+     * @todo route priority is temporarily set to -1 as it's extremely greedy because of the {route} parameter.
+     */
+    public function index(string $route, W3CApi $w3CApi, CraftCmsApi $craftApi): Response
     {
         // @todo Set cache (set in service)
         // Please note ping() does not use cache, all other requests will
@@ -28,6 +32,7 @@ class DefaultController extends AbstractController
             'craft_available' => $craftApi->ping(),
             'specifications'  => $specifications,
             'specifications_cache_hit' => $response->isHit(),
+            'route' => '/' . $route
         ]);
     }
 }
