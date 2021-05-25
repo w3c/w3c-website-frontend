@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "fb30f00e4d8b9759aeab27b72972c69c",
+    "content-hash": "655ee100bd7dfb0b011583a775c31242",
     "packages": [
         {
             "name": "composer/package-versions-deprecated",
@@ -402,22 +402,22 @@
         },
         {
             "name": "friendsofphp/proxy-manager-lts",
-            "version": "v1.0.3",
+            "version": "v1.0.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/FriendsOfPHP/proxy-manager-lts.git",
-                "reference": "121af47c9aee9c03031bdeca3fac0540f59aa5c3"
+                "reference": "006aa5d32f887a4db4353b13b5b5095613e0611f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/FriendsOfPHP/proxy-manager-lts/zipball/121af47c9aee9c03031bdeca3fac0540f59aa5c3",
-                "reference": "121af47c9aee9c03031bdeca3fac0540f59aa5c3",
+                "url": "https://api.github.com/repos/FriendsOfPHP/proxy-manager-lts/zipball/006aa5d32f887a4db4353b13b5b5095613e0611f",
+                "reference": "006aa5d32f887a4db4353b13b5b5095613e0611f",
                 "shasum": ""
             },
             "require": {
                 "laminas/laminas-code": "~3.4.1|^4.0",
                 "php": ">=7.1",
-                "symfony/filesystem": "^4.4.17|^5.0"
+                "symfony/filesystem": "^4.4.17|^5.0|^6.0"
             },
             "conflict": {
                 "laminas/laminas-stdlib": "<3.2.1",
@@ -428,7 +428,7 @@
             },
             "require-dev": {
                 "ext-phar": "*",
-                "symfony/phpunit-bridge": "^5.2"
+                "symfony/phpunit-bridge": "^5.2|^6.0"
             },
             "type": "library",
             "extra": {
@@ -468,7 +468,7 @@
             ],
             "support": {
                 "issues": "https://github.com/FriendsOfPHP/proxy-manager-lts/issues",
-                "source": "https://github.com/FriendsOfPHP/proxy-manager-lts/tree/v1.0.3"
+                "source": "https://github.com/FriendsOfPHP/proxy-manager-lts/tree/v1.0.5"
             },
             "funding": [
                 {
@@ -480,7 +480,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2021-01-14T21:52:44+00:00"
+            "time": "2021-05-22T16:11:15+00:00"
         },
         {
             "name": "laminas/laminas-code",
@@ -7004,23 +7004,23 @@
         },
         {
             "name": "w3c/website-templates-bundle",
-            "version": "dev-main",
+            "version": "dev-w3c-templates",
             "source": {
                 "type": "git",
                 "url": "https://github.com/w3c/w3c-website-templates-bundle.git",
-                "reference": "d414329ddbf4e9289a39566dbdd80f8ed8125b8c"
+                "reference": "83f1209c54885e5972019a373e4b93355f30e7fe"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/w3c/w3c-website-templates-bundle/zipball/d414329ddbf4e9289a39566dbdd80f8ed8125b8c",
-                "reference": "d414329ddbf4e9289a39566dbdd80f8ed8125b8c",
+                "url": "https://api.github.com/repos/w3c/w3c-website-templates-bundle/zipball/83f1209c54885e5972019a373e4b93355f30e7fe",
+                "reference": "83f1209c54885e5972019a373e4b93355f30e7fe",
                 "shasum": ""
             },
             "require": {
                 "php": ">=7.3",
+                "symfony/asset": "^5.2",
                 "symfony/http-kernel": "^5.2"
             },
-            "default-branch": true,
             "type": "symfony-bundle",
             "autoload": {
                 "psr-4": {
@@ -7035,9 +7035,9 @@
             "homepage": "https://github.com/w3c/w3c-website-templates-bundle",
             "support": {
                 "issues": "https://github.com/w3c/w3c-website-templates-bundle/issues",
-                "source": "https://github.com/w3c/w3c-website-templates-bundle/tree/main"
+                "source": "https://github.com/w3c/w3c-website-templates-bundle/tree/w3c-templates"
             },
-            "time": "2021-05-18T16:19:27+00:00"
+            "time": "2021-05-25T14:21:58+00:00"
         },
         {
             "name": "webmozart/assert",
@@ -7728,16 +7728,16 @@
         },
         {
             "name": "php-webdriver/webdriver",
-            "version": "1.11.0",
+            "version": "1.11.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-webdriver/php-webdriver.git",
-                "reference": "66adc952127dd1314af94ce28f8fc332d38f229b"
+                "reference": "da16e39968f8dd5cfb7d07eef91dc2b731c69880"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-webdriver/php-webdriver/zipball/66adc952127dd1314af94ce28f8fc332d38f229b",
-                "reference": "66adc952127dd1314af94ce28f8fc332d38f229b",
+                "url": "https://api.github.com/repos/php-webdriver/php-webdriver/zipball/da16e39968f8dd5cfb7d07eef91dc2b731c69880",
+                "reference": "da16e39968f8dd5cfb7d07eef91dc2b731c69880",
                 "shasum": ""
             },
             "require": {
@@ -7765,11 +7765,6 @@
                 "ext-SimpleXML": "For Firefox profile creation"
             },
             "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-main": "1.8.x-dev"
-                }
-            },
             "autoload": {
                 "psr-4": {
                     "Facebook\\WebDriver\\": "lib/"
@@ -7793,9 +7788,9 @@
             ],
             "support": {
                 "issues": "https://github.com/php-webdriver/php-webdriver/issues",
-                "source": "https://github.com/php-webdriver/php-webdriver/tree/1.11.0"
+                "source": "https://github.com/php-webdriver/php-webdriver/tree/1.11.1"
             },
-            "time": "2021-05-03T10:19:43+00:00"
+            "time": "2021-05-21T15:12:49+00:00"
         },
         {
             "name": "phpspec/prophecy",
@@ -10089,7 +10084,8 @@
     "platform": {
         "php": ">=7.4",
         "ext-ctype": "*",
-        "ext-iconv": "*"
+        "ext-iconv": "*",
+        "ext-json": "*"
     },
     "platform-dev": [],
     "plugin-api-version": "2.0.0"

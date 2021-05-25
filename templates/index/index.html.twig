@@ -2,7 +2,12 @@
 
 {% block title %}{{ 'title'|trans }}{% endblock %}
 
+{% set related_links = {'/bar': 'Bar'} %}
+{% set breadcrumbs = {'': 'Home', '/foo': 'Foo'} %}
+
 {% block body %}
+    {% include '@W3CWebsiteTemplates/components/page_translations.html.twig' %}
+    {% include '@W3CWebsiteTemplates/components/toc.html.twig' %}
     <p>{{ 'api_available.w3c'|trans({'available': w3c_available}) }}</p>
     <p>{{ 'api_available.craft'|trans({'available': craft_available}) }}</p>
     <p>{{ 'specifications_found'|trans({'total': specifications.total, 'cache': specifications_cache_hit}) }}</p>

@@ -42,7 +42,7 @@
         "symfony/yaml": "5.2.*",
         "twig/extra-bundle": "^2.12|^3.0",
         "twig/twig": "^2.12|^3.0",
-        "w3c/website-templates-bundle": "dev-main"
+        "w3c/website-templates-bundle": "dev-w3c-templates"
     },
     "require-dev": {
         "overtrue/phplint": "^2.3",
@@ -57,8 +57,7 @@
         "symfony/phpunit-bridge": "^5.2",
         "symfony/stopwatch": "^5.2",
         "symfony/var-dumper": "^5.2",
-        "symfony/web-profiler-bundle": "^5.2",
-        "w3c/website-templates-bundle": "dev-main"
+        "symfony/web-profiler-bundle": "^5.2"
     },
     "config": {
         "optimize-autoloader": true,
