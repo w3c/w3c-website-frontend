@@ -13,6 +13,31 @@
     '#design-principles': 'Design principles',
     '#vision': 'Vision'
 } %}
+{% set crosslinks = [
+    {
+        'url': '../page.html',
+        'title': 'W3C starts web payments standards work',
+        'text': 'New working group launched to make payments easier and more secure.',
+        'category': 'News',
+        'img': {
+            'src': asset('images/temp-developers-920.jpg', 'main'),
+            'srcset':
+                asset('images/temp-developers-360.jpg', 'main') ~ ' 360w, ' ~
+                asset('images/temp-developers-580.jpg', 'main') ~ ' 580w, ' ~
+                asset('images/temp-developers-700.jpg', 'main') ~ ' 700w, ' ~
+                asset('images/temp-developers-920.jpg', 'main') ~ ' 920w, ' ~
+                asset('images/temp-developers-1520.jpg', 'main') ~ ' 1520w',
+            'sizes': '(min-width: 64em) 33vw, (min-width: 48em) 50vw, 100vw',
+            'alt': 'A Macbook screen with code, as seen from over the developer\'s shoulder'
+        }
+    },
+    {
+        'url': '../page.html',
+        'title': 'W3C starts web payments standards work',
+        'text': 'New working group launched to make payments easier and more secure.',
+        'category': 'News'
+    }
+] %}
 
 {% block body %}
     {% embed '@W3CWebsiteTemplates/components/text.html.twig' %}
@@ -301,11 +326,6 @@
             <h3>Small text</h3>
             <p>Demonstrating the use of <small>small</small> for text.</p>
             <p class="small">The <code>.small</code> class is also available.</p>
-        {% endblock %}
-    {% endembed %}
-    {% embed '@W3CWebsiteTemplates/components/text.html.twig' %}
-        {% block text %}
-
         {% endblock %}
     {% endembed %}
 {% endblock %}
