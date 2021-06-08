@@ -2,4 +2,4 @@ framework:
     assets:
         packages:
             main:
-                base_urls: 'https://w3c-dev.studio24.dev/dist/assets/'
+                base_urls: '%app.app_url%/bundles/w3cwebsitetemplates/dist/assets/'
