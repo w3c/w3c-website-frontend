@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "bfb261922404615c3f5009fa2732f2d2",
+    "content-hash": "5b8365e0420b44ff3f5eec9edb0ef81d",
     "packages": [
         {
             "name": "composer/package-versions-deprecated",
@@ -7085,16 +7085,16 @@
         },
         {
             "name": "w3c/website-templates-bundle",
-            "version": "dev-w3c-template-assets-build-tools",
+            "version": "dev-main",
             "source": {
                 "type": "git",
                 "url": "https://github.com/w3c/w3c-website-templates-bundle.git",
-                "reference": "cf27627457c0f54af147d0417833e289fcde70d2"
+                "reference": "08687e3a4c2141d195f18385c172f06992f52079"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/w3c/w3c-website-templates-bundle/zipball/cf27627457c0f54af147d0417833e289fcde70d2",
-                "reference": "cf27627457c0f54af147d0417833e289fcde70d2",
+                "url": "https://api.github.com/repos/w3c/w3c-website-templates-bundle/zipball/08687e3a4c2141d195f18385c172f06992f52079",
+                "reference": "08687e3a4c2141d195f18385c172f06992f52079",
                 "shasum": ""
             },
             "require": {
@@ -7102,6 +7102,7 @@
                 "symfony/asset": "^5.2",
                 "symfony/http-kernel": "^5.2"
             },
+            "default-branch": true,
             "type": "symfony-bundle",
             "autoload": {
                 "psr-4": {
@@ -7116,9 +7117,9 @@
             "homepage": "https://github.com/w3c/w3c-website-templates-bundle",
             "support": {
                 "issues": "https://github.com/w3c/w3c-website-templates-bundle/issues",
-                "source": "https://github.com/w3c/w3c-website-templates-bundle/tree/w3c-template-assets-build-tools"
+                "source": "https://github.com/w3c/w3c-website-templates-bundle/tree/main"
             },
-            "time": "2021-06-07T14:55:40+00:00"
+            "time": "2021-06-11T12:53:18+00:00"
         },
         {
             "name": "webmozart/assert",
