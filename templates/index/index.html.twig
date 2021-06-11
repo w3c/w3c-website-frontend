@@ -1,16 +1,31 @@
-{% extends '@W3CWebsiteTemplates/base.html.twig' %}
+{% extends "@W3CWebsiteTemplates/base.html.twig" %}
 
 {% block title %}{{ 'title'|trans }}{% endblock %}
 
 {% block body %}
-    <p>{{ 'api_available.w3c'|trans({'available': w3c_available}) }}</p>
-    <p>{{ 'api_available.craft'|trans({'available': craft_available}) }}</p>
-    <p>{{ 'specifications_found'|trans({'total': specifications.total, 'cache': specifications_cache_hit}) }}</p>
+    <ul>
+        {% for localisation in page_localisations %}
+            <li><a href="{{ localisation.url }}">{{ localisation.language }}</a></li>
+        {% endfor %}
+    </ul>
 
-    <dl>
-        <dt>Lang:</dt>
-        <dd id="lang">{{ app.request.locale }}</dd>
-        <dt>Route:</dt>
-        <dd id="route">{{ route }}</dd>
-    </dl>
+    {% for component in page_content_components %}
+
+        {% if component is not empty %}
+
+            {% if component.typeHandle == 'textComponent' %}
+                {{ component.contentField|raw }}
+            {% endif %}
+
+            {% if component.typeHandle == 'blockquoteComponent' %}
+                <figure>
+                    <blockquote>
+                        <p>{{ component.quoteText|raw }}</p>
+                    </blockquote>
+                    <figcaption>{{ component.citation|raw }}</figcaption>
+                </figure>
+            {% endif %}
+
+        {% endif %}
+    {% endfor %}
 {% endblock %}

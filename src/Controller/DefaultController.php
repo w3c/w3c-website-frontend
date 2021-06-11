@@ -13,6 +13,30 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class DefaultController extends AbstractController
 {
+
+    /**
+     * @Route("/debug", requirements={"route"=".+"}, defaults={"route"=""}, priority=-1)
+     * @todo route priority is temporarily set to -1 as it's extremely greedy because of the {route} parameter.
+     */
+    public function debug(string $route, W3CApi $w3CApi, CraftCmsApi $craftApi): Response
+    {
+        // @todo Set cache (set in service)
+        // Please note ping() does not use cache, all other requests will
+        $cache = new FilesystemTagAwareAdapter('cache', 0, __DIR__ . '/../../var/cache/');
+        $w3CApi->setCache($cache);
+
+        $response = $w3CApi->getSpecifications();
+        $specifications = $w3CApi->getProvider()->decode($response);
+
+        return $this->render('debug/index.html.twig', [
+            'w3c_available'   => $w3CApi->ping(),
+            'craft_available' => $craftApi->ping(),
+            'specifications'  => $specifications,
+            'specifications_cache_hit' => $response->isHit(),
+            'route' => '/' . $route
+        ]);
+    }
+
     /**
      * @Route("/{route}", requirements={"route"=".+"}, defaults={"route"=""}, priority=-1)
      * @todo route priority is temporarily set to -1 as it's extremely greedy because of the {route} parameter.
@@ -24,14 +48,64 @@ class DefaultController extends AbstractController
         $cache = new FilesystemTagAwareAdapter('cache', 0, __DIR__ . '/../../var/cache/');
         $w3CApi->setCache($cache);
 
-        $response = $w3CApi->getSpecifications();
-        $specifications = $w3CApi->getProvider()->decode($response);
+        $landingPageQuery = 'query MyQuery {
+  entry(id: "89") {
+    id
+    ... on pages_landingPage_Entry {
+      title
+      pageLead
+      landingFlexibleComponents(orderBy: "sortOrder") {
+        ... on landingFlexibleComponents_textComponent_BlockType {
+          typeHandle
+          contentField
+          sortOrder
+          enabled
+        }
+        ... on landingFlexibleComponents_blockquoteComponent_BlockType {
+          typeHandle
+          sortOrder
+          citation
+          quoteText
+          enabled
+        }
+        ... on landingFlexibleComponents_fiftyFiftyComponent_BlockType {
+          typeHandle
+          ctaCopy
+          ctaUrl
+          enabled
+        }
+      }
+    }
+  }
+}';
+
+        $localisationQueries = 'query MyQuery {
+  entry(id: "89") {
+    id
+    ... on pages_landingPage_Entry {
+      id
+      language
+      localized {
+        language
+        title
+        url
+      }
+    }
+  }
+}
+';
+
+        $localiationContent = $craftApi->query($localisationQueries)->toArray();
+        $pageLocalisations = $localiationContent['data']['entry']['localized'];
+
+        $pagecontent = $craftApi->query($landingPageQuery)->toArray();
+        $pageContentComponents = $pagecontent['data']['entry']['landingFlexibleComponents'];
+
+        //dd($pageLocalisations);
 
         return $this->render('index/index.html.twig', [
-            'w3c_available'   => $w3CApi->ping(),
-            'craft_available' => $craftApi->ping(),
-            'specifications'  => $specifications,
-            'specifications_cache_hit' => $response->isHit(),
+            'page_localisations'   => $pageLocalisations,
+            'page_content_components'   => $pageContentComponents,
             'route' => '/' . $route
         ]);
     }
