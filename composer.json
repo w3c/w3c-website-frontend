@@ -42,7 +42,7 @@
         "symfony/yaml": "5.2.*",
         "twig/extra-bundle": "^2.12|^3.0",
         "twig/twig": "^2.12|^3.0",
-        "w3c/website-templates-bundle": "dev-w3c-templates"
+        "w3c/website-templates-bundle": "dev-main"
     },
     "require-dev": {
         "overtrue/phplint": "^2.3",
