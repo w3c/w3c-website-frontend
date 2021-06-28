@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "65716ca4c5a98c7e8b3a356f6002f6df",
+    "content-hash": "5b8365e0420b44ff3f5eec9edb0ef81d",
     "packages": [
         {
             "name": "composer/package-versions-deprecated",
@@ -7088,12 +7088,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/w3c/w3c-website-templates-bundle.git",
-                "reference": "08687e3a4c2141d195f18385c172f06992f52079"
+                "reference": "a511d28d3d0d55d8548b92d1c99cf877c32d1dda"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/w3c/w3c-website-templates-bundle/zipball/08687e3a4c2141d195f18385c172f06992f52079",
-                "reference": "08687e3a4c2141d195f18385c172f06992f52079",
+                "url": "https://api.github.com/repos/w3c/w3c-website-templates-bundle/zipball/a511d28d3d0d55d8548b92d1c99cf877c32d1dda",
+                "reference": "a511d28d3d0d55d8548b92d1c99cf877c32d1dda",
                 "shasum": ""
             },
             "require": {
@@ -7118,7 +7118,7 @@
                 "issues": "https://github.com/w3c/w3c-website-templates-bundle/issues",
                 "source": "https://github.com/w3c/w3c-website-templates-bundle/tree/main"
             },
-            "time": "2021-06-11T12:53:18+00:00"
+            "time": "2021-06-11T14:43:32+00:00"
         },
         {
             "name": "webmozart/assert",

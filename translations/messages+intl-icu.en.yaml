@@ -1,5 +1,8 @@
 welcome: Welcome!
 title: Hello IndexController!
+lang:
+    zho: 简体中文首页
+    fr: Français
 api_available:
     w3c: >-
         W3C API available: {available, select,

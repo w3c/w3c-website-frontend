@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace App\Controller;
 
 use App\Service\CraftCmsApi;
+use App\Service\GraphQlDataFormatter;
+use App\Service\GraphQlQueryBuilder;
 use App\Service\W3CApi;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Cache\Adapter\FilesystemTagAwareAdapter;
@@ -41,71 +43,21 @@ class DefaultController extends AbstractController
      * @Route("/{route}", requirements={"route"=".+"}, defaults={"route"=""}, priority=-1)
      * @todo route priority is temporarily set to -1 as it's extremely greedy because of the {route} parameter.
      */
-    public function index(string $route, W3CApi $w3CApi, CraftCmsApi $craftApi): Response
+    public function index(string $route, W3CApi $w3CApi, CraftCmsApi $craftApi, GraphQlQueryBuilder $queryBuilder): Response
     {
         // @todo Set cache (set in service)
         // Please note ping() does not use cache, all other requests will
         $cache = new FilesystemTagAwareAdapter('cache', 0, __DIR__ . '/../../var/cache/');
         $w3CApi->setCache($cache);
 
-        $landingPageQuery = 'query MyQuery {
-  entry(id: "89") {
-    id
-    ... on pages_landingPage_Entry {
-      title
-      pageLead
-      landingFlexibleComponents(orderBy: "sortOrder") {
-        ... on landingFlexibleComponents_textComponent_BlockType {
-          typeHandle
-          contentField
-          sortOrder
-          enabled
-        }
-        ... on landingFlexibleComponents_blockquoteComponent_BlockType {
-          typeHandle
-          sortOrder
-          citation
-          quoteText
-          enabled
-        }
-        ... on landingFlexibleComponents_fiftyFiftyComponent_BlockType {
-          typeHandle
-          ctaCopy
-          ctaUrl
-          enabled
-        }
-      }
-    }
-  }
-}';
+        $pageContent = $craftApi->query($queryBuilder->getLandingPageContentQueryForSlug($route));
+        $pageLocalisations = $craftApi->query($queryBuilder->getLocalisationQueryForSlug($route));
 
-        $localisationQueries = 'query MyQuery {
-  entry(id: "89") {
-    id
-    ... on pages_landingPage_Entry {
-      id
-      language
-      localized {
-        language
-        title
-        url
-      }
-    }
-  }
-}
-';
+//        dd($pageContent->toArray());
 
-        $localiationContent = $craftApi->query($localisationQueries)->toArray();
-        $pageLocalisations = $localiationContent['data']['entry']['localized'];
-
-        $pagecontent = $craftApi->query($landingPageQuery)->toArray();
-        $pageContentComponents = $pagecontent['data']['entry']['landingFlexibleComponents'];
-
-        //dd($pageLocalisations);
-
-        return $this->render('index/index.html.twig', [
-            'page_localisations'   => $pageLocalisations,
-            'page_content_components'   => $pageContentComponents,
+        return $this->render('debug/page.html.twig', [
+            'page_translations'   => GraphQlDataFormatter::formatLocalisationDataForView($pageLocalisations),
+            'page_content_components'   => GraphQlDataFormatter::formatLandingPageContentDataForView($pageContent),
             'route' => '/' . $route
         ]);
     }
