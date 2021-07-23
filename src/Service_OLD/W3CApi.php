@@ -9,24 +9,21 @@ use Strata\Data\Http\Response\CacheableResponse;
 use Strata\Data\Http\Rest;
 use Strata\Frontend\Repository\ContentRepository;
 use Strata\Frontend\Repository\RepositoryInterface;
-use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 
 class W3CApi extends ContentRepository implements RepositoryInterface
 {
     /**
-     * Constructor
+     * W3C constructor.
      *
-     * Auto-populates parameters from config/services.yaml
-     *
-     * @param ParameterBagInterface $parameters
+     * Auto-populates constructor arguments from service definition
+     * @see config/services.yaml
+     * @param string $apiUrl
+     * @param string $apiKey
      */
-    public function __construct(ParameterBagInterface $parameters)
+    public function __construct(string $apiUrl, string $apiKey)
     {
-        $baseUrl = $parameters->get('app.w3c_api_url');
-        $this->provider = new Rest($baseUrl);
-
-        $key = $parameters->get('app.w3c_api_key');
-        $this->setAuthorization($key);
+        $this->provider = new Rest($apiUrl);
+        $this->setAuthorization($apiKey);
     }
 
     /**
