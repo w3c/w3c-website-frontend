@@ -2,12 +2,6 @@
     "composer/package-versions-deprecated": {
         "version": "1.11.99.1"
     },
-    "deployer/deployer": {
-        "version": "v6.8.0"
-    },
-    "deployer/phar-update": {
-        "version": "v2.2.0"
-    },
     "doctrine/annotations": {
         "version": "1.0",
         "recipe": {
@@ -129,9 +123,6 @@
             "phpunit.xml.dist",
             "tests/bootstrap.php"
         ]
-    },
-    "pimple/pimple": {
-        "version": "v3.4.0"
     },
     "psr/cache": {
         "version": "1.0.1"
@@ -443,6 +434,9 @@
             "version": "1.0",
             "ref": "93d9baa582d0a755cc9ef81bc38a921d5fa16973"
         }
+    },
+    "symfony/password-hasher": {
+        "version": "v5.3.3"
     },
     "symfony/phpunit-bridge": {
         "version": "5.1",

@@ -1,0 +1,60 @@
+query Page($uri: [String], $siteId: [QueryArgument]) {
+    entry(uri: $uri, siteId: $siteId) {
+        id
+        status
+        uri
+        language
+        localized {
+            title
+            language_code: language
+            uri
+        }
+        postDate
+        ... on pages_default_Entry {
+
+        }
+        ... on pages_landingPage_Entry {
+            title
+            pageLead
+            heroIllustration {
+                title
+                filename
+                mimeType
+            }
+            landingFlexibleComponents(orderBy: "sortOrder") {
+                ...landingComponents
+            }
+            excerpt
+            thumbnailImage {
+                id
+            }
+            thumbnailAltText
+            seoOptions {
+                title
+                description
+                advanced {
+                    canonical
+                    robots
+                }
+                social {
+                    twitter {
+                        title
+                        description
+                        image {
+                            filename
+                            mimeType
+                        }
+                    }
+                    facebook {
+                        title
+                        description
+                        image {
+                            filename
+                            mimeType
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

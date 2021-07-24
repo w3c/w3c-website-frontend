@@ -1,0 +1,26 @@
+fragment seoOptionFields on seoOptions {
+    title
+    description
+    advanced {
+        canonical
+        robots
+    }
+    social {
+        twitter {
+            title
+            description
+            image {
+                filename
+                mimeType
+            }
+        }
+        facebook {
+            title
+            description
+            image {
+                filename
+                mimeType
+            }
+        }
+    }
+}

@@ -23,10 +23,10 @@ This is for a blog section entry with a postBlocks Matrix field with a body Rich
 
 Each of these bits and pieces should be discoverable via autocomplete or the Explorer pane in Craft’s GraphiQL interface.
 
-![Example of autocompleting GraphQL via the GraphQLi explorer](images/matrix-graphql.png)
+![Example of autocompleting GraphQL via the GraphQLi explorer](../images/matrix-graphql.png)
 
-![Example of autocompleting field names GraphQL via the GraphQLi explorer](images/matrix-graphql-explorer.png)
+![Example of autocompleting field names GraphQL via the GraphQLi explorer](../images/matrix-graphql-explorer.png)
 
 This is what that Matrix field’s configuration looks like in the Craft control panel.
 
-![Example of matrix field configuration in Craft CMS](images/matrix-craft-cms.png)
+![Example of matrix field configuration in Craft CMS](../images/matrix-craft-cms.png)

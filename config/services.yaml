@@ -5,10 +5,6 @@
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
     app.app_url: '%env(resolve:APP_URL)%'
-    app.w3c_api_url: '%env(resolve:W3C_API_URL)%'
-    app.w3c_api_key: '%env(resolve:W3C_API_KEY)%'
-    app.craftcms_api_url: '%env(resolve:CRAFTCMS_API_URL)%'
-    app.craftcms_api_read_token: '%env(resolve:CRAFTCMS_API_READ_TOKEN)%'
     app.craftcms_api_publish_token: '%env(resolve:CRAFTCMS_API_PUBLISH_TOKEN)%'
 
 services:
@@ -26,6 +22,7 @@ services:
             - '../src/Entity/'
             - '../src/Kernel.php'
             - '../src/Tests/'
+            - '../src/Service_OLD/'
 
     # controllers are imported separately to make sure services can be injected
     # as action arguments even if you don't extend any base controller class
@@ -35,3 +32,19 @@ services:
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
+
+    # W3C API connection
+    App\Service\W3C:
+        arguments:
+            $apiUrl: '%env(resolve:W3C_API_URL)%'
+            $apiKey: '%env(resolve:W3C_API_KEY)%'
+
+    # Craft CMS API connection
+    App\Service\CraftCMS:
+        arguments:
+            $apiUrl: '%env(resolve:CRAFTCMS_API_URL)%'
+            $apiKey: '%env(resolve:CRAFTCMS_API_READ_TOKEN)%'
+
+    # Query manager to retrieve data from APIs
+    Strata\Data\Query\QueryManager:
+            configurator: [ '@App\Service\QueryManagerConfigurator', 'configure' ]

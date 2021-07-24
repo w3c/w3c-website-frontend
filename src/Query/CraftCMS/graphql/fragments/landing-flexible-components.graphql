@@ -1,0 +1,21 @@
+fragment landingComponents on landingFlexibleComponents_MatrixField {
+    ... on landingFlexibleComponents_textComponent_BlockType {
+        typeHandle
+        contentField
+        sortOrder
+        enabled
+    }
+    ... on landingFlexibleComponents_blockquoteComponent_BlockType {
+        typeHandle
+        sortOrder
+        citation
+        quoteText
+        enabled
+    }
+    ... on landingFlexibleComponents_fiftyFiftyComponent_BlockType {
+        typeHandle
+        ctaCopy
+        ctaUrl
+        enabled
+    }
+}

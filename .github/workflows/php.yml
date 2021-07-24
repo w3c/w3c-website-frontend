@@ -44,3 +44,6 @@ jobs:
 
       - name: PHPUnit
         run: ./bin/phpunit tests/
+
+      - name: Symfony lint service container
+        run: php ./bin/console lint:container
