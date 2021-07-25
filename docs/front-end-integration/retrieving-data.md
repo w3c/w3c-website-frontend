@@ -14,11 +14,12 @@ which allows you to send GraphQL queries.
 Example usage:
 
 ```php
+// Runs GET request on W3C_API_URL/healthcheck
 $response = $w3c->get('healthcheck');
 $data = $w3c->decode($response);
 ```
 
-Alternatively, you can construct _queries_ which are an object-orientated way to construct queries. For REST-based data 
+Alternatively, you can construct _queries_ which are an object-orientated (OO) way to construct queries. For REST-based data 
 providers you can construct enture queries via the OO interface. For GraphQL queries simple queries can be built, or you 
 can load more complex queries via files (this is what we do for the W3C site).
 
@@ -97,6 +98,7 @@ QueryManager $manager
   * Add the CraftCMS and W3C data providers
   * Setup caching
   * Setup global query for navigation 
+  * Setup query for W3C API healthcheck
     
 You can retrieve global navigation via:
 
@@ -114,7 +116,7 @@ CraftCMS $craftCmsApi
 ```
 
 * Data provider for CraftCMS GraphQL API
-* Connects with the reading schema authentication token (`CRAFTCMS_API_READ_TOKEN` in your `.env` file)
+* Connects with the reading schema authentication token (`CRAFTCMS_API_READ_TOKEN` in your `.env.local` file)
 
 ### W3C
 
@@ -126,12 +128,12 @@ W3C $w3cApi
 ```
 
 * Data provider for W3C Rest API
-* Connects with the W3C API key (`W3C_API_KEY` in your `.env` file)
+* Connects with the W3C API key (`W3C_API_KEY` in your `.env.local` file)
 
 ## Retrieving CraftCMS content via GraphQL API
 
 For content retrieved from CraftCMS we need to do this using GraphQL queries. We also need to use an authentication token
-to use the _Reading schema_.
+to use the _Reading schema_ (this is automatically set when using the `CraftCMS` service or the Query Manager).
 
 We need a few different types of GraphQL queries to do the following:
 * Retrieve all content for an individual page
@@ -153,10 +155,10 @@ These are loaded to a query via: `$query->addFragmentFromFile()`
 ## Writing custom Query objects
 
 For W3C, create a class that extends `Strata\Data\Query\Query`, override the method `getRequiredDataProviderClass()` and 
-return `App\Service\W3C::class`.
+return `App\Service\W3C::class` to define the compatible data provider.
 
 For CraftCMS, create a class that extends `Strata\Data\Query\GraphQLQuery`, override the method `getRequiredDataProviderClass()` and
-return `App\Service\CraftCMS::class`.
+return `App\Service\CraftCMS::class` to define the compatible data provider.
 
 You can then setup your query in the `__construct()` method. It's recommended to setup any parameters (Rest queries) or 
 variables (GraphQL queries) as constructor arguments. Set defaults where these are optional. 
@@ -205,6 +207,34 @@ For more information see:
 * [Queries](https://docs.strata.dev/data/v/release%2F0.8.0/retrieving-data/query)
 * [Custom query classes](https://docs.strata.dev/data/v/release%2F0.8.0/retrieving-data/custom-query-classes)
 
+## Running queries
+
+Once you have a query object to use, you can add this to the Query Manager and retrieve data via the `get()` or 
+`getCollection()` method. Usually this is done in your controller. If the data is considered global you can also add it 
+to all instances of the Query Manager in the [`QueryManagerConfigurator`](../../src/Service/QueryManagerConfigurator.php)
+
+```php
+// Example controller method
+public function page(Request $request, QueryManager $manager): Response
+{
+  // Add query to query manager
+  $siteId = 1;
+  $manager->add('page', new Page($siteId, $request->getRequestUri()));
+  
+  // Pass retrieved data to view (query runs on access)
+  return $this->render('debug/page.html.twig', [
+      'navigation'        => $manager->getCollection('navigation'),
+      'page'              => $manager->get('page'),
+      'page_cached'       => $manager->isHit('page'),
+  ]);
+}
+```
+
+You will then have the returned data from your Page GraphQL query available in your Twig template via `{{ page }}`.
+
+Please note GraphQL only returns fields that match in your query, so it's possible some fields will not be set at all in
+your response data.
+
 ## Sending mutate requests to CraftCMS to change data
 
 If you need to send [mutate queries](https://graphql.org/learn/queries/#mutations) to change data, for example saving a
@@ -217,31 +247,3 @@ $publishingToken = $this->getParameter('app.craftcms_api_publish_token');
 To use in a service, you need to inject the config parameter as arguments of their constructors. See [Accessing Configuration Parameters](https://symfony.com/doc/current/configuration.html#configuration-accessing-parameters).
 
 Please ensure only use the publishing schema when you need to save data. By default, the reading schema is always used on the frontend app.
-
-## Running queries
-
-Once you have a query object to use, you can add this to the Query Manager and retrieve data via the `get()` or 
-`getCollection()` method. If the data is considered global you can also add it to all instances of the Query Manager 
-in the [`QueryManagerConfigurator`](../../src/Service/QueryManagerConfigurator.php)
-
-```php
-// Example controller method
-public function page(Request $request, QueryManager $manager): Response
-{
-  // Add query to query manager
-  $siteId = 1; 
-  $uri = ltrim($request->getRequestUri(), '/')
-  $manager->add('page', new Page($siteId, $uri));
-  
-  // Pass retrieved data to view (query runs on access)
-  return $this->render('debug/page.html.twig', [
-      'navigation'        => $manager->getCollection('navigation'),
-      'page'              => $manager->get('page'),
-      'page_cached'       => $manager->isHit('page'),
-  ]);
-}
-```
-
-Please note GraphQL only returns fields that match in your query, so it's possible some fields will not be set at all in
-your response data.
-
