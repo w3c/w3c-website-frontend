@@ -11,7 +11,7 @@ use Strata\Data\Query\Query;
  * Send a healthcheck request to W3C API to check its online
 
  */
-class PingQuery extends Query
+class Healthcheck extends Query
 {
 
     public function __construct()
@@ -32,10 +32,9 @@ class PingQuery extends Query
      * @return bool
      * @throws \Strata\Data\Exception\MapperException
      */
-    public function get(): bool
+    public function isHealthy(): bool
     {
-        $data = parent::get();
-
+        $data = $this->get();
         if ($data['app'] === true && $data['database'] === true) {
             return true;
         }

@@ -6,16 +6,18 @@ namespace App\Query\CraftCMS;
 
 use App\Service\CraftCMS;
 use Strata\Data\Cache\CacheLifetime;
-use Strata\Data\Mapper\MapArray;
-use Strata\Data\Mapper\WildcardMappingStrategy;
 use Strata\Data\Query\GraphQLQuery;
-use Strata\Data\Transform\Data\CallableData;
 
 /**
  * Get global navigation
  */
 class Page extends GraphQLQuery
 {
+
+    public function getRequiredDataProviderClass(): string
+    {
+        return CraftCMS::class;
+    }
 
     /**
      * Set up query
@@ -44,11 +46,6 @@ class Page extends GraphQLQuery
             ->enableCache($cacheLifetime)
             //->setCacheTags($uri)
         ;
-    }
-
-    public function getRequiredDataProviderClass(): string
-    {
-        return CraftCMS::class;
     }
 
 }

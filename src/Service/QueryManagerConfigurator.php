@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Service;
 
 use App\Query\CraftCMS\GlobalNavigation;
+use App\Query\W3C\Healthcheck;
 use Strata\Data\Query\QueryManager;
 use Symfony\Component\Cache\Adapter\FilesystemTagAwareAdapter;
 
@@ -42,6 +43,9 @@ class QueryManagerConfigurator
         $cache = new FilesystemTagAwareAdapter('cache', 0, __DIR__ . '/../../var/cache/');
         $manager->setCache($cache);
         $manager->disableCache();
+
+        // Add healthcheck queries
+        $manager->add('w3c_healthcheck', new Healthcheck());
 
         // Add global navigation
         // @todo set correct site ID based on language in route
