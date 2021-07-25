@@ -1,0 +1,24 @@
+fragment youMayAlsoLikeRelatedEntries on youMayAlsoLikeRelatedEntries_MatrixField {
+    ... on youMayAlsoLikeRelatedEntries_contentFromTheCms_BlockType {
+        typeHandle
+        contentEntry {
+            title
+            uri
+        }
+    }
+    ... on youMayAlsoLikeRelatedEntries_contentFromAnotherSource_BlockType {
+        typeHandle
+        resourceUrl
+        thumbnailImage {
+            url
+            mimeType
+            height
+            width
+            size
+        }
+        thumbnailAltText
+        resourceTitle
+        excerpt
+        typeOfContent
+    }
+}

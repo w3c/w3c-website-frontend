@@ -1,7 +1,9 @@
 # Front-end integration
 
-Documentation on how to integrate built HTML/CSS templates with content (from a CMS or other data sources) in Symfony.
-We are using the [Strata Frontend library](https://github.com/strata/frontend) to help integrate with headless CMS and other data sources.
+The following is an overview on how to integrate HTML/CSS templates with content (from a CMS or other data 
+sources) in Symfony to create finished web pages with real content. We are using the 
+[Strata Frontend library](https://github.com/strata/frontend) to help integrate with headless CMS and other data 
+sources. CraftCMS uses [GraphQL](https://graphql.org/learn/) for all API queries.
 
 ## Routing and localisation
 
@@ -62,9 +64,15 @@ to use the _Reading schema_.
 We need a few different types of GraphQL queries to do the following:
 * Retrieve all content for an individual page
 * Retrieve all global content (currently global navigation)
-* Retrieve lists fo content for listing pages (e.g. news) 
+* Retrieve lists of content for listing pages (e.g. news) 
 
-Find out [how to write GraphQL queries for CraftCMS](craftcms-graphql.md).
+Find out more about writing [GraphQL queries for CraftCMS](craftcms-graphql.md).
+
+### Sending mutate requests to CraftCMS to change data
+
+If you need to send [mutate queries](https://graphql.org/learn/queries/#mutations) to change data, for example saving a 
+blog comment, you need to use an authentication token for the the _Publishing schema_. Please only use this when you 
+need to save data. By default, the reading schema is always used on the frontend app.
 
 ### Writing queries
 
@@ -75,6 +83,9 @@ Any fragments (complex GraphQL query fragments that can be included in other que
 ### Running queries
 
 TODO
+
+Please note GraphQL only returns fields that match in your query, so it's possible some fields will not be set at all in 
+your response data. 
 
 ## Twig templates
 
@@ -89,6 +100,8 @@ TODO
 ### Generating URLs
 
 See https://symfony.com/doc/current/routing.html#generating-urls
+
+TODO
 
 ## Testing
 

@@ -1,6 +1,6 @@
 # Matrix: flexible components
 
-_Information from Craft Support:_
+_Information from CraftCMS Support:_
 
 If you’re looking to get content from a Rich Text field within a Matrix block, you'll need the entry type, Matrix field
 handle, Matrix block type, and Matrix block field handle for the query like this:

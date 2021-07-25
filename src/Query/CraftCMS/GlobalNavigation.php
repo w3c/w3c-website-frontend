@@ -39,6 +39,7 @@ class GlobalNavigation extends GraphQLQuery
 
             // Cache navigation response
             ->enableCache($cacheLifetime)
+            //->setCacheTags(['global'])
         ;
     }
 

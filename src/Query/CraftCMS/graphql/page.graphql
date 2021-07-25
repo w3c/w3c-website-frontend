@@ -10,19 +10,18 @@ query Page($uri: [String], $siteId: [QueryArgument]) {
             uri
         }
         postDate
+        dateUpdated
         ... on pages_default_Entry {
-
-        }
-        ... on pages_landingPage_Entry {
             title
-            pageLead
-            heroIllustration {
-                title
-                filename
-                mimeType
+            displayOnThisPageNavigation
+            defaultFlexibleComponents(orderBy: "sortOrder") {
+                ...defaultFlexibleComponents
             }
-            landingFlexibleComponents(orderBy: "sortOrder") {
-                ...landingComponents
+            displayYouMayAlsoLikeListing
+            youMayAlsoLikeTitle
+            youMayAlsoLikeSectionIntroduction
+            youMayAlsoLikeRelatedEntries {
+                ...youMayAlsoLikeRelatedEntries
             }
             excerpt
             thumbnailImage {
@@ -30,30 +29,35 @@ query Page($uri: [String], $siteId: [QueryArgument]) {
             }
             thumbnailAltText
             seoOptions {
-                title
-                description
-                advanced {
-                    canonical
-                    robots
-                }
-                social {
-                    twitter {
-                        title
-                        description
-                        image {
-                            filename
-                            mimeType
-                        }
-                    }
-                    facebook {
-                        title
-                        description
-                        image {
-                            filename
-                            mimeType
-                        }
-                    }
-                }
+                ...seoData
+            }
+        }
+        ... on pages_landingPage_Entry {
+            title
+            pageLead
+            heroIllustration {
+                url
+                mimeType
+                height
+                width
+                size
+            }
+            landingFlexibleComponents(orderBy: "sortOrder") {
+                ...landingFlexibleComponents
+            }
+            displayYouMayAlsoLikeListing
+            youMayAlsoLikeTitle
+            youMayAlsoLikeSectionIntroduction
+            youMayAlsoLikeRelatedEntries {
+                ...youMayAlsoLikeRelatedEntries
+            }
+            excerpt
+            thumbnailImage {
+                id
+            }
+            thumbnailAltText
+            seoOptions {
+                ...seoData
             }
         }
     }

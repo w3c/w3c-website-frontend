@@ -16,7 +16,7 @@
 
 <h2>Global navigation</h2>
 
-<p>Is cached? {% if navigation_cached %}Yes{% else %}No{% endif %}</p>
+<p>Is navigation cached? {% if navigation_cached %}Yes{% else %}No{% endif %}</p>
 
 <ul>
     {% for item in navigation %}
@@ -42,7 +42,9 @@
     {% endfor %}
 </ul>
 
-<h2>{{ title }}</h2>
+<h2>Page: {{ page.title }}</h2>
+
+<p>Is page cached? {% if page_cached %}Yes{% else %}No{% endif %}</p>
 
 <p>W3C API available? {% if w3c_available %}Yes{% else %}No{% endif %}</p>
 

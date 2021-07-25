@@ -1,4 +1,4 @@
-fragment seoOptionFields on seoOptions {
+fragment seoData on Ether_SeoData {
     title
     description
     advanced {

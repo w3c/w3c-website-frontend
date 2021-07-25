@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Controller;
 
 use App\Query\CraftCMS\GlobalNavigation;
+use App\Query\CraftCMS\Page;
 use App\Query\W3C\PingQuery;
 use App\Service\GraphQlDataFormatter;
 use Strata\Data\Query\GraphQLQuery;
@@ -24,17 +25,21 @@ class DefaultController extends AbstractController
     {
         $manager->add('ping', new PingQuery());
 
+        // Add test page
+        // @see https://cms-dev.w3.org/admin/entries/pages/48-w3c-mission-default?site=default
+        $manager->add('page', new Page(1, "landing-page/w3c-mission-default"));
+
 //        $response = $w3CApi->getSpecifications();
 //        $specifications = $w3CApi->getProvider()->decode($response);
-
-        $nav = $manager->getCollection('navigation');
-        dump($manager->getResponse('navigation'));
 
         return $this->render('debug/test.html.twig', [
             'title'             => 'Debug page',
             'navigation'        => $manager->getCollection('navigation'),
             'navigation_cached' => $manager->isHit('navigation'),
             'w3c_available'     => $manager->get('ping'),
+            'page'              => $manager->get('page'),
+            'page_cached'       => $manager->isHit('page'),
+
 //            'craft_available' => false, // $craftApi->ping(),
 //            'specifications'  => [], //$specifications,
 //            'specifications_cache_hit' => false, //$response->isHit(),
@@ -51,7 +56,7 @@ class DefaultController extends AbstractController
     {
         // Build queries
         $query = new GraphQLQuery('page', __DIR__ . '/../graphql/page.graphql');
-        $query->addFragmentFromFile(__DIR__ . '/../graphql/fragments/landing-flexible-components.graphql')
+        $query->addFragmentFromFile(__DIR__ . '/../graphql/fragments/landingFlexibleComponents.graphql')
               ->addVariable('slug', $route);
         $manager->add($query, 'craft');
 

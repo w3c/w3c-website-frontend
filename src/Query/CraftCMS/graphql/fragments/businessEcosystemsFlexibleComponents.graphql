@@ -1,0 +1,82 @@
+# TODO - block setup is not complete in CraftCMS, basic setup is below
+fragment businessEcosystemsFlexibleComponents on businessEcosystemsFlexibleComponents_MatrixField {
+    ... on businessEcosystemsFlexibleComponents_textComponent_BlockType {
+        typeHandle
+        contentField
+    }
+    ... on businessEcosystemsFlexibleComponents_blockquoteComponent_BlockType {
+        typeHandle
+        quoteText
+        citation
+    }
+    ... on businessEcosystemsFlexibleComponents_fiftyFiftyComponent_BlockType {
+        typeHandle
+        showImageBeforeText
+        image  {
+            url
+            mimeType
+            height
+            width
+            size
+        }
+        titleField
+        mainContent
+        ctaUrl
+        ctaCopy
+    }
+    ... on businessEcosystemsFlexibleComponents_imageMediaComponent_BlockType {
+        typeHandle
+        image {
+            url
+            mimeType
+            height
+            width
+            size
+        }
+        altText
+        figureCaption
+    }
+    ... on businessEcosystemsFlexibleComponents_videoMediaComponent_BlockType {
+        typeHandle
+        videoTitle
+        videoUrl {
+            url
+            image
+            imageWidth
+            imageHeight
+            code
+            width
+            height
+            aspectRatio
+            providerName
+        }
+        videoCaption
+        linkToVideoTranscript
+    }
+    ... on businessEcosystemsFlexibleComponents_groupListingComponent_BlockType {
+        typeHandle
+        titleField
+        introduction
+    }
+    ... on businessEcosystemsFlexibleComponents_businessRecentActivityComponent_BlockType {
+        typeHandle
+        title
+        introduction
+    }
+    ... on businessEcosystemsFlexibleComponents_membersQuotesCarouselComponent_BlockType {
+        typeHandle
+        introduction
+    }
+    ... on businessEcosystemsFlexibleComponents_featuredMembersComponent_BlockType {
+        typeHandle
+        callToActionLinks {
+            linkText
+            linkValue
+        }
+    }
+    ... on businessEcosystemsFlexibleComponents_featuredEvangelistsComponent_BlockType {
+        typeHandle
+        titleField
+        introduction
+    }
+}

@@ -1,0 +1,36 @@
+fragment defaultFlexibleComponents on defaultFlexibleComponents_MatrixField {
+    ... on defaultFlexibleComponents_textComponent_BlockType {
+        typeHandle
+        contentField
+    }
+    ... on defaultFlexibleComponents_blockquoteComponent_BlockType {
+        typeHandle
+        quoteText
+        citation
+    }
+    ...on defaultFlexibleComponents_imageMediaComponent_BlockType {
+        typeHandle
+        imageMedia {
+            id
+        }
+        altText
+        figureCaption
+    }
+    ...on defaultFlexibleComponents_videoMediaComponent_BlockType {
+        typeHandle
+        videoTitle
+        videoUrl {
+            url
+            image
+            imageWidth
+            imageHeight
+            code
+            width
+            height
+            aspectRatio
+            providerName
+        }
+        videoCaption
+        linkToVideoTranscript
+    }
+}
