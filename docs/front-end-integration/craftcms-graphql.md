@@ -40,8 +40,11 @@ GraphQL object `defaultFlexibleComponents_MatrixField` and the child objects ava
 
 ## Working out what content fields to retrieve
 
-There are a lot of content fields exposed in GraphQL. To make it slightly easier to work out what to select you can review
-the entry types setup in CraftCMS. 
+There are a lot of content fields exposed in GraphQL. The trickiest thing in GraphQL is working out what fields to select 
+and the exact format to use in GraphQL.
+
+You can refer to the planning doc [W3C Content Types + Fields](https://docs.google.com/spreadsheets/d/10p_TzKw2OPz80feWzRIN2bbpqYJeXXADnDT93xgKq2Y/view)
+to help confirm the different fields for each content type. You can also review the exact setup in CraftCMS.
 
 To do this login to the CMS and go to _Settings > Content > Sections_. Find the section you are interested in and select 
 the _entry type_ you want to view content fields for. This displays the content configurator and lists all custom fields 

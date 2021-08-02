@@ -1,5 +1,9 @@
 # Routing
 
+A [proposed sitemap](https://docs.google.com/spreadsheets/d/1a9pm5HWzcidtLPCeFRz4F0Ir4TT3oOK54FlEEd3IXUE/edit#gid=315005175) exists in Google Sheets which has been used by W3C and Studio 24 to help plan the web pages for the new w3.org website.
+
+## Symfony
+
 Routes are setup in Symfony using [annotations](https://symfony.com/doc/current/routing.html#creating-routes-as-attributes-or-annotations)
 in controllers (stored in `src/Controller`).
 

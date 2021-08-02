@@ -11,6 +11,24 @@ query Page($uri: [String], $siteId: [QueryArgument]) {
         }
         postDate
         dateUpdated
+        breadcrumbParentPages: parent {
+            title
+            uri
+            parent {
+                title
+                uri
+                parent {
+                    title
+                    uri
+                }
+            }
+        }
+        siblingNavigation: parent {
+            siblings: children {
+                title
+                uri
+            }
+        }
         ... on pages_default_Entry {
             title
             displayOnThisPageNavigation
