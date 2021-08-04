@@ -42,6 +42,13 @@ composer install # download dependencies
 rm -rf vendor/w3c/website-templates-bundle # delete the template bundle's folder
 ln -s ${BASE}/w3c-website-templates-bundle vendor/w3c/website-templates-bundle # create the symlink to the bundle
 ```
+
+For example if your template bundle is stored in `~/Sites/w3c/w3c-website-templates-bundle` the symlink command is:
+
+```shell
+ln -s ~/Sites/w3c/w3c-website-templates-bundle vendor/w3c/website-templates-bundle
+```
+
 That will replace the folder `vendor/w3c/website-templates-bundle` with a symlink to your development version of the
 bundle.
 
