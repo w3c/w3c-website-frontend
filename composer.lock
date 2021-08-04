@@ -1676,12 +1676,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/strata/data.git",
-                "reference": "0c1240d2227ad47dffbedeb7a64da021f3d6f3ee"
+                "reference": "759ef5f801d654aafed68950612f3a60584d5e0d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/strata/data/zipball/0c1240d2227ad47dffbedeb7a64da021f3d6f3ee",
-                "reference": "0c1240d2227ad47dffbedeb7a64da021f3d6f3ee",
+                "url": "https://api.github.com/repos/strata/data/zipball/759ef5f801d654aafed68950612f3a60584d5e0d",
+                "reference": "759ef5f801d654aafed68950612f3a60584d5e0d",
                 "shasum": ""
             },
             "require": {
@@ -1730,7 +1730,7 @@
                 "issues": "https://github.com/strata/data/issues",
                 "source": "https://github.com/strata/data/tree/release/0.8.0"
             },
-            "time": "2021-08-04T11:59:42+00:00"
+            "time": "2021-08-04T12:27:42+00:00"
         },
         {
             "name": "strata/frontend",
@@ -1738,12 +1738,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/strata/frontend.git",
-                "reference": "5c7eaa1590d0e3701f9ed38e57223c48b92c8e5f"
+                "reference": "59e873180164620c03adf385a4f179ab63bb6eb0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/strata/frontend/zipball/5c7eaa1590d0e3701f9ed38e57223c48b92c8e5f",
-                "reference": "5c7eaa1590d0e3701f9ed38e57223c48b92c8e5f",
+                "url": "https://api.github.com/repos/strata/frontend/zipball/59e873180164620c03adf385a4f179ab63bb6eb0",
+                "reference": "59e873180164620c03adf385a4f179ab63bb6eb0",
                 "shasum": ""
             },
             "require": {
@@ -1797,7 +1797,7 @@
                 "issues": "https://github.com/strata/frontend/issues",
                 "source": "https://github.com/strata/frontend/tree/release/0.8.0"
             },
-            "time": "2021-07-04T12:53:29+00:00"
+            "time": "2021-08-04T12:02:36+00:00"
         },
         {
             "name": "strata/symfony-frontend",
@@ -7131,12 +7131,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/w3c/w3c-website-templates-bundle.git",
-                "reference": "a29ae804b7fde05c4ff72ccfa3d72452efaacabe"
+                "reference": "1ba2ccc42bde68f0fe2136120ea7dd81e74687f8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/w3c/w3c-website-templates-bundle/zipball/a29ae804b7fde05c4ff72ccfa3d72452efaacabe",
-                "reference": "a29ae804b7fde05c4ff72ccfa3d72452efaacabe",
+                "url": "https://api.github.com/repos/w3c/w3c-website-templates-bundle/zipball/1ba2ccc42bde68f0fe2136120ea7dd81e74687f8",
+                "reference": "1ba2ccc42bde68f0fe2136120ea7dd81e74687f8",
                 "shasum": ""
             },
             "require": {
@@ -7161,7 +7161,7 @@
                 "issues": "https://github.com/w3c/w3c-website-templates-bundle/issues",
                 "source": "https://github.com/w3c/w3c-website-templates-bundle/tree/main"
             },
-            "time": "2021-07-02T15:06:32+00:00"
+            "time": "2021-08-04T15:59:04+00:00"
         },
         {
             "name": "webmozart/assert",
@@ -10236,5 +10236,5 @@
     "platform-overrides": {
         "php": "7.4"
     },
-    "plugin-api-version": "2.0.0"
+    "plugin-api-version": "2.1.0"
 }

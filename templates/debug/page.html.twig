@@ -2,7 +2,7 @@
 
 {% block title %}{{ 'title'|trans }}{% endblock %}
 
-{% set related_links = {'/bar': 'Bar'} %}
+{% set related_links = page.siblingNavigation.siblings %}
 {% set breadcrumbs = {'': 'Home', '/foo': 'Foo'} %}
 {% set toc = {
     '#open-standards-principles': 'Open Standards Principles',
