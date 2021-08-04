@@ -1,0 +1,7 @@
+my-account: __my-account
+my-calendar: __my-calendar
+my-organization: __my-organization
+member-site: __member-site
+team-site: __team-site
+admin: __admin
+logout: __logout
