@@ -29,3 +29,31 @@ To use templates from the bundle prefix with the handle `@W3CWebsiteTemplates`, 
 See https://symfony.com/doc/current/routing.html#generating-urls
 
 TODO
+
+## Working on the frontend and templates bundle at the same time
+
+If you need to make modifications to the templates bundle, it can be cumbersome to push changes and update dependencies
+every time you make a change.
+
+A simple workaround is to create a symlink to the bundle in the frontend's vendor directory.
+To do so, run the following command (replace `${BASE}` with the path to your local checkout of the templates bundle):
+```shell
+composer install # download dependencies
+rm -rf vendor/w3c/website-templates-bundle # delete the template bundle's folder
+ln -s ${BASE}/w3c-website-templates-bundle vendor/w3c/website-templates-bundle # create the symlink to the bundle
+```
+That will replace the folder `vendor/w3c/website-templates-bundle` with a symlink to your development version of the
+bundle.
+
+You can now make changes to the templates bundle and test them directly in the frontend.
+
+Then, when you finally push your changes to the templates bundle, you'll need to synchronize `composer.lock` with the
+new version for `composer install` to download the new version. To do so, run the following command (replace `${BASE}` with the path to your local checkout of the
+templates bundle):
+```shell
+rm -rf vendor/w3c/website-templates-bundle # delete the symlink
+composer update # update dependencies
+rm -rf vendor/w3c/website-templates-bundle # delete the folder
+ln -s ${BASE}/w3c-website-templates-bundle vendor/w3c/website-templates-bundle # re-create the symlink to the bundle
+```
+These commands can be chained using `&&`.
