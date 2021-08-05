@@ -1,0 +1,18 @@
+query YouMayAlsoLike($uri: [String], $siteId: [QueryArgument]) {
+    entry(uri: $uri, siteId: $siteId, displayYouMayAlsoLikeListing: true) {
+        ... on pages_default_Entry {
+            youMayAlsoLikeTitle
+            youMayAlsoLikeSectionIntroduction
+            youMayAlsoLikeRelatedEntries {
+                ...youMayAlsoLikeRelatedEntries
+            }
+        }
+        ... on pages_landingPage_Entry {
+            youMayAlsoLikeTitle
+            youMayAlsoLikeSectionIntroduction
+            youMayAlsoLikeRelatedEntries {
+                ...youMayAlsoLikeRelatedEntries
+            }
+        }
+    }
+}
