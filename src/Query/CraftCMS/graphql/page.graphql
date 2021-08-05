@@ -35,12 +35,6 @@ query Page($uri: [String], $siteId: [QueryArgument]) {
             defaultFlexibleComponents(orderBy: "sortOrder") {
                 ...defaultFlexibleComponents
             }
-            displayYouMayAlsoLikeListing
-            youMayAlsoLikeTitle
-            youMayAlsoLikeSectionIntroduction
-            youMayAlsoLikeRelatedEntries {
-                ...youMayAlsoLikeRelatedEntries
-            }
             excerpt
             thumbnailImage {
                 id
@@ -63,15 +57,9 @@ query Page($uri: [String], $siteId: [QueryArgument]) {
             landingFlexibleComponents(orderBy: "sortOrder") {
                 ...landingFlexibleComponents
             }
-            displayYouMayAlsoLikeListing
-            youMayAlsoLikeTitle
-            youMayAlsoLikeSectionIntroduction
-            youMayAlsoLikeRelatedEntries {
-                ...youMayAlsoLikeRelatedEntries
-            }
             excerpt
             thumbnailImage {
-                id
+                ...thumbnailImage
             }
             thumbnailAltText
             seoOptions {
