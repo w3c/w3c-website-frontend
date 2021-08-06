@@ -51,11 +51,6 @@ class YouMayAlsoLikeRelatedEntries extends GraphQLQuery
         return CraftCMS::class;
     }
 
-    public function transformText(?string $text, ?string $entryText): ?string
-    {
-        return $text ?: ($entryText ?: null);
-    }
-
     public function transformImage(?array $entry)
     {
         if (array_key_exists('contentEntry', $entry)) {
@@ -81,18 +76,11 @@ class YouMayAlsoLikeRelatedEntries extends GraphQLQuery
             '[links]' => new MapArray(
                 '[youMayAlsoLikeRelatedEntries]',
                 [
-                    '[title]'    => new CallableData([$this, 'transformText'], '[title]', '[contentEntry][0][title]'),
-                    '[url]'      => new CallableData([$this, 'transformText'], '[url]', '[contentEntry][0][url]'),
-                    '[category]' => new CallableData(
-                        [$this, 'transformText'],
-                        '[category]',
-                        '[contentEntry][0][category]'
-                    ),
-                    '[text]'     => new CallableData([$this, 'transformText'], '[text]', '[contentEntry][0][text]'),
-                    '[img]'      => new CallableData(
-                        [$this, 'transformImage']
-                    )
-
+                    '[title]'    => ['[title]', '[contentEntry][0][title]'],
+                    '[url]'      => ['[url]', '[contentEntry][0][url]'],
+                    '[category]' => ['[category]', '[contentEntry][0][category]'],
+                    '[text]'     => ['[text]', '[contentEntry][0][text]'],
+                    '[img]'      => new CallableData([$this, 'transformImage'])
                 ]
             )
         ];
