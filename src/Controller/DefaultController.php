@@ -58,9 +58,9 @@ class DefaultController extends AbstractController
         $manager->add('crosslinks', new YouMayAlsoLikeRelatedEntries(1, $route));
 
         // @todo testing, remove this
-        dump($manager->get('page'));
+        //dump($manager->get('page'));
 
-        return $this->render('debug/page.html.twig', [
+        return $this->render('pages/default.html.twig', [
             'navigation' => $manager->getCollection('navigation'),
             'page'       => $manager->get('page'),
             'crosslinks' => $manager->get('crosslinks')

@@ -1,0 +1,19 @@
+{% extends '@W3CWebsiteTemplates/base.html.twig' %}
+
+{% block title %}{{ page.title }}{% endblock %}
+
+{% set related_links = page.siblingNavigation.siblings %}
+{% set breadcrumbs = {'': 'Home', '/foo': 'Foo'} %}
+{% set toc = {
+    '#open-standards-principles': 'Open Standards Principles',
+    '#design-principles': 'Design principles',
+    '#vision': 'Vision'
+} %}
+
+{% block body %}
+
+    {% for component in page.defaultFlexibleComponents %}
+        {{ include('partials/defaultFlexibleComponents.html.twig') }}
+    {% endfor %}
+
+{% endblock %}
