@@ -81,16 +81,16 @@
         },
         {
             "name": "doctrine/annotations",
-            "version": "1.13.1",
+            "version": "1.13.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/annotations.git",
-                "reference": "e6e7b7d5b45a2f2abc5460cc6396480b2b1d321f"
+                "reference": "5b668aef16090008790395c02c893b1ba13f7e08"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/annotations/zipball/e6e7b7d5b45a2f2abc5460cc6396480b2b1d321f",
-                "reference": "e6e7b7d5b45a2f2abc5460cc6396480b2b1d321f",
+                "url": "https://api.github.com/repos/doctrine/annotations/zipball/5b668aef16090008790395c02c893b1ba13f7e08",
+                "reference": "5b668aef16090008790395c02c893b1ba13f7e08",
                 "shasum": ""
             },
             "require": {
@@ -147,9 +147,9 @@
             ],
             "support": {
                 "issues": "https://github.com/doctrine/annotations/issues",
-                "source": "https://github.com/doctrine/annotations/tree/1.13.1"
+                "source": "https://github.com/doctrine/annotations/tree/1.13.2"
             },
-            "time": "2021-05-16T18:07:53+00:00"
+            "time": "2021-08-05T19:00:23+00:00"
         },
         {
             "name": "doctrine/lexer",
@@ -7131,12 +7131,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/w3c/w3c-website-templates-bundle.git",
-                "reference": "af9abe510e743b72aa4e4dfa51ffeff7ae4919dd"
+                "reference": "9e8eab9d2d98b27a5be9a9021b10db96bb968977"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/w3c/w3c-website-templates-bundle/zipball/af9abe510e743b72aa4e4dfa51ffeff7ae4919dd",
-                "reference": "af9abe510e743b72aa4e4dfa51ffeff7ae4919dd",
+                "url": "https://api.github.com/repos/w3c/w3c-website-templates-bundle/zipball/9e8eab9d2d98b27a5be9a9021b10db96bb968977",
+                "reference": "9e8eab9d2d98b27a5be9a9021b10db96bb968977",
                 "shasum": ""
             },
             "require": {
@@ -7161,7 +7161,7 @@
                 "issues": "https://github.com/w3c/w3c-website-templates-bundle/issues",
                 "source": "https://github.com/w3c/w3c-website-templates-bundle/tree/main"
             },
-            "time": "2021-08-05T17:06:07+00:00"
+            "time": "2021-08-06T12:31:35+00:00"
         },
         {
             "name": "webmozart/assert",
