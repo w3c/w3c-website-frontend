@@ -5,16 +5,13 @@
 {% set related_links = page.siblingNavigation.siblings %}
 {% set page_translations = page.localized %}
 {% set breadcrumbs = {'': 'Home', '/foo': 'Foo'} %}
-{% set toc = {
-    '#open-standards-principles': 'Open Standards Principles',
-    '#design-principles': 'Design principles',
-    '#vision': 'Vision'
-} %}
-
-{% block body %}
-
+{% set body %}
     {% for component in page.defaultFlexibleComponents %}
         {{ include('partials/defaultFlexibleComponents.html.twig') }}
     {% endfor %}
+{% endset %}
+{% set toc = table_of_contents(body, ['h2']) %}
 
+{% block body %}
+    {{ body }}
 {% endblock %}
