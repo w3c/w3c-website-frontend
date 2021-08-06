@@ -60,7 +60,7 @@ class DefaultController extends AbstractController
         // @todo testing, remove this
         //dump($manager->get('page'));
 
-        return $this->render('debug/page.html.twig', [
+        return $this->render('pages/default.html.twig', [
             'navigation' => $manager->getCollection('navigation'),
             'page'       => $manager->get('page'),
             'crosslinks' => $manager->get('crosslinks')
