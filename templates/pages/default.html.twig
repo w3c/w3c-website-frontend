@@ -2,7 +2,9 @@
 
 {% block title %}{{ page.title }}{% endblock %}
 
-{% set related_links = page.siblingNavigation.siblings %}
+{% if page.siblingNavigation.siblings is defined %}
+    {% set related_links = page.siblingNavigation.siblings %}
+{% endif %}
 {% set page_translations = page.localized %}
 {% set breadcrumbs = page.breadcrumbParentPages %}
 {% set body %}
