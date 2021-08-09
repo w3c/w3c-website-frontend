@@ -36,4 +36,16 @@ class CraftCMS extends GraphQL
         ]);
     }
 
+    public static function getSiteForLocale(string $locale): int
+    {
+        $lang = strtolower(explode('_', $locale)[0]);
+        switch ($lang) {
+            case 'ja':
+                return 2;
+            case 'zh-hans':
+                return 3;
+            default:
+                return 1;
+        }
+    }
 }

@@ -6,10 +6,12 @@ namespace App\Controller;
 
 use App\Query\CraftCMS\Page;
 use App\Query\CraftCMS\YouMayAlsoLikeRelatedEntries;
+use App\Service\CraftCMS;
 use Strata\Data\Exception\GraphQLQueryException;
 use Strata\Data\Exception\QueryManagerException;
 use Strata\Data\Query\QueryManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -46,15 +48,17 @@ class DefaultController extends AbstractController
      *
      * @param string       $route
      * @param QueryManager $manager
+     * @param Request      $request
      *
      * @return Response
      * @throws GraphQLQueryException
      * @throws QueryManagerException
      */
-    public function index(string $route, QueryManager $manager): Response
+    public function index(string $route, QueryManager $manager, Request $request): Response
     {
+        ;
         // Build queries
-        $manager->add('page', new Page(1, $route));
+        $manager->add('page', new Page(CraftCMS::getSiteForLocale($request->getLocale()), $route));
         $manager->add('crosslinks', new YouMayAlsoLikeRelatedEntries(1, $route));
 
         // @todo testing, remove this
