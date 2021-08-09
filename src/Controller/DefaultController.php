@@ -14,6 +14,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Stopwatch\Stopwatch;
 
 class DefaultController extends AbstractController
 {
@@ -54,9 +55,8 @@ class DefaultController extends AbstractController
      * @throws GraphQLQueryException
      * @throws QueryManagerException
      */
-    public function index(string $route, QueryManager $manager, Request $request): Response
+    public function index(string $route, QueryManager $manager, Request $request, Stopwatch $stopwatch): Response
     {
-        ;
         // Build queries
         $manager->add('page', new Page(CraftCMS::getSiteForLocale($request->getLocale()), $route));
         $manager->add('crosslinks', new YouMayAlsoLikeRelatedEntries(1, $route));
@@ -64,10 +64,23 @@ class DefaultController extends AbstractController
         // @todo testing, remove this
         //dump($manager->get('page'));
 
+        $stopwatch->start('navigation');
+        $navigation = $manager->getCollection('navigation');
+
+        $stopwatch->start('page');
+        $page = $manager->get('page');
+
+        $stopwatch->start('crosslinks');
+        $crosslinks = $manager->get('crosslinks');
+
+        $stopwatch->stop('navigation');
+        $stopwatch->stop('page');
+        $stopwatch->stop('crosslinks');
+
         return $this->render('pages/default.html.twig', [
-            'navigation' => $manager->getCollection('navigation'),
-            'page'       => $manager->get('page'),
-            'crosslinks' => $manager->get('crosslinks')
+            'navigation' => $navigation,
+            'page'       => $page,
+            'crosslinks' => $crosslinks
         ]);
     }
 }
