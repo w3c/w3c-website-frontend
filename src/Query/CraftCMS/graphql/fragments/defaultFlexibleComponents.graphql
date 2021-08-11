@@ -11,11 +11,7 @@ fragment defaultFlexibleComponents on defaultFlexibleComponents_MatrixField {
     ...on defaultFlexibleComponents_imageMediaComponent_BlockType {
         typeHandle
         imageMedia {
-            url
-            mimeType
-            height
-            width
-            size
+            ...thumbnailImage
         }
         altText
         figureCaption

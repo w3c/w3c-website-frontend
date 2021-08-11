@@ -11,7 +11,7 @@
         {% endblock %}
     {% endembed %}
 {% elseif component.typeHandle == 'imageMediaComponent' %}
-    {% embed '@W3CWebsiteTemplates/components/image.html.twig' with {'src': component.imageMedia[0].url, 'alt': component.altText } %}
+    {% embed '@W3CWebsiteTemplates/components/image.html.twig' with {'attr': component.imageMedia[0], 'alt': component.altText } %}
         {% block caption %}
             {{ component.figureCaption }}
         {% endblock %}
