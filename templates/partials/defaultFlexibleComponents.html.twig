@@ -11,15 +11,17 @@
         {% endblock %}
     {% endembed %}
 {% elseif component.typeHandle == 'imageMediaComponent' %}
-    {% embed '@W3CWebsiteTemplates/components/image.html.twig' with {'attr': component.imageMedia[0], 'alt': component.altText } %}
-        {% block caption %}
-            {{ component.figureCaption }}
-        {% endblock %}
+    {% embed '@W3CWebsiteTemplates/components/image.html.twig' with {
+        'attr': component.imageMedia[0],
+        'alt': component.altText,
+        'caption': component.figureCaption is defined ? component.figureCaption : null
+    } %}
     {% endembed %}
 {% elseif component.typeHandle == 'videoMediaComponent' %}
-    {% embed '@W3CWebsiteTemplates/components/video.html.twig' with { 'iframe': component.videoUrl.code, 'title': component.videoTitle } %}
-        {% block caption %}
-            {{ component.videoCaption }}
-        {% endblock %}
+    {% embed '@W3CWebsiteTemplates/components/video.html.twig' with {
+        'iframe': component.videoUrl.code,
+        'title': component.videoTitle,
+        'caption': component.videoCaption is defined ? component.videoCaption : null
+    } %}
     {% endembed %}
 {% endif %}
