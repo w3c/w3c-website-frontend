@@ -38,12 +38,13 @@ class CraftCMS extends GraphQL
 
     public static function getSiteForLocale(string $locale): int
     {
-        $lang = strtolower(explode('_', $locale)[0]);
-        switch ($lang) {
+        switch ($locale) {
             case 'ja':
                 return 2;
             case 'zh-hans':
-                return 3;
+                return 4;
+            case 'fr':
+                return 6;
             default:
                 return 1;
         }
