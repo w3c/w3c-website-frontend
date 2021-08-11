@@ -7200,19 +7200,22 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/w3c/w3c-website-templates-bundle.git",
-                "reference": "a73f2b585970e79ee534889129c6367c6b275809"
+                "reference": "5f8966ad5a71b722f54360aee1d87c3ed3bf4170"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/w3c/w3c-website-templates-bundle/zipball/a73f2b585970e79ee534889129c6367c6b275809",
-                "reference": "a73f2b585970e79ee534889129c6367c6b275809",
+                "url": "https://api.github.com/repos/w3c/w3c-website-templates-bundle/zipball/5f8966ad5a71b722f54360aee1d87c3ed3bf4170",
+                "reference": "5f8966ad5a71b722f54360aee1d87c3ed3bf4170",
                 "shasum": ""
             },
             "require": {
                 "php": ">=7.3",
                 "symfony/asset": "^4.4 || ^5.2",
+                "symfony/config": "^4.4 || ^5.2",
+                "symfony/dependency-injection": "^4.4 || ^5.2",
                 "symfony/http-kernel": "^4.4 || ^5.2",
-                "twig/intl-extra": "^3.3"
+                "twig/intl-extra": "^3.3",
+                "twig/twig": "^3.3"
             },
             "default-branch": true,
             "type": "symfony-bundle",
@@ -7231,7 +7234,7 @@
                 "issues": "https://github.com/w3c/w3c-website-templates-bundle/issues",
                 "source": "https://github.com/w3c/w3c-website-templates-bundle/tree/main"
             },
-            "time": "2021-08-09T14:13:23+00:00"
+            "time": "2021-08-11T15:19:08+00:00"
         },
         {
             "name": "webmozart/assert",
