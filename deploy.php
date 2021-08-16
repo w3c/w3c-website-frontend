@@ -26,7 +26,7 @@ $shared_files = [
 
 // Shared directories that are not in git and need to persist between deployments (e.g. uploaded images)
 $shared_directories = [
-
+    'var'
 ];
 
 // Sets directories as writable (e.g. uploaded images)
@@ -109,9 +109,6 @@ task('deploy', [
 
     // Remind user to check that the remote .env is up to date (development and staging (default N)
     'env-reminder',
-
-    // Backup .env file on server
-    'env-backup',
 
     's24:check-branch',
     's24:show-summary',
