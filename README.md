@@ -1,4 +1,4 @@
-# W3C frontend website
+[# W3C frontend website
 
 Symfony frontend website for w3.org
 
@@ -74,6 +74,12 @@ Clone the repository
 
 Run `composer install`
 
+Install [W3C template bundle](https://github.com/w3c/w3c-website-templates-bundle/) assets:
+
+```bash
+./bin/console assets:install public
+```
+
 Create a local environment file and populate the required variables (see `.env.local.dist`).
 
 ```angular2html
@@ -96,3 +102,4 @@ symfony server:start
 - [Strata Frontend](https://github.com/strata/frontend)
 
 ## Credits
+](https://github.com/w3c/w3c-website-templates-bundle/)
