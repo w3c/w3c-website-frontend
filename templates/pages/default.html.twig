@@ -15,5 +15,5 @@
 {% set toc = table_of_contents(body, ['h2']) %}
 
 {% block body %}
-    {{ body }}
+    {{ toc.html|raw }}
 {% endblock %}
