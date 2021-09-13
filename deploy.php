@@ -50,7 +50,7 @@ set('shared_dirs', $shared_directories);
 set('writable_dirs', $writable_directories);
 set('sync', $sync);
 set('http_user', 'www-data');
-set('webroot', 'web');
+set('webroot', 'public');
 set('keep_releases', 5);
 set('git_tty', true);
 set('allow_anonymous_stats', false);
@@ -68,33 +68,23 @@ set('default_stage', 'staging');
  */
 
 
-host('production')
-    ->stage('production')
-    ->user('studio24')
-    ->hostname('128.30.54.149')
-    ->set('deploy_path', '/var/www/frontend-prod')
-    ->set('url', 'https://www.w3.org');
-
-host('beta')
-    ->stage('beta')
-    ->user('studio24')
-    ->hostname('128.30.54.149')
-    ->set('deploy_path', '/var/www/frontend-beta')
-    ->set('url', 'https://beta.w3.org');
-
 host('staging')
     ->stage('staging')
     ->user('studio24')
     ->hostname('128.30.54.149')
     ->set('deploy_path', '/var/www/frontend-staging')
-    ->set('url', 'https://www-staging.w3.org');
+    ->set('url', 'https://www-staging.w3.org')
+    ->set('composer_options', '{{composer_action}} --verbose --prefer-dist --no-progress --no-interaction --no-dev --optimize-autoloader');
+
 
 host('development')
     ->stage('development')
     ->user('studio24')
     ->hostname('128.30.54.149')
     ->set('deploy_path', '/var/www/frontend-dev')
-    ->set('url', 'https://www-dev.w3.org');
+    ->set('url', 'https://www-dev.w3.org')
+    ->set('composer_options', '{{composer_action}} --verbose --prefer-dist --no-progress --no-interaction --optimize-autoloader');
+
 
 /**
  * Deployment task
@@ -124,12 +114,16 @@ task('deploy', [
     'deploy:update_code',
 
     // Composer install
+    'dump-env',
     'deploy:vendors',
+    'cache-clear',
 
+    // Deploy shared, writeable and clear paths
     'deploy:shared',
     'deploy:writable',
-
     'deploy:clear_paths',
+
+    // Create build summary
     's24:build-summary',
 
     // Build complete, deploy is live once deploy:symlink runs
@@ -159,6 +153,18 @@ task('env-reminder', function () {
         die('Ok, deployment cancelled.');
     }
 });
+
+desc('Dump env details for deployment');
+task('dump-env', function () {
+    writeln('composer dump-env');
+});
+
+desc('Clear cache after Composer install');
+task('cache-clear', function () {
+    writeln('php bin/console cache:clear');
+});
+
+
 
 // [Optional] If deploy fails automatically unlock.
 after('deploy:failed', 'deploy:unlock');
