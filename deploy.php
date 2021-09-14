@@ -74,7 +74,7 @@ host('staging')
     ->hostname('128.30.54.149')
     ->set('deploy_path', '/var/www/frontend-staging')
     ->set('url', 'https://www-staging.w3.org')
-    ->set('composer_options', '{{composer_action}} --verbose --prefer-dist --no-progress --no-interaction --no-dev --optimize-autoloader');
+    ->set('composer_options', '{{composer_action}} --verbose --prefer-dist --no-progress --no-dev --no-interaction  --optimize-autoloader');
 
 
 host('development')
@@ -113,15 +113,15 @@ task('deploy', [
     'deploy:release',
     'deploy:update_code',
 
-    // Composer install
-    'dump-env',
-    'deploy:vendors',
-    'cache-clear',
-
     // Deploy shared, writeable and clear paths
     'deploy:shared',
     'deploy:writable',
     'deploy:clear_paths',
+
+    // Composer install
+    'dump-env',
+    'deploy:vendors',
+    'cache-clear',
 
     // Create build summary
     's24:build-summary',
