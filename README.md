@@ -55,8 +55,15 @@ To deploy a specific branch use
 vendor/bin/dep deploy <environment> --branch=<branch_name>
 ````
 
+E.g.
+
+```
+vendor/bin/dep deploy development --branch=develop
+```
+
 ### SSH access
 To connect to the server directly at the correct path for an environments current release, run the following from the root of the project
+
 ````
 vendor/bin/dep ssh <environment>
 ````
@@ -94,6 +101,4 @@ symfony server:start
 
 - [Symfony](https://symfony.com/)
 - [Strata Frontend](https://github.com/strata/frontend)
-
-## Credits
-](https://github.com/w3c/w3c-website-templates-bundle/)
+- [W3C Design System](https://github.com/w3c/w3c-website-templates-bundle/) (used as a Symfony template bundle)
