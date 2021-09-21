@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "cb6060fba7a13e8d3d393b9e3ab6cb9b",
+    "content-hash": "8fff0f90fb14f151a0cce89520f641ed",
     "packages": [
         {
             "name": "composer/package-versions-deprecated",
@@ -7134,16 +7134,16 @@
         },
         {
             "name": "w3c/website-templates-bundle",
-            "version": "dev-main",
+            "version": "dev-refactoring",
             "source": {
                 "type": "git",
                 "url": "https://github.com/w3c/w3c-website-templates-bundle.git",
-                "reference": "94eba24ba02615393346220daaa3a50a0dc04b41"
+                "reference": "dc37d4778176288cb18f9480c4b5717c9c7d9a77"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/w3c/w3c-website-templates-bundle/zipball/94eba24ba02615393346220daaa3a50a0dc04b41",
-                "reference": "94eba24ba02615393346220daaa3a50a0dc04b41",
+                "url": "https://api.github.com/repos/w3c/w3c-website-templates-bundle/zipball/dc37d4778176288cb18f9480c4b5717c9c7d9a77",
+                "reference": "dc37d4778176288cb18f9480c4b5717c9c7d9a77",
                 "shasum": ""
             },
             "require": {
@@ -7159,7 +7159,6 @@
                 "studio24/deployer-recipes": "^1.1",
                 "studio24/design-system": "dev-main"
             },
-            "default-branch": true,
             "type": "symfony-bundle",
             "autoload": {
                 "psr-4": {
@@ -7174,9 +7173,9 @@
             "homepage": "https://github.com/w3c/w3c-website-templates-bundle",
             "support": {
                 "issues": "https://github.com/w3c/w3c-website-templates-bundle/issues",
-                "source": "https://github.com/w3c/w3c-website-templates-bundle/tree/main"
+                "source": "https://github.com/w3c/w3c-website-templates-bundle/tree/refactoring"
             },
-            "time": "2021-09-17T17:12:57+00:00"
+            "time": "2021-09-21T10:23:20+00:00"
         },
         {
             "name": "webmozart/assert",
