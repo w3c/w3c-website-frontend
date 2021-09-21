@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "cb6060fba7a13e8d3d393b9e3ab6cb9b",
+    "content-hash": "8fff0f90fb14f151a0cce89520f641ed",
     "packages": [
         {
             "name": "composer/package-versions-deprecated",
@@ -484,16 +484,16 @@
         },
         {
             "name": "laminas/laminas-code",
-            "version": "4.4.3",
+            "version": "4.4.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laminas/laminas-code.git",
-                "reference": "bb324850d09dd437b6acb142c13e64fdc725b0e1"
+                "reference": "54251ab2b16c41c6980387839496b235f5f6e10b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laminas/laminas-code/zipball/bb324850d09dd437b6acb142c13e64fdc725b0e1",
-                "reference": "bb324850d09dd437b6acb142c13e64fdc725b0e1",
+                "url": "https://api.github.com/repos/laminas/laminas-code/zipball/54251ab2b16c41c6980387839496b235f5f6e10b",
+                "reference": "54251ab2b16c41c6980387839496b235f5f6e10b",
                 "shasum": ""
             },
             "require": {
@@ -547,7 +547,7 @@
                     "type": "community_bridge"
                 }
             ],
-            "time": "2021-09-21T13:40:23+00:00"
+            "time": "2021-07-09T11:58:40+00:00"
         },
         {
             "name": "laminas/laminas-escaper",
@@ -1676,12 +1676,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/strata/frontend.git",
-                "reference": "f48d02bf6af1e9a3dd3a849b271da755ab58a1c3"
+                "reference": "d815d88c382dc68801724e31f546a78811229d8f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/strata/frontend/zipball/f48d02bf6af1e9a3dd3a849b271da755ab58a1c3",
-                "reference": "f48d02bf6af1e9a3dd3a849b271da755ab58a1c3",
+                "url": "https://api.github.com/repos/strata/frontend/zipball/d815d88c382dc68801724e31f546a78811229d8f",
+                "reference": "d815d88c382dc68801724e31f546a78811229d8f",
                 "shasum": ""
             },
             "require": {
@@ -1735,7 +1735,7 @@
                 "issues": "https://github.com/strata/frontend/issues",
                 "source": "https://github.com/strata/frontend/tree/release/0.8.0"
             },
-            "time": "2021-09-22T21:13:29+00:00"
+            "time": "2021-09-20T15:51:01+00:00"
         },
         {
             "name": "strata/symfony-frontend",
@@ -7134,16 +7134,16 @@
         },
         {
             "name": "w3c/website-templates-bundle",
-            "version": "dev-main",
+            "version": "dev-refactoring",
             "source": {
                 "type": "git",
                 "url": "https://github.com/w3c/w3c-website-templates-bundle.git",
-                "reference": "cdea6be7e12e65dfe48b7f76cf0cd4daa29f672b"
+                "reference": "dc37d4778176288cb18f9480c4b5717c9c7d9a77"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/w3c/w3c-website-templates-bundle/zipball/cdea6be7e12e65dfe48b7f76cf0cd4daa29f672b",
-                "reference": "cdea6be7e12e65dfe48b7f76cf0cd4daa29f672b",
+                "url": "https://api.github.com/repos/w3c/w3c-website-templates-bundle/zipball/dc37d4778176288cb18f9480c4b5717c9c7d9a77",
+                "reference": "dc37d4778176288cb18f9480c4b5717c9c7d9a77",
                 "shasum": ""
             },
             "require": {
@@ -7159,7 +7159,6 @@
                 "studio24/deployer-recipes": "^1.1",
                 "studio24/design-system": "dev-main"
             },
-            "default-branch": true,
             "type": "symfony-bundle",
             "autoload": {
                 "psr-4": {
@@ -7173,9 +7172,10 @@
             "description": "W3C Website Templates",
             "homepage": "https://github.com/w3c/w3c-website-templates-bundle",
             "support": {
-                "source": "https://github.com/w3c/w3c-website-templates-bundle/tree/main"
+                "issues": "https://github.com/w3c/w3c-website-templates-bundle/issues",
+                "source": "https://github.com/w3c/w3c-website-templates-bundle/tree/refactoring"
             },
-            "time": "2021-09-23T11:49:07+00:00"
+            "time": "2021-09-21T10:23:20+00:00"
         },
         {
             "name": "webmozart/assert",
