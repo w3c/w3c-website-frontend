@@ -68,15 +68,13 @@ set('default_stage', 'staging');
  * Host, stage and deploy path must be unique
  */
 
-
 host('staging')
     ->stage('staging')
     ->user('studio24')
     ->hostname('128.30.54.149')
     ->set('deploy_path', '/var/www/frontend-staging')
     ->set('url', 'https://www-staging.w3.org')
-    ->set('composer_options', '{{composer_action}} --verbose --prefer-dist --no-progress --no-dev --no-interaction  --optimize-autoloader');
-
+    ->set('composer_options', '--no-dev --verbose --no-progress --no-interaction --optimize-autoloader');
 
 host('development')
     ->stage('development')
@@ -84,14 +82,12 @@ host('development')
     ->hostname('128.30.54.149')
     ->set('deploy_path', '/var/www/frontend-dev')
     ->set('url', 'https://www-dev.w3.org')
-    ->set('composer_options', '{{composer_action}} --verbose --prefer-dist --no-progress --no-interaction --optimize-autoloader');
-
+    ->set('composer_options', '--verbose --no-progress --no-interaction --optimize-autoloader');
 
 /**
  * Deployment task
  * The task that will be run when using dep deploy
  */
-
 desc('Deploy ' . get('application'));
 task('deploy', [
 
