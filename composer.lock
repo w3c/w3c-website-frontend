@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "cf4b42d1c03b248ff1aabea386544155",
+    "content-hash": "8fff0f90fb14f151a0cce89520f641ed",
     "packages": [
         {
             "name": "composer/package-versions-deprecated",
@@ -484,16 +484,16 @@
         },
         {
             "name": "laminas/laminas-code",
-            "version": "4.4.3",
+            "version": "4.4.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laminas/laminas-code.git",
-                "reference": "bb324850d09dd437b6acb142c13e64fdc725b0e1"
+                "reference": "54251ab2b16c41c6980387839496b235f5f6e10b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laminas/laminas-code/zipball/bb324850d09dd437b6acb142c13e64fdc725b0e1",
-                "reference": "bb324850d09dd437b6acb142c13e64fdc725b0e1",
+                "url": "https://api.github.com/repos/laminas/laminas-code/zipball/54251ab2b16c41c6980387839496b235f5f6e10b",
+                "reference": "54251ab2b16c41c6980387839496b235f5f6e10b",
                 "shasum": ""
             },
             "require": {
@@ -547,7 +547,7 @@
                     "type": "community_bridge"
                 }
             ],
-            "time": "2021-09-21T13:40:23+00:00"
+            "time": "2021-07-09T11:58:40+00:00"
         },
         {
             "name": "laminas/laminas-escaper",
@@ -1614,12 +1614,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/strata/data.git",
-                "reference": "286dcd82e3045a8880475d54aa081c8a3afe973f"
+                "reference": "759ef5f801d654aafed68950612f3a60584d5e0d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/strata/data/zipball/286dcd82e3045a8880475d54aa081c8a3afe973f",
-                "reference": "286dcd82e3045a8880475d54aa081c8a3afe973f",
+                "url": "https://api.github.com/repos/strata/data/zipball/759ef5f801d654aafed68950612f3a60584d5e0d",
+                "reference": "759ef5f801d654aafed68950612f3a60584d5e0d",
                 "shasum": ""
             },
             "require": {
@@ -1668,7 +1668,7 @@
                 "issues": "https://github.com/strata/data/issues",
                 "source": "https://github.com/strata/data/tree/release/0.8.0"
             },
-            "time": "2021-09-24T08:51:24+00:00"
+            "time": "2021-08-04T12:27:42+00:00"
         },
         {
             "name": "strata/frontend",
@@ -1676,12 +1676,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/strata/frontend.git",
-                "reference": "f48d02bf6af1e9a3dd3a849b271da755ab58a1c3"
+                "reference": "d815d88c382dc68801724e31f546a78811229d8f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/strata/frontend/zipball/f48d02bf6af1e9a3dd3a849b271da755ab58a1c3",
-                "reference": "f48d02bf6af1e9a3dd3a849b271da755ab58a1c3",
+                "url": "https://api.github.com/repos/strata/frontend/zipball/d815d88c382dc68801724e31f546a78811229d8f",
+                "reference": "d815d88c382dc68801724e31f546a78811229d8f",
                 "shasum": ""
             },
             "require": {
@@ -1735,7 +1735,7 @@
                 "issues": "https://github.com/strata/frontend/issues",
                 "source": "https://github.com/strata/frontend/tree/release/0.8.0"
             },
-            "time": "2021-09-22T21:13:29+00:00"
+            "time": "2021-09-20T15:51:01+00:00"
         },
         {
             "name": "strata/symfony-frontend",
@@ -2854,16 +2854,16 @@
         },
         {
             "name": "symfony/flex",
-            "version": "v1.16.1",
+            "version": "v1.15.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/flex.git",
-                "reference": "701891891209e70fb60e5ff3a5cd62216d66d7ab"
+                "reference": "9a22ef2a75609a4d3717db784d923a7a6b347bc5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/flex/zipball/701891891209e70fb60e5ff3a5cd62216d66d7ab",
-                "reference": "701891891209e70fb60e5ff3a5cd62216d66d7ab",
+                "url": "https://api.github.com/repos/symfony/flex/zipball/9a22ef2a75609a4d3717db784d923a7a6b347bc5",
+                "reference": "9a22ef2a75609a4d3717db784d923a7a6b347bc5",
                 "shasum": ""
             },
             "require": {
@@ -2874,13 +2874,13 @@
                 "composer/composer": "^1.0.2|^2.0",
                 "symfony/dotenv": "^4.4|^5.0",
                 "symfony/filesystem": "^4.4|^5.0",
-                "symfony/phpunit-bridge": "^4.4.12|^5.0",
+                "symfony/phpunit-bridge": "^4.4|^5.0",
                 "symfony/process": "^3.4|^4.4|^5.0"
             },
             "type": "composer-plugin",
             "extra": {
                 "branch-alias": {
-                    "dev-main": "1.16-dev"
+                    "dev-main": "1.13-dev"
                 },
                 "class": "Symfony\\Flex\\Flex"
             },
@@ -2902,7 +2902,7 @@
             "description": "Composer plugin for Symfony",
             "support": {
                 "issues": "https://github.com/symfony/flex/issues",
-                "source": "https://github.com/symfony/flex/tree/v1.16.1"
+                "source": "https://github.com/symfony/flex/tree/v1.15.4"
             },
             "funding": [
                 {
@@ -2918,7 +2918,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2021-09-23T14:52:29+00:00"
+            "time": "2021-09-13T14:49:33+00:00"
         },
         {
             "name": "symfony/form",
@@ -7134,16 +7134,16 @@
         },
         {
             "name": "w3c/website-templates-bundle",
-            "version": "dev-blog_listing",
+            "version": "dev-refactoring",
             "source": {
                 "type": "git",
                 "url": "https://github.com/w3c/w3c-website-templates-bundle.git",
-                "reference": "c886d7d0f785dbf0765ecb9c06a7ba6c508ec6af"
+                "reference": "dc37d4778176288cb18f9480c4b5717c9c7d9a77"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/w3c/w3c-website-templates-bundle/zipball/c886d7d0f785dbf0765ecb9c06a7ba6c508ec6af",
-                "reference": "c886d7d0f785dbf0765ecb9c06a7ba6c508ec6af",
+                "url": "https://api.github.com/repos/w3c/w3c-website-templates-bundle/zipball/dc37d4778176288cb18f9480c4b5717c9c7d9a77",
+                "reference": "dc37d4778176288cb18f9480c4b5717c9c7d9a77",
                 "shasum": ""
             },
             "require": {
@@ -7172,9 +7172,10 @@
             "description": "W3C Website Templates",
             "homepage": "https://github.com/w3c/w3c-website-templates-bundle",
             "support": {
-                "source": "https://github.com/w3c/w3c-website-templates-bundle/tree/blog_listing"
+                "issues": "https://github.com/w3c/w3c-website-templates-bundle/issues",
+                "source": "https://github.com/w3c/w3c-website-templates-bundle/tree/refactoring"
             },
-            "time": "2021-09-22T09:17:47+00:00"
+            "time": "2021-09-21T10:23:20+00:00"
         },
         {
             "name": "webmozart/assert",
@@ -10249,5 +10250,5 @@
     "platform-overrides": {
         "php": "7.4"
     },
-    "plugin-api-version": "2.0.0"
+    "plugin-api-version": "2.1.0"
 }
