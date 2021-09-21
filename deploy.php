@@ -26,7 +26,8 @@ $shared_files = [
 
 // Shared directories that are not in git and need to persist between deployments (e.g. uploaded images)
 $shared_directories = [
-    'var'
+    'var/log',
+    'var/sessions'
 ];
 
 // Sets directories as writable (e.g. uploaded images)
@@ -121,7 +122,6 @@ task('deploy', [
     // Composer install
     'dump-env',
     'deploy:vendors',
-    'cache-clear',
 
     // Create build summary
     's24:build-summary',
@@ -163,8 +163,6 @@ desc('Clear cache after Composer install');
 task('cache-clear', function () {
     writeln('php bin/console cache:clear');
 });
-
-
 
 // [Optional] If deploy fails automatically unlock.
 after('deploy:failed', 'deploy:unlock');
