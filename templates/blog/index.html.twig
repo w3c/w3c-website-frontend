@@ -1,0 +1,8 @@
+{% extends '@W3CWebsiteTemplates/base_listing.html.twig' %}
+
+{% block title %}{{ page.title }}{% endblock %}
+{% set breadcrumbs = {} %}
+
+{% block list %}
+    {{ include('@W3CWebsiteTemplates/components/listings/blog.html.twig') }}
+{% endblock %}
