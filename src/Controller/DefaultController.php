@@ -10,6 +10,7 @@ use App\Service\CraftCMS;
 use Strata\Data\Exception\GraphQLQueryException;
 use Strata\Data\Exception\QueryManagerException;
 use Strata\Data\Query\QueryManager;
+use Strata\Frontend\Site;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -54,12 +55,11 @@ class DefaultController extends AbstractController
      * @throws GraphQLQueryException
      * @throws QueryManagerException
      */
-    public function index(string $route, QueryManager $manager, Request $request): Response
+    public function index(string $route, Site $site, QueryManager $manager, Request $request): Response
     {
-        ;
         // Build queries
-        $manager->add('page', new Page(CraftCMS::getSiteForLocale($request->getLocale()), $route));
-        $manager->add('crosslinks', new YouMayAlsoLikeRelatedEntries(1, $route));
+        $manager->add('page', new Page($site->siteId, $route));
+        $manager->add('crosslinks', new YouMayAlsoLikeRelatedEntries($site->siteId, $route));
 
         // If page not found, return Error 404
         $page = $manager->get('page');
@@ -67,10 +67,9 @@ class DefaultController extends AbstractController
             throw $this->createNotFoundException('Page not found');
         }
 
-        // @todo testing, remove this
-        //dump($manager->get('page'));
-
         return $this->render('pages/default.html.twig', [
+            'locale'     => $site->getLocale(),
+            'textDirection' => $site->getTextDirectionHtml(),
             'navigation' => $manager->getCollection('navigation'),
             'page'       => $page,
             'crosslinks' => $manager->get('crosslinks')

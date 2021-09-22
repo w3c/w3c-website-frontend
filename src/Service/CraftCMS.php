@@ -35,18 +35,5 @@ class CraftCMS extends GraphQL
             'auth_bearer' => $token
         ]);
     }
-
-    public static function getSiteForLocale(string $locale): int
-    {
-        switch ($locale) {
-            case 'ja':
-                return 2;
-            case 'zh-hans':
-                return 4;
-            case 'fr':
-                return 6;
-            default:
-                return 1;
-        }
-    }
+    
 }

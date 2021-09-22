@@ -25,7 +25,6 @@ services:
             - '../src/Entity/'
             - '../src/Kernel.php'
             - '../src/Tests/'
-            - '../src/Service_OLD/'
 
     # controllers are imported separately to make sure services can be injected
     # as action arguments even if you don't extend any base controller class
@@ -51,3 +50,7 @@ services:
     # Query manager to retrieve data from APIs
     Strata\Data\Query\QueryManager:
             configurator: [ '@App\Service\QueryManagerConfigurator', 'configure' ]
+
+    # Site object
+    Strata\Frontend\Site:
+        configurator: [ '@App\Service\SiteConfigurator', 'configure' ]

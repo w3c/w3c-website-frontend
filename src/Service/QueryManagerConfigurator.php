@@ -7,6 +7,7 @@ namespace App\Service;
 use App\Query\CraftCMS\GlobalNavigation;
 use App\Query\W3C\Healthcheck;
 use Strata\Data\Query\QueryManager;
+use Strata\Frontend\Site;
 use Symfony\Component\Cache\Adapter\FilesystemTagAwareAdapter;
 use Symfony\Component\HttpFoundation\RequestStack;
 
@@ -22,13 +23,13 @@ class QueryManagerConfigurator
 {
     private W3C $w3CApi;
     private CraftCMS $craftCmsApi;
-    private RequestStack $requestStack;
+    private Site $site;
 
-    public function __construct(W3C $w3cApi, CraftCMS $craftCmsApi, RequestStack $requestStack)
+    public function __construct(W3C $w3cApi, CraftCMS $craftCmsApi, Site $site)
     {
         $this->w3CApi = $w3cApi;
         $this->craftCmsApi = $craftCmsApi;
-        $this->requestStack = $requestStack;
+        $this->site = $site;
     }
 
     /**
@@ -51,11 +52,6 @@ class QueryManagerConfigurator
         $manager->add('w3c_healthcheck', new Healthcheck());
 
         // Add global navigation
-        $manager->add(
-            'navigation',
-            new GlobalNavigation(
-                CraftCMS::getSiteForLocale($this->requestStack->getCurrentRequest()->getLocale())
-            )
-        );
+        $manager->add('navigation', new GlobalNavigation($this->site->siteId));
     }
 }
