@@ -1,0 +1,57 @@
+query BlogListing($siteId: [QueryArgument], $limit: Int, $offset: Int) {
+    entry(section: "blogListing", siteId: $siteId) {
+        id
+        slug
+        title
+        uri
+        ... on blogListing_blogListing_Entry {
+            excerpt
+            lead: pageLead
+        }
+    }
+    total: entryCount(section: "blogPosts", siteId: $siteId)
+    entries(section: "blogPosts", siteId: $siteId, limit: $limit, offset: $offset, orderBy: "postDate desc") {
+        id
+        slug
+        uri
+        title
+        ... on blogPosts_default_Entry {
+            author {
+                name
+                email
+            }
+            authors {
+                ... on authors_author_BlockType {
+                    name: authorName
+                    email: authorEmailAddress
+                }
+            }
+            categories: blogCategories {
+                uri
+                title
+            }
+            specifications {
+                uri
+                title
+            }
+            ecosystems: businessEcosystems {
+                uri
+                title
+            }
+            groups: workingGroups {
+                uri
+                title
+            }
+            tags: blogTags {
+                uri
+                title
+            }
+            date: postDate
+            excerpt
+            thumbnailImage {
+                ...thumbnailImage
+            }
+            thumbnailAltText
+        }
+    }
+}

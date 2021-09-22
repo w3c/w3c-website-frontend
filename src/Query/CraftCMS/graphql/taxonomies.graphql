@@ -1,0 +1,6 @@
+query Taxonomies($siteId: [QueryArgument], $handle: [String]) {
+    categories(siteId: $siteId, group: $handle, orderBy: "title asc") {
+        title
+        uri
+    }
+}

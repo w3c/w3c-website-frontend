@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "8fff0f90fb14f151a0cce89520f641ed",
+    "content-hash": "cf4b42d1c03b248ff1aabea386544155",
     "packages": [
         {
             "name": "composer/package-versions-deprecated",
@@ -484,16 +484,16 @@
         },
         {
             "name": "laminas/laminas-code",
-            "version": "4.4.2",
+            "version": "4.4.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laminas/laminas-code.git",
-                "reference": "54251ab2b16c41c6980387839496b235f5f6e10b"
+                "reference": "bb324850d09dd437b6acb142c13e64fdc725b0e1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laminas/laminas-code/zipball/54251ab2b16c41c6980387839496b235f5f6e10b",
-                "reference": "54251ab2b16c41c6980387839496b235f5f6e10b",
+                "url": "https://api.github.com/repos/laminas/laminas-code/zipball/bb324850d09dd437b6acb142c13e64fdc725b0e1",
+                "reference": "bb324850d09dd437b6acb142c13e64fdc725b0e1",
                 "shasum": ""
             },
             "require": {
@@ -547,7 +547,7 @@
                     "type": "community_bridge"
                 }
             ],
-            "time": "2021-07-09T11:58:40+00:00"
+            "time": "2021-09-21T13:40:23+00:00"
         },
         {
             "name": "laminas/laminas-escaper",
@@ -7134,16 +7134,16 @@
         },
         {
             "name": "w3c/website-templates-bundle",
-            "version": "dev-refactoring",
+            "version": "dev-blog_listing",
             "source": {
                 "type": "git",
                 "url": "https://github.com/w3c/w3c-website-templates-bundle.git",
-                "reference": "dc37d4778176288cb18f9480c4b5717c9c7d9a77"
+                "reference": "c886d7d0f785dbf0765ecb9c06a7ba6c508ec6af"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/w3c/w3c-website-templates-bundle/zipball/dc37d4778176288cb18f9480c4b5717c9c7d9a77",
-                "reference": "dc37d4778176288cb18f9480c4b5717c9c7d9a77",
+                "url": "https://api.github.com/repos/w3c/w3c-website-templates-bundle/zipball/c886d7d0f785dbf0765ecb9c06a7ba6c508ec6af",
+                "reference": "c886d7d0f785dbf0765ecb9c06a7ba6c508ec6af",
                 "shasum": ""
             },
             "require": {
@@ -7172,10 +7172,9 @@
             "description": "W3C Website Templates",
             "homepage": "https://github.com/w3c/w3c-website-templates-bundle",
             "support": {
-                "issues": "https://github.com/w3c/w3c-website-templates-bundle/issues",
-                "source": "https://github.com/w3c/w3c-website-templates-bundle/tree/refactoring"
+                "source": "https://github.com/w3c/w3c-website-templates-bundle/tree/blog_listing"
             },
-            "time": "2021-09-21T10:23:20+00:00"
+            "time": "2021-09-22T09:17:47+00:00"
         },
         {
             "name": "webmozart/assert",
