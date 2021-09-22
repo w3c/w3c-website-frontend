@@ -12,7 +12,7 @@ fragment landingFlexibleComponents on landingFlexibleComponents_MatrixField {
         typeHandle
         showImageBeforeText
         image  {
-            ...thumbnailImage
+            ...contentImage
         }
         titleField
         mainContent
@@ -56,7 +56,7 @@ fragment landingFlexibleComponents on landingFlexibleComponents_MatrixField {
     ... on landingFlexibleComponents_imageMediaComponent_BlockType {
         typeHandle
         image {
-            ...thumbnailImage
+            ...contentImage
         }
         altText
         figureCaption
