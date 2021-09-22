@@ -61,12 +61,18 @@ class DefaultController extends AbstractController
         $manager->add('page', new Page(CraftCMS::getSiteForLocale($request->getLocale()), $route));
         $manager->add('crosslinks', new YouMayAlsoLikeRelatedEntries(1, $route));
 
+        // If page not found, return Error 404
+        $page = $manager->get('page');
+        if (empty($page)) {
+            throw $this->createNotFoundException('Page not found');
+        }
+
         // @todo testing, remove this
         //dump($manager->get('page'));
 
         return $this->render('pages/default.html.twig', [
             'navigation' => $manager->getCollection('navigation'),
-            'page'       => $manager->get('page'),
+            'page'       => $page,
             'crosslinks' => $manager->get('crosslinks')
         ]);
     }
