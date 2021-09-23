@@ -1,5 +1,0 @@
-fragment thumbnailImage on AssetInterface {
-    src: url
-    title
-    srcset(sizes: ["360", "920", "1520"])
-}
