@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "8fff0f90fb14f151a0cce89520f641ed",
+    "content-hash": "cb6060fba7a13e8d3d393b9e3ab6cb9b",
     "packages": [
         {
             "name": "composer/package-versions-deprecated",
@@ -1676,12 +1676,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/strata/frontend.git",
-                "reference": "d815d88c382dc68801724e31f546a78811229d8f"
+                "reference": "f48d02bf6af1e9a3dd3a849b271da755ab58a1c3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/strata/frontend/zipball/d815d88c382dc68801724e31f546a78811229d8f",
-                "reference": "d815d88c382dc68801724e31f546a78811229d8f",
+                "url": "https://api.github.com/repos/strata/frontend/zipball/f48d02bf6af1e9a3dd3a849b271da755ab58a1c3",
+                "reference": "f48d02bf6af1e9a3dd3a849b271da755ab58a1c3",
                 "shasum": ""
             },
             "require": {
@@ -1735,7 +1735,7 @@
                 "issues": "https://github.com/strata/frontend/issues",
                 "source": "https://github.com/strata/frontend/tree/release/0.8.0"
             },
-            "time": "2021-09-20T15:51:01+00:00"
+            "time": "2021-09-22T21:13:29+00:00"
         },
         {
             "name": "strata/symfony-frontend",
@@ -7134,16 +7134,16 @@
         },
         {
             "name": "w3c/website-templates-bundle",
-            "version": "dev-refactoring",
+            "version": "dev-main",
             "source": {
                 "type": "git",
                 "url": "https://github.com/w3c/w3c-website-templates-bundle.git",
-                "reference": "254a771fa2ac3930f70c423c89312c44b9f56c28"
+                "reference": "e8800c6ed8346fb513f44a4aff7115f4b9d6456e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/w3c/w3c-website-templates-bundle/zipball/254a771fa2ac3930f70c423c89312c44b9f56c28",
-                "reference": "254a771fa2ac3930f70c423c89312c44b9f56c28",
+                "url": "https://api.github.com/repos/w3c/w3c-website-templates-bundle/zipball/e8800c6ed8346fb513f44a4aff7115f4b9d6456e",
+                "reference": "e8800c6ed8346fb513f44a4aff7115f4b9d6456e",
                 "shasum": ""
             },
             "require": {
@@ -7159,6 +7159,7 @@
                 "studio24/deployer-recipes": "^1.1",
                 "studio24/design-system": "dev-main"
             },
+            "default-branch": true,
             "type": "symfony-bundle",
             "autoload": {
                 "psr-4": {
@@ -7172,9 +7173,9 @@
             "description": "W3C Website Templates",
             "homepage": "https://github.com/w3c/w3c-website-templates-bundle",
             "support": {
-                "source": "https://github.com/w3c/w3c-website-templates-bundle/tree/refactoring"
+                "source": "https://github.com/w3c/w3c-website-templates-bundle/tree/main"
             },
-            "time": "2021-09-22T16:54:24+00:00"
+            "time": "2021-09-23T07:49:45+00:00"
         },
         {
             "name": "webmozart/assert",
