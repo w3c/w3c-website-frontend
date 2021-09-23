@@ -74,7 +74,7 @@ class DefaultController extends AbstractController
             'navigation' => $manager->getCollection('navigation'),
             'page'       => $page,
             'crosslinks' => $manager->get('crosslinks'),
-            'seo' => $seo
+            'seo'        => $seo
         ]);
     }
 }
