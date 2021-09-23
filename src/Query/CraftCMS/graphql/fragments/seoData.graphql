@@ -10,16 +10,14 @@ fragment seoData on Ether_SeoData {
             title
             description
             image {
-                filename
-                mimeType
+                url(width: 1200, height: 600)
             }
         }
         facebook {
             title
             description
             image {
-                filename
-                mimeType
+                url(width: 1200, height: 630)
             }
         }
     }
