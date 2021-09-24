@@ -1,4 +1,4 @@
-query Taxonomies($siteId: [QueryArgument], $handle: [String]) {
+query Categories($siteId: [QueryArgument], $handle: [String]) {
     categories(siteId: $siteId, group: $handle) {
         id
         title

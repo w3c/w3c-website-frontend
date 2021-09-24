@@ -7,7 +7,7 @@ use Strata\Data\Cache\CacheLifetime;
 use Strata\Data\Exception\GraphQLQueryException;
 use Strata\Data\Query\GraphQLQuery;
 
-class Taxonomies extends GraphQLQuery
+class Categories extends GraphQLQuery
 {
     public function getRequiredDataProviderClass(): string
     {
@@ -25,7 +25,7 @@ class Taxonomies extends GraphQLQuery
      */
     public function __construct(int $siteId, string $handle, int $cacheLifetime = CacheLifetime::HOUR)
     {
-        $this->setGraphQLFromFile(__DIR__ . '/../graphql/taxonomies.graphql')
+        $this->setGraphQLFromFile(__DIR__ . '/../graphql/taxonomies/categories.graphql')
              ->addVariable('siteId', $siteId)
              ->addVariable('handle', $handle)
              ->setRootPropertyPath('[categories]')

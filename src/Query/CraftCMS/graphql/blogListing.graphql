@@ -1,4 +1,4 @@
-query BlogListing($siteId: [QueryArgument], $category: [QueryArgument], $before: String, $after: String, $search: String, $limit: Int, $offset: Int) {
+query BlogListing($siteId: [QueryArgument], $category: [QueryArgument], $tag: [QueryArgument], $before: String, $after: String, $search: String, $limit: Int, $offset: Int) {
     entry(section: "blogListing", siteId: $siteId) {
         id
         slug
@@ -9,8 +9,8 @@ query BlogListing($siteId: [QueryArgument], $category: [QueryArgument], $before:
             lead: pageLead
         }
     }
-    total: entryCount(section: "blogPosts", siteId: $siteId, blogCategories: $category, before: $before, after: $after, search: $search)
-    entries(section: "blogPosts", siteId: $siteId, blogCategories: $category, before: $before, after: $after, search: $search, limit: $limit, offset: $offset, orderBy: "postDate desc") {
+    total: entryCount(section: "blogPosts", siteId: $siteId, blogCategories: $category, blogTags: $tag, before: $before, after: $after, search: $search)
+    entries(section: "blogPosts", siteId: $siteId, blogCategories: $category, blogTags: $tag, before: $before, after: $after, search: $search, limit: $limit, offset: $offset, orderBy: "postDate desc") {
         id
         slug
         uri
@@ -31,8 +31,8 @@ query BlogListing($siteId: [QueryArgument], $category: [QueryArgument], $before:
                 title
             }
             tags: blogTags {
-                uri
                 title
+                slug
             }
             date: postDate
             excerpt
