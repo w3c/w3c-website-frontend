@@ -58,19 +58,22 @@ class BlogController extends AbstractController
         }
 
         $page    = $manager->get('blogListing', '[entry]');
-        $filters = $manager->getCollection('filters');
+        $categories = $manager->getCollection('filters');
+        $first = $manager->get('filters', '[first]');
+        $last = $manager->get('filters', '[last]');
 
         $archives = range(
-            (new DateTimeImmutable($filters['first']['postDate']))->format('Y'),
-            (new DateTimeImmutable($filters['last']['postDate']))->format('Y')
+            (new DateTimeImmutable($first['postDate']))->format('Y'),
+            (new DateTimeImmutable($last['postDate']))->format('Y')
         );
-        $categories = $filters['categories'];
 
         dump($archives);
         dump($page);
         dump($collection);
         dump($pagination);
-        dump($filters);
+        dump($categories);
+        dump($first);
+        dump($last);
 
         return $this->render('blog/index.html.twig', [
             'navigation' => $manager->getCollection('navigation'),

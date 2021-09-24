@@ -1614,12 +1614,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/strata/data.git",
-                "reference": "286dcd82e3045a8880475d54aa081c8a3afe973f"
+                "reference": "5949288dc22cd2456a6764091b2661db3c885735"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/strata/data/zipball/286dcd82e3045a8880475d54aa081c8a3afe973f",
-                "reference": "286dcd82e3045a8880475d54aa081c8a3afe973f",
+                "url": "https://api.github.com/repos/strata/data/zipball/5949288dc22cd2456a6764091b2661db3c885735",
+                "reference": "5949288dc22cd2456a6764091b2661db3c885735",
                 "shasum": ""
             },
             "require": {
@@ -1668,7 +1668,7 @@
                 "issues": "https://github.com/strata/data/issues",
                 "source": "https://github.com/strata/data/tree/release/0.8.0"
             },
-            "time": "2021-09-24T08:51:24+00:00"
+            "time": "2021-09-24T14:58:59+00:00"
         },
         {
             "name": "strata/frontend",
