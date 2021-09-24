@@ -33,6 +33,10 @@ class BlogListing extends GraphQLQuery
     {
         $this->setGraphQLFromFile(__DIR__ . '/graphql/blogListing.graphql')
             ->addFragmentFromFile(__DIR__ . '/graphql/fragments/thumbnailImage.graphql')
+            ->setRootPropertyPath('[entries]')
+            ->setTotalResults('[total]')
+            ->setResultsPerPage($limit)
+
             ->addVariable('siteId', $siteId)
             ->addVariable('limit', $limit)
             ->addVariable('offset', ($page - 1) * $limit)
