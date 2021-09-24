@@ -58,7 +58,7 @@ class BlogController extends AbstractController
         }
 
         $page    = $manager->get('blogListing', '[entry]');
-        $categories = $manager->getCollection('filters');
+        $categories = $manager->getCollection('filters', '[categories]');
         $first = $manager->get('filters', '[first]');
         $last = $manager->get('filters', '[last]');
 
