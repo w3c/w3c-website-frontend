@@ -2,10 +2,13 @@
 
 {% block title %}{{ page.title }}{% endblock %}
 {% set breadcrumbs = {} %}
+{% block filters %}
+    {{ include('@W3CWebsiteTemplates/components/listings/blog/filters.html.twig') }}
+{% endblock %}
 
 {% block list %}
 
     <p>This is page {{ entries.pagination.page }}, displaying results {{ entries.pagination.from }}-{{ entries.pagination.to }}</p>
 
-    {{ include('@W3CWebsiteTemplates/components/listings/blog.html.twig') }}
+    {{ include('@W3CWebsiteTemplates/components/listings/blog/list.html.twig') }}
 {% endblock %}
