@@ -15,6 +15,7 @@ fragment defaultFlexibleComponents on defaultFlexibleComponents_MatrixField {
         }
         altText
         figureCaption
+        informativeOrDecorative
     }
     ...on defaultFlexibleComponents_videoMediaComponent_BlockType {
         typeHandle

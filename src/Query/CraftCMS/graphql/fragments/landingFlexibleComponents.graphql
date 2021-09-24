@@ -24,16 +24,18 @@ fragment landingFlexibleComponents on landingFlexibleComponents_MatrixField {
         heading
         description
         cards {
-            title
-            uri
+            ... on cards_BlockType {
+                title
+                uri
+            }
         }
     }
     ... on landingFlexibleComponents_iconsAndDescriptionsComponent_BlockType {
         typeHandle
         heading
         description
-        cards {
-            ... on cards_BlockType {
+        iconCards {
+            ... on iconCards_BlockType {
                 icon {
                     ... on icon_Icon {
                         iconName
@@ -60,6 +62,7 @@ fragment landingFlexibleComponents on landingFlexibleComponents_MatrixField {
         }
         altText
         figureCaption
+        informativeOrDecorative
     }
     ... on landingFlexibleComponents_videoMediaComponent_BlockType {
         typeHandle
