@@ -79,8 +79,7 @@ class DefaultController extends AbstractController
         dump($crosslinks);
 
         return $this->render('pages/default.html.twig', [
-            'locale'     => $site->getLocale(),
-            'textDirection' => $site->getTextDirectionHtml(),
+            'site'       => $site,
             'navigation' => $manager->getCollection('navigation'),
             'page'       => $page,
             'crosslinks' => $crosslinks,

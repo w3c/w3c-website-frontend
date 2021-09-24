@@ -1,5 +1,9 @@
 # Internationalization
 
+## Setting up languages
+
+See [adding languages](adding-languages.md).
+
 ## Routing
 
 See [routing locales](routing.md#locale).

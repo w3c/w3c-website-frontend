@@ -1614,12 +1614,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/strata/data.git",
-                "reference": "759ef5f801d654aafed68950612f3a60584d5e0d"
+                "reference": "5949288dc22cd2456a6764091b2661db3c885735"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/strata/data/zipball/759ef5f801d654aafed68950612f3a60584d5e0d",
-                "reference": "759ef5f801d654aafed68950612f3a60584d5e0d",
+                "url": "https://api.github.com/repos/strata/data/zipball/5949288dc22cd2456a6764091b2661db3c885735",
+                "reference": "5949288dc22cd2456a6764091b2661db3c885735",
                 "shasum": ""
             },
             "require": {
@@ -1668,7 +1668,7 @@
                 "issues": "https://github.com/strata/data/issues",
                 "source": "https://github.com/strata/data/tree/release/0.8.0"
             },
-            "time": "2021-08-04T12:27:42+00:00"
+            "time": "2021-09-24T14:58:59+00:00"
         },
         {
             "name": "strata/frontend",
@@ -2854,16 +2854,16 @@
         },
         {
             "name": "symfony/flex",
-            "version": "v1.15.4",
+            "version": "v1.16.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/flex.git",
-                "reference": "9a22ef2a75609a4d3717db784d923a7a6b347bc5"
+                "reference": "f1e77e62bcb068bf094f4781eca1436ef818ff72"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/flex/zipball/9a22ef2a75609a4d3717db784d923a7a6b347bc5",
-                "reference": "9a22ef2a75609a4d3717db784d923a7a6b347bc5",
+                "url": "https://api.github.com/repos/symfony/flex/zipball/f1e77e62bcb068bf094f4781eca1436ef818ff72",
+                "reference": "f1e77e62bcb068bf094f4781eca1436ef818ff72",
                 "shasum": ""
             },
             "require": {
@@ -2874,13 +2874,13 @@
                 "composer/composer": "^1.0.2|^2.0",
                 "symfony/dotenv": "^4.4|^5.0",
                 "symfony/filesystem": "^4.4|^5.0",
-                "symfony/phpunit-bridge": "^4.4|^5.0",
+                "symfony/phpunit-bridge": "^4.4.12|^5.0",
                 "symfony/process": "^3.4|^4.4|^5.0"
             },
             "type": "composer-plugin",
             "extra": {
                 "branch-alias": {
-                    "dev-main": "1.13-dev"
+                    "dev-main": "1.16-dev"
                 },
                 "class": "Symfony\\Flex\\Flex"
             },
@@ -2902,7 +2902,7 @@
             "description": "Composer plugin for Symfony",
             "support": {
                 "issues": "https://github.com/symfony/flex/issues",
-                "source": "https://github.com/symfony/flex/tree/v1.15.4"
+                "source": "https://github.com/symfony/flex/tree/v1.16.2"
             },
             "funding": [
                 {
@@ -2918,7 +2918,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2021-09-13T14:49:33+00:00"
+            "time": "2021-09-24T08:45:18+00:00"
         },
         {
             "name": "symfony/form",
@@ -7138,12 +7138,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/w3c/w3c-website-templates-bundle.git",
-                "reference": "cdea6be7e12e65dfe48b7f76cf0cd4daa29f672b"
+                "reference": "c44c98ca40c12a1db4a876d3384dbcb5453adf4a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/w3c/w3c-website-templates-bundle/zipball/cdea6be7e12e65dfe48b7f76cf0cd4daa29f672b",
-                "reference": "cdea6be7e12e65dfe48b7f76cf0cd4daa29f672b",
+                "url": "https://api.github.com/repos/w3c/w3c-website-templates-bundle/zipball/c44c98ca40c12a1db4a876d3384dbcb5453adf4a",
+                "reference": "c44c98ca40c12a1db4a876d3384dbcb5453adf4a",
                 "shasum": ""
             },
             "require": {
@@ -7175,7 +7175,7 @@
             "support": {
                 "source": "https://github.com/w3c/w3c-website-templates-bundle/tree/main"
             },
-            "time": "2021-09-23T11:49:07+00:00"
+            "time": "2021-09-24T16:33:05+00:00"
         },
         {
             "name": "webmozart/assert",
