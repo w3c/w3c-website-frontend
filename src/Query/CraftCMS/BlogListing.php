@@ -22,15 +22,27 @@ class BlogListing extends GraphQLQuery
     /**
      * Set up query
      *
-     * @param int $siteId        Site ID of page content
-     * @param int $limit
-     * @param int $page
-     * @param int $cacheLifetime Cache lifetime to store HTTP response for, defaults to 1 hour
+     * @param int         $siteId        Site ID of page content
+     * @param int|null    $category
+     * @param string|null $before
+     * @param string|null $after
+     * @param string|null $search
+     * @param int         $limit
+     * @param int         $page
+     * @param int         $cacheLifetime Cache lifetime to store HTTP response for, defaults to 1 hour
      *
      * @throws GraphQLQueryException
      */
-    public function __construct(int $siteId, int $limit = 10, int $page = 1, int $cacheLifetime = CacheLifetime::HOUR)
-    {
+    public function __construct(
+        int $siteId,
+        int $category = null,
+        string $before = null,
+        string $after = null,
+        string $search = null,
+        int $limit = 10,
+        int $page = 1,
+        int $cacheLifetime = CacheLifetime::HOUR
+    ) {
         $this->setGraphQLFromFile(__DIR__ . '/graphql/blogListing.graphql')
             ->setRootPropertyPath('[entries]')
             ->setTotalResults('[total]')
@@ -38,6 +50,10 @@ class BlogListing extends GraphQLQuery
             ->setCurrentPage($page)
 
             ->addVariable('siteId', $siteId)
+            ->addVariable('category', $category)
+            ->addVariable('before', $before)
+            ->addVariable('after', $after)
+            ->addVariable('search', $search)
             ->addVariable('limit', $limit)
             ->addVariable('offset', ($page - 1) * $limit)
             ->enableCache($cacheLifetime)
