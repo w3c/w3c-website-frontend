@@ -41,19 +41,23 @@ class BlogController extends AbstractController
         );
         $manager->add('categories', new Taxonomies($siteId, 'blogCategories'));
 
-        $blogListing = $manager->get('blogListing');
-        $totalPages = (int) ceil($blogListing['total'] / self::LIMIT);
+        $collection = $manager->getCollection('blogListing');
+        $pagination = $collection->getPagination();
 
-        if ($currentPage > $totalPages && $totalPages > 0) {
+        if (empty($collection) && $currentPage !== 1) {
             return $this->redirectToRoute('app_blog_index', ['page' => 1]);
         }
-dump($blogListing);
+
+        if ($currentPage > $pagination->getTotalPages() && $pagination->getTotalPages() > 0) {
+            return $this->redirectToRoute('app_blog_index', ['page' => 1]);
+        }
+
         return $this->render('blog/index.html.twig', [
             'navigation' => $manager->getCollection('navigation'),
-            'page' => $blogListing['entry'],
-            'pagination' => ['current' => $currentPage, 'total' => $totalPages],
-            'entries' => $blogListing['entries'],
-            'categories' => $manager->get('categories')['categories']
+            'page' => $manager->get('blogListing', '[entry]'),
+            'entries' => $collection,
+            'pagination' => $pagination,
+            'categories' => $manager->getCollection('categories')
         ]);
     }
 }

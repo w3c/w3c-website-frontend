@@ -28,6 +28,7 @@ class Taxonomies extends GraphQLQuery
         $this->setGraphQLFromFile(__DIR__ . '/../graphql/taxonomies.graphql')
              ->addVariable('siteId', $siteId)
              ->addVariable('handle', $handle)
+             ->setRootPropertyPath('[categories]')
              ->enableCache($cacheLifetime)//->setCacheTags($uri)
         ;
     }
