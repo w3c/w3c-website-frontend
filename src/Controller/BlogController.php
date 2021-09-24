@@ -59,7 +59,7 @@ class BlogController extends AbstractController
         }
 
         $page    = $manager->get('blogListing', '[entry]');
-        $filters = $manager->get('filters');
+        $filters = $manager->getCollection('filters');
 
         $archives = range(
             (new DateTimeImmutable($filters['first']['postDate']))->format('Y'),
