@@ -16,3 +16,92 @@ query YouMayAlsoLike($uri: [String], $siteId: [QueryArgument]) {
         }
     }
 }
+
+fragment youMayAlsoLikeRelatedEntries on youMayAlsoLikeRelatedEntries_MatrixField {
+    ... on youMayAlsoLikeRelatedEntries_contentFromTheCms_BlockType {
+        contentEntry {
+            category: typeHandle
+            title
+            url: uri
+            ... on blogPosts_default_Entry {
+                text: excerpt
+                thumbnailImage {
+                    ...thumbnailImage
+                }
+                thumbnailAltText
+            }
+            ... on pages_landingPage_Entry {
+                text: excerpt
+                thumbnailImage {
+                    ...thumbnailImage
+                }
+                thumbnailAltText
+            }
+            ... on pressReleases_default_Entry {
+                text: excerpt
+                thumbnailImage {
+                    ...thumbnailImage
+                }
+                thumbnailAltText
+            }
+            ... on newsArticles_default_Entry {
+                text: excerpt
+                thumbnailImage {
+                    ...thumbnailImage
+                }
+                thumbnailAltText
+            }
+            ... on pages_default_Entry {
+                text: excerpt
+                thumbnailImage {
+                    ...thumbnailImage
+                }
+                thumbnailAltText
+            }
+            ... on events_default_Entry {
+                text: excerpt
+                thumbnailImage {
+                    ...thumbnailImage
+                }
+                thumbnailAltText
+            }
+            ... on businessEcosystems_default_Entry {
+                text: excerpt
+                thumbnailImage {
+                    ...thumbnailImage
+                }
+                thumbnailAltText
+            }
+            ... on events_external_Entry {
+                text: excerpt
+                thumbnailImage {
+                    ...thumbnailImage
+                }
+                thumbnailAltText
+            }
+            ... on homepage_homepage_Entry {
+                text: excerpt
+                thumbnailImage {
+                    ...thumbnailImage
+                }
+                thumbnailAltText
+            }
+        }
+    }
+    ... on youMayAlsoLikeRelatedEntries_contentFromAnotherSource_BlockType {
+        url: resourceUrl
+        thumbnailImage {
+            ...thumbnailImage
+        }
+        thumbnailAltText
+        title: resourceTitle
+        text: excerpt
+        category: typeOfContent
+    }
+}
+
+fragment thumbnailImage on AssetInterface {
+    src: url
+    title
+    srcset(sizes: ["360", "580", "700", "920", "1520"])
+}

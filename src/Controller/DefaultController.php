@@ -67,12 +67,24 @@ class DefaultController extends AbstractController
             throw $this->createNotFoundException('Page not found');
         }
 
+        $seo           = $page['seoOptions'];
+        $seo['expiry'] = $page['expiryDate'];
+
+        $navigation = $manager->getCollection('navigation');
+        $crosslinks = $manager->get('crosslinks');
+
+        dump($navigation);
+        dump($page);
+        dump($seo);
+        dump($crosslinks);
+
         return $this->render('pages/default.html.twig', [
             'locale'     => $site->getLocale(),
             'textDirection' => $site->getTextDirectionHtml(),
             'navigation' => $manager->getCollection('navigation'),
             'page'       => $page,
-            'crosslinks' => $manager->get('crosslinks')
+            'crosslinks' => $crosslinks,
+            'seo'        => $seo
         ]);
     }
 }

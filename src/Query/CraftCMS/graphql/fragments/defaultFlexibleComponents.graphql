@@ -11,10 +11,11 @@ fragment defaultFlexibleComponents on defaultFlexibleComponents_MatrixField {
     ...on defaultFlexibleComponents_imageMediaComponent_BlockType {
         typeHandle
         imageMedia {
-            ...thumbnailImage
+            ...contentImage
         }
         altText
         figureCaption
+        informativeOrDecorative
     }
     ...on defaultFlexibleComponents_videoMediaComponent_BlockType {
         typeHandle

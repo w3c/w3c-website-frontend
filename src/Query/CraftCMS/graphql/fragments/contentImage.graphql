@@ -1,0 +1,5 @@
+fragment contentImage on AssetInterface {
+    src: url
+    title
+    srcset(sizes: ["360", "580", "920", "1520"])
+}

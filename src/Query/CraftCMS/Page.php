@@ -32,7 +32,7 @@ class Page extends GraphQLQuery
         $this->setGraphQLFromFile(__DIR__ . '/graphql/page.graphql')
             ->addFragmentFromFile(__DIR__ . '/graphql/fragments/defaultFlexibleComponents.graphql')
             ->addFragmentFromFile(__DIR__ . '/graphql/fragments/landingFlexibleComponents.graphql')
-            ->addFragmentFromFile(__DIR__ . '/graphql/fragments/thumbnailImage.graphql')
+            ->addFragmentFromFile(__DIR__ . '/graphql/fragments/contentImage.graphql')
             ->addFragmentFromFile(__DIR__ . '/graphql/fragments/seoData.graphql')
             ->setRootPropertyPath('[entry]')
 
