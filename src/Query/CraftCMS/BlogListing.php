@@ -32,10 +32,10 @@ class BlogListing extends GraphQLQuery
     public function __construct(int $siteId, int $limit = 10, int $page = 1, int $cacheLifetime = CacheLifetime::HOUR)
     {
         $this->setGraphQLFromFile(__DIR__ . '/graphql/blogListing.graphql')
-            ->addFragmentFromFile(__DIR__ . '/graphql/fragments/thumbnailImage.graphql')
             ->setRootPropertyPath('[entries]')
             ->setTotalResults('[total]')
             ->setResultsPerPage($limit)
+            ->setCurrentPage($page)
 
             ->addVariable('siteId', $siteId)
             ->addVariable('limit', $limit)
