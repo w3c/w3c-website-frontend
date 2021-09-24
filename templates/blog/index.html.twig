@@ -4,5 +4,8 @@
 {% set breadcrumbs = {} %}
 
 {% block list %}
+
+    <p>This is page {{ entries.pagination.page }}, displaying results {{ entries.pagination.from }}-{{ entries.pagination.to }}</p>
+
     {{ include('@W3CWebsiteTemplates/components/listings/blog.html.twig') }}
 {% endblock %}
