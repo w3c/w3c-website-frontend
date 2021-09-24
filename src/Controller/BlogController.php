@@ -4,7 +4,8 @@ namespace App\Controller;
 
 use App\Query\CraftCMS\BlogFilters;
 use App\Query\CraftCMS\BlogListing;
-use App\Query\CraftCMS\Taxonomies\Taxonomies;
+use App\Query\CraftCMS\Taxonomies\Categories;
+use App\Query\CraftCMS\Taxonomies\Tags;
 use App\Service\CraftCMS;
 use DateTimeImmutable;
 use Exception;
@@ -44,6 +45,7 @@ class BlogController extends AbstractController
                 null,
                 null,
                 null,
+                null,
                 $search,
                 self::LIMIT,
                 $currentPage
@@ -75,6 +77,7 @@ class BlogController extends AbstractController
             new BlogListing(
                 $siteId,
                 null,
+                null,
                 $year + 1,
                 $year,
                 $search,
@@ -87,7 +90,7 @@ class BlogController extends AbstractController
     }
 
     /**
-     * @Route("/blog/category/{category}", requirements={"category": ".+"})
+     * @Route("/blog/categories/{category}", requirements={"category": ".+"})
      *
      * @param QueryManager $manager
      * @param string       $category
@@ -104,7 +107,7 @@ class BlogController extends AbstractController
         // Build queries
         $siteId = CraftCMS::getSiteForLocale($request->getLocale());
 
-        $manager->add('categories', new Taxonomies($siteId, 'blogCategories'));
+        $manager->add('categories', new Categories($siteId, 'blogCategories'));
         $categories = $manager->getCollection('categories');
         $categoryId = null;
         foreach ($categories as $categoryData) {
@@ -125,6 +128,56 @@ class BlogController extends AbstractController
                 $categoryId,
                 null,
                 null,
+                null,
+                $search,
+                self::LIMIT,
+                $currentPage
+            )
+        );
+
+        return $this->buildListing($manager, $siteId, $currentPage, $search);
+    }
+
+    /**
+     * @Route("/blog/tags/{tag}", requirements={"tag": ".+"})
+     *
+     * @param QueryManager $manager
+     * @param string       $tag
+     * @param Request      $request
+     *
+     * @return Response
+     * @throws GraphQLQueryException
+     * @throws QueryManagerException
+     */
+    public function tag(QueryManager $manager, string $tag, Request $request): Response
+    {
+        $currentPage = $request->query->get('page', 1);
+        $search      = $request->query->get('search');
+        // Build queries
+        $siteId = CraftCMS::getSiteForLocale($request->getLocale());
+
+        $manager->add('tags', new Tags($siteId, 'blogTags'));
+        $tags = $manager->getCollection('tags');
+        $tagId = null;
+        foreach ($tags as $tagData) {
+            if ($tagData['slug'] == $tag) {
+                $tagId = $tagData['id'];
+                break;
+            }
+        }
+
+        if ($tagId == null) {
+            throw $this->createNotFoundException('Tag not found');
+        }
+
+        $manager->add(
+            'blogListing',
+            new BlogListing(
+                $siteId,
+                null,
+                $tagId,
+                null,
+                null,
                 $search,
                 self::LIMIT,
                 $currentPage
@@ -143,6 +196,7 @@ class BlogController extends AbstractController
      * @return RedirectResponse|Response
      * @throws GraphQLQueryException
      * @throws QueryManagerException
+     * @throws Exception
      */
     protected function buildListing(QueryManager $manager, int $siteId, int $currentPage, ?string $search)
     {
@@ -184,5 +238,5 @@ class BlogController extends AbstractController
             'archives'   => $archives,
             'search'     => $search
         ]);
-}
+    }
 }

@@ -1,0 +1,7 @@
+query Tags($siteId: [QueryArgument], $handle: [String]) {
+    tags(siteId: $siteId, group: $handle) {
+        id
+        title
+        slug
+    }
+}

@@ -24,6 +24,7 @@ class BlogListing extends GraphQLQuery
      *
      * @param int         $siteId        Site ID of page content
      * @param int|null    $category
+     * @param int|null    $tag
      * @param string|null $before
      * @param string|null $after
      * @param string|null $search
@@ -36,6 +37,7 @@ class BlogListing extends GraphQLQuery
     public function __construct(
         int $siteId,
         int $category = null,
+        int $tag = null,
         string $before = null,
         string $after = null,
         string $search = null,
@@ -51,6 +53,7 @@ class BlogListing extends GraphQLQuery
 
             ->addVariable('siteId', $siteId)
             ->addVariable('category', $category)
+            ->addVariable('tag', $tag)
             ->addVariable('before', $before)
             ->addVariable('after', $after)
             ->addVariable('search', $search)
