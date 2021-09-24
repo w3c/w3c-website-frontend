@@ -32,7 +32,6 @@ class BlogFilters extends GraphQLQuery
         $this->setGraphQLFromFile(__DIR__ . '/graphql/blogFilters.graphql')
             ->addVariable('siteId', $siteId)
             ->enableCache($cacheLifetime)
-            ->setRootPropertyPath('[categories]')
 
             //->setCacheTags($uri)
         ;
