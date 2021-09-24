@@ -70,10 +70,18 @@ class DefaultController extends AbstractController
         $seo           = $page['seoOptions'];
         $seo['expiry'] = $page['expiryDate'];
 
+        $navigation = $manager->getCollection('navigation');
+        $crosslinks = $manager->get('crosslinks');
+
+        dump($navigation);
+        dump($page);
+        dump($seo);
+        dump($crosslinks);
+
         return $this->render('pages/default.html.twig', [
             'navigation' => $manager->getCollection('navigation'),
             'page'       => $page,
-            'crosslinks' => $manager->get('crosslinks'),
+            'crosslinks' => $crosslinks,
             'seo'        => $seo
         ]);
     }
