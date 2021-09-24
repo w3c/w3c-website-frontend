@@ -11,7 +11,7 @@ use Strata\Data\Mapper\MapArray;
 use Strata\Data\Query\GraphQLQuery;
 use Strata\Data\Transform\Data\CallableData;
 
-class BlogListing extends GraphQLQuery
+class BlogFilters extends GraphQLQuery
 {
 
     public function getRequiredDataProviderClass(): string
@@ -23,23 +23,14 @@ class BlogListing extends GraphQLQuery
      * Set up query
      *
      * @param int $siteId        Site ID of page content
-     * @param int $limit
-     * @param int $page
      * @param int $cacheLifetime Cache lifetime to store HTTP response for, defaults to 1 hour
      *
      * @throws GraphQLQueryException
      */
-    public function __construct(int $siteId, int $limit = 10, int $page = 1, int $cacheLifetime = CacheLifetime::HOUR)
+    public function __construct(int $siteId, int $cacheLifetime = CacheLifetime::HOUR)
     {
-        $this->setGraphQLFromFile(__DIR__ . '/graphql/blogListing.graphql')
-            ->setRootPropertyPath('[entries]')
-            ->setTotalResults('[total]')
-            ->setResultsPerPage($limit)
-            ->setCurrentPage($page)
-
+        $this->setGraphQLFromFile(__DIR__ . '/graphql/blogFilters.graphql')
             ->addVariable('siteId', $siteId)
-            ->addVariable('limit', $limit)
-            ->addVariable('offset', ($page - 1) * $limit)
             ->enableCache($cacheLifetime)
             //->setCacheTags($uri)
         ;

@@ -2854,16 +2854,16 @@
         },
         {
             "name": "symfony/flex",
-            "version": "v1.16.1",
+            "version": "v1.16.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/flex.git",
-                "reference": "701891891209e70fb60e5ff3a5cd62216d66d7ab"
+                "reference": "f1e77e62bcb068bf094f4781eca1436ef818ff72"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/flex/zipball/701891891209e70fb60e5ff3a5cd62216d66d7ab",
-                "reference": "701891891209e70fb60e5ff3a5cd62216d66d7ab",
+                "url": "https://api.github.com/repos/symfony/flex/zipball/f1e77e62bcb068bf094f4781eca1436ef818ff72",
+                "reference": "f1e77e62bcb068bf094f4781eca1436ef818ff72",
                 "shasum": ""
             },
             "require": {
@@ -2902,7 +2902,7 @@
             "description": "Composer plugin for Symfony",
             "support": {
                 "issues": "https://github.com/symfony/flex/issues",
-                "source": "https://github.com/symfony/flex/tree/v1.16.1"
+                "source": "https://github.com/symfony/flex/tree/v1.16.2"
             },
             "funding": [
                 {
@@ -2918,7 +2918,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2021-09-23T14:52:29+00:00"
+            "time": "2021-09-24T08:45:18+00:00"
         },
         {
             "name": "symfony/form",
@@ -7138,12 +7138,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/w3c/w3c-website-templates-bundle.git",
-                "reference": "c886d7d0f785dbf0765ecb9c06a7ba6c508ec6af"
+                "reference": "b032cf9477b08a4dd41e24249cf5d81e92395b77"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/w3c/w3c-website-templates-bundle/zipball/c886d7d0f785dbf0765ecb9c06a7ba6c508ec6af",
-                "reference": "c886d7d0f785dbf0765ecb9c06a7ba6c508ec6af",
+                "url": "https://api.github.com/repos/w3c/w3c-website-templates-bundle/zipball/b032cf9477b08a4dd41e24249cf5d81e92395b77",
+                "reference": "b032cf9477b08a4dd41e24249cf5d81e92395b77",
                 "shasum": ""
             },
             "require": {
@@ -7174,7 +7174,7 @@
             "support": {
                 "source": "https://github.com/w3c/w3c-website-templates-bundle/tree/blog_listing"
             },
-            "time": "2021-09-22T09:17:47+00:00"
+            "time": "2021-09-24T14:03:20+00:00"
         },
         {
             "name": "webmozart/assert",

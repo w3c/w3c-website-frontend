@@ -12,7 +12,7 @@ fragment landingFlexibleComponents on landingFlexibleComponents_MatrixField {
         typeHandle
         showImageBeforeText
         image  {
-            ...thumbnailImage
+            ...contentImage
         }
         titleField
         mainContent
@@ -24,16 +24,18 @@ fragment landingFlexibleComponents on landingFlexibleComponents_MatrixField {
         heading
         description
         cards {
-            title
-            uri
+            ... on cards_BlockType {
+                title
+                uri
+            }
         }
     }
     ... on landingFlexibleComponents_iconsAndDescriptionsComponent_BlockType {
         typeHandle
         heading
         description
-        cards {
-            ... on cards_BlockType {
+        iconCards {
+            ... on iconCards_BlockType {
                 icon {
                     ... on icon_Icon {
                         iconName
@@ -56,10 +58,11 @@ fragment landingFlexibleComponents on landingFlexibleComponents_MatrixField {
     ... on landingFlexibleComponents_imageMediaComponent_BlockType {
         typeHandle
         image {
-            ...thumbnailImage
+            ...contentImage
         }
         altText
         figureCaption
+        informativeOrDecorative
     }
     ... on landingFlexibleComponents_videoMediaComponent_BlockType {
         typeHandle

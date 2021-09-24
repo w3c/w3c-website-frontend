@@ -2,6 +2,10 @@
 
 Symfony frontend website for w3.org
 
+## Reporting issues
+
+Please report any issues to the [w3c-website](https://github.com/w3c/w3c-website/issues) repo.
+
 ## Getting started
 
 This document is a summary of what you need to know when working on this project. Please also read the more [detailed project documentation](docs/README.md)

@@ -55,7 +55,6 @@ set('webroot', 'public');
 set('keep_releases', 5);
 set('git_tty', true);
 set('allow_anonymous_stats', false);
-set('composer_options', '{{composer_action}} --verbose --prefer-dist --no-progress --no-interaction --no-dev --optimize-autoloader');
 
 // Default stage - prevents accidental deploying to production with dep deploy
 set('default_stage', 'staging');
@@ -74,7 +73,7 @@ host('staging')
     ->hostname('128.30.54.149')
     ->set('deploy_path', '/var/www/frontend-staging')
     ->set('url', 'https://www-staging.w3.org')
-    ->set('composer_options', '--no-dev --verbose --no-progress --no-interaction --optimize-autoloader');
+    ->set('composer_options', '{{composer_action}} --no-dev --verbose --no-progress --no-interaction --optimize-autoloader');
 
 host('development')
     ->stage('development')
@@ -82,7 +81,7 @@ host('development')
     ->hostname('128.30.54.149')
     ->set('deploy_path', '/var/www/frontend-dev')
     ->set('url', 'https://www-dev.w3.org')
-    ->set('composer_options', '--verbose --no-progress --no-interaction --optimize-autoloader');
+    ->set('composer_options', '{{composer_action}} --verbose --no-progress --no-interaction --optimize-autoloader');
 
 /**
  * Deployment task
