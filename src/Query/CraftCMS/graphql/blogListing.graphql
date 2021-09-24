@@ -55,3 +55,11 @@ query BlogListing($siteId: [QueryArgument], $limit: Int, $offset: Int) {
         }
     }
 }
+
+
+fragment thumbnailImage on AssetInterface {
+    src: url
+    title
+    srcset(sizes: ["360", "580"])
+}
+
