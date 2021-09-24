@@ -31,7 +31,7 @@ fr: '/fr'
 
 See [Internationalized routing](https://symfony.com/blog/new-in-symfony-4-1-internationalized-routing).
 
-### Hosting platform routing
+## Hosting platform routing
 
 Please note only fixed prefixes are routed from w3.org to the Symfony app. To ensure the new language route points to 
 the Symfony frontend web app ...
@@ -61,7 +61,7 @@ You can use `$site->addRtfLocale()` to add a right-to-left locale. For example, 
 $site->addRtfLocale('ar', ['siteId' => 9]);
 ```
 
-### Translation messages file
+## Translation messages file
 
 Add a file to `translations/js+intl-icu.{lc}.yaml` (JavaScript messages) and `translations/messages+intl-icu.{lc}.yaml` 
 (website messages), using the English (`en`) file as the starting point.
