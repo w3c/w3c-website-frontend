@@ -52,12 +52,20 @@ class BlogController extends AbstractController
             return $this->redirectToRoute('app_blog_index', ['page' => 1]);
         }
 
+        $page       = $manager->get('blogListing', '[entry]');
+        $categories = $manager->getCollection('categories');
+
+        dump($page);
+        dump($collection);
+        dump($pagination);
+        dump($categories);
+
         return $this->render('blog/index.html.twig', [
             'navigation' => $manager->getCollection('navigation'),
-            'page' => $manager->get('blogListing', '[entry]'),
+            'page' => $page,
             'entries' => $collection,
             'pagination' => $pagination,
-            'categories' => $manager->getCollection('categories')
+            'categories' => $categories
         ]);
     }
 }
