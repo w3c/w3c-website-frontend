@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "cf4b42d1c03b248ff1aabea386544155",
+    "content-hash": "cb6060fba7a13e8d3d393b9e3ab6cb9b",
     "packages": [
         {
             "name": "composer/package-versions-deprecated",
@@ -7134,16 +7134,16 @@
         },
         {
             "name": "w3c/website-templates-bundle",
-            "version": "dev-blog_listing",
+            "version": "dev-main",
             "source": {
                 "type": "git",
                 "url": "https://github.com/w3c/w3c-website-templates-bundle.git",
-                "reference": "bcd5a87308fbbf1c5dc96b46e6107aabde7147c6"
+                "reference": "5a8b17d790d14c60d884793ad51751b459b5dc86"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/w3c/w3c-website-templates-bundle/zipball/bcd5a87308fbbf1c5dc96b46e6107aabde7147c6",
-                "reference": "bcd5a87308fbbf1c5dc96b46e6107aabde7147c6",
+                "url": "https://api.github.com/repos/w3c/w3c-website-templates-bundle/zipball/5a8b17d790d14c60d884793ad51751b459b5dc86",
+                "reference": "5a8b17d790d14c60d884793ad51751b459b5dc86",
                 "shasum": ""
             },
             "require": {
@@ -7159,6 +7159,7 @@
                 "studio24/deployer-recipes": "^1.1",
                 "studio24/design-system": "dev-main"
             },
+            "default-branch": true,
             "type": "symfony-bundle",
             "autoload": {
                 "psr-4": {
@@ -7172,9 +7173,9 @@
             "description": "W3C Website Templates",
             "homepage": "https://github.com/w3c/w3c-website-templates-bundle",
             "support": {
-                "source": "https://github.com/w3c/w3c-website-templates-bundle/tree/blog_listing"
+                "source": "https://github.com/w3c/w3c-website-templates-bundle/tree/main"
             },
-            "time": "2021-09-27T10:11:07+00:00"
+            "time": "2021-09-27T12:08:20+00:00"
         },
         {
             "name": "webmozart/assert",
