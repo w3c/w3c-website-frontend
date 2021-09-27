@@ -90,7 +90,7 @@ class BlogController extends AbstractController
     }
 
     /**
-     * @Route("/blog/categories/{category}", requirements={"category": ".+"})
+     * @Route("/blog/category/{category}", requirements={"category": ".+"})
      *
      * @param QueryManager $manager
      * @param string       $category
@@ -139,7 +139,7 @@ class BlogController extends AbstractController
     }
 
     /**
-     * @Route("/blog/tags/{tag}", requirements={"tag": ".+"})
+     * @Route("/blog/tag/{tag}", requirements={"tag": ".+"})
      *
      * @param QueryManager $manager
      * @param string       $tag
