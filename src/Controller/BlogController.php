@@ -232,6 +232,7 @@ class BlogController extends AbstractController
         return $this->render('blog/index.html.twig', [
             'navigation' => $manager->getCollection('navigation'),
             'page'       => $page,
+            'seo'        => $page['seoOptions'],
             'entries'    => $collection,
             'pagination' => $pagination,
             'categories' => $categories,
