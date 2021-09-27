@@ -12,6 +12,7 @@ use Exception;
 use Strata\Data\Exception\GraphQLQueryException;
 use Strata\Data\Exception\QueryManagerException;
 use Strata\Data\Query\QueryManager;
+use Strata\Frontend\Site;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -32,16 +33,16 @@ class BlogController extends AbstractController
      * @throws GraphQLQueryException
      * @throws QueryManagerException
      */
-    public function index(QueryManager $manager, Request $request): Response
+    public function index(QueryManager $manager, Site $site, Request $request): Response
     {
         $currentPage = $request->query->get('page', 1);
         $search = $request->query->get('search');
+        
         // Build queries
-        $siteId = CraftCMS::getSiteForLocale($request->getLocale());
         $manager->add(
             'blogListing',
             new BlogListing(
-                $siteId,
+                $site->siteId,
                 null,
                 null,
                 null,
@@ -52,7 +53,7 @@ class BlogController extends AbstractController
             )
         );
 
-        return $this->buildListing($manager, $siteId, $currentPage, $search);
+        return $this->buildListing($manager, $site->siteId, $currentPage, $search);
     }
 
     /**
