@@ -40,7 +40,7 @@ class SiteConfigurator
         $site->addLocale('fr', ['siteId' => 6]);
         $site->addLocale('es', ['siteId' => 7]);
         $site->addLocale('de', ['siteId' => 8]);
-        $site->addRtfLocale('ar', ['siteId' => 9]);
+        $site->addLocaleRtl('ar', ['siteId' => 9]);
 
         // Set current locale
         $site->setLocale($this->requestStack->getCurrentRequest()->getLocale());
