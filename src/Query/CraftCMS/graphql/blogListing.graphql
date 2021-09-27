@@ -4,9 +4,13 @@ query BlogListing($siteId: [QueryArgument], $category: [QueryArgument], $tag: [Q
         slug
         title
         uri
+        expiryDate
         ... on blogListing_blogListing_Entry {
             excerpt
             lead: pageLead
+            seoOptions {
+                ...seoData
+            }
         }
     }
     total: entryCount(section: "blogPosts", siteId: $siteId, blogCategories: $category, blogTags: $tag, before: $before, after: $after, search: $search)

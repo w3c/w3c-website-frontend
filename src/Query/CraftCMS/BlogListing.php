@@ -46,6 +46,7 @@ class BlogListing extends GraphQLQuery
         int $cacheLifetime = CacheLifetime::HOUR
     ) {
         $this->setGraphQLFromFile(__DIR__ . '/graphql/blogListing.graphql')
+            ->addFragmentFromFile(__DIR__ . '/graphql/fragments/seoData.graphql')
             ->setRootPropertyPath('[entries]')
             ->setTotalResults('[total]')
             ->setResultsPerPage($limit)
