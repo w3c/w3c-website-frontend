@@ -1,7 +1,7 @@
 query BlogFilters($siteId: [QueryArgument]) {
     categories(siteId: $siteId, group: "blogCategories", orderBy: "title asc") {
         title
-        uri
+        slug
     }
     first: entry(section: "blogPosts", siteId: $siteId, orderBy: "postDate asc") {
         postDate
