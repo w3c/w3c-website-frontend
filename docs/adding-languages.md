@@ -1,7 +1,7 @@
 # Adding languages
 
-Use the [two-character ISO 639-1 locale code](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) to identify the 
-locale. To keep clean URLs we use `-` instead of `_` and lower-case.
+We aim to use standard locale strings, based on the [ISO 639-1 alpha-2 language list](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) 
+and any required script and region strings. Since locales are used in URLs, we use `-` instead of `_` and lower-case for clean URLs.
 
 For example French is `fr`, Portuguese - Brazil is `pt-br`
 
