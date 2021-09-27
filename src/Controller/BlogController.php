@@ -20,7 +20,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class BlogController extends AbstractController
 {
-    private const LIMIT = 1;
+    private const LIMIT = 10;
 
     /**
      * @Route("/blog/")
