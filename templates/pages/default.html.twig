@@ -1,12 +1,5 @@
 {% extends '@W3CWebsiteTemplates/base_page.html.twig' %}
 
-{% block title %}{{ page.title }}{% endblock %}
-
-{% if page.siblingNavigation.siblings is defined %}
-    {% set related_links = page.siblingNavigation.siblings %}
-{% endif %}
-{% set page_translations = page.localized %}
-{% set breadcrumbs = page.breadcrumbParentPages %}
 {% set body %}
     {% for component in page.defaultFlexibleComponents %}
         {{ include('partials/defaultFlexibleComponents.html.twig') }}

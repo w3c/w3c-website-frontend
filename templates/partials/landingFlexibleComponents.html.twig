@@ -1,0 +1,27 @@
+{% if component.typeHandle == 'textComponent' %}
+    {% embed '@W3CWebsiteTemplates/components/text.html.twig' %}
+        {% block text %}
+            {{ component.contentField|raw }}
+        {% endblock %}
+    {% endembed %}
+{% elseif component.typeHandle == 'blockquoteComponent' %}
+    {% embed '@W3CWebsiteTemplates/components/quote.html.twig' with {'author': component.citation} %}
+        {% block text %}
+            {{ component.quoteText }}
+        {% endblock %}
+    {% endembed %}
+{% elseif component.typeHandle == 'imageMediaComponent' %}
+    {% embed '@W3CWebsiteTemplates/components/image.html.twig' with {
+        'attr': component.imageMedia[0],
+        'alt': component.altText,
+        'caption': component.figureCaption is defined ? component.figureCaption : null
+    } %}
+    {% endembed %}
+{% elseif component.typeHandle == 'videoMediaComponent' %}
+    {% embed '@W3CWebsiteTemplates/components/video.html.twig' with {
+        'iframe': component.videoUrl.code|preg_replace('/^<iframe/', '<iframe title="' ~ component.videoTitle|e('html_attr') ~ '"'),
+        'title': component.videoTitle,
+        'caption': component.videoCaption is defined ? component.videoCaption : null
+    } %}
+    {% endembed %}
+{% endif %}
