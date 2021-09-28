@@ -102,6 +102,5 @@ fragment youMayAlsoLikeRelatedEntries on youMayAlsoLikeRelatedEntries_MatrixFiel
 
 fragment thumbnailImage on AssetInterface {
     src: url
-    title
     srcset(sizes: ["360", "580", "700", "920", "1520"])
 }
