@@ -22,7 +22,8 @@
     {% embed '@W3CWebsiteTemplates/components/video.html.twig' with {
         'iframe': component.videoUrl.code|preg_replace('/^<iframe/', '<iframe title="' ~ component.videoTitle|e('html_attr') ~ '"'),
         'title': component.videoTitle,
-        'caption': component.videoCaption is defined ? component.videoCaption : null
+        'caption': component.videoCaption is defined ? component.videoCaption : null,
+        'transcript': component.linkToVideoTranscript is defined ? component.linkToVideoTranscript : null
     } %}
     {% endembed %}
 {% endif %}
