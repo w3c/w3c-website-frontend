@@ -18,6 +18,8 @@ fragment landingFlexibleComponents on landingFlexibleComponents_MatrixField {
         mainContent
         ctaUrl
         ctaCopy
+        secondaryLinkUrl
+        secondaryLinkCopy
     }
     ... on landingFlexibleComponents_imagesAndDescriptionsComponent_BlockType {
         typeHandle
