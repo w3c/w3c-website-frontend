@@ -19,7 +19,7 @@ fragment landingFlexibleComponents on landingFlexibleComponents_MatrixField {
         ctaUrl
         ctaCopy
     }
-    ... on landingFlexibleComponents_imagesAndDescriptions_BlockType {
+    ... on landingFlexibleComponents_imagesAndDescriptionsComponent_BlockType {
         typeHandle
         heading
         description
