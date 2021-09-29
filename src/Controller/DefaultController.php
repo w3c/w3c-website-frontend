@@ -85,7 +85,7 @@ class DefaultController extends AbstractController
 
         return $this->render($template, [
             'site'          => $site,
-            'navigation'    => $manager->getCollection('navigation'),
+            'navigation'    => $navigation,
             'page'          => $page,
             'crosslinks'    => $crosslinks,
             'seo'           => $seo,
