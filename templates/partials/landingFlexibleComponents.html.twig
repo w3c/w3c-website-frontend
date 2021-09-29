@@ -28,7 +28,14 @@
     {% endembed %}
 {% elseif component.typeHandle == 'fiftyFiftyComponent' %}
     {% embed '@W3CWebsiteTemplates/components/fifty_fifty.html.twig' with {
-        'order': component.showImageBeforeText
+        'order': component.showImageBeforeText,
+        'title': component.titleField,
+        'content': component.mainContent,
+        'link_main_url': component.ctaUrl is defined ? component.ctaUrl : null,
+        'link_main_text': component.ctaCopy is defined ? component.ctaCopy : null,
+        'link_secondary_url': component.secondaryLinkUrl is defined ? component.secondaryLinkUrl : null,
+        'link_secondary_text': component.secondaryLinkCopy is defined ? component.secondaryLinkCopy : null,
+        'attr': component.image
     } %}
     {% endembed %}
 {% endif %}
