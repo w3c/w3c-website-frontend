@@ -76,10 +76,14 @@ class DefaultController extends AbstractController
         $navigation = $manager->getCollection('navigation');
         $crosslinks = $manager->get('crosslinks');
 
-        dump($navigation);
-        dump($page);
-        dump($seo);
-        dump($crosslinks);
+        //Only for testing purposes in dev
+        $twig_variables = array(
+          'navigation' => $navigation,
+            'page' => $page,
+            'seo' => $seo,
+            'crosslinks' => $crosslinks
+        );
+        dump($twig_variables);
 
         $template = 'pages/default.html.twig';
         if ($page['typeHandle'] === 'landingPage') {
