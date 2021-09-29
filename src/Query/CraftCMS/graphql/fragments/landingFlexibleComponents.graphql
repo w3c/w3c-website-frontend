@@ -40,14 +40,7 @@ fragment landingFlexibleComponents on landingFlexibleComponents_MatrixField {
             ... on iconCards_BlockType {
                 icon {
                     ... on icon_Icon {
-                        iconName
-                        type
-                        glyphName
-                        url
-                        css
-                        width
-                        height
-                        path
+                        inline
                     }
                 }
                 heading
