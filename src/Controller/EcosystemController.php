@@ -31,24 +31,29 @@ class EcosystemController extends AbstractController
      */
     public function show(string $slug, Site $site, QueryManager $manager, Request $request): Response
     {
-        // todo: retrieve proper info from craft
         $manager->add('page', new CraftEcosystem($site->siteId, 'ecosystems/' . $slug));
         $manager->add('evangelists', new Evangelists($slug));
         $manager->add('groups', new Groups($slug));
         $manager->add('members', new Members($slug));
 
+        $page        = $manager->get('page');
         $evangelists = $manager->getCollection('evangelists');
-        $groups = $manager->getCollection('groups');
-        $members = $manager->getCollection('members');
+        $groups      = $manager->getCollection('groups');
+        $members     = $manager->getCollection('members');
 
+        $seo           = $page['seoOptions'];
+        $seo['expiry'] = $page['expiryDate'];
+
+        dump($page);
         dump($evangelists);
         dump($groups);
         dump($members);
 
-        return $this->render('pages/default.html.twig', [
+        return $this->render('@W3CWebsiteTemplates/ecosystem_page.html.twig', [
             'site'       => $site,
             'navigation' => $manager->getCollection('navigation'),
-            'page' => $manager->get('page')
+            'page'       => $page,
+            'seo'        => $seo
         ]);
     }
 }

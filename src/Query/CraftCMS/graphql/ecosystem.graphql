@@ -26,7 +26,7 @@ query Ecosystem($uri: [String], $siteId: [QueryArgument]) {
             seoOptions {
                 ...seoData
             }
-            businessEcosystemsFlexibleComponents {
+            ecosystemsFlexibleComponents: businessEcosystemsFlexibleComponents {
                 ...ecosystemsFlexibleComponents
             }
         }

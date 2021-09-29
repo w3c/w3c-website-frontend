@@ -11,11 +11,7 @@ fragment ecosystemsFlexibleComponents on businessEcosystemsFlexibleComponents_Ma
     ... on businessEcosystemsFlexibleComponents_fiftyFiftyComponent_BlockType {
         typeHandle
         image  {
-            url
-            mimeType
-            height
-            width
-            size
+            ...contentImage
         }
         titleField
         mainContent
