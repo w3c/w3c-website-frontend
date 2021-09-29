@@ -6,6 +6,7 @@ namespace App\Query\CraftCMS;
 
 use App\Service\CraftCMS;
 use Strata\Data\Cache\CacheLifetime;
+use Strata\Data\Mapper\WildcardMappingStrategy;
 use Strata\Data\Query\GraphQLQuery;
 
 /**
@@ -46,5 +47,14 @@ class Page extends GraphQLQuery
             ->enableCache($cacheLifetime)
             //->setCacheTags($uri)
         ;
+    }
+
+    public function getMapping()
+    {
+        $mapping = new WildcardMappingStrategy();
+        $mapping->addMapping('siblingNavigation', ['[siblings]' => '[siblingNavigation][siblings]']);
+        $mapping->addMapping('heroIllustration', ['[heroIllustration]' => '[heroIllustration][0]']);
+
+        return $mapping;
     }
 }
