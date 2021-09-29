@@ -69,9 +69,6 @@ class DefaultController extends AbstractController
 
         $seo           = $page['seoOptions'];
         $seo['expiry'] = $page['expiryDate'];
-        if (array_key_exists('heroIllustration', $page)) {
-            $page['heroIllustration'] = $page['heroIllustration'][0];
-        }
 
         $navigation = $manager->getCollection('navigation');
         $crosslinks = $manager->get('crosslinks');
@@ -93,8 +90,7 @@ class DefaultController extends AbstractController
             'crosslinks'    => $crosslinks,
             'seo'           => $seo,
             'breadcrumbs'   => array_key_exists('breadcrumbParentPages', $page) ? $page['breadcrumbParentPages'] : null,
-            'related_links' => array_key_exists('siblingNavigation', $page) && $page['siblingNavigation'] ?
-                $page['siblingNavigation']['siblings'] : null
+            'related_links' => array_key_exists('siblings', $page) ? $page['siblings'] : null
         ]);
     }
 }
