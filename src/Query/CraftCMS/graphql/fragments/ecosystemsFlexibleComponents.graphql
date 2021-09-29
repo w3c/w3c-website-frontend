@@ -1,4 +1,3 @@
-# TODO - block setup is not complete in CraftCMS, basic setup is below
 fragment ecosystemsFlexibleComponents on businessEcosystemsFlexibleComponents_MatrixField {
     ... on businessEcosystemsFlexibleComponents_textComponent_BlockType {
         typeHandle
@@ -26,11 +25,7 @@ fragment ecosystemsFlexibleComponents on businessEcosystemsFlexibleComponents_Ma
     ... on businessEcosystemsFlexibleComponents_imageMediaComponent_BlockType {
         typeHandle
         image {
-            url
-            mimeType
-            height
-            width
-            size
+            ...contentImage
         }
         altText
         figureCaption
