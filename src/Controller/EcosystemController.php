@@ -41,8 +41,7 @@ class EcosystemController extends AbstractController
         $groups      = $manager->getCollection('groups');
         $members     = $manager->getCollection('members');
 
-        $seo           = $page['seoOptions'];
-        $seo['expiry'] = $page['expiryDate'];
+        $page['seo']['expiry'] = $page['expiryDate'];
 
         dump($page);
         dump($evangelists);
@@ -53,7 +52,6 @@ class EcosystemController extends AbstractController
             'site'       => $site,
             'navigation' => $manager->getCollection('navigation'),
             'page'       => $page,
-            'seo'        => $seo
         ]);
     }
 }

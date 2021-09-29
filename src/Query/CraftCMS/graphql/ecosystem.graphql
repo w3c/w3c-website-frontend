@@ -23,7 +23,7 @@ query Ecosystem($uri: [String], $siteId: [QueryArgument]) {
                 size
             }
             excerpt
-            seoOptions {
+            seo: seoOptions {
                 ...seoData
             }
             ecosystemsFlexibleComponents: businessEcosystemsFlexibleComponents {
