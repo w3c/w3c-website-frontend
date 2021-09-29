@@ -1,0 +1,34 @@
+query Ecosystem($uri: [String], $siteId: [QueryArgument]) {
+    entry(uri: $uri, siteId: $siteId) {
+        id
+        status
+        uri
+        language
+        title
+        localized {
+            title
+            language_code: language
+            uri
+        }
+        postDate
+        dateUpdated
+        expiryDate
+        ... on businessEcosystems_default_Entry {
+            pageLead
+            heroIllustration {
+                url
+                mimeType
+                height
+                width
+                size
+            }
+            excerpt
+            seoOptions {
+                ...seoData
+            }
+            businessEcosystemsFlexibleComponents {
+                ...ecosystemsFlexibleComponents
+            }
+        }
+    }
+}
