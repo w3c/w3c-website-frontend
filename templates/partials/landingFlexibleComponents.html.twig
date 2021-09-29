@@ -35,7 +35,9 @@
         'link_main_text': component.ctaCopy is defined ? component.ctaCopy : null,
         'link_secondary_url': component.secondaryLinkUrl is defined ? component.secondaryLinkUrl : null,
         'link_secondary_text': component.secondaryLinkCopy is defined ? component.secondaryLinkCopy : null,
-        'attr': component.image
+        'attr': component.image[0],
+        'alt': component.altText,
+        'informative_or_decorative': component.informativeOrDecorative
     } %}
     {% endembed %}
 {% endif %}
