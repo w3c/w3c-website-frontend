@@ -13,6 +13,9 @@ query Ecosystem($uri: [String], $siteId: [QueryArgument]) {
         postDate
         dateUpdated
         expiryDate
+        breadcrumbs: parent {
+            ...breadcrumbs
+        }
         ... on businessEcosystems_default_Entry {
             pageLead
             heroIllustration {

@@ -35,6 +35,7 @@ class Page extends GraphQLQuery
             ->addFragmentFromFile(__DIR__ . '/graphql/fragments/landingFlexibleComponents.graphql')
             ->addFragmentFromFile(__DIR__ . '/graphql/fragments/contentImage.graphql')
             ->addFragmentFromFile(__DIR__ . '/graphql/fragments/seoData.graphql')
+            ->addFragmentFromFile(__DIR__ . '/graphql/fragments/breadcrumbs.graphql')
             ->setRootPropertyPath('[entry]')
 
             // Set page URI to retrieve navigation for

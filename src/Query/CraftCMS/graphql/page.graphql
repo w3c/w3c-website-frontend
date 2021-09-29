@@ -14,28 +14,7 @@ query Page($uri: [String], $siteId: [QueryArgument]) {
         dateUpdated
         expiryDate
         breadcrumbs: parent {
-            title
-            uri
-            parent {
-                title
-                uri
-                parent {
-                    title
-                    uri
-                    parent {
-                        title
-                        uri
-                        parent {
-                            title
-                            uri
-                            parent {
-                                title
-                                uri
-                            }
-                        }
-                    }
-                }
-            }
+            ...breadcrumbs
         }
         ... on pages_default_Entry {
             title
