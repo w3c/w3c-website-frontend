@@ -6,7 +6,6 @@ namespace App\Controller;
 
 use App\Query\CraftCMS\Page;
 use App\Query\CraftCMS\YouMayAlsoLikeRelatedEntries;
-use App\Service\CraftCMS;
 use Strata\Data\Exception\GraphQLQueryException;
 use Strata\Data\Exception\QueryManagerException;
 use Strata\Data\Query\QueryManager;
@@ -67,15 +66,13 @@ class DefaultController extends AbstractController
             throw $this->createNotFoundException('Page not found');
         }
 
-        $seo           = $page['seoOptions'];
-        $seo['expiry'] = $page['expiryDate'];
+        $page['seo']['expiry'] = $page['expiryDate'];
 
         $navigation = $manager->getCollection('navigation');
         $crosslinks = $manager->get('crosslinks');
 
         dump($navigation);
         dump($page);
-        dump($seo);
         dump($crosslinks);
 
         $template = 'pages/default.html.twig';
