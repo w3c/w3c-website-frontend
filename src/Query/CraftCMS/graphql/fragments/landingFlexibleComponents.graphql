@@ -14,6 +14,8 @@ fragment landingFlexibleComponents on landingFlexibleComponents_MatrixField {
         image  {
             ...contentImage
         }
+        informativeOrDecorative
+        altText
         titleField
         mainContent
         ctaUrl
