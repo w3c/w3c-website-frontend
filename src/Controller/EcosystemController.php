@@ -48,7 +48,7 @@ class EcosystemController extends AbstractController
         dump($groups);
         dump($members);
 
-        return $this->render('@W3CWebsiteTemplates/ecosystem_page.html.twig', [
+        return $this->render('ecosystems/show.html.twig', [
             'site'       => $site,
             'navigation' => $manager->getCollection('navigation'),
             'page'       => $page,

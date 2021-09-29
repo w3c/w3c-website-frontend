@@ -1,0 +1,7 @@
+{% extends '@W3CWebsiteTemplates/pages/landing.html.twig' %}
+
+{% block components %}
+    {% for component in page.landingFlexibleComponents %}
+        {{ include('partials/landingFlexibleComponents.html.twig') }}
+    {% endfor %}
+{% endblock %}

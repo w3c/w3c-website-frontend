@@ -1,14 +1,14 @@
-{% extends '@W3CWebsiteTemplates/base_page.html.twig' %}
+{% extends '@W3CWebsiteTemplates/pages/default.html.twig' %}
 
-{% set body %}
+{% set components %}
     {% if page.defaultFlexibleComponents is defined and page.defaultFlexibleComponents %}
         {% for component in page.defaultFlexibleComponents %}
             {{ include('partials/defaultFlexibleComponents.html.twig') }}
         {% endfor %}
     {% endif %}
 {% endset %}
-{% set toc = table_of_contents(body, ['h2']) %}
+{% set toc = table_of_contents(components, ['h2']) %}
 
-{% block body %}
+{% block components %}
     {{ toc.html|raw }}
 {% endblock %}

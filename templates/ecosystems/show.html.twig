@@ -1,0 +1,7 @@
+{% extends '@W3CWebsiteTemplates/pages/ecosystem.html.twig' %}
+
+{% block components %}
+    {% for component in page.ecosystemsFlexibleComponents %}
+        {{ include('partials/landingFlexibleComponents.html.twig') }}
+    {% endfor %}
+{% endblock %}
