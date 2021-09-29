@@ -26,4 +26,9 @@
         'transcript': component.linkToVideoTranscript is defined ? component.linkToVideoTranscript : null
     } %}
     {% endembed %}
+{% elseif component.typeHandle == 'fiftyFiftyComponent' %}
+    {% embed '@W3CWebsiteTemplates/components/fifty_fifty.html.twig' with {
+        'order': component.showImageBeforeText
+    } %}
+    {% endembed %}
 {% endif %}
