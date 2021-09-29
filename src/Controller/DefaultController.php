@@ -77,7 +77,7 @@ class DefaultController extends AbstractController
 
         $template = 'pages/default.html.twig';
         if ($page['typeHandle'] === 'landingPage') {
-            $template = '@W3CWebsiteTemplates/landing_page.html.twig';
+            $template = 'pages/landing.html.twig';
         }
 
         return $this->render($template, [

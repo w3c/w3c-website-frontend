@@ -1,5 +1,4 @@
-# TODO - block setup is not complete in CraftCMS, basic setup is below
-fragment businessEcosystemsFlexibleComponents on businessEcosystemsFlexibleComponents_MatrixField {
+fragment ecosystemsFlexibleComponents on businessEcosystemsFlexibleComponents_MatrixField {
     ... on businessEcosystemsFlexibleComponents_textComponent_BlockType {
         typeHandle
         contentField
@@ -11,13 +10,8 @@ fragment businessEcosystemsFlexibleComponents on businessEcosystemsFlexibleCompo
     }
     ... on businessEcosystemsFlexibleComponents_fiftyFiftyComponent_BlockType {
         typeHandle
-        showImageBeforeText
         image  {
-            url
-            mimeType
-            height
-            width
-            size
+            ...contentImage
         }
         titleField
         mainContent
@@ -27,11 +21,7 @@ fragment businessEcosystemsFlexibleComponents on businessEcosystemsFlexibleCompo
     ... on businessEcosystemsFlexibleComponents_imageMediaComponent_BlockType {
         typeHandle
         image {
-            url
-            mimeType
-            height
-            width
-            size
+            ...contentImage
         }
         altText
         figureCaption
@@ -69,10 +59,6 @@ fragment businessEcosystemsFlexibleComponents on businessEcosystemsFlexibleCompo
     }
     ... on businessEcosystemsFlexibleComponents_featuredMembersComponent_BlockType {
         typeHandle
-        callToActionLinks {
-            linkText
-            linkValue
-        }
     }
     ... on businessEcosystemsFlexibleComponents_featuredEvangelistsComponent_BlockType {
         typeHandle

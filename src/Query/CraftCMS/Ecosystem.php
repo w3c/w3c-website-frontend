@@ -12,7 +12,7 @@ use Strata\Data\Query\GraphQLQuery;
 /**
  * Get global navigation
  */
-class Page extends GraphQLQuery
+class Ecosystem extends GraphQLQuery
 {
 
     public function getRequiredDataProviderClass(): string
@@ -30,21 +30,14 @@ class Page extends GraphQLQuery
      */
     public function __construct(int $siteId, string $uri, int $cacheLifetime = CacheLifetime::HOUR)
     {
-        $this->setGraphQLFromFile(__DIR__ . '/graphql/page.graphql')
-            ->addFragmentFromFile(__DIR__ . '/graphql/fragments/defaultFlexibleComponents.graphql')
-            ->addFragmentFromFile(__DIR__ . '/graphql/fragments/landingFlexibleComponents.graphql')
+        $this->setGraphQLFromFile(__DIR__ . '/graphql/ecosystem.graphql')
+            ->addFragmentFromFile(__DIR__ . '/graphql/fragments/ecosystemsFlexibleComponents.graphql')
             ->addFragmentFromFile(__DIR__ . '/graphql/fragments/contentImage.graphql')
             ->addFragmentFromFile(__DIR__ . '/graphql/fragments/seoData.graphql')
             ->addFragmentFromFile(__DIR__ . '/graphql/fragments/breadcrumbs.graphql')
             ->setRootPropertyPath('[entry]')
-
-            // Set page URI to retrieve navigation for
             ->addVariable('uri', $uri)
-
-            // Set site ID to retrieve navigation for
             ->addVariable('siteId', $siteId)
-
-            // Cache page response
             ->enableCache($cacheLifetime)
             //->setCacheTags($uri)
         ;
@@ -53,7 +46,6 @@ class Page extends GraphQLQuery
     public function getMapping()
     {
         $mapping = new WildcardMappingStrategy();
-        $mapping->addMapping('siblingNavigation', ['[siblings]' => '[siblingNavigation][siblings]']);
         $mapping->addMapping('heroIllustration', ['[heroIllustration]' => '[heroIllustration][0]']);
 
         return $mapping;
