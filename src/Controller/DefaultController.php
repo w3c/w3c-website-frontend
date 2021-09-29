@@ -88,8 +88,6 @@ class DefaultController extends AbstractController
             'navigation'    => $navigation,
             'page'          => $page,
             'crosslinks'    => $crosslinks,
-            'seo'           => $seo,
-            'breadcrumbs'   => array_key_exists('breadcrumbParentPages', $page) ? $page['breadcrumbParentPages'] : null,
             'related_links' => array_key_exists('siblings', $page) ? $page['siblings'] : null
         ]);
     }

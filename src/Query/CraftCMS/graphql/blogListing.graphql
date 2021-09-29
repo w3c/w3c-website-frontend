@@ -8,7 +8,7 @@ query BlogListing($siteId: [QueryArgument], $category: [QueryArgument], $tag: [Q
         ... on blogListing_blogListing_Entry {
             excerpt
             lead: pageLead
-            seoOptions {
+            seo: seoOptions {
                 ...seoData
             }
         }
