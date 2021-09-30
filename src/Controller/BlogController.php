@@ -38,7 +38,6 @@ class BlogController extends AbstractController
         $currentPage = $request->query->get('page', 1);
         $search = $request->query->get('search');
         
-        // Build queries
         $manager->add(
             'blogListing',
             new BlogListing(
@@ -53,7 +52,7 @@ class BlogController extends AbstractController
             )
         );
 
-        return $this->buildListing($manager, $site->siteId, $currentPage, $search);
+        return $this->buildListing($manager, $site, $currentPage, $search);
     }
 
     /**
@@ -61,22 +60,22 @@ class BlogController extends AbstractController
      *
      * @param QueryManager $manager
      * @param int          $year
+     * @param Site         $site
      * @param Request      $request
      *
      * @return Response
      * @throws GraphQLQueryException
      * @throws QueryManagerException
      */
-    public function archive(QueryManager $manager, int $year, Request $request): Response
+    public function archive(QueryManager $manager, int $year, Site $site, Request $request): Response
     {
         $currentPage = $request->query->get('page', 1);
         $search = $request->query->get('search');
-        // Build queries
-        $siteId = CraftCMS::getSiteForLocale($request->getLocale());
+
         $manager->add(
             'blogListing',
             new BlogListing(
-                $siteId,
+                $site->siteId,
                 null,
                 null,
                 $year + 1,
@@ -87,7 +86,7 @@ class BlogController extends AbstractController
             )
         );
 
-        return $this->buildListing($manager, $siteId, $currentPage, $search);
+        return $this->buildListing($manager, $site, $currentPage, $search);
     }
 
     /**
@@ -95,20 +94,19 @@ class BlogController extends AbstractController
      *
      * @param QueryManager $manager
      * @param string       $category
+     * @param Site         $site
      * @param Request      $request
      *
      * @return Response
      * @throws GraphQLQueryException
      * @throws QueryManagerException
      */
-    public function category(QueryManager $manager, string $category, Request $request): Response
+    public function category(QueryManager $manager, string $category, Site $site, Request $request): Response
     {
         $currentPage = $request->query->get('page', 1);
         $search = $request->query->get('search');
-        // Build queries
-        $siteId = CraftCMS::getSiteForLocale($request->getLocale());
 
-        $manager->add('categories', new Categories($siteId, 'blogCategories'));
+        $manager->add('categories', new Categories($site->siteId, 'blogCategories'));
         $categories = $manager->getCollection('categories');
         $categoryId = null;
         foreach ($categories as $categoryData) {
@@ -125,7 +123,7 @@ class BlogController extends AbstractController
         $manager->add(
             'blogListing',
             new BlogListing(
-                $siteId,
+                $site->siteId,
                 $categoryId,
                 null,
                 null,
@@ -136,7 +134,7 @@ class BlogController extends AbstractController
             )
         );
 
-        return $this->buildListing($manager, $siteId, $currentPage, $search);
+        return $this->buildListing($manager, $site, $currentPage, $search);
     }
 
     /**
@@ -144,20 +142,19 @@ class BlogController extends AbstractController
      *
      * @param QueryManager $manager
      * @param string       $tag
+     * @param Site         $site
      * @param Request      $request
      *
      * @return Response
      * @throws GraphQLQueryException
      * @throws QueryManagerException
      */
-    public function tag(QueryManager $manager, string $tag, Request $request): Response
+    public function tag(QueryManager $manager, string $tag, Site $site, Request $request): Response
     {
         $currentPage = $request->query->get('page', 1);
         $search      = $request->query->get('search');
-        // Build queries
-        $siteId = CraftCMS::getSiteForLocale($request->getLocale());
 
-        $manager->add('tags', new Tags($siteId, 'blogTags'));
+        $manager->add('tags', new Tags($site->siteId, 'blogTags'));
         $tags = $manager->getCollection('tags');
         $tagId = null;
         foreach ($tags as $tagData) {
@@ -174,7 +171,7 @@ class BlogController extends AbstractController
         $manager->add(
             'blogListing',
             new BlogListing(
-                $siteId,
+                $site->siteId,
                 null,
                 $tagId,
                 null,
@@ -185,23 +182,22 @@ class BlogController extends AbstractController
             )
         );
 
-        return $this->buildListing($manager, $siteId, $currentPage, $search);
+        return $this->buildListing($manager, $site, $currentPage, $search);
     }
 
     /**
      * @param QueryManager $manager
-     * @param int          $siteId
+     * @param Site         $site
      * @param int          $currentPage
      * @param string|null  $search
      *
      * @return RedirectResponse|Response
      * @throws GraphQLQueryException
      * @throws QueryManagerException
-     * @throws Exception
      */
-    protected function buildListing(QueryManager $manager, int $siteId, int $currentPage, ?string $search)
+    protected function buildListing(QueryManager $manager, Site $site, int $currentPage, ?string $search)
     {
-        $manager->add('filters', new BlogFilters($siteId));
+        $manager->add('filters', new BlogFilters($site->siteId));
 
         $collection = $manager->getCollection('blogListing');
         $pagination = $collection->getPagination();
@@ -233,6 +229,7 @@ class BlogController extends AbstractController
         dump($categories);
 
         return $this->render('blog/index.html.twig', [
+            'site'       => $site,
             'navigation' => $manager->getCollection('navigation'),
             'page'       => $page,
             'entries'    => $collection,

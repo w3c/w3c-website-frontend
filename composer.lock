@@ -1614,12 +1614,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/strata/data.git",
-                "reference": "5106d7eabebaca980dfc60651303099e51051be5"
+                "reference": "fd3c46b83799d552f3ba8ac5da728c3281cd331b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/strata/data/zipball/5106d7eabebaca980dfc60651303099e51051be5",
-                "reference": "5106d7eabebaca980dfc60651303099e51051be5",
+                "url": "https://api.github.com/repos/strata/data/zipball/fd3c46b83799d552f3ba8ac5da728c3281cd331b",
+                "reference": "fd3c46b83799d552f3ba8ac5da728c3281cd331b",
                 "shasum": ""
             },
             "require": {
@@ -1668,7 +1668,7 @@
                 "issues": "https://github.com/strata/data/issues",
                 "source": "https://github.com/strata/data/tree/release/0.8.0"
             },
-            "time": "2021-09-29T10:29:15+00:00"
+            "time": "2021-09-30T11:18:12+00:00"
         },
         {
             "name": "strata/frontend",
@@ -1676,12 +1676,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/strata/frontend.git",
-                "reference": "82af79900f813ea382b4c2a650de370d8b526322"
+                "reference": "ef4a449e2e4c99729a338eadee8f93d4bd39dab1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/strata/frontend/zipball/82af79900f813ea382b4c2a650de370d8b526322",
-                "reference": "82af79900f813ea382b4c2a650de370d8b526322",
+                "url": "https://api.github.com/repos/strata/frontend/zipball/ef4a449e2e4c99729a338eadee8f93d4bd39dab1",
+                "reference": "ef4a449e2e4c99729a338eadee8f93d4bd39dab1",
                 "shasum": ""
             },
             "require": {
@@ -1735,7 +1735,7 @@
                 "issues": "https://github.com/strata/frontend/issues",
                 "source": "https://github.com/strata/frontend/tree/release/0.8.0"
             },
-            "time": "2021-09-27T16:07:16+00:00"
+            "time": "2021-09-29T21:31:21+00:00"
         },
         {
             "name": "strata/symfony-frontend",
