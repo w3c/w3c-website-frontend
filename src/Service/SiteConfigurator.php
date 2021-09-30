@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace App\Service;
 
 use Strata\Frontend\Site;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 /**
  * Configure the Site object
@@ -19,10 +19,12 @@ use Symfony\Component\HttpFoundation\RequestStack;
 class SiteConfigurator
 {
     private RequestStack $requestStack;
+    private UrlGeneratorInterface $router;
 
-    public function __construct(RequestStack $requestStack)
+    public function __construct(RequestStack $requestStack, UrlGeneratorInterface $router)
     {
         $this->requestStack = $requestStack;
+        $this->router = $router;
     }
 
     /**
@@ -32,10 +34,29 @@ class SiteConfigurator
     public function configure(Site $site): void
     {
         // Setup locales
-        $site->addLocale('en', ['siteId' => 1]);
-        $site->addLocale('ja', ['siteId' => 2]);
+        // @todo replace hardcoded labels with translations
+        $site->addLocale('en', [
+            'siteId' => 1,
+            'siteLink' =>  [
+                'label' => 'English homepage',
+                'url'   => $this->router->generate('app_default_index.en'),
+            ]
+        ]);
+        $site->addLocale('ja', [
+            'siteId' => 2,
+            'siteLink' =>  [
+                'label' => '日本語ホームページ',
+                'url'   => $this->router->generate('app_default_index.ja'),
+            ]
+        ]);
+        $site->addLocale('zh-hans', [
+            'siteId' => 4,
+            'siteLink' =>  [
+                'label' => '简体中文首页',
+                'url'   => $this->router->generate('app_default_index.zh-hans'),
+            ]
+        ]);
         $site->addLocale('pt-br', ['siteId' => 3]);
-        $site->addLocale('zh-hans', ['siteId' => 4]);
         $site->addLocale('hu', ['siteId' => 5]);
         $site->addLocale('fr', ['siteId' => 6]);
         $site->addLocale('es', ['siteId' => 7]);

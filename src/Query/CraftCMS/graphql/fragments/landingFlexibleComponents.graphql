@@ -48,7 +48,6 @@ fragment landingFlexibleComponents on landingFlexibleComponents_MatrixField {
                 heading
                 description
                 linkDestination
-                linkText
             }
         }
     }
