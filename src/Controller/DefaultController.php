@@ -6,7 +6,6 @@ namespace App\Controller;
 
 use App\Query\CraftCMS\Page;
 use App\Query\CraftCMS\YouMayAlsoLikeRelatedEntries;
-use App\Service\CraftCMS;
 use Strata\Data\Exception\GraphQLQueryException;
 use Strata\Data\Exception\QueryManagerException;
 use Strata\Data\Query\QueryManager;
@@ -67,8 +66,7 @@ class DefaultController extends AbstractController
             throw $this->createNotFoundException('Page not found');
         }
 
-        $seo           = $page['seoOptions'];
-        $seo['expiry'] = $page['expiryDate'];
+        $page['seo']['expiry'] = $page['expiryDate'];
 
         $navigation = $manager->getCollection('navigation');
         $crosslinks = $manager->get('crosslinks');
@@ -77,14 +75,13 @@ class DefaultController extends AbstractController
         $twig_variables = array(
           'navigation' => $navigation,
             'page' => $page,
-            'seo' => $seo,
             'crosslinks' => $crosslinks
         );
         dump($twig_variables);
 
         $template = 'pages/default.html.twig';
         if ($page['typeHandle'] === 'landingPage') {
-            $template = '@W3CWebsiteTemplates/landing_page.html.twig';
+            $template = 'pages/landing.html.twig';
         }
 
         return $this->render($template, [
@@ -92,8 +89,6 @@ class DefaultController extends AbstractController
             'navigation'    => $navigation,
             'page'          => $page,
             'crosslinks'    => $crosslinks,
-            'seo'           => $seo,
-            'breadcrumbs'   => array_key_exists('breadcrumbParentPages', $page) ? $page['breadcrumbParentPages'] : null,
             'related_links' => array_key_exists('siblings', $page) ? $page['siblings'] : null
         ]);
     }

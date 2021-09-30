@@ -1,0 +1,24 @@
+fragment breadcrumbs on EntryInterface {
+    title
+    uri
+    parent {
+        title
+        uri
+        parent {
+            title
+            uri
+            parent {
+                title
+                uri
+                parent {
+                    title
+                    uri
+                    parent {
+                        title
+                        uri
+                    }
+                }
+            }
+        }
+    }
+}

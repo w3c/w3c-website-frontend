@@ -224,6 +224,8 @@ class BlogController extends AbstractController
             (new DateTimeImmutable($last['postDate']))->format('Y')
         );
 
+        $page['seo']['expiry'] = $page['expiryDate'];
+
         dump($archives);
         dump($page);
         dump($collection);
@@ -233,7 +235,6 @@ class BlogController extends AbstractController
         return $this->render('blog/index.html.twig', [
             'navigation' => $manager->getCollection('navigation'),
             'page'       => $page,
-            'seo'        => $page['seoOptions'],
             'entries'    => $collection,
             'pagination' => $pagination,
             'categories' => $categories,

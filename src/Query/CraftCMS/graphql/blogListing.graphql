@@ -5,10 +5,13 @@ query BlogListing($siteId: [QueryArgument], $category: [QueryArgument], $tag: [Q
         title
         uri
         expiryDate
+        breadcrumbs: parent {
+            ...breadcrumbs
+        }
         ... on blogListing_blogListing_Entry {
             excerpt
             lead: pageLead
-            seoOptions {
+            seo: seoOptions {
                 ...seoData
             }
         }

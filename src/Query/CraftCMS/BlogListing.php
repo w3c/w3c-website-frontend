@@ -47,6 +47,7 @@ class BlogListing extends GraphQLQuery
     ) {
         $this->setGraphQLFromFile(__DIR__ . '/graphql/blogListing.graphql')
             ->addFragmentFromFile(__DIR__ . '/graphql/fragments/seoData.graphql')
+            ->addFragmentFromFile(__DIR__ . '/graphql/fragments/breadcrumbs.graphql')
             ->setRootPropertyPath('[entries]')
             ->setTotalResults('[total]')
             ->setResultsPerPage($limit)

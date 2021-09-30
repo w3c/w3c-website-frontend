@@ -13,29 +13,8 @@ query Page($uri: [String], $siteId: [QueryArgument]) {
         postDate
         dateUpdated
         expiryDate
-        breadcrumbParentPages: parent {
-            title
-            uri
-            parent {
-                title
-                uri
-                parent {
-                    title
-                    uri
-                    parent {
-                        title
-                        uri
-                        parent {
-                            title
-                            uri
-                            parent {
-                                title
-                                uri
-                            }
-                        }
-                    }
-                }
-            }
+        breadcrumbs: parent {
+            ...breadcrumbs
         }
         ... on pages_default_Entry {
             title
@@ -50,7 +29,7 @@ query Page($uri: [String], $siteId: [QueryArgument]) {
                 ...defaultFlexibleComponents
             }
             excerpt
-            seoOptions {
+            seo: seoOptions {
                 ...seoData
             }
         }
@@ -68,7 +47,7 @@ query Page($uri: [String], $siteId: [QueryArgument]) {
                 ...landingFlexibleComponents
             }
             excerpt
-            seoOptions {
+            seo: seoOptions {
                 ...seoData
             }
         }
