@@ -47,4 +47,11 @@
         'cards': component.iconCards
     } %}
     {% endembed %}
+{% elseif component.typeHandle == 'imagesAndDescriptionsComponent' %}
+    {% embed '@W3CWebsiteTemplates/components/columns_with_icons.html.twig' with {
+        'title': component.heading is defined ? component.heading : null,
+        'summary': component.description is defined ? component.description : null,
+        'cards': component.Cards
+    } %}
+    {% endembed %}
 {% endif %}
