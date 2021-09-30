@@ -29,8 +29,13 @@ fragment landingFlexibleComponents on landingFlexibleComponents_MatrixField {
         description
         cards {
             ... on cards_BlockType {
-                title
-                uri
+                image {
+                    ...thumbnailImage
+                }
+                AltText
+                heading
+                description
+                linkDestination
             }
         }
     }
