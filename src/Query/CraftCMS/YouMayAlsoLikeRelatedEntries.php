@@ -30,6 +30,7 @@ class YouMayAlsoLikeRelatedEntries extends GraphQLQuery
     {
         parent::__construct(__DIR__ . '/graphql/youMayAlsoLikeRelatedEntries.graphql');
         $this
+            ->addFragmentFromFile(__DIR__. '/graphql/fragments/thumbnailImage.graphql')
             ->setRootPropertyPath('[entry]')
 
             // Set page URI to retrieve navigation for
