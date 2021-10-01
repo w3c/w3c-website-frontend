@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Query\CraftCMS;
+namespace App\Query\CraftCMS\Blog;
 
 use App\Service\CraftCMS;
 use Strata\Data\Cache\CacheLifetime;
@@ -11,7 +11,7 @@ use Strata\Data\Mapper\MapArray;
 use Strata\Data\Query\GraphQLQuery;
 use Strata\Data\Transform\Data\CallableData;
 
-class BlogFilters extends GraphQLQuery
+class Filters extends GraphQLQuery
 {
 
     public function getRequiredDataProviderClass(): string
@@ -29,7 +29,7 @@ class BlogFilters extends GraphQLQuery
      */
     public function __construct(int $siteId, int $cacheLifetime = CacheLifetime::HOUR)
     {
-        $this->setGraphQLFromFile(__DIR__ . '/graphql/blogFilters.graphql')
+        $this->setGraphQLFromFile(__DIR__ . '/../graphql/blog/filters.graphql')
             ->addVariable('siteId', $siteId)
             ->enableCache($cacheLifetime)
 
