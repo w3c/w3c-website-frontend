@@ -1,5 +1,5 @@
-query BlogListing($siteId: [QueryArgument], $category: [QueryArgument], $tag: [QueryArgument], $before: String, $after: String, $search: String, $limit: Int, $offset: Int) {
-    entry(section: "blogListing", siteId: $siteId) {
+query NewsListing($siteId: [QueryArgument], $before: String, $after: String, $search: String, $limit: Int, $offset: Int) {
+    entry(section: "newsListing", siteId: $siteId) {
         id
         slug
         title
@@ -8,7 +8,7 @@ query BlogListing($siteId: [QueryArgument], $category: [QueryArgument], $tag: [Q
         breadcrumbs: parent {
             ...breadcrumbs
         }
-        ... on blogListing_blogListing_Entry {
+        ... on newsListing_newsListing_Entry {
             excerpt
             lead: pageLead
             seo: seoOptions {
@@ -16,13 +16,13 @@ query BlogListing($siteId: [QueryArgument], $category: [QueryArgument], $tag: [Q
             }
         }
     }
-    total: entryCount(section: "blogPosts", siteId: $siteId, blogCategories: $category, blogTags: $tag, before: $before, after: $after, search: $search)
-    entries(section: "blogPosts", siteId: $siteId, blogCategories: $category, blogTags: $tag, before: $before, after: $after, search: $search, limit: $limit, offset: $offset, orderBy: "postDate desc") {
+    total: entryCount(section: "newsArticles", siteId: $siteId, before: $before, after: $after, search: $search)
+    entries(section: "newsArticles", siteId: $siteId, before: $before, after: $after, search: $search, limit: $limit, offset: $offset, orderBy: "postDate desc") {
         id
         slug
         uri
         title
-        ... on blogPosts_default_Entry {
+        ... on newsArticles_default_Entry {
             author {
                 name
                 email
@@ -32,14 +32,6 @@ query BlogListing($siteId: [QueryArgument], $category: [QueryArgument], $tag: [Q
                     name: authorName
                     email: authorEmailAddress
                 }
-            }
-            categories: blogCategories {
-                uri
-                title
-            }
-            tags: blogTags {
-                title
-                slug
             }
             date: postDate
             excerpt
@@ -56,4 +48,3 @@ fragment thumbnailImage on AssetInterface {
     title
     srcset(sizes: ["360", "580"])
 }
-

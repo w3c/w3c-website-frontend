@@ -19,4 +19,9 @@ query SinglesBreadcrumbs($siteId: [QueryArgument]) {
         title
         uri
     }
+    news: entry(section: "newsListing", siteId: $siteId) {
+        slug
+        title
+        uri
+    }
 }
