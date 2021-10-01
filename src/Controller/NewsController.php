@@ -183,11 +183,11 @@ class NewsController extends AbstractController
         dump($singlesBreadcrumbs);
 
         // @todo use news article template
-        return $this->render('pages/default.html.twig', [
+        return $this->render('news/show.html.twig', [
             'site'       => $site,
             'navigation' => $manager->getCollection('navigation'),
             'page'       => $page,
-            'crosslinks' => $crosslinks
+            'crosslinks' => $crosslinks,
         ]);
     }
 

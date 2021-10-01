@@ -334,7 +334,7 @@ class BlogController extends AbstractController
         dump($singlesBreadcrumbs);
 
         // @todo use blog post template
-        return $this->render('pages/default.html.twig', [
+        return $this->render('blog/show.html.twig', [
             'site'       => $site,
             'navigation' => $manager->getCollection('navigation'),
             'page'       => $page,
