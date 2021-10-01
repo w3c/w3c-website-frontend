@@ -1,0 +1,53 @@
+query BlogPost($slug: [String], $siteId: [QueryArgument]) {
+    entry(slug: $slug, siteId: $siteId, section: "blogPosts") {
+        status
+        uri
+        title
+        slug
+        language
+        localized {
+            title
+            language_code: language
+            uri
+        }
+        postDate
+        dateUpdated
+        expiryDate
+        ... on blogPosts_default_Entry {
+            excerpt
+            displayYouMayAlsoLikeListing
+            authors {
+                ... on authors_author_BlockType {
+                    name: authorName
+                    email: authorEmailAddress
+                }
+            }
+            categories: blogCategories {
+                uri
+                title
+            }
+            tags: blogTags {
+                title
+                slug
+            }
+            groups: workingGroups {
+                title
+                slug
+            }
+            specifications {
+                title
+                slug
+            }
+            ecosystems: businessEcosystems {
+                title
+                slug
+            }
+            defaultFlexibleComponents(orderBy: "sortOrder") {
+                ...defaultFlexibleComponents
+            }
+            seoOptions {
+                ...seoData
+            }
+        }
+    }
+}

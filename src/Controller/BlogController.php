@@ -7,7 +7,7 @@ use App\Query\CraftCMS\Blog\Filters;
 use App\Query\CraftCMS\Blog\Listing;
 use App\Query\CraftCMS\Taxonomies\Categories;
 use App\Query\CraftCMS\Taxonomies\Tags;
-use App\Service\CraftCMS;
+use App\Query\CraftCMS\YouMayAlsoLikeRelatedEntries;
 use DateTimeImmutable;
 use Exception;
 use Strata\Data\Exception\GraphQLQueryException;
@@ -270,6 +270,70 @@ class BlogController extends AbstractController
             'categories' => $categories,
             'archives'   => $archives,
             'search'     => $search
+        ]);
+    }
+
+    /**
+     * @Route("/blog/{year}/{slug}", requirements={"year": "\d\d\d\d"})
+     *
+     * @param QueryManager $manager
+     * @param int          $year
+     * @param string       $slug
+     * @param Site         $site
+     * @param Request      $request
+     *
+     * @return Response
+     * @throws GraphQLQueryException
+     * @throws QueryManagerException
+     * @throws Exception
+     */
+    public function show(QueryManager $manager, int $year, string $slug, Site $site, Request $request): Response
+    {
+        $manager->add('page', new Entry($site->siteId, $slug));
+
+        $page = $manager->get('page');
+        if (empty($page)) {
+            throw $this->createNotFoundException('Page not found');
+        }
+
+        $postYear = intval((new DateTimeImmutable($page['postDate']))->format('Y'));
+        if ($year !== $postYear) {
+            return $this->redirectToRoute('app_blog_show', ['slug' => $slug, 'year' => $postYear]);
+        }
+
+        $manager->add(
+            'crosslinks',
+            new YouMayAlsoLikeRelatedEntries($site->siteId, substr($request->getPathInfo(), 1))
+        );
+
+        $crosslinks = $manager->get('crosslinks');
+        $singlesBreadcrumbs = $manager->get('singles-breadcrumbs');
+
+        $page['seo']['expiry'] = $page['expiryDate'];
+        $page['breadcrumbs'] = [
+            'title'  => $page['title'],
+            'uri'    => $page['uri'],
+            'parent' => [
+                'title'  => $year,
+                'uri'    => $singlesBreadcrumbs['blog']['uri'] . '/' . $year,
+                'parent' => [
+                    'title'  => $singlesBreadcrumbs['blog']['title'],
+                    'uri'    => $singlesBreadcrumbs['blog']['uri'],
+                    'parent' => null
+                ]
+            ]
+        ];
+
+        dump($page);
+        dump($crosslinks);
+        dump($singlesBreadcrumbs);
+
+        // @todo use blog post template
+        return $this->render('pages/default.html.twig', [
+            'site'       => $site,
+            'navigation' => $manager->getCollection('navigation'),
+            'page'       => $page,
+            'crosslinks' => $crosslinks
         ]);
     }
 
