@@ -20,17 +20,12 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-/**
- * @author Jean-Guilhem Rouel <jean-gui@w3.org>
- *
- * @Route("/blog")
- */
-class BlogController extends AbstractController
+class NewsController extends AbstractController
 {
     private const LIMIT = 10;
 
     /**
-     * @Route("/")
+     * @Route("/blog/")
      *
      * @param QueryManager $manager
      * @param Site         $site
@@ -79,7 +74,7 @@ class BlogController extends AbstractController
     }
 
     /**
-     * @Route("/{year}", requirements={"year": "\d\d\d\d"})
+     * @Route("/blog/{year}", requirements={"year": "\d\d\d\d"})
      *
      * @param QueryManager $manager
      * @param int          $year
@@ -136,7 +131,7 @@ class BlogController extends AbstractController
     }
 
     /**
-     * @Route("/category/{slug}", requirements={"category": ".+"})
+     * @Route("/blog/category/{slug}", requirements={"category": ".+"})
      *
      * @param QueryManager $manager
      * @param string       $slug
@@ -208,7 +203,7 @@ class BlogController extends AbstractController
     }
 
     /**
-     * @Route("/tag/{slug}", requirements={"tag": ".+"})
+     * @Route("/blog/tag/{slug}", requirements={"tag": ".+"})
      *
      * @param QueryManager $manager
      * @param string       $slug
@@ -279,7 +274,7 @@ class BlogController extends AbstractController
     }
 
     /**
-     * @Route("/{year}/{slug}", requirements={"year": "\d\d\d\d"})
+     * @Route("/blog/{year}/{slug}", requirements={"year": "\d\d\d\d"})
      *
      * @param QueryManager $manager
      * @param int          $year
