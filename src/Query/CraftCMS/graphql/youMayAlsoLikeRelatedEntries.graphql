@@ -99,8 +99,3 @@ fragment youMayAlsoLikeRelatedEntries on youMayAlsoLikeRelatedEntries_MatrixFiel
         category: typeOfContent
     }
 }
-
-fragment thumbnailImage on AssetInterface {
-    src: url
-    srcset(sizes: ["360", "580", "700", "920", "1520"])
-}
