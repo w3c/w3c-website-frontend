@@ -42,6 +42,11 @@ class EcosystemController extends AbstractController
         $members     = $manager->getCollection('members');
 
         $page['seo']['expiry'] = $page['expiryDate'];
+        $page['breadcrumbs'] = [
+            'title'  => $page['title'],
+            'uri'    => $page['uri'],
+            'parent' => null
+        ];
 
         dump($page);
         dump($evangelists);

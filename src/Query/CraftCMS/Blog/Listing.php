@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Query\CraftCMS;
+namespace App\Query\CraftCMS\Blog;
 
 use App\Service\CraftCMS;
 use Strata\Data\Cache\CacheLifetime;
@@ -11,7 +11,7 @@ use Strata\Data\Mapper\MapArray;
 use Strata\Data\Query\GraphQLQuery;
 use Strata\Data\Transform\Data\CallableData;
 
-class BlogListing extends GraphQLQuery
+class Listing extends GraphQLQuery
 {
 
     public function getRequiredDataProviderClass(): string
@@ -45,9 +45,9 @@ class BlogListing extends GraphQLQuery
         int $page = 1,
         int $cacheLifetime = CacheLifetime::HOUR
     ) {
-        $this->setGraphQLFromFile(__DIR__ . '/graphql/blogListing.graphql')
-            ->addFragmentFromFile(__DIR__ . '/graphql/fragments/seoData.graphql')
-            ->addFragmentFromFile(__DIR__ . '/graphql/fragments/breadcrumbs.graphql')
+        $this->setGraphQLFromFile(__DIR__ . '/../graphql/blog/listing.graphql')
+            ->addFragmentFromFile(__DIR__ . '/../graphql/fragments/seoData.graphql')
+            ->addFragmentFromFile(__DIR__ . '/../graphql/fragments/breadcrumbs.graphql')
             ->setRootPropertyPath('[entries]')
             ->setTotalResults('[total]')
             ->setResultsPerPage($limit)
