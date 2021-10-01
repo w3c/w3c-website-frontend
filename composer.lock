@@ -1743,18 +1743,18 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/strata/symfony-frontend.git",
-                "reference": "c4f315767c2fabac4fb28d5246d67dd75bde614f"
+                "reference": "46999fbb0bb26a7b1b7975d37c7b8c8835e258a7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/strata/symfony-frontend/zipball/c4f315767c2fabac4fb28d5246d67dd75bde614f",
-                "reference": "c4f315767c2fabac4fb28d5246d67dd75bde614f",
+                "url": "https://api.github.com/repos/strata/symfony-frontend/zipball/46999fbb0bb26a7b1b7975d37c7b8c8835e258a7",
+                "reference": "46999fbb0bb26a7b1b7975d37c7b8c8835e258a7",
                 "shasum": ""
             },
             "require": {
                 "php": ">=7.4",
                 "strata/frontend": "dev-release/0.8.0 as 0.8.0",
-                "symfony/http-kernel": "^5.2",
+                "symfony/http-kernel": "^5.3",
                 "twig/twig": "^3.0"
             },
             "require-dev": {
@@ -1777,7 +1777,7 @@
                 "issues": "https://github.com/strata/symfony-frontend/issues",
                 "source": "https://github.com/strata/symfony-frontend/tree/release/0.8.0"
             },
-            "time": "2021-05-09T10:44:13+00:00"
+            "time": "2021-10-01T10:10:28+00:00"
         },
         {
             "name": "symfony/asset",
@@ -7138,12 +7138,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/w3c/w3c-website-templates-bundle.git",
-                "reference": "63054d067993486d97ca3945a7077fd728506c7e"
+                "reference": "67e48090b32d2f2924987a54cbb8b6fa3ebbb32e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/w3c/w3c-website-templates-bundle/zipball/63054d067993486d97ca3945a7077fd728506c7e",
-                "reference": "63054d067993486d97ca3945a7077fd728506c7e",
+                "url": "https://api.github.com/repos/w3c/w3c-website-templates-bundle/zipball/67e48090b32d2f2924987a54cbb8b6fa3ebbb32e",
+                "reference": "67e48090b32d2f2924987a54cbb8b6fa3ebbb32e",
                 "shasum": ""
             },
             "require": {
@@ -7177,7 +7177,7 @@
             "support": {
                 "source": "https://github.com/w3c/w3c-website-templates-bundle/tree/main"
             },
-            "time": "2021-09-29T16:50:54+00:00"
+            "time": "2021-09-30T14:58:56+00:00"
         },
         {
             "name": "webmozart/assert",
@@ -10252,5 +10252,5 @@
     "platform-overrides": {
         "php": "7.4"
     },
-    "plugin-api-version": "2.1.0"
+    "plugin-api-version": "2.0.0"
 }
