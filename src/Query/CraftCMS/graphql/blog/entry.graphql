@@ -45,7 +45,7 @@ query BlogPost($slug: [String], $siteId: [QueryArgument]) {
             defaultFlexibleComponents(orderBy: "sortOrder") {
                 ...defaultFlexibleComponents
             }
-            seoOptions {
+            seo: seoOptions {
                 ...seoData
             }
         }
