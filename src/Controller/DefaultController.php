@@ -47,6 +47,7 @@ class DefaultController extends AbstractController
      * @todo route priority is temporarily set to -1 as it's extremely greedy because of the {route} parameter.
      *
      * @param string       $route
+     * @param Site         $site
      * @param QueryManager $manager
      * @param Request      $request
      *
@@ -67,6 +68,11 @@ class DefaultController extends AbstractController
         }
 
         $page['seo']['expiry'] = $page['expiryDate'];
+        $page['breadcrumbs'] = [
+            'title'  => $page['title'],
+            'uri'    => $page['uri'],
+            'parent' => $page['breadcrumbs']
+        ];
 
         $navigation = $manager->getCollection('navigation');
         $crosslinks = $manager->get('crosslinks');

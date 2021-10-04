@@ -51,7 +51,6 @@ query BlogListing($siteId: [QueryArgument], $category: [QueryArgument], $tag: [Q
     }
 }
 
-
 fragment thumbnailImage on AssetInterface {
     url(transform: "size360x270")
     srcset(sizes: ["580"])

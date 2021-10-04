@@ -1,0 +1,45 @@
+query NewsArticles($slug: [String], $siteId: [QueryArgument]) {
+    entry(slug: $slug, siteId: $siteId, section: "newsArticles") {
+        status
+        uri
+        title
+        slug
+        language
+        localized {
+            title
+            language_code: language
+            uri
+        }
+        postDate
+        dateUpdated
+        expiryDate
+        ... on newsArticles_default_Entry {
+            excerpt
+            displayYouMayAlsoLikeListing
+            authors {
+                ... on authors_author_BlockType {
+                    name: authorName
+                    email: authorEmailAddress
+                }
+            }
+            groups: workingGroups {
+                title
+                slug
+            }
+            specifications {
+                title
+                slug
+            }
+            ecosystems: businessEcosystems {
+                title
+                slug
+            }
+            defaultFlexibleComponents(orderBy: "sortOrder") {
+                ...defaultFlexibleComponents
+            }
+            seo: seoOptions {
+                ...seoData
+            }
+        }
+    }
+}

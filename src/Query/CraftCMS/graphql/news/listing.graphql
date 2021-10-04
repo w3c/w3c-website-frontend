@@ -1,0 +1,50 @@
+query NewsListing($siteId: [QueryArgument], $before: String, $after: String, $search: String, $limit: Int, $offset: Int) {
+    entry(section: "newsListing", siteId: $siteId) {
+        id
+        slug
+        title
+        uri
+        expiryDate
+        breadcrumbs: parent {
+            ...breadcrumbs
+        }
+        ... on newsListing_newsListing_Entry {
+            excerpt
+            lead: pageLead
+            seo: seoOptions {
+                ...seoData
+            }
+        }
+    }
+    total: entryCount(section: "newsArticles", siteId: $siteId, before: $before, after: $after, search: $search)
+    entries(section: "newsArticles", siteId: $siteId, before: $before, after: $after, search: $search, limit: $limit, offset: $offset, orderBy: "postDate desc") {
+        id
+        slug
+        uri
+        title
+        ... on newsArticles_default_Entry {
+            author {
+                name
+                email
+            }
+            authors {
+                ... on authors_author_BlockType {
+                    name: authorName
+                    email: authorEmailAddress
+                }
+            }
+            date: postDate
+            excerpt
+            thumbnailImage {
+                ...thumbnailImage
+            }
+            thumbnailAltText
+        }
+    }
+}
+
+fragment thumbnailImage on AssetInterface {
+    src: url
+    title
+    srcset(sizes: ["360", "580"])
+}

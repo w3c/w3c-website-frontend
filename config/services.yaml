@@ -54,3 +54,8 @@ services:
     # Site object
     Strata\Frontend\Site:
         configurator: [ '@App\Service\SiteConfigurator', 'configure' ]
+
+    # CMS preview mode
+    Strata\Symfony\EventSubscriber\PreviewMode:
+        arguments:
+            $dataProvider: 'craft'

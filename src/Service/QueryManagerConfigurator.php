@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Service;
 
 use App\Query\CraftCMS\GlobalNavigation;
+use App\Query\CraftCMS\SinglesBreadcrumbs;
 use App\Query\W3C\Healthcheck;
 use Strata\Data\Query\QueryManager;
 use Strata\Frontend\Site;
@@ -53,5 +54,8 @@ class QueryManagerConfigurator
 
         // Add global navigation
         $manager->add('navigation', new GlobalNavigation($this->site->siteId));
+
+        // Add breadcrumbs for Craft singles
+        $manager->add('singles-breadcrumbs', new SinglesBreadcrumbs($this->site->siteId));
     }
 }

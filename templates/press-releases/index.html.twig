@@ -1,0 +1,12 @@
+{% extends '@W3CWebsiteTemplates/pages/listing.html.twig' %}
+
+{% block filters %}
+    {{ include('@W3CWebsiteTemplates/components/listings/press-releases/filters.html.twig') }}
+{% endblock %}
+
+{% block list %}
+
+    <p>This is page {{ entries.pagination.page }}, displaying results {{ entries.pagination.from }}-{{ entries.pagination.to }}</p>
+
+    {{ include('@W3CWebsiteTemplates/components/listings/press-releases/list.html.twig') }}
+{% endblock %}
