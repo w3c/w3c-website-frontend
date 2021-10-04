@@ -44,7 +44,6 @@ query PressReleasesListing($siteId: [QueryArgument], $before: String, $after: St
 }
 
 fragment thumbnailImage on AssetInterface {
-    src: url
-    title
-    srcset(sizes: ["360", "580"])
+    url(transform: "size360x270")
+    srcset(sizes: ["580"])
 }
