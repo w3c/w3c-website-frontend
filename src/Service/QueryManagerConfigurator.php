@@ -6,11 +6,9 @@ namespace App\Service;
 
 use App\Query\CraftCMS\GlobalNavigation;
 use App\Query\CraftCMS\SinglesBreadcrumbs;
-use App\Query\W3C\Healthcheck;
 use Strata\Data\Query\QueryManager;
 use Strata\Frontend\Site;
 use Symfony\Component\Cache\Adapter\FilesystemTagAwareAdapter;
-use Symfony\Component\HttpFoundation\RequestStack;
 
 /**
  * Configure the QueryManager service
@@ -48,9 +46,6 @@ class QueryManagerConfigurator
         $cache = new FilesystemTagAwareAdapter('cache', 0, __DIR__ . '/../../var/cache/');
         $manager->setCache($cache);
         $manager->disableCache();
-
-        // Add healthcheck queries
-        $manager->add('w3c_healthcheck', new Healthcheck());
 
         // Add global navigation
         $manager->add('navigation', new GlobalNavigation($this->site->siteId));

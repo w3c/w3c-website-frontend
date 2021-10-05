@@ -6,6 +6,7 @@ namespace App\Controller;
 
 use App\Query\CraftCMS\Page;
 use App\Query\CraftCMS\YouMayAlsoLikeRelatedEntries;
+use App\Query\W3C\Healthcheck;
 use Strata\Data\Exception\GraphQLQueryException;
 use Strata\Data\Exception\QueryManagerException;
 use Strata\Data\Query\QueryManager;
@@ -31,6 +32,7 @@ class DefaultController extends AbstractController
         // Add test page
         // @see https://cms-dev.w3.org/admin/entries/pages/48-w3c-mission-default?site=default
         $manager->add('page', new Page(1, "landing-page/w3c-mission-default"));
+        $manager->add('w3c_healthcheck', new Healthcheck());
 
         return $this->render('debug/test.html.twig', [
             'title'             => 'Debug page',
