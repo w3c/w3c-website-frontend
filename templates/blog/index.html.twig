@@ -6,7 +6,7 @@
 
 {% block list %}
 
-    <p>This is page {{ entries.pagination.page }}, displaying results {{ entries.pagination.from }}-{{ entries.pagination.to }}</p>
+<div aria-live="polite" aria-atomic="true">This is page {{ entries.pagination.page }}, displaying results {{ entries.pagination.from }}-{{ entries.pagination.to }}</div>
 
     {{ include('@W3CWebsiteTemplates/components/listings/blog/list.html.twig') }}
 {% endblock %}

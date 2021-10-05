@@ -14,14 +14,16 @@
     {% embed '@W3CWebsiteTemplates/components/image.html.twig' with {
         'attr': component.imageMedia[0],
         'alt': component.altText,
-        'caption': component.figureCaption is defined ? component.figureCaption : null
+        'caption': component.figureCaption is defined ? component.figureCaption : null,
+        'informative_or_decorative': component.informativeOrDecorative
     } %}
     {% endembed %}
 {% elseif component.typeHandle == 'videoMediaComponent' %}
     {% embed '@W3CWebsiteTemplates/components/video.html.twig' with {
         'iframe': component.videoUrl.code|preg_replace('/^<iframe/', '<iframe title="' ~ component.videoTitle|e('html_attr') ~ '"'),
         'title': component.videoTitle,
-        'caption': component.videoCaption is defined ? component.videoCaption : null
+        'caption': component.videoCaption is defined ? component.videoCaption : null,
+        'transcript': component.linkToVideoTranscript is defined ? component.linkToVideoTranscript : null
     } %}
     {% endembed %}
 {% endif %}

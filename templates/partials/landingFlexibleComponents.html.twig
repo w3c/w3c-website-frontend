@@ -14,14 +14,44 @@
     {% embed '@W3CWebsiteTemplates/components/image.html.twig' with {
         'attr': component.imageMedia[0],
         'alt': component.altText,
-        'caption': component.figureCaption is defined ? component.figureCaption : null
+        'caption': component.figureCaption is defined ? component.figureCaption : null,
+        'informative_or_decorative': component.informativeOrDecorative
     } %}
     {% endembed %}
 {% elseif component.typeHandle == 'videoMediaComponent' %}
     {% embed '@W3CWebsiteTemplates/components/video.html.twig' with {
         'iframe': component.videoUrl.code|preg_replace('/^<iframe/', '<iframe title="' ~ component.videoTitle|e('html_attr') ~ '"'),
         'title': component.videoTitle,
-        'caption': component.videoCaption is defined ? component.videoCaption : null
+        'caption': component.videoCaption is defined ? component.videoCaption : null,
+        'transcript': component.linkToVideoTranscript is defined ? component.linkToVideoTranscript : null
+    } %}
+    {% endembed %}
+{% elseif component.typeHandle == 'fiftyFiftyComponent' %}
+    {% embed '@W3CWebsiteTemplates/components/fifty_fifty.html.twig' with {
+        'order': component.showImageBeforeText,
+        'title': component.titleField,
+        'content': component.mainContent,
+        'link_main_url': component.ctaUrl is defined ? component.ctaUrl : null,
+        'link_main_text': component.ctaCopy is defined ? component.ctaCopy : null,
+        'link_secondary_url': component.secondaryLinkUrl is defined ? component.secondaryLinkUrl : null,
+        'link_secondary_text': component.secondaryLinkCopy is defined ? component.secondaryLinkCopy : null,
+        'image': component.image[0],
+        'alt': component.altText,
+        'informative_or_decorative': component.informativeOrDecorative
+    } %}
+    {% endembed %}
+{% elseif component.typeHandle == 'iconsAndDescriptionsComponent' %}
+    {% embed '@W3CWebsiteTemplates/components/columns_with_icons.html.twig' with {
+        'title': component.heading is defined ? component.heading : null,
+        'summary': component.description is defined ? component.description : null,
+        'cards': component.iconCards
+    } %}
+    {% endembed %}
+{% elseif component.typeHandle == 'imagesAndDescriptionsComponent' %}
+    {% embed '@W3CWebsiteTemplates/components/columns_with_images.html.twig' with {
+        'title': component.heading is defined ? component.heading : null,
+        'summary': component.description is defined ? component.description : null,
+        'cards': component.cards
     } %}
     {% endembed %}
 {% endif %}
