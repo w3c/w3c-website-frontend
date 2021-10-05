@@ -2,11 +2,12 @@
 
 namespace App\Controller;
 
-use App\Query\CraftCMS\BlogFilters;
-use App\Query\CraftCMS\BlogListing;
+use App\Query\CraftCMS\Blog\Entry;
+use App\Query\CraftCMS\Blog\Filters;
+use App\Query\CraftCMS\Blog\Listing;
 use App\Query\CraftCMS\Taxonomies\Categories;
 use App\Query\CraftCMS\Taxonomies\Tags;
-use App\Service\CraftCMS;
+use App\Query\CraftCMS\YouMayAlsoLikeRelatedEntries;
 use DateTimeImmutable;
 use Exception;
 use Strata\Data\Exception\GraphQLQueryException;
@@ -19,14 +20,20 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+/**
+ * @author Jean-Guilhem Rouel <jean-gui@w3.org>
+ *
+ * @Route("/blog")
+ */
 class BlogController extends AbstractController
 {
     private const LIMIT = 10;
 
     /**
-     * @Route("/blog/")
+     * @Route("/")
      *
      * @param QueryManager $manager
+     * @param Site         $site
      * @param Request      $request
      *
      * @return Response
@@ -40,7 +47,7 @@ class BlogController extends AbstractController
         
         $manager->add(
             'blogListing',
-            new BlogListing(
+            new Listing(
                 $site->siteId,
                 null,
                 null,
@@ -52,11 +59,27 @@ class BlogController extends AbstractController
             )
         );
 
-        return $this->buildListing($manager, $site, $currentPage, $search);
+        [$page, $collection, $categories, $archives] = $this->buildListing($manager, $site, $currentPage);
+        $page['breadcrumbs'] = [
+            'title'  => $page['title'],
+            'uri'    => $page['uri'],
+            'parent' => null
+        ];
+
+        return $this->render('blog/index.html.twig', [
+            'site'       => $site,
+            'navigation' => $manager->getCollection('navigation'),
+            'page'       => $page,
+            'entries'    => $collection,
+            'pagination' => $collection->getPagination(),
+            'categories' => $categories,
+            'archives'   => $archives,
+            'search'     => $search
+        ]);
     }
 
     /**
-     * @Route("/blog/{year}", requirements={"year": "\d\d\d\d"})
+     * @Route("/{year}", requirements={"year": "\d\d\d\d"})
      *
      * @param QueryManager $manager
      * @param int          $year
@@ -74,7 +97,7 @@ class BlogController extends AbstractController
 
         $manager->add(
             'blogListing',
-            new BlogListing(
+            new Listing(
                 $site->siteId,
                 null,
                 null,
@@ -86,14 +109,37 @@ class BlogController extends AbstractController
             )
         );
 
-        return $this->buildListing($manager, $site, $currentPage, $search);
+        $singlesBreadcrumbs = $manager->get('singles-breadcrumbs');
+
+        [$page, $collection, $categories, $archives] = $this->buildListing($manager, $site, $currentPage);
+        $page['breadcrumbs'] = [
+            'title' => $year,
+            'uri' => $singlesBreadcrumbs['blog']['uri'] . '/' . $year,
+            'parent' => [
+                'title'  => $singlesBreadcrumbs['blog']['title'],
+                'uri'    => $singlesBreadcrumbs['blog']['uri'],
+                'parent' => null
+            ]
+        ];
+        $page['title'] = $page['title'] . ' - ' . $year;
+
+        return $this->render('blog/index.html.twig', [
+            'site'       => $site,
+            'navigation' => $manager->getCollection('navigation'),
+            'page'       => $page,
+            'entries'    => $collection,
+            'pagination' => $collection->getPagination(),
+            'categories' => $categories,
+            'archives'   => $archives,
+            'search'     => $search
+        ]);
     }
 
     /**
-     * @Route("/blog/category/{category}", requirements={"category": ".+"})
+     * @Route("/category/{slug}", requirements={"category": ".+"})
      *
      * @param QueryManager $manager
-     * @param string       $category
+     * @param string       $slug
      * @param Site         $site
      * @param Request      $request
      *
@@ -101,30 +147,31 @@ class BlogController extends AbstractController
      * @throws GraphQLQueryException
      * @throws QueryManagerException
      */
-    public function category(QueryManager $manager, string $category, Site $site, Request $request): Response
+    public function category(QueryManager $manager, string $slug, Site $site, Request $request): Response
     {
         $currentPage = $request->query->get('page', 1);
         $search = $request->query->get('search');
 
         $manager->add('categories', new Categories($site->siteId, 'blogCategories'));
         $categories = $manager->getCollection('categories');
-        $categoryId = null;
+
+        $category = [];
         foreach ($categories as $categoryData) {
-            if ($categoryData['slug'] == $category) {
-                $categoryId = $categoryData['id'];
+            if ($categoryData['slug'] == $slug) {
+                $category = $categoryData;
                 break;
             }
         }
 
-        if ($categoryId == null) {
+        if ($category['id'] == null) {
             throw $this->createNotFoundException('Category not found');
         }
 
         $manager->add(
             'blogListing',
-            new BlogListing(
+            new Listing(
                 $site->siteId,
-                $categoryId,
+                $category['id'],
                 null,
                 null,
                 null,
@@ -134,14 +181,37 @@ class BlogController extends AbstractController
             )
         );
 
-        return $this->buildListing($manager, $site, $currentPage, $search);
+        [$page, $collection, $categories, $archives] = $this->buildListing($manager, $site, $currentPage);
+        $singlesBreadcrumbs = $manager->get('singles-breadcrumbs');
+
+        $page['breadcrumbs'] = [
+            'title'  => $category['title'],
+            'uri'    => $singlesBreadcrumbs['blog']['uri'] . '/category/' . $slug,
+            'parent' => [
+                'title'  => $singlesBreadcrumbs['blog']['title'],
+                'uri'    => $singlesBreadcrumbs['blog']['uri'],
+                'parent' => null
+            ]
+        ];
+        $page['title']       = $page['title'] . ' - ' . $category['title'];
+
+        return $this->render('blog/index.html.twig', [
+            'site'       => $site,
+            'navigation' => $manager->getCollection('navigation'),
+            'page'       => $page,
+            'entries'    => $collection,
+            'pagination' => $collection->getPagination(),
+            'categories' => $categories,
+            'archives'   => $archives,
+            'search'     => $search
+        ]);
     }
 
     /**
-     * @Route("/blog/tag/{tag}", requirements={"tag": ".+"})
+     * @Route("/tag/{slug}", requirements={"tag": ".+"})
      *
      * @param QueryManager $manager
-     * @param string       $tag
+     * @param string       $slug
      * @param Site         $site
      * @param Request      $request
      *
@@ -149,31 +219,31 @@ class BlogController extends AbstractController
      * @throws GraphQLQueryException
      * @throws QueryManagerException
      */
-    public function tag(QueryManager $manager, string $tag, Site $site, Request $request): Response
+    public function tag(QueryManager $manager, string $slug, Site $site, Request $request): Response
     {
         $currentPage = $request->query->get('page', 1);
         $search      = $request->query->get('search');
 
         $manager->add('tags', new Tags($site->siteId, 'blogTags'));
         $tags = $manager->getCollection('tags');
-        $tagId = null;
+        $tag = [];
         foreach ($tags as $tagData) {
-            if ($tagData['slug'] == $tag) {
-                $tagId = $tagData['id'];
+            if ($tagData['slug'] == $slug) {
+                $tag = $tagData;
                 break;
             }
         }
 
-        if ($tagId == null) {
+        if ($tag['id'] == null) {
             throw $this->createNotFoundException('Tag not found');
         }
 
         $manager->add(
             'blogListing',
-            new BlogListing(
+            new Listing(
                 $site->siteId,
                 null,
-                $tagId,
+                $tag['id'],
                 null,
                 null,
                 $search,
@@ -182,22 +252,109 @@ class BlogController extends AbstractController
             )
         );
 
-        return $this->buildListing($manager, $site, $currentPage, $search);
+        [$page, $collection, $categories, $archives] = $this->buildListing($manager, $site, $currentPage);
+        $singlesBreadcrumbs = $manager->get('singles-breadcrumbs');
+
+        $page['breadcrumbs'] = [
+            'title'  => $tag['title'],
+            'uri'    => $singlesBreadcrumbs['blog']['uri'] . '/tag/' . $slug,
+            'parent' => [
+                'title'  => $singlesBreadcrumbs['blog']['title'],
+                'uri'    => $singlesBreadcrumbs['blog']['uri'],
+                'parent' => null
+            ]
+        ];
+        $page['title']       = $page['title'] . ' - ' . $tag['title'];
+
+        return $this->render('blog/index.html.twig', [
+            'site'       => $site,
+            'navigation' => $manager->getCollection('navigation'),
+            'page'       => $page,
+            'entries'    => $collection,
+            'pagination' => $collection->getPagination(),
+            'categories' => $categories,
+            'archives'   => $archives,
+            'search'     => $search
+        ]);
+    }
+
+    /**
+     * @Route("/{year}/{slug}", requirements={"year": "\d\d\d\d"})
+     *
+     * @param QueryManager $manager
+     * @param int          $year
+     * @param string       $slug
+     * @param Site         $site
+     * @param Request      $request
+     *
+     * @return Response
+     * @throws GraphQLQueryException
+     * @throws QueryManagerException
+     * @throws Exception
+     */
+    public function show(QueryManager $manager, int $year, string $slug, Site $site, Request $request): Response
+    {
+        $manager->add('page', new Entry($site->siteId, $slug));
+
+        $page = $manager->get('page');
+        if (empty($page)) {
+            throw $this->createNotFoundException('Page not found');
+        }
+
+        $postYear = intval((new DateTimeImmutable($page['postDate']))->format('Y'));
+        if ($year !== $postYear) {
+            return $this->redirectToRoute('app_blog_show', ['slug' => $slug, 'year' => $postYear]);
+        }
+
+        $manager->add(
+            'crosslinks',
+            new YouMayAlsoLikeRelatedEntries($site->siteId, substr($request->getPathInfo(), 1))
+        );
+
+        $crosslinks = $manager->get('crosslinks');
+        $singlesBreadcrumbs = $manager->get('singles-breadcrumbs');
+
+        $page['seo']['expiry'] = $page['expiryDate'];
+        $page['breadcrumbs'] = [
+            'title'  => $page['title'],
+            'uri'    => $page['uri'],
+            'parent' => [
+                'title'  => $year,
+                'uri'    => $singlesBreadcrumbs['blog']['uri'] . '/' . $year,
+                'parent' => [
+                    'title'  => $singlesBreadcrumbs['blog']['title'],
+                    'uri'    => $singlesBreadcrumbs['blog']['uri'],
+                    'parent' => null
+                ]
+            ]
+        ];
+
+        dump($page);
+        dump($crosslinks);
+        dump($singlesBreadcrumbs);
+
+        // @todo use blog post template
+        return $this->render('blog/show.html.twig', [
+            'site'       => $site,
+            'navigation' => $manager->getCollection('navigation'),
+            'page'       => $page,
+            'crosslinks' => $crosslinks
+        ]);
     }
 
     /**
      * @param QueryManager $manager
      * @param Site         $site
      * @param int          $currentPage
-     * @param string|null  $search
      *
-     * @return RedirectResponse|Response
+     * @return RedirectResponse|array
      * @throws GraphQLQueryException
      * @throws QueryManagerException
+     * @throws Exception
      */
-    protected function buildListing(QueryManager $manager, Site $site, int $currentPage, ?string $search)
+    protected function buildListing(QueryManager $manager, Site $site, int $currentPage): array
     {
-        $manager->add('filters', new BlogFilters($site->siteId));
+        $manager->add('filters', new Filters($site->siteId));
 
         $collection = $manager->getCollection('blogListing');
         $pagination = $collection->getPagination();
@@ -228,15 +385,6 @@ class BlogController extends AbstractController
         dump($pagination);
         dump($categories);
 
-        return $this->render('blog/index.html.twig', [
-            'site'       => $site,
-            'navigation' => $manager->getCollection('navigation'),
-            'page'       => $page,
-            'entries'    => $collection,
-            'pagination' => $pagination,
-            'categories' => $categories,
-            'archives'   => $archives,
-            'search'     => $search
-        ]);
+        return [$page, $collection, $categories, $archives];
     }
 }

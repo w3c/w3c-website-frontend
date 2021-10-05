@@ -1,0 +1,50 @@
+query PressReleasesListing($siteId: [QueryArgument], $before: String, $after: String, $limit: Int, $offset: Int) {
+    entry(section: "pressReleasesListing", siteId: $siteId) {
+        id
+        slug
+        title
+        uri
+        expiryDate
+        breadcrumbs: parent {
+            ...breadcrumbs
+        }
+        ... on pressReleasesListing_pressReleasesListing_Entry {
+            excerpt
+            lead: pageLead
+            seo: seoOptions {
+                ...seoData
+            }
+        }
+    }
+    total: entryCount(section: "pressReleases", siteId: $siteId, before: $before, after: $after)
+    entries(section: "pressReleases", siteId: $siteId, before: $before, after: $after, limit: $limit, offset: $offset, orderBy: "postDate desc") {
+        id
+        slug
+        uri
+        title
+        ... on pressReleases_default_Entry {
+            author {
+                name
+                email
+            }
+            authors {
+                ... on authors_author_BlockType {
+                    name: authorName
+                    email: authorEmailAddress
+                }
+            }
+            date: postDate
+            excerpt
+            thumbnailImage {
+                ...thumbnailImage
+            }
+            thumbnailAltText
+        }
+    }
+}
+
+fragment thumbnailImage on AssetInterface {
+    src: url
+    title
+    srcset(sizes: ["360", "580"])
+}

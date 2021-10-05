@@ -1,0 +1,8 @@
+query PressReleasesFilters($siteId: [QueryArgument]) {
+    first: entry(section: "pressReleases", siteId: $siteId, orderBy: "postDate asc") {
+        postDate
+    }
+    last: entry(section: "pressReleases", siteId: $siteId, orderBy: "postDate desc") {
+        postDate
+    }
+}

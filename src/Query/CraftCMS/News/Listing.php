@@ -2,16 +2,14 @@
 
 declare(strict_types=1);
 
-namespace App\Query\CraftCMS;
+namespace App\Query\CraftCMS\News;
 
 use App\Service\CraftCMS;
 use Strata\Data\Cache\CacheLifetime;
 use Strata\Data\Exception\GraphQLQueryException;
-use Strata\Data\Mapper\MapArray;
 use Strata\Data\Query\GraphQLQuery;
-use Strata\Data\Transform\Data\CallableData;
 
-class BlogListing extends GraphQLQuery
+class Listing extends GraphQLQuery
 {
 
     public function getRequiredDataProviderClass(): string
@@ -23,8 +21,6 @@ class BlogListing extends GraphQLQuery
      * Set up query
      *
      * @param int         $siteId        Site ID of page content
-     * @param int|null    $category
-     * @param int|null    $tag
      * @param string|null $before
      * @param string|null $after
      * @param string|null $search
@@ -36,8 +32,6 @@ class BlogListing extends GraphQLQuery
      */
     public function __construct(
         int $siteId,
-        int $category = null,
-        int $tag = null,
         string $before = null,
         string $after = null,
         string $search = null,
@@ -45,17 +39,15 @@ class BlogListing extends GraphQLQuery
         int $page = 1,
         int $cacheLifetime = CacheLifetime::HOUR
     ) {
-        $this->setGraphQLFromFile(__DIR__ . '/graphql/blogListing.graphql')
-            ->addFragmentFromFile(__DIR__ . '/graphql/fragments/seoData.graphql')
-            ->addFragmentFromFile(__DIR__ . '/graphql/fragments/breadcrumbs.graphql')
+        $this->setGraphQLFromFile(__DIR__ . '/../graphql/news/listing.graphql')
+            ->addFragmentFromFile(__DIR__ . '/../graphql/fragments/seoData.graphql')
+            ->addFragmentFromFile(__DIR__ . '/../graphql/fragments/breadcrumbs.graphql')
             ->setRootPropertyPath('[entries]')
             ->setTotalResults('[total]')
             ->setResultsPerPage($limit)
             ->setCurrentPage($page)
 
             ->addVariable('siteId', $siteId)
-            ->addVariable('category', $category)
-            ->addVariable('tag', $tag)
             ->addVariable('before', $before)
             ->addVariable('after', $after)
             ->addVariable('search', $search)

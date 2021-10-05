@@ -1,0 +1,8 @@
+query NewsFilters($siteId: [QueryArgument]) {
+    first: entry(section: "newsArticles", siteId: $siteId, orderBy: "postDate asc") {
+        postDate
+    }
+    last: entry(section: "newsArticles", siteId: $siteId, orderBy: "postDate desc") {
+        postDate
+    }
+}
