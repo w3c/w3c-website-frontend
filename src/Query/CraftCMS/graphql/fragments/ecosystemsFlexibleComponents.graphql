@@ -1,4 +1,4 @@
-fragment ecosystemsFlexibleComponents on ecosystemsFlexibleComponents_MatrixField {
+fragment ecosystemsFlexibleComponents on businessEcosystemsFlexibleComponents_MatrixField {
     ... on businessEcosystemsFlexibleComponents_textComponent_BlockType {
         typeHandle
         contentField
