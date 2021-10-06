@@ -24,4 +24,9 @@ query SinglesBreadcrumbs($siteId: [QueryArgument]) {
         title
         uri
     }
+    ecosystems: entry(section: "ecosystems", siteId: $siteId) {
+        slug
+        title
+        uri
+    }
 }
