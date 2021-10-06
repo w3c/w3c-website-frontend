@@ -89,7 +89,7 @@ host('s24-development')
     ->hostname('52.31.200.8')
     ->set('http_user', 'apache')
     ->set('deploy_path', '/data/var/www/vhosts/w3c/www-w3c/development')
-    ->set('url', 'https://www-w3c.studio24.dev')
+    ->set('url', 'https://www-dev-w3c.studio24.dev')
     ->set('composer_options', '{{composer_action}} --verbose --no-progress --no-interaction --optimize-autoloader');
 
 
