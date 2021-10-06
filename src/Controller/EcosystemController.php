@@ -32,11 +32,12 @@ class EcosystemController extends AbstractController
     public function show(string $slug, Site $site, QueryManager $manager, Request $request): Response
     {
         $manager->add('page', new CraftEcosystem($site->siteId, 'ecosystems/' . $slug));
-        $manager->add('evangelists', new Evangelists($slug));
-        $manager->add('groups', new Groups($slug));
-        $manager->add('members', new Members($slug));
+        $page = $manager->get('page');
 
-        $page        = $manager->get('page');
+        $manager->add('evangelists', new Evangelists($page['taxonomy-slug']));
+        $manager->add('groups', new Groups($page['taxonomy-slug']));
+        $manager->add('members', new Members($page['taxonomy-slug']));
+
         $evangelists = $manager->getCollection('evangelists');
         $groups      = $manager->getCollection('groups');
         $members     = $manager->getCollection('members');

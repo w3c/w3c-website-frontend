@@ -47,6 +47,7 @@ class Ecosystem extends GraphQLQuery
     {
         $mapping = new WildcardMappingStrategy();
         $mapping->addMapping('heroIllustration', ['[heroIllustration]' => '[heroIllustration][0]']);
+        $mapping->addMapping('ecosystem', ['[taxonomy-slug]' => '[ecosystem][0][slug]']);
 
         return $mapping;
     }
