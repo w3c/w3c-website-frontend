@@ -2,14 +2,18 @@
 
 namespace App\Controller;
 
+use App\Form\CommentType;
+use App\Query\CraftCMS\Blog\CreateComment;
 use App\Query\CraftCMS\Blog\Entry;
 use App\Query\CraftCMS\Blog\Filters;
+use App\Query\CraftCMS\Blog\Comments;
 use App\Query\CraftCMS\Blog\Listing;
 use App\Query\CraftCMS\Taxonomies\Categories;
 use App\Query\CraftCMS\Taxonomies\Tags;
 use App\Query\CraftCMS\YouMayAlsoLikeRelatedEntries;
 use DateTimeImmutable;
 use Exception;
+use Strata\Data\Collection;
 use Strata\Data\Exception\GraphQLQueryException;
 use Strata\Data\Exception\QueryManagerException;
 use Strata\Data\Query\QueryManager;
@@ -281,9 +285,9 @@ class BlogController extends AbstractController
     /**
      * @Route("/{year}/{slug}", requirements={"year": "\d\d\d\d"})
      *
-     * @param QueryManager $manager
      * @param int          $year
      * @param string       $slug
+     * @param QueryManager $manager
      * @param Site         $site
      * @param Request      $request
      *
@@ -292,13 +296,43 @@ class BlogController extends AbstractController
      * @throws QueryManagerException
      * @throws Exception
      */
-    public function show(QueryManager $manager, int $year, string $slug, Site $site, Request $request): Response
+    public function show(int $year, string $slug, QueryManager $manager, Site $site, Request $request): Response
     {
         $manager->add('page', new Entry($site->siteId, $slug));
 
         $page = $manager->get('page');
         if (empty($page)) {
             throw $this->createNotFoundException('Page not found');
+        }
+
+        $replyTo    = $request->query->get('replytocom');
+        $newComment = ['post' => $page['id'], 'parent' => $replyTo];
+        $form = $this->createForm(CommentType::class, $newComment);
+
+        $form->handleRequest($request);
+        if ($form->isSubmitted()) {
+            if ($form->isValid()) {
+                $newComment = $form->getData();
+
+                $manager->add(
+                    'create-comment',
+                    new CreateComment(
+                        $newComment['post'],
+                        $newComment['name'],
+                        $newComment['email'],
+                        $newComment['comment'],
+                        $newComment['parent']
+                    )
+                );
+
+                // @todo switch to publishing schema before running this query
+                $response = $manager->get('create-comment');
+                dump($response);
+
+                return $this->redirectToRoute('app_blog_show', ['year' => $year, 'slug' => $slug]);
+            } else {
+                $this->addFlash('error', 'blog.comments.form.error');
+            }
         }
 
         $postYear = intval((new DateTimeImmutable($page['postDate']))->format('Y'));
@@ -311,8 +345,15 @@ class BlogController extends AbstractController
             new YouMayAlsoLikeRelatedEntries($site->siteId, substr($request->getPathInfo(), 1))
         );
 
+        $manager->add('comments', new Comments($page['id']));
+
         $crosslinks = $manager->get('crosslinks');
         $singlesBreadcrumbs = $manager->get('singles-breadcrumbs');
+        $comments = $manager->getCollection('comments');
+
+        $topLevelComms = $this->buildComments($comments);
+
+        dump($topLevelComms);
 
         $page['seo']['expiry'] = $page['expiryDate'];
         $page['breadcrumbs'] = [
@@ -332,13 +373,19 @@ class BlogController extends AbstractController
         dump($page);
         dump($crosslinks);
         dump($singlesBreadcrumbs);
+        dump($comments);
 
         // @todo use blog post template
         return $this->render('blog/show.html.twig', [
-            'site'       => $site,
-            'navigation' => $manager->getCollection('navigation'),
-            'page'       => $page,
-            'crosslinks' => $crosslinks
+            'site'          => $site,
+            'navigation'    => $manager->getCollection('navigation'),
+            'page'          => $page,
+            'crosslinks'    => $crosslinks,
+            'comments'      => $topLevelComms,
+            'commentsCount' => count($comments),
+            'year'          => $year,
+            'slug'          => $slug,
+            'comment_form'  => $form->createView()
         ]);
     }
 
@@ -387,4 +434,40 @@ class BlogController extends AbstractController
 
         return [$page, $collection, $categories, $archives];
     }
+
+    private function getRootComment($reply, $replies, $roots)
+    {
+        $parentId = $reply['parent']['id'];
+        if (array_key_exists($parentId, $roots)) {
+            return $roots[$parentId]['id'];
+        }
+
+        return $this->getRootComment($replies[$parentId], $replies, $roots);
+    }
+
+    /**
+     * @param Collection $comments
+     *
+     * @return array
+     */
+    private function buildComments(Collection $comments): array
+    {
+        $replies       = [];
+        $topLevelComms = [];
+        foreach ($comments as $comment) {
+            if ($comment['level'] === 1) {
+                $comment['children']           = [];
+                $topLevelComms[$comment['id']] = $comment;
+            } else {
+                $replies[$comment['id']] = $comment;
+            }
+        }
+
+        foreach ($replies as $reply) {
+            $rootId = $this->getRootComment($reply, $replies, $topLevelComms);
+            $topLevelComms[$rootId]['children'][$reply['id']] = $reply;
+        }
+
+        return $topLevelComms;
+}
 }
