@@ -36,61 +36,7 @@ query Ecosystem($uri: [String], $siteId: [QueryArgument]) {
                 ...ecosystemsFlexibleComponents
             }
             ecosystemsBottomFlexibleComponents: businessEcosystemsBottomFlexibleComponents {
-                ... on businessEcosystemsBottomFlexibleComponents_textComponent_BlockType {
-                    typeHandle
-                    contentField
-                }
-                ... on businessEcosystemsBottomFlexibleComponents_blockquoteComponent_BlockType {
-                    typeHandle
-                    quoteText
-                    citation
-                }
-                ... on businessEcosystemsBottomFlexibleComponents_imageMediaComponent_BlockType {
-                    typeHandle
-                    image {
-                        ...contentImage
-                    }
-                    altText
-                    figureCaption
-                    informativeOrDecorative
-                }
-                ... on businessEcosystemsBottomFlexibleComponents_videoMediaComponent_BlockType {
-                    typeHandle
-                    videoTitle
-                    videoUrl {
-                        url
-                        image
-                        imageWidth
-                        imageHeight
-                        code
-                        width
-                        height
-                        aspectRatio
-                        providerName
-                    }
-                    videoCaption
-                    linkToVideoTranscript
-                }
-                ... on businessEcosystemsBottomFlexibleComponents_fiftyFiftyComponent_BlockType {
-                    typeHandle
-                    showImageBeforeText
-                    image  {
-                        ...contentImage
-                    }
-                    informativeOrDecorative
-                    altText
-                    titleField
-                    mainContent
-                    ctaUrl
-                    ctaCopy
-                    secondaryLinkUrl
-                }
-                ... on businessEcosystemsBottomFlexibleComponents_groupsListingComponent_BlockType {
-                    typeHandle
-                }
-                ... on businessEcosystemsBottomFlexibleComponents_featuredEvangelistsComponent_BlockType {
-                    typeHandle
-                }
+                ...ecosystemsBottomFlexibleComponents
             }
             recentActivitiesComponentTitle
             recentActivitiesComponentIntroduction
