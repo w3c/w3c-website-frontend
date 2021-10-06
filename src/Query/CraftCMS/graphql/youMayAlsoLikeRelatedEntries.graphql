@@ -72,7 +72,7 @@ fragment youMayAlsoLikeRelatedEntries on youMayAlsoLikeRelatedEntries_MatrixFiel
                 }
                 thumbnailAltText
             }
-            ... on businessEcosystems_default_Entry {
+            ... on ecosystems_default_Entry {
                 text: excerpt
                 thumbnailImage {
                     ...thumbnailImage

@@ -1,4 +1,4 @@
-fragment ecosystemsFlexibleComponents on businessEcosystemsFlexibleComponents_MatrixField {
+fragment ecosystemsFlexibleComponents on ecosystemsFlexibleComponents_MatrixField {
     ... on businessEcosystemsFlexibleComponents_textComponent_BlockType {
         typeHandle
         contentField
@@ -43,26 +43,13 @@ fragment ecosystemsFlexibleComponents on businessEcosystemsFlexibleComponents_Ma
         videoCaption
         linkToVideoTranscript
     }
-    ... on businessEcosystemsFlexibleComponents_groupListingComponent_BlockType {
-        typeHandle
-        titleField
-        introduction
-    }
-    ... on businessEcosystemsFlexibleComponents_businessRecentActivityComponent_BlockType {
-        typeHandle
-        title
-        introduction
-    }
-    ... on businessEcosystemsFlexibleComponents_membersQuotesCarouselComponent_BlockType {
+    ... on businessEcosystemsFlexibleComponents_groupsListingComponent_BlockType {
         typeHandle
         introduction
-    }
-    ... on businessEcosystemsFlexibleComponents_featuredMembersComponent_BlockType {
-        typeHandle
     }
     ... on businessEcosystemsFlexibleComponents_featuredEvangelistsComponent_BlockType {
         typeHandle
-        titleField
+        title: evangelistsTitle
         introduction
     }
 }
