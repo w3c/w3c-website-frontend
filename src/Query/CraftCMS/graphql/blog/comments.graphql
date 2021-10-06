@@ -1,0 +1,17 @@
+query Comments($postId: [QueryArgument]) {
+    comments (ownerId: $postId, orderBy: "commentDate DESC") {
+        ...comment
+    }
+}
+
+fragment comment on CommentInterface {
+    id
+    date: commentDate
+    name
+    email
+    comment
+    level
+    parent {
+        id
+    }
+}
