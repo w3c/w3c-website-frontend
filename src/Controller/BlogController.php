@@ -324,10 +324,8 @@ class BlogController extends AbstractController
                         $newComment['parent']
                     )
                 );
-                $manager->getDataProvider('craft')->setAuthorization(
-                    $this->getParameter('app.craftcms_api_publish_token')
-                );
 
+                // @todo switch to publishing schema before running this query
                 $response = $manager->get('create-comment');
                 dump($response);
 
