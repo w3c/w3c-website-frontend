@@ -1,14 +1,14 @@
-fragment ecosystemsFlexibleComponents on businessEcosystemsFlexibleComponents_MatrixField {
-    ... on businessEcosystemsFlexibleComponents_textComponent_BlockType {
+fragment ecosystemsFlexibleComponents on ecosystemsFlexibleComponents_MatrixField {
+    ... on ecosystemsFlexibleComponents_textComponent_BlockType {
         typeHandle
         contentField
     }
-    ... on businessEcosystemsFlexibleComponents_blockquoteComponent_BlockType {
+    ... on ecosystemsFlexibleComponents_blockquoteComponent_BlockType {
         typeHandle
         quoteText
         citation
     }
-    ... on businessEcosystemsFlexibleComponents_fiftyFiftyComponent_BlockType {
+    ... on ecosystemsFlexibleComponents_fiftyFiftyComponent_BlockType {
         typeHandle
         image  {
             ...contentImage
@@ -18,7 +18,7 @@ fragment ecosystemsFlexibleComponents on businessEcosystemsFlexibleComponents_Ma
         ctaUrl
         ctaCopy
     }
-    ... on businessEcosystemsFlexibleComponents_imageMediaComponent_BlockType {
+    ... on ecosystemsFlexibleComponents_imageMediaComponent_BlockType {
         typeHandle
         image {
             ...contentImage
@@ -26,7 +26,7 @@ fragment ecosystemsFlexibleComponents on businessEcosystemsFlexibleComponents_Ma
         altText
         figureCaption
     }
-    ... on businessEcosystemsFlexibleComponents_videoMediaComponent_BlockType {
+    ... on ecosystemsFlexibleComponents_videoMediaComponent_BlockType {
         typeHandle
         videoTitle
         videoUrl {
@@ -43,11 +43,11 @@ fragment ecosystemsFlexibleComponents on businessEcosystemsFlexibleComponents_Ma
         videoCaption
         linkToVideoTranscript
     }
-    ... on businessEcosystemsFlexibleComponents_groupsListingComponent_BlockType {
+    ... on ecosystemsFlexibleComponents_groupsListingComponent_BlockType {
         typeHandle
         introduction
     }
-    ... on businessEcosystemsFlexibleComponents_featuredEvangelistsComponent_BlockType {
+    ... on ecosystemsFlexibleComponents_featuredEvangelistsComponent_BlockType {
         typeHandle
         title: evangelistsTitle
         introduction

@@ -32,10 +32,10 @@ query Ecosystem($uri: [String], $siteId: [QueryArgument]) {
             seo: seoOptions {
                 ...seoData
             }
-            ecosystemsFlexibleComponents: businessEcosystemsFlexibleComponents {
+            ecosystemsFlexibleComponents {
                 ...ecosystemsFlexibleComponents
             }
-            ecosystemsBottomFlexibleComponents: businessEcosystemsBottomFlexibleComponents {
+            ecosystemsBottomFlexibleComponents {
                 ...ecosystemsBottomFlexibleComponents
             }
             recentActivitiesComponentTitle

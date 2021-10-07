@@ -30,7 +30,7 @@ query PressReleases($slug: [String], $siteId: [QueryArgument]) {
                 title
                 slug
             }
-            ecosystems: businessEcosystems {
+            ecosystems {
                 title
                 slug
             }
