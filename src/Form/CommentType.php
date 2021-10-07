@@ -19,24 +19,26 @@ class CommentType extends AbstractType
         $builder
             ->add('name', TextType::class, [
                 'label'              => 'blog.comments.form.name.label',
-                'constraints'        => [new NotBlank()],
+                'constraints'        => [new NotBlank(['message' => 'blog.comments.form.name.blank'])],
                 'translation_domain' => 'w3c_website_templates_bundle'
             ])
             ->add('email', EmailType::class, [
                 'label'              => 'blog.comments.form.email.label',
                 'constraints'        => [
-                    new NotBlank(),
-                    new Email()
+                    new NotBlank(['message' => 'blog.comments.form.email.blank']),
+                    new Email(['message' => 'blog.comments.form.email.format'])
                 ],
                 'translation_domain' => 'w3c_website_templates_bundle'
             ])
             ->add('comment', TextareaType::class, [
                 'label'              => 'blog.comments.form.comment.label',
                 'help'               => 'blog.comments.form.comment.help',
-                'constraints'        => [new NotBlank()],
+                'constraints'        => [new NotBlank(['message' => 'blog.comments.form.comment.blank'])],
                 'translation_domain' => 'w3c_website_templates_bundle'
             ])
-            ->add('post', HiddenType::class, ['constraints' => [new NotBlank()]])
+            ->add('post', HiddenType::class, [
+                'constraints' => [new NotBlank(['message' => 'blog.comments.form.post.blank'])]
+            ])
             ->add('parent', HiddenType::class, ['required'    => false]);
     }
 
