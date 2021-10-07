@@ -28,7 +28,7 @@ class NewsController extends AbstractController
     private const LIMIT = 10;
 
     /**
-     * @Route("/list")
+     * @Route("/")
      *
      * @param QueryManager $manager
      * @param Site         $site
