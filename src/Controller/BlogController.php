@@ -310,29 +310,27 @@ class BlogController extends AbstractController
         $form = $this->createForm(CommentType::class, $newComment);
 
         $form->handleRequest($request);
-        if ($form->isSubmitted()) {
-            if ($form->isValid()) {
-                $newComment = $form->getData();
+        if ($form->isSubmitted() && $form->isValid()) {
+            $newComment = $form->getData();
 
-                $manager->add(
-                    'create-comment',
-                    new CreateComment(
-                        $newComment['post'],
-                        $newComment['name'],
-                        $newComment['email'],
-                        $newComment['comment'],
-                        $newComment['parent']
-                    )
-                );
+            $manager->add(
+                'create-comment',
+                new CreateComment(
+                    $newComment['post'],
+                    $newComment['name'],
+                    $newComment['email'],
+                    $newComment['comment'],
+                    $newComment['parent']
+                )
+            );
 
-                // @todo switch to publishing schema before running this query
-                $response = $manager->get('create-comment');
-                dump($response);
+            // @todo switch to publishing schema before running this query
+            $response = $manager->get('create-comment');
+            dump($response);
 
-                return $this->redirectToRoute('app_blog_show', ['year' => $year, 'slug' => $slug]);
-            } else {
-                $this->addFlash('error', 'blog.comments.form.error');
-            }
+            $this->addFlash('success', 'blog.comments.form.success');
+
+            return $this->redirectToRoute('app_blog_show', ['year' => $year, 'slug' => $slug]);
         }
 
         $postYear = intval((new DateTimeImmutable($page['postDate']))->format('Y'));
