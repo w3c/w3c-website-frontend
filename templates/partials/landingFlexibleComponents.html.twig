@@ -12,7 +12,7 @@
     {% endembed %}
 {% elseif component.typeHandle == 'imageMediaComponent' %}
     {% embed '@W3CWebsiteTemplates/components/image.html.twig' with {
-        'attr': component.imageMedia[0],
+        'attr': component.image[0],
         'alt': component.altText,
         'caption': component.figureCaption is defined ? component.figureCaption : null,
         'informative_or_decorative': component.informativeOrDecorative
