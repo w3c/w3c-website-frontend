@@ -43,10 +43,17 @@ class EcosystemController extends AbstractController
         $members     = $manager->getCollection('members');
 
         $page['seo']['expiry'] = $page['expiryDate'];
+
+        $singlesBreadcrumbs = $manager->get('singles-breadcrumbs');
+        dump($singlesBreadcrumbs);
         $page['breadcrumbs'] = [
             'title'  => $page['title'],
             'uri'    => $page['uri'],
-            'parent' => null
+            'parent' => [
+                'title'  => $singlesBreadcrumbs['ecosystems']['title'],
+                'uri'    => $singlesBreadcrumbs['ecosystems']['uri'],
+                'parent' => null
+            ]
         ];
 
         dump($page);
