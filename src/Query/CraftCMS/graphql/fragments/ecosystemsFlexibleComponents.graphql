@@ -10,13 +10,18 @@ fragment ecosystemsFlexibleComponents on ecosystemsFlexibleComponents_MatrixFiel
     }
     ... on ecosystemsFlexibleComponents_fiftyFiftyComponent_BlockType {
         typeHandle
+        showImageBeforeText
         image  {
             ...contentImage
         }
+        informativeOrDecorative
+        altText
         titleField
         mainContent
         ctaUrl
         ctaCopy
+        secondaryLinkUrl
+        secondaryLinkCopy
     }
     ... on ecosystemsFlexibleComponents_imageMediaComponent_BlockType {
         typeHandle
@@ -25,6 +30,7 @@ fragment ecosystemsFlexibleComponents on ecosystemsFlexibleComponents_MatrixFiel
         }
         altText
         figureCaption
+        informativeOrDecorative
     }
     ... on ecosystemsFlexibleComponents_videoMediaComponent_BlockType {
         typeHandle

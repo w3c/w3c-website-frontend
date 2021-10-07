@@ -8,6 +8,20 @@ fragment ecosystemsBottomFlexibleComponents on ecosystemsBottomFlexibleComponent
         quoteText
         citation
     }
+    ... on ecosystemsBottomFlexibleComponents_fiftyFiftyComponent_BlockType {
+        typeHandle
+        showImageBeforeText
+        image  {
+            ...contentImage
+        }
+        informativeOrDecorative
+        altText
+        titleField
+        mainContent
+        ctaUrl
+        ctaCopy
+        secondaryLinkUrl
+    }
     ... on ecosystemsBottomFlexibleComponents_imageMediaComponent_BlockType {
         typeHandle
         image {
@@ -34,24 +48,13 @@ fragment ecosystemsBottomFlexibleComponents on ecosystemsBottomFlexibleComponent
         videoCaption
         linkToVideoTranscript
     }
-    ... on ecosystemsBottomFlexibleComponents_fiftyFiftyComponent_BlockType {
-        typeHandle
-        showImageBeforeText
-        image  {
-            ...contentImage
-        }
-        informativeOrDecorative
-        altText
-        titleField
-        mainContent
-        ctaUrl
-        ctaCopy
-        secondaryLinkUrl
-    }
     ... on ecosystemsBottomFlexibleComponents_groupsListingComponent_BlockType {
         typeHandle
+        introduction
     }
     ... on ecosystemsBottomFlexibleComponents_featuredEvangelistsComponent_BlockType {
         typeHandle
+        title: evangelistsTitle
+        introduction
     }
 }
