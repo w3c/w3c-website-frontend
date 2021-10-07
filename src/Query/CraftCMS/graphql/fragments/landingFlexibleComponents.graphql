@@ -36,6 +36,7 @@ fragment landingFlexibleComponents on landingFlexibleComponents_MatrixField {
                 heading
                 description
                 linkDestination
+                linkCopy
             }
         }
     }
@@ -53,6 +54,7 @@ fragment landingFlexibleComponents on landingFlexibleComponents_MatrixField {
                 heading
                 description
                 linkDestination
+                linkCopy
             }
         }
     }
