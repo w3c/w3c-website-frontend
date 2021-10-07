@@ -20,7 +20,6 @@ class CommentType extends AbstractType
             ->add('name', TextType::class, [
                 'label'              => 'blog.comments.form.name.label',
                 'constraints'        => [new NotBlank(['message' => 'blog.comments.form.name.blank'])],
-                'translation_domain' => 'w3c_website_templates_bundle'
             ])
             ->add('email', EmailType::class, [
                 'label'              => 'blog.comments.form.email.label',
@@ -28,13 +27,11 @@ class CommentType extends AbstractType
                     new NotBlank(['message' => 'blog.comments.form.email.blank']),
                     new Email(['message' => 'blog.comments.form.email.format'])
                 ],
-                'translation_domain' => 'w3c_website_templates_bundle'
             ])
             ->add('comment', TextareaType::class, [
                 'label'              => 'blog.comments.form.comment.label',
                 'help'               => 'blog.comments.form.comment.help',
                 'constraints'        => [new NotBlank(['message' => 'blog.comments.form.comment.blank'])],
-                'translation_domain' => 'w3c_website_templates_bundle'
             ])
             ->add('post', HiddenType::class, [
                 'constraints' => [new NotBlank(['message' => 'blog.comments.form.post.blank'])]
