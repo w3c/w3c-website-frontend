@@ -23,3 +23,15 @@ specifications_found: >-
             1 {cache hit}
         other {live request}
     })
+blog:
+    comments:
+        form:
+            comment:
+                label: Comment
+                help: Your email address will not be published.
+            name:
+                label: Name
+            email:
+                label: Email address
+            submit: Post comment
+            cancel: Cancel

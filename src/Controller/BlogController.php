@@ -385,7 +385,9 @@ class BlogController extends AbstractController
             'commentsCount' => count($comments),
             'year'          => $year,
             'slug'          => $slug,
-            'comment_form'  => $form->createView()
+            'comment_form'  => $form->createView(),
+            'form_errors'   => $form->getErrors(true),
+            'reply_to'      => $replyTo
         ]);
     }
 
