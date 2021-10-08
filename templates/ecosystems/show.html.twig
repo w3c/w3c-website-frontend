@@ -2,6 +2,9 @@
 
 {% block components %}
     {% for component in page.ecosystemsFlexibleComponents %}
-        {{ include('partials/landingFlexibleComponents.html.twig') }}
+        {{ include('partials/ecosystemsFlexibleComponents.html.twig') }}
+    {% endfor %}
+    {% for component in page.ecosystemsBottomFlexibleComponents %}
+        {{ include('partials/ecosystemsFlexibleComponents.html.twig') }}
     {% endfor %}
 {% endblock %}

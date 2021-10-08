@@ -20,3 +20,6 @@ specifications_found: >-
             1 {depuis le cache}
         other {requête directe}
     })
+components:
+    groups_list:
+        title: Groupes actifs

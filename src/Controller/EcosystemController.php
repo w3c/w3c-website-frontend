@@ -43,6 +43,23 @@ class EcosystemController extends AbstractController
         $members     = $manager->getCollection('members');
 
         $page['seo']['expiry'] = $page['expiryDate'];
+        $page['groups'] = [];
+
+        //To move in a better place!!
+        if (!empty($groups)) {
+            foreach ($groups as $group) {
+                $group_minimal = array(
+                    'name' => preg_replace('/\s+(((working|community|business|interest|incubator|coordination|other)\s+group)|(task\s+force)|(function))$/i','', $group['name']),
+                    'type' => $group['type'],
+                    'description' => $group['description'],
+                    'url' => $group['_links']['homepage']['href']
+                );
+                array_push($page['groups'], $group_minimal);
+            }
+        }
+
+        $page['members'] = $members;
+        $page['evangelists'] = $evangelists;
 
         $singlesBreadcrumbs = $manager->get('singles-breadcrumbs');
         dump($singlesBreadcrumbs);
