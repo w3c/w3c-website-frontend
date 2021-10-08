@@ -88,7 +88,7 @@ class DefaultController extends AbstractController
         dump($twig_variables);
 
         $template = 'pages/default.html.twig';
-        if ($page['typeHandle'] === 'landingPage') {
+        if ($page['typeHandle'] === 'landingPage' || $page['typeHandle'] === 'ecosystemsLandingPage') {
             $template = 'pages/landing.html.twig';
         }
 
