@@ -8,11 +8,15 @@ use App\Service\CraftCMS;
 use Strata\Data\Cache\CacheLifetime;
 use Strata\Data\Exception\GraphQLQueryException;
 use Strata\Data\Mapper\MapArray;
+use Strata\Data\Mapper\WildcardMappingStrategy;
 use Strata\Data\Query\GraphQLQuery;
 use Strata\Data\Transform\Data\CallableData;
+use Symfony\Component\Routing\RouterInterface;
 
 class Entry extends GraphQLQuery
 {
+
+    private RouterInterface $router;
 
     public function getRequiredDataProviderClass(): string
     {
@@ -31,8 +35,11 @@ class Entry extends GraphQLQuery
     public function __construct(
         int $siteId,
         string $slug,
+        RouterInterface $router,
         int $cacheLifetime = CacheLifetime::HOUR
     ) {
+        $this->router = $router;
+
         $this->setGraphQLFromFile(__DIR__ . '/../graphql/blog/entry.graphql')
             ->addFragmentFromFile(__DIR__ . '/../graphql/fragments/defaultFlexibleComponents.graphql')
             ->addFragmentFromFile(__DIR__ . '/../graphql/fragments/seoData.graphql')
@@ -44,5 +51,47 @@ class Entry extends GraphQLQuery
             ->enableCache($cacheLifetime)
             //->setCacheTags($uri)
         ;
+    }
+
+    public function getMapping()
+    {
+        $mapping = new WildcardMappingStrategy();
+        $mapping->addMapping('categories', $this->mapTaxonomy('categories', 'transformCategory'));
+        $mapping->addMapping('tags', $this->mapTaxonomy('tags', 'transformTag'));
+        $mapping->addMapping('ecosystems', $this->mapTaxonomy('ecosystems', 'transformEcosystem'));
+
+        return $mapping;
+    }
+
+    private function mapTaxonomy(string $field, string $function): array
+    {
+        return ['[' . $field . ']' => new MapArray(
+            '[' . $field . ']',
+            [
+                '[title]' => '[title]',
+                '[slug]'  => '[slug]',
+                '[uri]'   => new CallableData([$this, $function])
+            ]
+        )];
+    }
+
+    public function transformCategory(array $data): string
+    {
+        $slug = $data['slug'];
+
+        return $this->router->generate('app_blog_category', ['slug' => $slug]);
+    }
+
+    public function transformEcosystem(array $data): string
+    {
+        $slug = $data['slug'];
+        return $this->router->generate('app_ecosystem_show', ['slug' => $slug]);
+    }
+
+    public function transformTag(array $data): string
+    {
+        $slug = $data['slug'];
+
+        return $this->router->generate('app_blog_tag', ['slug' => $slug]);
     }
 }
