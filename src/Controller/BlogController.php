@@ -23,6 +23,7 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\RouterInterface;
 
 /**
  * @author Jean-Guilhem Rouel <jean-gui@w3.org>
@@ -285,20 +286,26 @@ class BlogController extends AbstractController
     /**
      * @Route("/{year}/{slug}", requirements={"year": "\d\d\d\d"})
      *
-     * @param int          $year
-     * @param string       $slug
-     * @param QueryManager $manager
-     * @param Site         $site
-     * @param Request      $request
+     * @param int             $year
+     * @param string          $slug
+     * @param QueryManager    $manager
+     * @param RouterInterface $router
+     * @param Site            $site
+     * @param Request         $request
      *
      * @return Response
      * @throws GraphQLQueryException
      * @throws QueryManagerException
-     * @throws Exception
      */
-    public function show(int $year, string $slug, QueryManager $manager, Site $site, Request $request): Response
-    {
-        $manager->add('page', new Entry($site->siteId, $slug));
+    public function show(
+        int $year,
+        string $slug,
+        QueryManager $manager,
+        RouterInterface $router,
+        Site $site,
+        Request $request
+    ): Response {
+        $manager->add('page', new Entry($site->siteId, $slug, $router));
 
         $page = $manager->get('page');
         if (empty($page)) {
