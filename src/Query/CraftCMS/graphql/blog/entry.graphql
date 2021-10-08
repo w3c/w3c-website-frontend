@@ -24,8 +24,8 @@ query BlogPost($slug: [String], $siteId: [QueryArgument]) {
                 }
             }
             categories: blogCategories {
-                uri
                 title
+                slug
             }
             tags: blogTags {
                 title
