@@ -49,10 +49,10 @@
     {% endembed %}
 {% elseif component.typeHandle == 'featuredEvangelistsComponent' %}
     {% embed '@W3CWebsiteTemplates/components/evangelists.html.twig' with {
-        'title': component.title
+        'title': component.title,
         'introduction': component.introduction is defined ? component.introduction : null,
-        'list_title': component.introduction is defined ? component.introduction : null,
-        'groups': page.groups is defined ? page.groups : []
+        'evangelists': page.evangelists is defined ? page.evangelists : [],
+        'ecosystem_name': page.title
     } %}
     {% endembed %}
 {% endif %}
