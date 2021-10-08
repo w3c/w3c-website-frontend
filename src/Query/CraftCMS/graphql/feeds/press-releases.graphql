@@ -1,0 +1,30 @@
+query pressReleases($siteId: [QueryArgument], $limit: Int) {
+    entries(section: "pressReleases", siteId: $siteId, limit: $limit, orderBy: "postDate desc") {
+        id
+        slug
+        uri
+        title
+        ... on pressReleases_default_Entry {
+            authors {
+                ... on authors_author_BlockType {
+                    name: authorName
+                    email: authorEmailAddress
+                }
+            }
+            date: postDate
+            dateUpdated
+            excerpt
+            defaultFlexibleComponents(orderBy: "sortOrder") {
+                ...defaultFlexibleComponents
+            }
+        }
+    }
+    comments(siteId: $siteId) {
+        ownerId
+    }
+}
+
+fragment contentImage on AssetInterface {
+    src: url(width: 580)
+    extension
+}
