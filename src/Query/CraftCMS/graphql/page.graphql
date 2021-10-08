@@ -51,5 +51,23 @@ query Page($uri: [String], $siteId: [QueryArgument]) {
                 ...seoData
             }
         }
+        ... on ecosystemsLandingPage_ecosystemsLandingPage_Entry {
+            title
+            pageLead
+            heroIllustration {
+                url
+                mimeType
+                height
+                width
+                size
+            }
+            landingFlexibleComponents(orderBy: "sortOrder") {
+                ...landingFlexibleComponents
+            }
+            excerpt
+            seo: seoOptions {
+                ...seoData
+            }
+        }
     }
 }
