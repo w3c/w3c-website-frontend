@@ -1,0 +1,17 @@
+query testimonials($ecosystemId: [QueryArgument]) {
+    entries(section: "testimonial", ecosystems: $ecosystemId, siteId: "*") {
+        id
+        language
+        ... on testimonial_default_Entry {
+            quote: quoteForCarousel
+            author: authorName
+            authorJobTitle
+            organization: authorOrganization
+            logo: organizationLogo {
+                ... on publicS3Bucket_Asset {
+                    url
+                }
+            }
+        }
+    }
+}

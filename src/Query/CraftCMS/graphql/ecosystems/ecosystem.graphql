@@ -19,6 +19,7 @@ query Ecosystem($uri: [String], $siteId: [QueryArgument]) {
         ... on ecosystems_default_Entry {
             ecosystem {
                 slug
+                id
             }
             pageLead
             heroIllustration {
