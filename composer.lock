@@ -1676,12 +1676,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/strata/frontend.git",
-                "reference": "ef4a449e2e4c99729a338eadee8f93d4bd39dab1"
+                "reference": "8a9bb5c34a49df9a8515bbf8ac550b32207c0e9b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/strata/frontend/zipball/ef4a449e2e4c99729a338eadee8f93d4bd39dab1",
-                "reference": "ef4a449e2e4c99729a338eadee8f93d4bd39dab1",
+                "url": "https://api.github.com/repos/strata/frontend/zipball/8a9bb5c34a49df9a8515bbf8ac550b32207c0e9b",
+                "reference": "8a9bb5c34a49df9a8515bbf8ac550b32207c0e9b",
                 "shasum": ""
             },
             "require": {
@@ -1735,7 +1735,7 @@
                 "issues": "https://github.com/strata/frontend/issues",
                 "source": "https://github.com/strata/frontend/tree/release/0.8.0"
             },
-            "time": "2021-09-29T21:31:21+00:00"
+            "time": "2021-10-11T09:19:45+00:00"
         },
         {
             "name": "strata/symfony-frontend",
