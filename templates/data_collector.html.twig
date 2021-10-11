@@ -1,0 +1,192 @@
+{% extends '@WebProfiler/Profiler/layout.html.twig' %}
+
+{% block toolbar %}
+    {% set icon %}
+        {# this is the content displayed as a panel in the toolbar #}
+        {{ include('strata-logo.svg') }}
+        <span class="sf-toolbar-value">{{ collector.totalQueries }}</span>
+    {% endset %}
+
+    {% set text %}
+        {# this is the content displayed when hovering the mouse over
+           the toolbar panel #}
+        <div class="sf-toolbar-info-piece">
+            <b>Locale</b>
+            <span>{{ collector.locale }}</span>
+        </div>
+        <div class="sf-toolbar-info-piece">
+            <b>Queries</b>
+            <span>{{ collector.totalQueries }}</span>
+        </div>
+        <div class="sf-toolbar-info-piece">
+            <b>Cached</b>
+            <span>{{ collector.totalQueriesCached }}</span>
+        </div>
+        <div class="sf-toolbar-info-piece">
+            <b>Preview mode</b>
+            <span>{{ collector.previewMode ? 'Yes' : 'No' }}</span>
+        </div>
+
+    {% endset %}
+
+    {# the 'link' value set to 'false' means that this panel doesn't
+       show a section in the web profiler #}
+    {{ include('@WebProfiler/Profiler/toolbar_item.html.twig', { link: true }) }}
+{% endblock %}
+
+{% block menu %}
+    {# This left-hand menu appears when using the full-screen profiler. #}
+    <span class="label">
+        <span class="icon">{{ include('strata-logo.svg') }}</span>
+        <strong>Strata</strong>
+    </span>
+{% endblock %}
+
+{% block panel %}
+    {# Optional, for showing the most details. #}
+    <h2>Strata</h2>
+    <div class="metrics">
+        <div class="metric">
+            <span class="value">{{ collector.totalQueries }}</span>
+            <span class="label">Queries</span>
+        </div>
+        <div class="metric">
+            <span class="value">{{ collector.totalQueriesCached }}</span>
+            <span class="label">Cached</span>
+        </div>
+        <div class="metric-divider"></div>
+        <div class="metric">
+            <span class="value">{{ collector.locale }}</span>
+            <span class="label">Locale</span>
+        </div>
+        <div class="metric">
+            <span class="value">{{ collector.textDirection }}</span>
+            <span class="label">Text direction</span>
+        </div>
+        <div class="metric">
+            <span class="value">{{ include('@WebProfiler/Icon/' ~ (collector.previewMode ? 'yes' : 'no') ~ '.svg') }}</span>
+            <span class="label">Preview mode</span>
+        </div>
+    </div>
+
+    <h3>Queries</h3>
+
+    {% if collector.queries is empty %}
+    <div class="empty">
+        <p>No data queries were collected during this request.</p>
+    </div>
+    {% else %}
+
+    <table>
+        <thead>
+        <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Class</th>
+            <th scope="col">Data provider</th>
+            <th scope="col">Type</th>
+            <th scope="col">Cache hit</th>
+            <th scope="col">Cache age</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for item in collector.queries %}
+            <tr>
+                <td>{{ item.name }}</td>
+                <td>{{ item.class }}</td>
+                <td>{{ item.dataProvider }}</th>
+                <td>{{ item.type }}</td>
+
+                {% if item.hasResponse %}
+                <td>{{ item.cacheHit ? '<span class="label status-success">Yes</span>' : 'No' }}</td>
+                <td>{{ item.cacheAge }}</td>
+                {% else %}
+                <td></td>
+                <td></td>
+                {% endif %}
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <div class="sf-tabs">
+        {% for item in collector.queries %}
+        <div class="tab">
+            <h3 class="tab-title">{{ item.name }}</h3>
+
+            <div class="tab-content">
+                <table>
+                    <tbody>
+                    <tr>
+                        <th scope="row">Base URI</th>
+                        <td><pre class="sf-dump">{{ item.baseUri }}</pre></td>
+                    </tr>
+
+                    {% if item.type == 'GraphQL' %}
+                    <tr>
+                        <th scope="row">GraphQL</th>
+                        <td><pre class="sf-dump">{{ item.graphql }}</pre></td>
+                    </tr>
+                    {% else %}
+                    <tr>
+                        <th scope="row">URI</th>
+                        <td><pre class="sf-dump">{{ item.uri }}</pre></td>
+                    </tr>
+                    {% endif %}
+
+                    <tr>
+                        <th scope="row">HTTP options</th>
+                        <td>{{ dump(item.httpOptions) }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">HTTP request headers</th>
+                        <td>{{ dump(item.httpHeaders) }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">HTTP status code</th>
+                        <td><pre class="sf-dump">{# item.httpStatusCode #}</pre></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">HTTP response headers</th>
+                        <td>{{ dump(item.responseHeaders) }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Response data</th>
+                        <td>{{ dump(item.responseData) }}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    {% endif %}
+
+    <h3>Site data for locale: {{ collector.locale }}</h3>
+
+    {% if  collector.localeData is empty %}
+        <div class="empty">
+            <p>No locale data is setup.</p>
+        </div>
+    {% else %}
+
+        <table>
+            <thead>
+            <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Value</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for key, value in collector.localeData %}
+                <tr>
+                    <th scope="row">{{ key }}</th>
+                    <td>{{ dump(value) }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+    {% endif %}
+
+{% endblock %}

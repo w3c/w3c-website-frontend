@@ -31,9 +31,7 @@ class Filters extends GraphQLQuery
     {
         $this->setGraphQLFromFile(__DIR__ . '/../graphql/blog/filters.graphql')
             ->addVariable('siteId', $siteId)
-            ->enableCache($cacheLifetime)
-
-            //->setCacheTags($uri)
+            ->cache($cacheLifetime)
         ;
     }
 }

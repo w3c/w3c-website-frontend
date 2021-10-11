@@ -29,7 +29,7 @@ class Categories extends GraphQLQuery
              ->addVariable('siteId', $siteId)
              ->addVariable('handle', $handle)
              ->setRootPropertyPath('[categories]')
-             ->enableCache($cacheLifetime)//->setCacheTags($uri)
+             ->cache($cacheLifetime)
         ;
     }
 }

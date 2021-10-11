@@ -45,9 +45,8 @@ class Page extends GraphQLQuery
             // Set site ID to retrieve navigation for
             ->addVariable('siteId', $siteId)
 
-            // Cache page response
-            ->enableCache($cacheLifetime)
-            //->setCacheTags($uri)
+            // Caching
+            ->doNotCache()
         ;
     }
 

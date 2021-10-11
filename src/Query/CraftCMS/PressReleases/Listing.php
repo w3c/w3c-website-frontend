@@ -50,8 +50,7 @@ class Listing extends GraphQLQuery
             ->addVariable('after', $after)
             ->addVariable('limit', $limit)
             ->addVariable('offset', ($page - 1) * $limit)
-            ->enableCache($cacheLifetime)
-            //->setCacheTags($uri)
+            ->cache($cacheLifetime)
         ;
     }
 }

@@ -6,6 +6,8 @@
 parameters:
     app.app_url: '%env(resolve:APP_URL)%'
     app.craftcms_api_publish_token: '%env(resolve:CRAFTCMS_API_PUBLISH_TOKEN)%'
+    app.cacheEnable: '%env(default:app.cacheDefault:CACHE_ENABLE)%'
+    app.cacheDefault: true
 
 services:
     # default configuration for services in *this* file
@@ -13,8 +15,8 @@ services:
         autowire: true      # Automatically injects dependencies in your services.
         autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
 
-    Strata\Symfony\TwigExtension:
-        tags: [ 'twig.extension' ]
+#    Strata\Symfony\TwigExtension:
+#        tags: [ 'twig.extension' ]
 
     # makes classes in src/ available to be used as services
     # this creates a service per class whose id is the fully-qualified class name
@@ -25,6 +27,7 @@ services:
             - '../src/Entity/'
             - '../src/Kernel.php'
             - '../src/Tests/'
+            - '../src/Service/StrataDataCollector.php'
 
     # controllers are imported separately to make sure services can be injected
     # as action arguments even if you don't extend any base controller class
@@ -48,14 +51,11 @@ services:
             $apiKey: '%env(resolve:CRAFTCMS_API_READ_TOKEN)%'
 
     # Query manager to retrieve data from APIs
-    Strata\Data\Query\QueryManager:
-            configurator: [ '@App\Service\QueryManagerConfigurator', 'configure' ]
+    strata.query_manager:
+        class: Strata\Data\Query\QueryManager
+        configurator: [ '@App\Service\QueryManagerConfigurator', 'configure' ]
 
     # Site object
-    Strata\Frontend\Site:
+    strata.site:
+        class: Strata\Frontend\Site
         configurator: [ '@App\Service\SiteConfigurator', 'configure' ]
-
-    # CMS preview mode
-    Strata\Symfony\EventSubscriber\PreviewMode:
-        arguments:
-            $dataProvider: 'craft'

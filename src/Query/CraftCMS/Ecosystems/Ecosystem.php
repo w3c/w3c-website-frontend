@@ -39,8 +39,7 @@ class Ecosystem extends GraphQLQuery
             ->setRootPropertyPath('[entry]')
             ->addVariable('uri', $uri)
             ->addVariable('siteId', $siteId)
-            ->enableCache($cacheLifetime)
-            //->setCacheTags($uri)
+            ->cache($cacheLifetime)
         ;
     }
 

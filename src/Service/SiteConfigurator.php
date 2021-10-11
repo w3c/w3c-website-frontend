@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Service;
 
 use Strata\Frontend\Site;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
@@ -35,7 +36,7 @@ class SiteConfigurator
     {
         // Setup locales
         // @todo replace hardcoded labels with translations
-        $site->addLocale('en', [
+        $site->addDefaultLocale('en', [
             'siteId' => 1,
             'siteLink' =>  [
                 'label' => 'English homepage',
@@ -64,6 +65,10 @@ class SiteConfigurator
         $site->addLocaleRtl('ar', ['siteId' => 9]);
 
         // Set current locale
-        $site->setLocale($this->requestStack->getCurrentRequest()->getLocale());
+        $request = $this->requestStack->getCurrentRequest();
+        if ($request instanceof Request) {
+            $site->setLocale($request->getLocale());
+        }
     }
+
 }

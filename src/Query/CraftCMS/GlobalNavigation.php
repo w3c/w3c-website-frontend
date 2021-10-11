@@ -38,8 +38,8 @@ class GlobalNavigation extends GraphQLQuery
             ->addVariable('limit', $limit)
 
             // Cache navigation response
-            ->enableCache($cacheLifetime)
-            //->setCacheTags(['global'])
+            ->cache($cacheLifetime)
+            ->cacheTags(['global'])
         ;
     }
 
