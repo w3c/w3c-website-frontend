@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace App\Query\CraftCMS\Blog;
 
 use App\Service\CraftCMS;
-use Strata\Data\Query\GraphQLQuery;
+use Strata\Data\Query\GraphQLMutation;
 
-class CreateComment extends GraphQLQuery
+class CreateComment extends GraphQLMutation
 {
 
     public function getRequiredDataProviderClass(): string
