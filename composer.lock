@@ -1614,12 +1614,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/strata/data.git",
-                "reference": "c29b53698b611034761542233f24cb69a40c4c39"
+                "reference": "758aead22b5ce32c7aa8b58667f807ca238da400"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/strata/data/zipball/c29b53698b611034761542233f24cb69a40c4c39",
-                "reference": "c29b53698b611034761542233f24cb69a40c4c39",
+                "url": "https://api.github.com/repos/strata/data/zipball/758aead22b5ce32c7aa8b58667f807ca238da400",
+                "reference": "758aead22b5ce32c7aa8b58667f807ca238da400",
                 "shasum": ""
             },
             "require": {
@@ -1668,7 +1668,7 @@
                 "issues": "https://github.com/strata/data/issues",
                 "source": "https://github.com/strata/data/tree/release/0.8.0"
             },
-            "time": "2021-10-02T21:53:34+00:00"
+            "time": "2021-10-11T09:16:39+00:00"
         },
         {
             "name": "strata/frontend",
@@ -1743,12 +1743,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/strata/symfony-frontend.git",
-                "reference": "4c864b7e98b6aa43a3d375b2fa904a4c35f23fcf"
+                "reference": "7f93412666582fbd5ea25cb6d21a68b424f5bdd7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/strata/symfony-frontend/zipball/4c864b7e98b6aa43a3d375b2fa904a4c35f23fcf",
-                "reference": "4c864b7e98b6aa43a3d375b2fa904a4c35f23fcf",
+                "url": "https://api.github.com/repos/strata/symfony-frontend/zipball/7f93412666582fbd5ea25cb6d21a68b424f5bdd7",
+                "reference": "7f93412666582fbd5ea25cb6d21a68b424f5bdd7",
                 "shasum": ""
             },
             "require": {
@@ -1760,25 +1760,31 @@
             },
             "require-dev": {
                 "overtrue/phplint": "^2.3",
-                "phpunit/phpunit": "^9.5",
-                "squizlabs/php_codesniffer": "^3.5"
+                "squizlabs/php_codesniffer": "^3.5",
+                "symfony/phpunit-bridge": "^5.3"
             },
-            "type": "library",
+            "type": "symfony-bundle",
             "autoload": {
                 "psr-4": {
-                    "Strata\\Symfony\\": "src/"
+                    "Strata\\SymfonyBundle\\": "src/"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
+            "authors": [
+                {
+                    "name": "Simon R Jones",
+                    "email": "simon@studio24.net"
+                }
+            ],
             "description": "TODO",
             "support": {
                 "issues": "https://github.com/strata/symfony-frontend/issues",
                 "source": "https://github.com/strata/symfony-frontend/tree/release/0.8.0"
             },
-            "time": "2021-10-05T16:37:46+00:00"
+            "time": "2021-10-11T07:41:37+00:00"
         },
         {
             "name": "symfony/asset",
@@ -9441,16 +9447,16 @@
         },
         {
             "name": "squizlabs/php_codesniffer",
-            "version": "3.6.0",
+            "version": "3.6.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/squizlabs/PHP_CodeSniffer.git",
-                "reference": "ffced0d2c8fa8e6cdc4d695a743271fab6c38625"
+                "reference": "f268ca40d54617c6e06757f83f699775c9b3ff2e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/squizlabs/PHP_CodeSniffer/zipball/ffced0d2c8fa8e6cdc4d695a743271fab6c38625",
-                "reference": "ffced0d2c8fa8e6cdc4d695a743271fab6c38625",
+                "url": "https://api.github.com/repos/squizlabs/PHP_CodeSniffer/zipball/f268ca40d54617c6e06757f83f699775c9b3ff2e",
+                "reference": "f268ca40d54617c6e06757f83f699775c9b3ff2e",
                 "shasum": ""
             },
             "require": {
@@ -9493,7 +9499,7 @@
                 "source": "https://github.com/squizlabs/PHP_CodeSniffer",
                 "wiki": "https://github.com/squizlabs/PHP_CodeSniffer/wiki"
             },
-            "time": "2021-04-09T00:54:41+00:00"
+            "time": "2021-10-11T04:00:11+00:00"
         },
         {
             "name": "studio24/deployer-recipes",
@@ -10254,5 +10260,5 @@
     "platform-overrides": {
         "php": "7.4"
     },
-    "plugin-api-version": "2.1.0"
+    "plugin-api-version": "2.0.0"
 }
