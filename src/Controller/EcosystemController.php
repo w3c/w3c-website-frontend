@@ -47,11 +47,11 @@ class EcosystemController extends AbstractController
 
         $page['seo']['expiry'] = $page['expiryDate'];
         $page['groups'] = $groups;
+        $page['testimonials'] = $testimonials;
         $page['members'] = $members;
         $page['evangelists'] = $evangelists;
 
         $singlesBreadcrumbs = $manager->get('singles-breadcrumbs');
-        dump($singlesBreadcrumbs);
         $page['breadcrumbs'] = [
             'title'  => $page['title'],
             'uri'    => $page['uri'],
@@ -63,10 +63,7 @@ class EcosystemController extends AbstractController
         ];
 
         dump($page);
-        dump($testimonials);
-        dump($evangelists);
-        dump($groups);
-        dump($members);
+        dump($site);
 
         return $this->render('ecosystems/show.html.twig', [
             'site'       => $site,

@@ -6,6 +6,7 @@ namespace App\Query\CraftCMS\Ecosystems;
 
 use App\Service\CraftCMS;
 use Strata\Data\Cache\CacheLifetime;
+use Strata\Data\Mapper\WildcardMappingStrategy;
 use Strata\Data\Query\GraphQLQuery;
 
 class Testimonials extends GraphQLQuery
@@ -27,5 +28,13 @@ class Testimonials extends GraphQLQuery
 //            ->enableCache($cacheLifetime)
             //->setCacheTags($uri)
         ;
+    }
+
+    public function getMapping()
+    {
+        $mapping = new WildcardMappingStrategy();
+        $mapping->addMapping('logo', ['[logo]' => '[logo][0][url]']);
+
+        return $mapping;
     }
 }
