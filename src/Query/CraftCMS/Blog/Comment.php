@@ -21,7 +21,7 @@ class Comment extends GraphQLQuery
         $this->setGraphQLFromFile(__DIR__ . '/../graphql/blog/comment.graphql')
             ->setRootPropertyPath('[comment]')
             ->addVariable('id', '' . $id)
-            ->enableCache($cacheLifetime)
+//            ->enableCache($cacheLifetime)
         ;
     }
 }

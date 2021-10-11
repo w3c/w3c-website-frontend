@@ -24,7 +24,7 @@ class Testimonials extends GraphQLQuery
             ->setRootPropertyPath('[entries]')
 
             ->addVariable('ecosystemId', $ecosystemId)
-            ->enableCache($cacheLifetime)
+//            ->enableCache($cacheLifetime)
             //->setCacheTags($uri)
         ;
     }

@@ -17,7 +17,7 @@ class Healthcheck extends Query
     public function __construct()
     {
         $this->setUri('healthcheck')
-            ->disableCache()
+//            ->disableCache()
         ;
     }
 
