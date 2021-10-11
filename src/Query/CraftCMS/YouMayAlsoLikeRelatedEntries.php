@@ -28,8 +28,8 @@ class YouMayAlsoLikeRelatedEntries extends GraphQLQuery
      */
     public function __construct(int $siteId, string $uri, int $cacheLifetime = CacheLifetime::HOUR)
     {
-        parent::__construct(__DIR__ . '/graphql/youMayAlsoLikeRelatedEntries.graphql');
         $this
+            ->setGraphQLFromFile(__DIR__ . '/graphql/youMayAlsoLikeRelatedEntries.graphql')
             ->addFragmentFromFile(__DIR__. '/graphql/fragments/thumbnailImage.graphql')
             ->setRootPropertyPath('[entry]')
 
@@ -40,8 +40,7 @@ class YouMayAlsoLikeRelatedEntries extends GraphQLQuery
             ->addVariable('siteId', $siteId)
 
             // Cache page response
-            ->enableCache($cacheLifetime)
-            //->setCacheTags(['global'])
+            ->cache($cacheLifetime)
         ;
     }
 

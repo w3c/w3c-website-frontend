@@ -6,9 +6,12 @@ namespace App\Service;
 
 use App\Query\CraftCMS\GlobalNavigation;
 use App\Query\CraftCMS\SinglesBreadcrumbs;
+use Psr\Cache\CacheItemPoolInterface;
+use Psr\EventDispatcher\EventDispatcherInterface;
 use Strata\Data\Query\QueryManager;
 use Strata\Frontend\Site;
 use Symfony\Component\Cache\Adapter\FilesystemTagAwareAdapter;
+use Symfony\Component\DependencyInjection\ParameterBag\ContainerBagInterface;
 
 /**
  * Configure the QueryManager service
@@ -23,12 +26,23 @@ class QueryManagerConfigurator
     private W3C $w3CApi;
     private CraftCMS $craftCmsApi;
     private Site $site;
+    private EventDispatcherInterface $eventDispatcher;
+    private CacheItemPoolInterface $cache;
+    private bool $enableCache;
 
-    public function __construct(W3C $w3cApi, CraftCMS $craftCmsApi, Site $site)
+    public function __construct(
+        W3C $w3cApi,
+        CraftCMS $craftCmsApi,
+        Site $site, EventDispatcherInterface $eventDispatcher,
+        CacheItemPoolInterface $cache,
+        ContainerBagInterface $params)
     {
         $this->w3CApi = $w3cApi;
         $this->craftCmsApi = $craftCmsApi;
         $this->site = $site;
+        $this->eventDispatcher = $eventDispatcher;
+        $this->cache = $cache;
+        $this->enableCache = (bool) $params->get('app.cacheEnable');
     }
 
     /**
@@ -41,11 +55,17 @@ class QueryManagerConfigurator
         $manager->addDataProvider('craft', $this->craftCmsApi);
         $manager->addDataProvider('w3c', $this->w3CApi);
 
-        // Set cache, but disable it initially.
-        // To use, use $manager->enableCache($lifetime) for all queries or $query->enableCache($lifetime) for individual queries
-        $cache = new FilesystemTagAwareAdapter('cache', 0, __DIR__ . '/../../var/cache/');
-        $manager->setCache($cache);
-        $manager->disableCache();
+        // Event dispatcher
+        $manager->getDataProvider('craft')->setEventDispatcher($this->eventDispatcher);
+
+        // Set cache
+        $manager->setCache($this->cache);
+
+        if (!$this->enableCache) {
+            $manager->disableCache();
+        }
+
+        // Please note queries added here are not affected by preview mode disabling the cache
 
         // Add global navigation
         $manager->add('navigation', new GlobalNavigation($this->site->siteId));

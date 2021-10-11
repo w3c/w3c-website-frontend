@@ -2,7 +2,8 @@
 
 namespace App\Controller;
 
-use App\Query\CraftCMS\Ecosystem as CraftEcosystem;
+use App\Query\CraftCMS\Ecosystems\Ecosystem as CraftEcosystem;
+use App\Query\CraftCMS\Ecosystems\Testimonials;
 use App\Query\W3C\Ecosystem\Evangelists;
 use App\Query\W3C\Ecosystem\Groups;
 use App\Query\W3C\Ecosystem\Members;
@@ -34,13 +35,15 @@ class EcosystemController extends AbstractController
         $manager->add('page', new CraftEcosystem($site->siteId, 'ecosystems/' . $slug));
         $page = $manager->get('page');
 
+        $manager->add('testimonials', new Testimonials($page['taxonomy-id']));
         $manager->add('evangelists', new Evangelists($page['taxonomy-slug']));
         $manager->add('groups', new Groups($page['taxonomy-slug']));
         $manager->add('members', new Members($page['taxonomy-slug']));
 
-        $evangelists = $manager->getCollection('evangelists');
-        $groups      = $manager->getCollection('groups');
-        $members     = $manager->getCollection('members');
+        $testimonials = $manager->getCollection('testimonials');
+        $evangelists  = $manager->getCollection('evangelists');
+        $groups       = $manager->getCollection('groups');
+        $members      = $manager->getCollection('members');
 
         $page['seo']['expiry'] = $page['expiryDate'];
         $page['groups'] = $groups;
@@ -60,6 +63,7 @@ class EcosystemController extends AbstractController
         ];
 
         dump($page);
+        dump($testimonials);
         dump($evangelists);
         dump($groups);
         dump($members);

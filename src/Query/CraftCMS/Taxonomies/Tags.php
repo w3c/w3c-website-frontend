@@ -29,7 +29,7 @@ class Tags extends GraphQLQuery
              ->addVariable('siteId', $siteId)
              ->addVariable('handle', $handle)
              ->setRootPropertyPath('[tags]')
-             ->enableCache($cacheLifetime)//->setCacheTags($uri)
+             ->cache($cacheLifetime)
         ;
     }
 }

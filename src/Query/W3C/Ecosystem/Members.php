@@ -19,7 +19,7 @@ class Members extends Query
             ->setCurrentPage('[page]')
             ->setTotalResults('[total]')
             ->setResultsPerPage('[limit]')
-            ->disableCache()
+//            ->disableCache()
         ;
     }
 

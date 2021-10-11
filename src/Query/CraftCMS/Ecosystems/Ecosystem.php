@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Query\CraftCMS;
+namespace App\Query\CraftCMS\Ecosystems;
 
 use App\Service\CraftCMS;
 use Strata\Data\Cache\CacheLifetime;
@@ -30,17 +30,16 @@ class Ecosystem extends GraphQLQuery
      */
     public function __construct(int $siteId, string $uri, int $cacheLifetime = CacheLifetime::HOUR)
     {
-        $this->setGraphQLFromFile(__DIR__ . '/graphql/ecosystem.graphql')
-            ->addFragmentFromFile(__DIR__ . '/graphql/fragments/ecosystemsFlexibleComponents.graphql')
-            ->addFragmentFromFile(__DIR__ . '/graphql/fragments/ecosystemsBottomFlexibleComponents.graphql')
-            ->addFragmentFromFile(__DIR__ . '/graphql/fragments/contentImage.graphql')
-            ->addFragmentFromFile(__DIR__ . '/graphql/fragments/seoData.graphql')
-            ->addFragmentFromFile(__DIR__ . '/graphql/fragments/breadcrumbs.graphql')
+        $this->setGraphQLFromFile(__DIR__ . '/../graphql/ecosystems/ecosystem.graphql')
+            ->addFragmentFromFile(__DIR__ . '/../graphql/fragments/ecosystemsFlexibleComponents.graphql')
+            ->addFragmentFromFile(__DIR__ . '/../graphql/fragments/ecosystemsBottomFlexibleComponents.graphql')
+            ->addFragmentFromFile(__DIR__ . '/../graphql/fragments/contentImage.graphql')
+            ->addFragmentFromFile(__DIR__ . '/../graphql/fragments/seoData.graphql')
+            ->addFragmentFromFile(__DIR__ . '/../graphql/fragments/breadcrumbs.graphql')
             ->setRootPropertyPath('[entry]')
             ->addVariable('uri', $uri)
             ->addVariable('siteId', $siteId)
-            ->enableCache($cacheLifetime)
-            //->setCacheTags($uri)
+            ->cache($cacheLifetime)
         ;
     }
 
@@ -49,6 +48,7 @@ class Ecosystem extends GraphQLQuery
         $mapping = new WildcardMappingStrategy();
         $mapping->addMapping('heroIllustration', ['[heroIllustration]' => '[heroIllustration][0]']);
         $mapping->addMapping('ecosystem', ['[taxonomy-slug]' => '[ecosystem][0][slug]']);
+        $mapping->addMapping('ecosystem', ['[taxonomy-id]' => '[ecosystem][0][id]']);
 
         return $mapping;
     }

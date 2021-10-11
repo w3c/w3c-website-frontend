@@ -11,4 +11,5 @@ return [
     Symfony\Bundle\SecurityBundle\SecurityBundle::class => ['all' => true],
     Twig\Extra\TwigExtraBundle\TwigExtraBundle::class => ['all' => true],
     W3C\WebsiteTemplatesBundle\W3CWebsiteTemplatesBundle::class => ['all' => true],
+    Strata\SymfonyBundle\StrataBundle::class => ['all' => true],
 ];

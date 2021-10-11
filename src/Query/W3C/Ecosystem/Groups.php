@@ -21,8 +21,8 @@ class Groups extends Query
              ->setRootPropertyPath('[_embedded][groups]')
              ->setCurrentPage('[page]')
              ->setTotalResults('[total]')
-             ->setResultsPerPage('[limit]')
-             ->disableCache();
+             ->setResultsPerPage('[limit]');
+//             ->disableCache();
     }
 
     public function getRequiredDataProviderClass(): string

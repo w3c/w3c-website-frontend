@@ -1,0 +1,3 @@
+strata:
+    preview_mode:
+        data_provider: 'craft'

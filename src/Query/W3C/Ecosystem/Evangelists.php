@@ -20,8 +20,8 @@ class Evangelists extends Query
             ->setRootPropertyPath('[_embedded][evangelists]')
             ->setCurrentPage('[page]')
             ->setTotalResults('[total]')
-            ->setResultsPerPage('[limit]')
-            ->disableCache();
+            ->setResultsPerPage('[limit]');
+//            ->disableCache();
         ;
     }
 
