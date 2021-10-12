@@ -17,26 +17,26 @@ class CommentType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+            ->add('comment', TextareaType::class, [
+                'label'       => 'blog.comments.form.comment.label',
+                'help'        => 'blog.comments.form.comment.help',
+                'constraints' => [new NotBlank(['message' => 'blog.comments.form.comment.blank'])],
+            ])
             ->add('name', TextType::class, [
-                'label'              => 'blog.comments.form.name.label',
-                'constraints'        => [new NotBlank(['message' => 'blog.comments.form.name.blank'])],
+                'label'       => 'blog.comments.form.name.label',
+                'constraints' => [new NotBlank(['message' => 'blog.comments.form.name.blank'])],
             ])
             ->add('email', EmailType::class, [
-                'label'              => 'blog.comments.form.email.label',
-                'constraints'        => [
-                    new NotBlank(['message' => 'blog.comments.form.email.blank']),
+                'label'       => 'blog.comments.form.email.label',
+                'required'    => false,
+                'constraints' => [
                     new Email(['message' => 'blog.comments.form.email.format'])
                 ],
-            ])
-            ->add('comment', TextareaType::class, [
-                'label'              => 'blog.comments.form.comment.label',
-                'help'               => 'blog.comments.form.comment.help',
-                'constraints'        => [new NotBlank(['message' => 'blog.comments.form.comment.blank'])],
             ])
             ->add('post', HiddenType::class, [
                 'constraints' => [new NotBlank(['message' => 'blog.comments.form.post.blank'])]
             ])
-            ->add('parent', HiddenType::class, ['required'    => false]);
+            ->add('parent', HiddenType::class, ['required' => false]);
     }
 
     public function getBlockPrefix()
