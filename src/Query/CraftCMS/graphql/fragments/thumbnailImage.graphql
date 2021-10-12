@@ -1,4 +1,4 @@
 fragment thumbnailImage on AssetInterface {
-    src: url
+    src: url(width: 920)
     srcset(sizes: ["360", "580", "700", "920", "1520"])
 }
