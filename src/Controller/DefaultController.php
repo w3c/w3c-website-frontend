@@ -85,7 +85,10 @@ class DefaultController extends AbstractController
             'page' => $page,
             'crosslinks' => $crosslinks
         );
-        dump($twig_variables);
+
+        if ($this->getParameter('kernel.environment') == 'dev') {
+            dump($twig_variables);
+        }
 
         $template = 'pages/default.html.twig';
         if ($page['typeHandle'] === 'landingPage' || $page['typeHandle'] === 'ecosystemsLandingPage') {

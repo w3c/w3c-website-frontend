@@ -334,6 +334,7 @@ class BlogController extends AbstractController
             // @todo switch to publishing schema before running this query
             $manager->getDataProvider('craft')->setAuthorization($this->getParameter('app.craftcms_api_publish_token'));
             $response = $manager->get('create-comment');
+
             dump($response);
 
             $this->addFlash('success', 'blog.comments.form.success');
