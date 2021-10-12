@@ -18,7 +18,7 @@ class CreateComment extends GraphQLMutation
     public function __construct(
         int $id,
         string $name,
-        string $email,
+        ?string $email,
         string $comment,
         ?int $parentId = null
     ) {
