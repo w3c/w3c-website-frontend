@@ -335,7 +335,9 @@ class BlogController extends AbstractController
             $manager->getDataProvider('craft')->setAuthorization($this->getParameter('app.craftcms_api_publish_token'));
             $response = $manager->get('create-comment');
 
-            dump($response);
+            if ($this->getParameter('kernel.environment')) {
+                dump($response);
+            }
 
             $this->addFlash('success', 'blog.comments.form.success');
 
@@ -360,7 +362,9 @@ class BlogController extends AbstractController
 
         $topLevelComms = $this->buildComments($comments);
 
-        dump($topLevelComms);
+        if ($this->getParameter('kernel.environment')) {
+            dump($topLevelComms);
+        }
 
         $page['seo']['expiry'] = $page['expiryDate'];
         $page['breadcrumbs'] = [
@@ -377,10 +381,12 @@ class BlogController extends AbstractController
             ]
         ];
 
-        dump($page);
-        dump($crosslinks);
-        dump($singlesBreadcrumbs);
-        dump($comments);
+        if ($this->getParameter('kernel.environment')) {
+            dump($page);
+            dump($crosslinks);
+            dump($singlesBreadcrumbs);
+            dump($comments);
+        }
 
         // @todo use blog post template
         return $this->render('blog/show.html.twig', [
@@ -435,11 +441,13 @@ class BlogController extends AbstractController
 
         $page['seo']['expiry'] = $page['expiryDate'];
 
-        dump($archives);
-        dump($page);
-        dump($collection);
-        dump($pagination);
-        dump($categories);
+        if ($this->getParameter('kernel.environment')) {
+            dump($archives);
+            dump($page);
+            dump($collection);
+            dump($pagination);
+            dump($categories);
+        }
 
         return [$page, $collection, $categories, $archives];
     }

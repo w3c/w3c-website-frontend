@@ -178,9 +178,11 @@ class NewsController extends AbstractController
             ]
         ];
 
-        dump($page);
-        dump($crosslinks);
-        dump($singlesBreadcrumbs);
+        if ($this->getParameter('kernel.environment')) {
+            dump($page);
+            dump($crosslinks);
+            dump($singlesBreadcrumbs);
+        }
 
         // @todo use news article template
         return $this->render('news/show.html.twig', [
@@ -226,10 +228,12 @@ class NewsController extends AbstractController
 
         $page['seo']['expiry'] = $page['expiryDate'];
 
-        dump($archives);
-        dump($page);
-        dump($collection);
-        dump($pagination);
+        if ($this->getParameter('kernel.environment')) {
+            dump($archives);
+            dump($page);
+            dump($collection);
+            dump($pagination);
+        }
 
         return [$page, $collection, $archives];
     }

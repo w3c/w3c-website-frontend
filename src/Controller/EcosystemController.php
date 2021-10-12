@@ -48,7 +48,7 @@ class EcosystemController extends AbstractController
         $page['seo']['expiry'] = $page['expiryDate'];
 
         $singlesBreadcrumbs = $manager->get('singles-breadcrumbs');
-        dump($singlesBreadcrumbs);
+
         $page['breadcrumbs'] = [
             'title'  => $page['title'],
             'uri'    => $page['uri'],
@@ -59,11 +59,14 @@ class EcosystemController extends AbstractController
             ]
         ];
 
-        dump($page);
-        dump($testimonials);
-        dump($evangelists);
-        dump($groups);
-        dump($members);
+        if ($this->getParameter('kernel.environment')) {
+            dump($singlesBreadcrumbs);
+            dump($page);
+            dump($testimonials);
+            dump($evangelists);
+            dump($groups);
+            dump($members);
+        }
 
         return $this->render('ecosystems/show.html.twig', [
             'site'       => $site,

@@ -180,9 +180,11 @@ class PressReleasesController extends AbstractController
             ]
         ];
 
-        dump($page);
-        dump($crosslinks);
-        dump($singlesBreadcrumbs);
+        if ($this->getParameter('kernel.environment')) {
+            dump($page);
+            dump($crosslinks);
+            dump($singlesBreadcrumbs);
+        }
 
         return $this->render('press-releases/show.html.twig', [
             'site'       => $site,
@@ -227,10 +229,12 @@ class PressReleasesController extends AbstractController
 
         $page['seo']['expiry'] = $page['expiryDate'];
 
-        dump($archives);
-        dump($page);
-        dump($collection);
-        dump($pagination);
+        if ($this->getParameter('kernel.environment')) {
+            dump($archives);
+            dump($page);
+            dump($collection);
+            dump($pagination);
+        }
 
         return [$page, $collection, $archives];
     }
