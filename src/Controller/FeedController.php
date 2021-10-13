@@ -319,11 +319,15 @@ class FeedController extends AbstractController
         $entry = $feed->createEntry();
         $entry->setTitle($post['title']);
         $entry->setLink($url);
-        foreach ($post['authors'] as $author) {
-            $entry->addAuthor([
-                'name'  => $author['name'],
-                'email' => $author['email']
-            ]);
+
+        $authors = implode(
+            ', ',
+            array_map(function ($e) {
+                return $e['name'];
+            }, $post['authors'])
+        );
+        if ($authors) {
+            $entry->addAuthor(['name'  => $authors]);
         }
         //$entry->setDateModified(time());
         $entry->setDateCreated($date);
