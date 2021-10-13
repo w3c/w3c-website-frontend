@@ -40,6 +40,21 @@ query RecentActivities($ecosystemId: [QueryArgument], $endDatetime: [QueryArgume
                 slug
                 title
             }
+            excerpt
+            thumbnailImage {
+                ...thumbnailImage
+            }
+            thumbnailAltText
+        }
+        ... on events_external_Entry {
+            start: startDatetime
+            end: endDatetime
+            uri: urlLink
+            excerpt
+            thumbnailImage {
+                ...thumbnailImage
+            }
+            thumbnailAltText
         }
     }
 }
