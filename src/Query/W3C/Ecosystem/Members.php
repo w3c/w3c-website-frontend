@@ -32,7 +32,8 @@ class Members extends Query
     public function getMapping(): array
     {
         return [
-            '[name]'        => '[name]'
+            '[name]'        => '[name]',
+            '[logo]'      => '[_links][logo][href]'
         ];
     }
 }

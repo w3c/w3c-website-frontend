@@ -55,7 +55,7 @@ class EcosystemController extends AbstractController
         $page['seo']['expiry'] = $page['expiryDate'];
         $page['groups'] = $groups;
         $page['testimonials'] = $testimonials;
-        $page['members'] = $members;
+        $page['members'] = $members->getCollection();
         $page['evangelists'] = $evangelists;
 
         $singlesBreadcrumbs = $manager->get('singles-breadcrumbs');
