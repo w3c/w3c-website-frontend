@@ -322,17 +322,15 @@ class BlogController extends AbstractController
 
             $manager->add(
                 'create-comment',
-                new CreateComment(
+                (new CreateComment(
                     $newComment['post'],
                     $newComment['name'],
                     $newComment['email'],
                     $newComment['comment'],
                     $newComment['parent']
-                )
+                ))->setOptions(['auth_bearer' => $this->getParameter('app.craftcms_api_publish_token')])
             );
 
-            // @todo switch to publishing schema before running this query
-            $manager->getDataProvider('craft')->setAuthorization($this->getParameter('app.craftcms_api_publish_token'));
             $response = $manager->get('create-comment');
 
             if ($this->getParameter('kernel.environment')) {
