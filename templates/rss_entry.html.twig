@@ -26,10 +26,6 @@
             'caption': component.videoCaption is defined ? component.videoCaption : null,
             'transcript': component.linkToVideoTranscript is defined ? component.linkToVideoTranscript : null
         } %}
-            {% block video_iframe %}
-                <iframe loading="lazy" title="{{ component.videoTitle }}" src="{{ component.videoUrl.url }}"
-                        allowfullscreen="allowfullscreen" width="560" height="315" style="border: 0"></iframe>
-            {% endblock %}
         {% endembed %}
     {% endif %}
 {% endfor %}
