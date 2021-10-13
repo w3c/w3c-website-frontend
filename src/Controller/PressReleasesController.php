@@ -180,7 +180,7 @@ class PressReleasesController extends AbstractController
             ]
         ];
 
-        if ($this->getParameter('kernel.environment')) {
+        if ($this->getParameter('kernel.environment') == 'dev') {
             dump($page);
             dump($crosslinks);
             dump($singlesBreadcrumbs);
@@ -229,7 +229,7 @@ class PressReleasesController extends AbstractController
 
         $page['seo']['expiry'] = $page['expiryDate'];
 
-        if ($this->getParameter('kernel.environment')) {
+        if ($this->getParameter('kernel.environment') == 'dev') {
             dump($archives);
             dump($page);
             dump($collection);

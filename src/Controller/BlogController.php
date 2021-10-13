@@ -335,7 +335,7 @@ class BlogController extends AbstractController
             $manager->getDataProvider('craft')->setAuthorization($this->getParameter('app.craftcms_api_publish_token'));
             $response = $manager->get('create-comment');
 
-            if ($this->getParameter('kernel.environment')) {
+            if ($this->getParameter('kernel.environment') == 'dev') {
                 dump($response);
             }
 
@@ -362,7 +362,7 @@ class BlogController extends AbstractController
 
         $topLevelComms = $this->buildComments($comments);
 
-        if ($this->getParameter('kernel.environment')) {
+        if ($this->getParameter('kernel.environment') == 'dev') {
             dump($topLevelComms);
         }
 
@@ -381,7 +381,7 @@ class BlogController extends AbstractController
             ]
         ];
 
-        if ($this->getParameter('kernel.environment')) {
+        if ($this->getParameter('kernel.environment') == 'dev') {
             dump($page);
             dump($crosslinks);
             dump($singlesBreadcrumbs);
@@ -441,7 +441,7 @@ class BlogController extends AbstractController
 
         $page['seo']['expiry'] = $page['expiryDate'];
 
-        if ($this->getParameter('kernel.environment')) {
+        if ($this->getParameter('kernel.environment') == 'dev') {
             dump($archives);
             dump($page);
             dump($collection);

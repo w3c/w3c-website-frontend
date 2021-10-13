@@ -66,7 +66,7 @@ class EcosystemController extends AbstractController
             ]
         ];
 
-        if ($this->getParameter('kernel.environment')) {
+        if ($this->getParameter('kernel.environment') == 'dev') {
             dump($singlesBreadcrumbs);
             dump($recentActivities);
             dump($page);
