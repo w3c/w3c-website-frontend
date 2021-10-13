@@ -1,0 +1,5 @@
+query comments($owners: [QueryArgument]) {
+    comments(ownerId: $owners) {
+        ownerId
+    }
+}

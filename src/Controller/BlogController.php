@@ -141,7 +141,7 @@ class BlogController extends AbstractController
     }
 
     /**
-     * @Route("/category/{slug}", requirements={"category": ".+"})
+     * @Route("/category/{slug}", requirements={"slug": "[^/]+"})
      *
      * @param QueryManager $manager
      * @param string       $slug
@@ -213,7 +213,7 @@ class BlogController extends AbstractController
     }
 
     /**
-     * @Route("/tag/{slug}", requirements={"tag": ".+"})
+     * @Route("/tag/{slug}", requirements={"tag": "[^/]+"})
      *
      * @param QueryManager $manager
      * @param string       $slug
@@ -484,5 +484,5 @@ class BlogController extends AbstractController
         }
 
         return $topLevelComms;
-}
+    }
 }
