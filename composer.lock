@@ -1614,12 +1614,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/strata/data.git",
-                "reference": "758aead22b5ce32c7aa8b58667f807ca238da400"
+                "reference": "2a0af5035528cdec34bb093b7ddba117291ab8ef"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/strata/data/zipball/758aead22b5ce32c7aa8b58667f807ca238da400",
-                "reference": "758aead22b5ce32c7aa8b58667f807ca238da400",
+                "url": "https://api.github.com/repos/strata/data/zipball/2a0af5035528cdec34bb093b7ddba117291ab8ef",
+                "reference": "2a0af5035528cdec34bb093b7ddba117291ab8ef",
                 "shasum": ""
             },
             "require": {
@@ -1668,7 +1668,7 @@
                 "issues": "https://github.com/strata/data/issues",
                 "source": "https://github.com/strata/data/tree/release/0.8.0"
             },
-            "time": "2021-10-11T09:16:39+00:00"
+            "time": "2021-10-12T19:47:59+00:00"
         },
         {
             "name": "strata/frontend",
@@ -1743,12 +1743,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/strata/symfony-frontend.git",
-                "reference": "7f93412666582fbd5ea25cb6d21a68b424f5bdd7"
+                "reference": "d351734ee3a89cb0296ae7475b5fed83d0835979"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/strata/symfony-frontend/zipball/7f93412666582fbd5ea25cb6d21a68b424f5bdd7",
-                "reference": "7f93412666582fbd5ea25cb6d21a68b424f5bdd7",
+                "url": "https://api.github.com/repos/strata/symfony-frontend/zipball/d351734ee3a89cb0296ae7475b5fed83d0835979",
+                "reference": "d351734ee3a89cb0296ae7475b5fed83d0835979",
                 "shasum": ""
             },
             "require": {
@@ -1784,7 +1784,7 @@
                 "issues": "https://github.com/strata/symfony-frontend/issues",
                 "source": "https://github.com/strata/symfony-frontend/tree/release/0.8.0"
             },
-            "time": "2021-10-11T07:41:37+00:00"
+            "time": "2021-10-12T17:56:41+00:00"
         },
         {
             "name": "symfony/asset",
