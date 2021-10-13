@@ -12,6 +12,7 @@ use Strata\Data\Query\QueryManager;
 use Strata\Frontend\Site;
 use Symfony\Component\Cache\Adapter\FilesystemTagAwareAdapter;
 use Symfony\Component\DependencyInjection\ParameterBag\ContainerBagInterface;
+use Symfony\Contracts\HttpClient\HttpClientInterface;
 
 /**
  * Configure the QueryManager service
@@ -29,20 +30,24 @@ class QueryManagerConfigurator
     private EventDispatcherInterface $eventDispatcher;
     private CacheItemPoolInterface $cache;
     private bool $enableCache;
+    private HttpClientInterface $httpClient;
 
     public function __construct(
         W3C $w3cApi,
         CraftCMS $craftCmsApi,
-        Site $site, EventDispatcherInterface $eventDispatcher,
+        Site $site,
+        EventDispatcherInterface $eventDispatcher,
         CacheItemPoolInterface $cache,
-        ContainerBagInterface $params)
-    {
+        ContainerBagInterface $params,
+        HttpClientInterface $httpClient
+    ) {
         $this->w3CApi = $w3cApi;
         $this->craftCmsApi = $craftCmsApi;
         $this->site = $site;
         $this->eventDispatcher = $eventDispatcher;
         $this->cache = $cache;
         $this->enableCache = (bool) $params->get('app.cacheEnable');
+        $this->httpClient = $httpClient;
     }
 
     /**
@@ -55,6 +60,9 @@ class QueryManagerConfigurator
         $manager->addDataProvider('craft', $this->craftCmsApi);
         $manager->addDataProvider('w3c', $this->w3CApi);
 
+        // Use Sf's HTTP client
+        $manager->setHttpClient($this->httpClient);
+        
         // Event dispatcher
         $manager->getDataProvider('craft')->setEventDispatcher($this->eventDispatcher);
 

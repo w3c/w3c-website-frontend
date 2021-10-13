@@ -1,0 +1,45 @@
+query RecentActivities($ecosystemId: [QueryArgument], $endDatetime: [QueryArgument]) {
+    recentEntries: entries(section: ["blogPosts", "newsArticles", "pressReleases"], ecosystems: $ecosystemId, limit: 3, orderBy: "postDate DESC") {
+        id
+        slug
+        sectionHandle
+        title
+        uri
+        url
+        year: postDate @formatDateTime(format: "Y")
+        ... on blogPosts_default_Entry {
+            excerpt
+            thumbnailImage {
+                ...thumbnailImage
+            }
+            thumbnailAltText
+        }
+        ... on newsArticles_default_Entry {
+            excerpt
+            thumbnailImage {
+                ...thumbnailImage
+            }
+            thumbnailAltText
+        }
+        ... on pressReleases_default_Entry {
+            excerpt
+            thumbnailImage {
+                ...thumbnailImage
+            }
+            thumbnailAltText
+        }
+    }
+    recentEvents: entries(section: "events", ecosystems: $ecosystemId, endDatetime: $endDatetime, limit: 2, orderBy: "endDate ASC") {
+        id
+        title
+        ... on events_default_Entry {
+            start: startDatetime
+            end: endDatetime
+            eventType {
+                id
+                slug
+                title
+            }
+        }
+    }
+}

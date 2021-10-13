@@ -233,16 +233,16 @@
         },
         {
             "name": "egulias/email-validator",
-            "version": "3.1.1",
+            "version": "3.1.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/egulias/EmailValidator.git",
-                "reference": "c81f18a3efb941d8c4d2e025f6183b5c6d697307"
+                "reference": "ee0db30118f661fb166bcffbf5d82032df484697"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/egulias/EmailValidator/zipball/c81f18a3efb941d8c4d2e025f6183b5c6d697307",
-                "reference": "c81f18a3efb941d8c4d2e025f6183b5c6d697307",
+                "url": "https://api.github.com/repos/egulias/EmailValidator/zipball/ee0db30118f661fb166bcffbf5d82032df484697",
+                "reference": "ee0db30118f661fb166bcffbf5d82032df484697",
                 "shasum": ""
             },
             "require": {
@@ -289,7 +289,7 @@
             ],
             "support": {
                 "issues": "https://github.com/egulias/EmailValidator/issues",
-                "source": "https://github.com/egulias/EmailValidator/tree/3.1.1"
+                "source": "https://github.com/egulias/EmailValidator/tree/3.1.2"
             },
             "funding": [
                 {
@@ -297,7 +297,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2021-04-01T18:37:14+00:00"
+            "time": "2021-10-11T09:18:27+00:00"
         },
         {
             "name": "erusev/parsedown",
@@ -1614,12 +1614,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/strata/data.git",
-                "reference": "758aead22b5ce32c7aa8b58667f807ca238da400"
+                "reference": "2a0af5035528cdec34bb093b7ddba117291ab8ef"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/strata/data/zipball/758aead22b5ce32c7aa8b58667f807ca238da400",
-                "reference": "758aead22b5ce32c7aa8b58667f807ca238da400",
+                "url": "https://api.github.com/repos/strata/data/zipball/2a0af5035528cdec34bb093b7ddba117291ab8ef",
+                "reference": "2a0af5035528cdec34bb093b7ddba117291ab8ef",
                 "shasum": ""
             },
             "require": {
@@ -1668,7 +1668,7 @@
                 "issues": "https://github.com/strata/data/issues",
                 "source": "https://github.com/strata/data/tree/release/0.8.0"
             },
-            "time": "2021-10-11T09:16:39+00:00"
+            "time": "2021-10-12T19:47:59+00:00"
         },
         {
             "name": "strata/frontend",
@@ -1676,12 +1676,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/strata/frontend.git",
-                "reference": "8a9bb5c34a49df9a8515bbf8ac550b32207c0e9b"
+                "reference": "439e6679ab38f2d0aa5b43df1f12504ab0a1d19c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/strata/frontend/zipball/8a9bb5c34a49df9a8515bbf8ac550b32207c0e9b",
-                "reference": "8a9bb5c34a49df9a8515bbf8ac550b32207c0e9b",
+                "url": "https://api.github.com/repos/strata/frontend/zipball/439e6679ab38f2d0aa5b43df1f12504ab0a1d19c",
+                "reference": "439e6679ab38f2d0aa5b43df1f12504ab0a1d19c",
                 "shasum": ""
             },
             "require": {
@@ -1735,7 +1735,7 @@
                 "issues": "https://github.com/strata/frontend/issues",
                 "source": "https://github.com/strata/frontend/tree/release/0.8.0"
             },
-            "time": "2021-10-11T09:19:45+00:00"
+            "time": "2021-10-11T14:26:16+00:00"
         },
         {
             "name": "strata/symfony-frontend",
@@ -1743,12 +1743,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/strata/symfony-frontend.git",
-                "reference": "7f93412666582fbd5ea25cb6d21a68b424f5bdd7"
+                "reference": "d351734ee3a89cb0296ae7475b5fed83d0835979"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/strata/symfony-frontend/zipball/7f93412666582fbd5ea25cb6d21a68b424f5bdd7",
-                "reference": "7f93412666582fbd5ea25cb6d21a68b424f5bdd7",
+                "url": "https://api.github.com/repos/strata/symfony-frontend/zipball/d351734ee3a89cb0296ae7475b5fed83d0835979",
+                "reference": "d351734ee3a89cb0296ae7475b5fed83d0835979",
                 "shasum": ""
             },
             "require": {
@@ -1784,7 +1784,7 @@
                 "issues": "https://github.com/strata/symfony-frontend/issues",
                 "source": "https://github.com/strata/symfony-frontend/tree/release/0.8.0"
             },
-            "time": "2021-10-11T07:41:37+00:00"
+            "time": "2021-10-12T17:56:41+00:00"
         },
         {
             "name": "symfony/asset",
@@ -2861,16 +2861,16 @@
         },
         {
             "name": "symfony/flex",
-            "version": "v1.16.3",
+            "version": "v1.17.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/flex.git",
-                "reference": "f05406b33681409b83285f4d2ff4efbca7c55b03"
+                "reference": "862e30b13ba0a171f05d9f4e3ea8b106084a3442"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/flex/zipball/f05406b33681409b83285f4d2ff4efbca7c55b03",
-                "reference": "f05406b33681409b83285f4d2ff4efbca7c55b03",
+                "url": "https://api.github.com/repos/symfony/flex/zipball/862e30b13ba0a171f05d9f4e3ea8b106084a3442",
+                "reference": "862e30b13ba0a171f05d9f4e3ea8b106084a3442",
                 "shasum": ""
             },
             "require": {
@@ -2887,7 +2887,7 @@
             "type": "composer-plugin",
             "extra": {
                 "branch-alias": {
-                    "dev-main": "1.16-dev"
+                    "dev-main": "1.17-dev"
                 },
                 "class": "Symfony\\Flex\\Flex"
             },
@@ -2909,7 +2909,7 @@
             "description": "Composer plugin for Symfony",
             "support": {
                 "issues": "https://github.com/symfony/flex/issues",
-                "source": "https://github.com/symfony/flex/tree/v1.16.3"
+                "source": "https://github.com/symfony/flex/tree/v1.17.0"
             },
             "funding": [
                 {
@@ -2925,7 +2925,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2021-09-28T17:00:52+00:00"
+            "time": "2021-10-11T15:59:11+00:00"
         },
         {
             "name": "symfony/form",
@@ -7145,12 +7145,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/w3c/w3c-website-templates-bundle.git",
-                "reference": "f00e11acf30640beaf8ffb9096e5acd61685a91a"
+                "reference": "4b84e6cd2471f4896bf6f54dc60d142e04313124"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/w3c/w3c-website-templates-bundle/zipball/f00e11acf30640beaf8ffb9096e5acd61685a91a",
-                "reference": "f00e11acf30640beaf8ffb9096e5acd61685a91a",
+                "url": "https://api.github.com/repos/w3c/w3c-website-templates-bundle/zipball/4b84e6cd2471f4896bf6f54dc60d142e04313124",
+                "reference": "4b84e6cd2471f4896bf6f54dc60d142e04313124",
                 "shasum": ""
             },
             "require": {
@@ -7185,7 +7185,7 @@
             "support": {
                 "source": "https://github.com/w3c/w3c-website-templates-bundle/tree/main"
             },
-            "time": "2021-10-08T14:35:54+00:00"
+            "time": "2021-10-12T11:49:09+00:00"
         },
         {
             "name": "webmozart/assert",
@@ -10260,5 +10260,5 @@
     "platform-overrides": {
         "php": "7.4"
     },
-    "plugin-api-version": "2.0.0"
+    "plugin-api-version": "2.1.0"
 }

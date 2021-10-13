@@ -17,6 +17,7 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\RouterInterface;
 
 /**
  * @author Jean-Guilhem Rouel <jean-gui@w3.org>
@@ -130,20 +131,26 @@ class NewsController extends AbstractController
     /**
      * @Route("/{year}/{slug}", requirements={"year": "\d\d\d\d"})
      *
-     * @param QueryManager $manager
-     * @param int          $year
-     * @param string       $slug
-     * @param Site         $site
-     * @param Request      $request
+     * @param QueryManager    $manager
+     * @param int             $year
+     * @param string          $slug
+     * @param Site            $site
+     * @param Request         $request
+     * @param RouterInterface $router
      *
      * @return Response
      * @throws GraphQLQueryException
      * @throws QueryManagerException
-     * @throws Exception
      */
-    public function show(QueryManager $manager, int $year, string $slug, Site $site, Request $request): Response
-    {
-        $manager->add('page', new Entry($site->siteId, $slug));
+    public function show(
+        QueryManager $manager,
+        int $year,
+        string $slug,
+        Site $site,
+        Request $request,
+        RouterInterface $router
+    ): Response {
+        $manager->add('page', new Entry($site->siteId, $slug, $router));
 
         $page = $manager->get('page');
         if (empty($page)) {
@@ -178,9 +185,11 @@ class NewsController extends AbstractController
             ]
         ];
 
-        dump($page);
-        dump($crosslinks);
-        dump($singlesBreadcrumbs);
+        if ($this->getParameter('kernel.environment') == 'dev') {
+            dump($page);
+            dump($crosslinks);
+            dump($singlesBreadcrumbs);
+        }
 
         // @todo use news article template
         return $this->render('news/show.html.twig', [
@@ -226,10 +235,12 @@ class NewsController extends AbstractController
 
         $page['seo']['expiry'] = $page['expiryDate'];
 
-        dump($archives);
-        dump($page);
-        dump($collection);
-        dump($pagination);
+        if ($this->getParameter('kernel.environment') == 'dev') {
+            dump($archives);
+            dump($page);
+            dump($collection);
+            dump($pagination);
+        }
 
         return [$page, $collection, $archives];
     }
