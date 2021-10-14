@@ -40,6 +40,7 @@ query NewsArticles($slug: [String], $siteId: [QueryArgument]) {
             seo: seoOptions {
                 ...seoData
             }
+            notes: postPageNotes
         }
     }
 }
