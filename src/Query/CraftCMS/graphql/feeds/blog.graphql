@@ -17,6 +17,10 @@ query blog($siteId: [QueryArgument], $category: [QueryArgument], $tag: [QueryArg
             defaultFlexibleComponents(orderBy: "sortOrder") {
                 ...defaultFlexibleComponents
             }
+            categories: blogCategories {
+                slug
+                title
+            }
         }
     }
 }

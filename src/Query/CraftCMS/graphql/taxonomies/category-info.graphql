@@ -1,0 +1,8 @@
+query CategoryInfo($siteId: [QueryArgument], $handle: [String], $slug: [String]) {
+    category(siteId: $siteId, group: $handle, slug: $slug) {
+        id
+        title
+        uri
+        slug
+    }
+}

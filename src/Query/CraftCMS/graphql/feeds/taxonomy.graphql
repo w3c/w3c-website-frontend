@@ -1,0 +1,99 @@
+query taxonomy($siteId: [QueryArgument], $category: [QueryArgument], $ecosystem: [QueryArgument] $limit: Int) {
+    entries(section: ["blogPosts", "events", "newsArticles", "pressReleases"], siteId: $siteId, blogCategories: $category, ecosystems: $ecosystem, limit: $limit, orderBy: "postDate desc") {
+        sectionHandle
+        id
+        slug
+        uri
+        title
+        ... on blogPosts_default_Entry {
+            authors {
+                ... authors
+            }
+            date: postDate
+            excerpt
+            defaultFlexibleComponents(orderBy: "sortOrder") {
+                ...defaultFlexibleComponents
+            }
+            categories: blogCategories {
+                slug
+                title
+            }
+        }
+        ... on newsArticles_default_Entry {
+            authors {
+                ... authors
+            }
+            date: postDate
+            excerpt
+            defaultFlexibleComponents(orderBy: "sortOrder") {
+                ...defaultFlexibleComponents
+            }
+        }
+        ... on pressReleases_default_Entry {
+            authors {
+                ... authors
+            }
+            date: postDate
+            excerpt
+            defaultFlexibleComponents(orderBy: "sortOrder") {
+                ...defaultFlexibleComponents
+            }
+        }
+        ... on events_default_Entry {
+            date: startDatetime
+            start: startDatetime
+            end: endDatetime
+            excerpt: eventExcerpt
+            type: eventType {
+                id
+                slug
+                title
+            }
+            thumbnailImage {
+                ...thumbnailImage
+            }
+            thumbnailAltText
+            defaultFlexibleComponents(orderBy: "sortOrder") {
+                ...defaultFlexibleComponents
+            }
+            categories: blogCategories {
+                slug
+                title
+            }
+        }
+        ... on events_external_Entry {
+            date: startDatetime
+            start: startDatetime
+            end: endDatetime
+            urlLink
+            excerpt: eventExcerpt
+            type: eventType {
+                id
+                slug
+                title
+            }
+            thumbnailImage {
+                ...thumbnailImage
+            }
+            thumbnailAltText
+            categories: blogCategories {
+                slug
+                title
+            }
+        }
+    }
+    comments(siteId: $siteId) {
+        ownerId
+    }
+}
+
+fragment contentImage on AssetInterface {
+    src: url(width: 580)
+    extension
+}
+
+fragment authors on authors_author_BlockType {
+    name: authorName
+    email: authorEmailAddress
+}
+

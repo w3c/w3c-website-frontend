@@ -6,10 +6,11 @@ use App\Query\CraftCMS\Feeds\Blog;
 use App\Query\CraftCMS\Feeds\Comments;
 use App\Query\CraftCMS\Feeds\News;
 use App\Query\CraftCMS\Feeds\PressReleases;
-use App\Query\CraftCMS\Taxonomies\Categories;
-use App\Query\CraftCMS\Taxonomies\Tags;
+use App\Query\CraftCMS\Feeds\Taxonomy;
+use App\Query\CraftCMS\Taxonomies\CategoryInfo;
 use DateTimeImmutable;
 use Exception;
+use Laminas\Feed\Writer\Entry;
 use Laminas\Feed\Writer\Feed;
 use Strata\Data\Collection;
 use Strata\Data\Exception\GraphQLQueryException;
@@ -52,93 +53,31 @@ class FeedController extends AbstractController
         $feedUrl = $this->generateUrl('app_feed_blog', [], UrlGeneratorInterface::ABSOLUTE_URL);
         $pageUrl = $this->generateUrl('app_blog_index', [], UrlGeneratorInterface::ABSOLUTE_URL);
 
-        return $this->blogFeeds($manager, $site, $feedUrl, $pageUrl, $twig);
-    }
+        $entries       = $manager->getCollection('rss');
+        $commentCounts = $this->getBlogCommentCounts($entries, $manager);
 
-    /**
-     * @Route("/blog/category/{slug}/feed", requirements={"slug": "[^/]+"})
-     *
-     * @param QueryManager $manager
-     * @param string       $slug
-     * @param Site         $site
-     * @param Environment  $twig
-     *
-     * @return Response
-     * @throws GraphQLQueryException
-     * @throws InvalidLocaleException
-     * @throws LoaderError
-     * @throws QueryManagerException
-     * @throws RuntimeError
-     * @throws SyntaxError
-     * @throws Exception
-     */
-    public function category(QueryManager $manager, string $slug, Site $site, Environment $twig): Response
-    {
-        $manager->add('categories', new Categories($site->siteId, 'blogCategories'));
+        $feed = new Feed();
+        $feed->setTitle("W3C");
+        $feed->setLanguage($site->getLocale());
 
-        $categories = $manager->getCollection('categories');
+        $feed->setLink($pageUrl);
+        $feed->setFeedLink($feedUrl, 'rss');
 
-        $category = [];
-        foreach ($categories as $categoryData) {
-            if ($categoryData['slug'] == $slug) {
-                $category = $categoryData;
-                break;
+        $feed->setDateModified(time());
+        $feed->setDescription('Description');
+
+        foreach ($entries as $data) {
+            if (array_key_exists($data['id'], $commentCounts)) {
+                $data['comments'] = $commentCounts[$data['id']];
+            } else {
+                $data['comments'] = 0;
             }
+            $feed->addEntry($this->buildBlogEntry($data, $feed, $twig));
         }
 
-        if ($category['id'] == null) {
-            throw $this->createNotFoundException('Category not found');
-        }
+        $out = $feed->export('rss');
 
-        $feedUrl = $this->generateUrl('app_feed_category', ['slug' => $slug], UrlGeneratorInterface::ABSOLUTE_URL);
-        $pageUrl = $this->generateUrl('app_blog_category', ['slug' => $slug], UrlGeneratorInterface::ABSOLUTE_URL);
-
-        $manager->add('rss', new Blog($site->siteId, self::LIMIT, $category['id']));
-
-        return $this->blogFeeds($manager, $site, $feedUrl, $pageUrl, $twig);
-    }
-
-    /**
-     * @Route("/blog/tags/{slug}/feed", requirements={"slug": "[^/]+"})
-     *
-     * @param QueryManager $manager
-     * @param string       $slug
-     * @param Site         $site
-     * @param Environment  $twig
-     *
-     * @return Response
-     * @throws GraphQLQueryException
-     * @throws InvalidLocaleException
-     * @throws LoaderError
-     * @throws QueryManagerException
-     * @throws RuntimeError
-     * @throws SyntaxError
-     * @throws Exception
-     */
-    public function tag(QueryManager $manager, string $slug, Site $site, Environment $twig): Response
-    {
-        $manager->add('tags', new Tags($site->siteId, 'blogTags'));
-
-        $tags = $manager->getCollection('tags');
-
-        $tag = [];
-        foreach ($tags as $tagData) {
-            if ($tagData['slug'] == $slug) {
-                $tag = $tagData;
-                break;
-            }
-        }
-
-        if ($tag['id'] == null) {
-            throw $this->createNotFoundException('Tag not found');
-        }
-
-        $feedUrl = $this->generateUrl('app_feed_tag', ['slug' => $slug], UrlGeneratorInterface::ABSOLUTE_URL);
-        $pageUrl = $this->generateUrl('app_blog_tag', ['slug' => $slug], UrlGeneratorInterface::ABSOLUTE_URL);
-
-        $manager->add('rss', new Blog($site->siteId, self::LIMIT, null, $tag['id']));
-
-        return $this->blogFeeds($manager, $site, $feedUrl, $pageUrl, $twig);
+        return new Response($out, Response::HTTP_OK, ['content-type' => 'application/rss+xml']);
     }
 
     /**
@@ -165,7 +104,23 @@ class FeedController extends AbstractController
         $feedUrl = $this->generateUrl('app_feed_news', [], UrlGeneratorInterface::ABSOLUTE_URL);
         $pageUrl = $this->generateUrl('app_news_index', [], UrlGeneratorInterface::ABSOLUTE_URL);
 
-        return $this->prNewsFeeds($site, $pageUrl, $feedUrl, $entries, $twig);
+        $feed = new Feed();
+        $feed->setTitle("W3C - News");
+        $feed->setLanguage($site->getLocale());
+
+        $feed->setLink($pageUrl);
+        $feed->setFeedLink($feedUrl, 'rss');
+
+        $feed->setDateModified(time());
+        $feed->setDescription('Description');
+
+        foreach ($entries as $data) {
+            $feed->addEntry($this->buildNewsEntry($data, $feed, $twig));
+        }
+
+        $out = $feed->export('rss');
+
+        return new Response($out, Response::HTTP_OK, ['content-type' => 'application/rss+xml']);
     }
 
     /**
@@ -182,7 +137,6 @@ class FeedController extends AbstractController
      * @throws QueryManagerException
      * @throws RuntimeError
      * @throws SyntaxError
-     * @throws Exception
      */
     public function pressReleases(QueryManager $manager, Site $site, Environment $twig): Response
     {
@@ -192,14 +146,31 @@ class FeedController extends AbstractController
         $feedUrl = $this->generateUrl('app_feed_pressreleases', [], UrlGeneratorInterface::ABSOLUTE_URL);
         $pageUrl = $this->generateUrl('app_pressreleases_index', [], UrlGeneratorInterface::ABSOLUTE_URL);
 
-        return $this->prNewsFeeds($site, $pageUrl, $feedUrl, $entries, $twig);
+        $feed = new Feed();
+        $feed->setTitle("W3C - Press Releases");
+        $feed->setLanguage($site->getLocale());
+
+        $feed->setLink($pageUrl);
+        $feed->setFeedLink($feedUrl, 'rss');
+
+        $feed->setDateModified(time());
+        $feed->setDescription('Description');
+
+        foreach ($entries as $data) {
+            $feed->addEntry($this->buildPressReleaseEntry($data, $feed, $twig));
+        }
+
+        $out = $feed->export('rss');
+
+        return new Response($out, Response::HTTP_OK, ['content-type' => 'application/rss+xml']);
     }
 
     /**
+     * @Route("/feeds/category/{slug}")
+     *
+     * @param string       $slug
      * @param QueryManager $manager
      * @param Site         $site
-     * @param string       $feedUrl
-     * @param string       $pageUrl
      * @param Environment  $twig
      *
      * @return Response
@@ -209,15 +180,77 @@ class FeedController extends AbstractController
      * @throws QueryManagerException
      * @throws RuntimeError
      * @throws SyntaxError
+     * @throws Exception
      */
-    private function blogFeeds(
-        QueryManager $manager,
-        Site $site,
-        string $feedUrl,
-        string $pageUrl,
-        Environment $twig
-    ): Response {
+    public function category(string $slug, QueryManager $manager, Site $site, Environment $twig): Response
+    {
+        $manager->add('category-info', new CategoryInfo($site->siteId, 'blogCategories', $slug));
+        $category = $manager->get('category-info');
+
+        if (!$category) {
+            throw $this->createNotFoundException('Category not found');
+        }
+
+        $manager->add('rss', new Taxonomy($site->siteId, self::LIMIT, $category['id']));
+
         $entries = $manager->getCollection('rss');
+        $feedUrl = $this->generateUrl(
+            'app_feed_category',
+            ['slug' => $site->siteId],
+            UrlGeneratorInterface::ABSOLUTE_URL
+        );
+
+        return $this->buildTaxonomyFeed($entries, $manager, $category['title'], $site, $feedUrl, $twig);
+    }
+
+    /**
+     * @Route("/feeds/ecosystem/{slug}")
+     *
+     * @param string       $slug
+     * @param QueryManager $manager
+     * @param Site         $site
+     * @param Environment  $twig
+     *
+     * @return Response
+     * @throws GraphQLQueryException
+     * @throws InvalidLocaleException
+     * @throws LoaderError
+     * @throws QueryManagerException
+     * @throws RuntimeError
+     * @throws SyntaxError
+     * @throws Exception
+     */
+    public function ecosystem(string $slug, QueryManager $manager, Site $site, Environment $twig): Response
+    {
+        $manager->add('ecosystem-info', new CategoryInfo($site->siteId, 'ecosystems', $slug));
+        $ecosystem = $manager->get('ecosystem-info');
+
+        if (!$ecosystem) {
+            throw $this->createNotFoundException('Category not found');
+        }
+
+        $manager->add('rss', new Taxonomy($site->siteId, self::LIMIT, null, $ecosystem['id']));
+
+        $entries = $manager->getCollection('rss');
+        $feedUrl = $this->generateUrl(
+            'app_feed_ecosystem',
+            ['slug' => $site->siteId],
+            UrlGeneratorInterface::ABSOLUTE_URL
+        );
+
+        return $this->buildTaxonomyFeed($entries, $manager, $ecosystem['title'], $site, $feedUrl, $twig);
+    }
+
+    /**
+     * @param Collection   $entries
+     * @param QueryManager $manager
+     *
+     * @return array
+     * @throws GraphQLQueryException
+     * @throws QueryManagerException
+     */
+    private function getBlogCommentCounts(Collection $entries, QueryManager $manager): array
+    {
         $postIds = array_map(function (array $entry) {
             return $entry['id'];
         }, $entries->getCollection());
@@ -232,115 +265,233 @@ class FeedController extends AbstractController
             }
         }
 
-        $feed = new Feed();
-        $feed->setTitle("W3C");
-        $feed->setLanguage($site->getLocale());
-
-        $feed->setLink($pageUrl);
-        $feed->setFeedLink($feedUrl, 'rss');
-
-        $feed->setDateModified(time());
-        $feed->setDescription('Description');
-
-        foreach ($entries as $post) {
-            [$url, $entry] = $this->entry($post, $feed, $twig);
-            $entry->setCommentLink($url . '#comments');
-            if (array_key_exists($post['id'], $commentCounts)) {
-                $entry->setCommentCount($commentCounts[$post['id']]);
-            }
-            $feed->addEntry($entry);
-        }
-
-        $out = $feed->export('rss');
-
-        return new Response($out, Response::HTTP_OK, ['content-type' => 'application/rss+xml']);
+        return $commentCounts;
     }
 
     /**
-     * @param Site        $site
-     * @param string      $pageUrl
-     * @param string      $feedUrl
-     * @param Collection  $entries
+     * @param array       $data
+     * @param Feed        $feed
      * @param Environment $twig
      *
-     * @return Response
-     * @throws InvalidLocaleException
-     * @throws LoaderError
-     * @throws RuntimeError
-     * @throws SyntaxError
-     */
-    private function prNewsFeeds(
-        Site $site,
-        string $pageUrl,
-        string $feedUrl,
-        Collection $entries,
-        Environment $twig
-    ): Response {
-        $feed = new Feed();
-        $feed->setTitle("W3C");
-        $feed->setLanguage($site->getLocale());
-
-        $feed->setLink($pageUrl);
-        $feed->setFeedLink($feedUrl, 'rss');
-
-        $feed->setDateModified(time());
-        $feed->setDescription('Description');
-
-        foreach ($entries as $post) {
-            [$url, $entry] = $this->entry($post, $feed, $twig);
-
-            $feed->addEntry($entry);
-        }
-
-        $out = $feed->export('rss');
-
-        return new Response($out, Response::HTTP_OK, ['content-type' => 'application/rss+xml']);
-    }
-
-    /**
-     * @param              $post
-     * @param Feed         $feed
-     * @param Environment  $twig
-     *
-     * @return array
+     * @return Entry
      * @throws LoaderError
      * @throws RuntimeError
      * @throws SyntaxError
      * @throws Exception
      */
-    private function entry($post, Feed $feed, Environment $twig): array
+    private function buildBlogEntry(array $data, Feed $feed, Environment $twig): Entry
     {
-        $date  = new DateTimeImmutable($post['date']);
-        $url   = $this->generateUrl(
+        $date  = new DateTimeImmutable($data['date']);
+
+        $entry = $this->buildBasicEntry($data, $feed, $date, $twig);
+
+        $url = $this->generateUrl(
             'app_blog_show',
-            ['year' => $date->format('Y'), 'slug' => $post['slug']],
+            ['year' => $date->format('Y'), 'slug' => $data['slug']],
             UrlGeneratorInterface::ABSOLUTE_URL
         );
-        $entry = $feed->createEntry();
-        $entry->setTitle($post['title']);
         $entry->setLink($url);
+        $entry->setCommentLink($url . '#comments');
+        $entry->setCommentCount($data['comments']);
+        $entry->addCategory(['term' => 'blogs', 'label' => 'Blog']);
 
-        $authors = implode(
-            ', ',
-            array_map(function ($e) {
-                return $e['name'];
-            }, $post['authors'])
+        return $entry;
+    }
+
+    /**
+     * @param array       $data
+     * @param Feed        $feed
+     * @param Environment $twig
+     *
+     * @return Entry
+     * @throws LoaderError
+     * @throws RuntimeError
+     * @throws SyntaxError
+     * @throws Exception
+     */
+    private function buildEventEntry(array $data, Feed $feed, Environment $twig): Entry
+    {
+        $date = new DateTimeImmutable($data['date']);
+
+        $entry = $this->buildBasicEntry($data, $feed, $date, $twig);
+
+        /*$url = $this->generateUrl(
+            'app_blog_show',
+            ['year' => $year, 'slug' => $post['slug']],
+            UrlGeneratorInterface::ABSOLUTE_URL
+        );*/
+        $entry->addCategory(['term' => $data['type'][0]['slug'], 'label' => $data['type'][0]['title']]);
+
+        return $entry;
+    }
+
+    /**
+     * @param array       $data
+     * @param Feed        $feed
+     * @param Environment $twig
+     *
+     * @return Entry
+     * @throws LoaderError
+     * @throws RuntimeError
+     * @throws SyntaxError
+     * @throws Exception
+     */
+    private function buildNewsEntry(array $data, Feed $feed, Environment $twig): Entry
+    {
+        $date = new DateTimeImmutable($data['date']);
+
+        $entry = $this->buildBasicEntry($data, $feed, $date, $twig);
+
+        $entry->setLink(
+            $this->generateUrl(
+                'app_news_show',
+                ['year' => $date->format('Y'), 'slug' => $data['slug']],
+                UrlGeneratorInterface::ABSOLUTE_URL
+            )
         );
-        if ($authors) {
-            $entry->addAuthor(['name'  => $authors]);
+        $entry->addCategory(['term' => 'news', 'label' => 'News']);
+
+        return $entry;
+    }
+
+    /**
+     * @param array       $data
+     * @param Feed        $feed
+     * @param Environment $twig
+     *
+     * @return Entry
+     * @throws LoaderError
+     * @throws RuntimeError
+     * @throws SyntaxError
+     * @throws Exception
+     */
+    private function buildPressReleaseEntry(array $data, Feed $feed, Environment $twig): Entry
+    {
+        $date = new DateTimeImmutable($data['date']);
+
+        $entry = $this->buildBasicEntry($data, $feed, $date, $twig);
+
+        $entry->setLink(
+            $this->generateUrl(
+                'app_pressreleases_show',
+                ['year' => $date->format('Y'), 'slug' => $data['slug']],
+                UrlGeneratorInterface::ABSOLUTE_URL
+            )
+        );
+        $entry->addCategory(['term' => 'press-releases', 'label' => 'Press Release']);
+
+        return $entry;
+    }
+
+    /**
+     * @param Feed              $feed
+     * @param array             $data
+     * @param DateTimeImmutable $date
+     * @param Environment       $twig
+     *
+     * @return Entry
+     * @throws LoaderError
+     * @throws RuntimeError
+     * @throws SyntaxError
+     */
+    private function buildBasicEntry(array $data, Feed $feed, DateTimeImmutable $date, Environment $twig): Entry
+    {
+        $entry = $feed->createEntry();
+        $entry->setTitle($data['title']);
+
+        if (array_key_exists('authors', $data)) {
+            $authors = implode(
+                ', ',
+                array_map(function ($author) {
+                    return $author['name'];
+                }, $data['authors'])
+            );
+            if ($authors) {
+                $entry->addAuthor(['name' => $authors]);
+            }
         }
+
         //$entry->setDateModified(time());
         $entry->setDateCreated($date);
-        if ($post['excerpt']) {
-            $entry->setDescription($post['excerpt']);
+        if ($data['excerpt']) {
+            $entry->setDescription($data['excerpt']);
         }
 
-        if (count($post['defaultFlexibleComponents']) > 0) {
+        if (array_key_exists('categories', $data)) {
+            foreach ($data['categories'] as $category) {
+                $entry->addCategory(['term' => $category['slug'], 'label' => $category['title']]);
+            }
+        }
+
+        if (array_key_exists('defaultFlexibleComponents', $data) && count($data['defaultFlexibleComponents']) > 0) {
             $entry->setContent(
-                $twig->render('rss_entry.html.twig', ['components' => $post['defaultFlexibleComponents']])
+                $twig->render('rss_entry.html.twig', ['components' => $data['defaultFlexibleComponents']])
             );
         }
 
-        return [$url, $entry];
+        return $entry;
+    }
+
+    /**
+     * @param Collection $entries
+     * @param QueryManager $manager
+     * @param              $title
+     * @param Site $site
+     * @param string $feedUrl
+     * @param Environment $twig
+     *
+     * @return Response
+     * @throws GraphQLQueryException
+     * @throws InvalidLocaleException
+     * @throws LoaderError
+     * @throws QueryManagerException
+     * @throws RuntimeError
+     * @throws SyntaxError
+     */
+    private function buildTaxonomyFeed(
+        Collection $entries,
+        QueryManager $manager,
+        $title,
+        Site $site,
+        string $feedUrl,
+        Environment $twig
+    ): Response {
+        $commentCounts = $this->getBlogCommentCounts($entries, $manager);
+
+        $feed = new Feed();
+        $feed->setTitle("W3C - " . $title);
+        $feed->setDescription('Description');
+        $feed->setLanguage($site->getLocale());
+
+        $feed->setLink('https://www.w3.org/');
+        $feed->setFeedLink($feedUrl, 'rss');
+
+        $feed->setDateModified(time());
+
+        foreach ($entries as $data) {
+            switch ($data['sectionHandle']) {
+                case 'blogPosts':
+                    if (array_key_exists($data['id'], $commentCounts)) {
+                        $data['comments'] = $commentCounts[$data['id']];
+                    } else {
+                        $data['comments'] = 0;
+                    }
+                    $feed->addEntry($this->buildBlogEntry($data, $feed, $twig));
+                    break;
+                case 'events':
+                    $feed->addEntry($this->buildEventEntry($data, $feed, $twig));
+                    break;
+                case 'newsArticles':
+                    $feed->addEntry($this->buildNewsEntry($data, $feed, $twig));
+                    break;
+                case 'pressReleases':
+                    $feed->addEntry($this->buildPressReleaseEntry($data, $feed, $twig));
+                    break;
+            }
+        }
+
+        $out = $feed->export('rss');
+
+        return new Response($out, Response::HTTP_OK, ['content-type' => 'application/rss+xml']);
     }
 }
