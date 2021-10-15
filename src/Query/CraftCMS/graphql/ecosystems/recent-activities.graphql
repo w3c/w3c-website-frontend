@@ -40,7 +40,7 @@ query RecentActivities($ecosystemId: [QueryArgument], $endDatetime: [QueryArgume
                 slug
                 title
             }
-            excerpt
+            excerpt: eventExcerpt
             thumbnailImage {
                 ...thumbnailImage
             }
@@ -50,7 +50,7 @@ query RecentActivities($ecosystemId: [QueryArgument], $endDatetime: [QueryArgume
             start: startDatetime
             end: endDatetime
             uri: urlLink
-            excerpt
+            excerpt: eventExcerpt
             thumbnailImage {
                 ...thumbnailImage
             }
