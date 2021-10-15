@@ -36,3 +36,6 @@ blog:
             submit: Post comment
             cancel: Cancel
             success: Your comment has successfully been saved and will be moderated before becoming visible.
+components:
+    groups_list:
+        title: Active groups

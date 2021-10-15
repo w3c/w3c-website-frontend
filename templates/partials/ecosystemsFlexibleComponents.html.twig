@@ -1,0 +1,58 @@
+{% if component.typeHandle == 'textComponent' %}
+    {% embed '@W3CWebsiteTemplates/components/text.html.twig' %}
+        {% block text %}
+            {{ component.contentField|raw }}
+        {% endblock %}
+    {% endembed %}
+{% elseif component.typeHandle == 'blockquoteComponent' %}
+    {% embed '@W3CWebsiteTemplates/components/quote.html.twig' with {'author': component.citation} %}
+        {% block text %}
+            {{ component.quoteText }}
+        {% endblock %}
+    {% endembed %}
+{% elseif component.typeHandle == 'imageMediaComponent' %}
+    {% embed '@W3CWebsiteTemplates/components/image.html.twig' with {
+        'attr': component.image[0],
+        'alt': component.altText,
+        'caption': component.figureCaption is defined ? component.figureCaption : null,
+        'informative_or_decorative': component.informativeOrDecorative
+    } %}
+    {% endembed %}
+{% elseif component.typeHandle == 'videoMediaComponent' %}
+    {% embed '@W3CWebsiteTemplates/components/video.html.twig' with {
+        'iframe': component.videoUrl.code|preg_replace('/^<iframe/', '<iframe title="' ~ component.videoTitle|e('html_attr') ~ '"'),
+        'title': component.videoTitle,
+        'caption': component.videoCaption is defined ? component.videoCaption : null,
+        'transcript': component.linkToVideoTranscript is defined ? component.linkToVideoTranscript : null
+    } %}
+    {% endembed %}
+{% elseif component.typeHandle == 'fiftyFiftyComponent' %}
+    {% embed '@W3CWebsiteTemplates/components/fifty_fifty.html.twig' with {
+        'order': component.showImageBeforeText,
+        'title': component.titleField,
+        'content': component.mainContent,
+        'link_main_url': component.ctaUrl is defined ? component.ctaUrl : null,
+        'link_main_text': component.ctaCopy is defined ? component.ctaCopy : null,
+        'link_secondary_url': component.secondaryLinkUrl is defined ? component.secondaryLinkUrl : null,
+        'link_secondary_text': component.secondaryLinkCopy is defined ? component.secondaryLinkCopy : null,
+        'image': component.image[0],
+        'alt': component.altText,
+        'informative_or_decorative': component.informativeOrDecorative
+    } %}
+    {% endembed %}
+{% elseif component.typeHandle == 'groupsListingComponent' %}
+    {% embed '@W3CWebsiteTemplates/components/groups_list.html.twig' with {
+        'list_title': 'components.groups_list.title'|trans({}),
+        'list_introduction': component.introduction is defined ? component.introduction : null,
+        'groups': page.groups is defined ? page.groups : []
+    } %}
+    {% endembed %}
+{% elseif component.typeHandle == 'featuredEvangelistsComponent' %}
+    {% embed '@W3CWebsiteTemplates/components/evangelists.html.twig' with {
+        'title': component.title,
+        'introduction': component.introduction is defined ? component.introduction : null,
+        'evangelists': page.evangelists is defined ? page.evangelists : [],
+        'ecosystem_name': page.title
+    } %}
+    {% endembed %}
+{% endif %}

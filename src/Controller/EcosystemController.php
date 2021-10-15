@@ -41,7 +41,7 @@ class EcosystemController extends AbstractController
         }
 
         $manager->add('recent-activities', new RecentActivities($page['taxonomy-id'], $router));
-        $manager->add('testimonials', new Testimonials($page['taxonomy-id']));
+        $manager->add('testimonials', new Testimonials($page['taxonomy-id'], $site));
         $manager->add('evangelists', new Evangelists($page['taxonomy-slug']));
         $manager->add('groups', new Groups($page['taxonomy-slug']));
         $manager->add('members', new Members($page['taxonomy-slug']));
@@ -53,6 +53,11 @@ class EcosystemController extends AbstractController
         $members          = $manager->getCollection('members');
 
         $page['seo']['expiry'] = $page['expiryDate'];
+        $page['groups'] = $groups;
+        $page['recent_activities'] = $recentActivities;
+        $page['testimonials'] = $testimonials;
+        $page['members'] = $members->getCollection();
+        $page['evangelists'] = $evangelists;
 
         $singlesBreadcrumbs = $manager->get('singles-breadcrumbs');
 

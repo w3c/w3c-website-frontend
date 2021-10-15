@@ -6,6 +6,8 @@ namespace App\Query\W3C\Ecosystem;
 
 use App\Service\W3C;
 use Strata\Data\Query\Query;
+use Strata\Data\Mapper\MapArray;
+use Strata\Data\Mapper\WildcardMappingStrategy;
 
 class Evangelists extends Query
 {
@@ -26,5 +28,15 @@ class Evangelists extends Query
     public function getRequiredDataProviderClass(): string
     {
         return W3C::class;
+    }
+
+    public function getMapping(): array
+    {
+        return [
+            '[name]'        => '[name]',
+            '[work_title]'        => '[work-title]',
+            '[phone]' => '[phone]',
+            '[email]'         => '[email]',
+        ];
     }
 }
