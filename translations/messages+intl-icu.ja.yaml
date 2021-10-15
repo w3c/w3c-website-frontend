@@ -17,3 +17,6 @@ blog:
             submit: __blog.comments.form.submit
             cancel: __blog.comments.form.cancel
             success: __blog.comments.form.success
+components:
+    groups_list:
+        title: __components.groups_list.title__frontend(not bundle)
