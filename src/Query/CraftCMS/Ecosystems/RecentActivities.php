@@ -46,27 +46,28 @@ class RecentActivities extends GraphQLQuery
     public function getMapping()
     {
         return [
-            '[recentEntries]' => new MapArray(
-                '[recentEntries]',
-                [
-                    '[sectionHandle]'    => '[sectionHandle]',
-                    '[title]'            => '[title]',
-                    '[excerpt]'          => '[excerpt]',
-                    '[thumbnailImage]'   => '[thumbnailImage][0]',
-                    '[thumbnailAltText]' => '[thumbnailAltText]',
-                    '[uri]'              => new CallableData(
-                        [$this, 'transformEntryUri'],
-                        '[sectionHandle]',
-                        '[slug]',
-                        '[year]'
-                    )
-                ]
-            ),
+            '[recentEntries]' => new MapArray('[recentEntries]', [
+                '[sectionHandle]'    => '[sectionHandle]',
+                '[title]'            => '[title]',
+                '[excerpt]'          => '[excerpt]',
+                '[thumbnailImage]'   => '[thumbnailImage][0]',
+                '[thumbnailAltText]' => '[thumbnailAltText]',
+                '[uri]'              => new CallableData(
+                    [$this, 'transformEntryUri'],
+                    '[sectionHandle]',
+                    '[slug]',
+                    '[year]'
+                )
+            ]),
             '[recentEvents]' => new MapArray('[recentEvents]', [
-                '[title]' => '[title]',
-                '[start]' => new DateTimeValue('[start]'),
-                '[end]' => new DateTimeValue('[end]'),
-                '[type]' => '[eventType][0][title]'
+                '[title]'            => '[title]',
+                '[start]'            => new DateTimeValue('[start]'),
+                '[end]'              => new DateTimeValue('[end]'),
+                '[type]'             => '[eventType][0][title]',
+                '[excerpt]'          => '[excerpt]',
+                '[thumbnailImage]'   => '[thumbnailImage][0]',
+                '[thumbnailAltText]' => '[thumbnailAltText]',
+                '[uri]'              => '[uri]'
             ])
         ];
     }
