@@ -315,11 +315,15 @@ class FeedController extends AbstractController
 
         $entry = $this->buildBasicEntry($data, $feed, $date, $twig);
 
-        /*$url = $this->generateUrl(
-            'app_blog_show',
-            ['year' => $year, 'slug' => $post['slug']],
-            UrlGeneratorInterface::ABSOLUTE_URL
-        );*/
+        if ($data['typeHandle'] === 'external') {
+            $entry->setLink($data['urlLink']);
+        } else {
+            /*$url = $this->generateUrl(
+                'app_blog_show',
+                ['year' => $year, 'slug' => $post['slug']],
+                UrlGeneratorInterface::ABSOLUTE_URL
+            );*/
+        }
         $entry->addCategory(['term' => $data['type'][0]['slug'], 'label' => $data['type'][0]['title']]);
 
         return $entry;
