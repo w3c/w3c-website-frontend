@@ -23,16 +23,6 @@ query PressReleasesListing($siteId: [QueryArgument], $before: String, $after: St
         uri
         title
         ... on pressReleases_default_Entry {
-            author {
-                name
-                email
-            }
-            authors {
-                ... on authors_author_BlockType {
-                    name: authorName
-                    email: authorEmailAddress
-                }
-            }
             date: postDate
             excerpt
             thumbnailImage {

@@ -16,12 +16,6 @@ query PressReleases($slug: [String], $siteId: [QueryArgument]) {
         ... on pressReleases_default_Entry {
             excerpt
             displayYouMayAlsoLikeListing
-            authors {
-                ... on authors_author_BlockType {
-                    name: authorName
-                    email: authorEmailAddress
-                }
-            }
             groups: workingGroups {
                 title
                 slug

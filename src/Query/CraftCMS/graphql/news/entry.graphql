@@ -16,12 +16,6 @@ query NewsArticles($slug: [String], $siteId: [QueryArgument]) {
         ... on newsArticles_default_Entry {
             excerpt
             displayYouMayAlsoLikeListing
-            authors {
-                ... on authors_author_BlockType {
-                    name: authorName
-                    email: authorEmailAddress
-                }
-            }
             groups: workingGroups {
                 title
                 slug
