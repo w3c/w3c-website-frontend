@@ -1,5 +1,5 @@
-query taxonomy($siteId: [QueryArgument], $category: [QueryArgument], $ecosystem: [QueryArgument] $limit: Int) {
-    entries(section: ["blogPosts", "events", "newsArticles", "pressReleases"], siteId: $siteId, blogCategories: $category, ecosystems: $ecosystem, limit: $limit, orderBy: "postDate desc") {
+query taxonomy($siteId: [QueryArgument], $category: [QueryArgument], $ecosystem: [QueryArgument], $group: [QueryArgument], $limit: Int) {
+    entries(section: ["blogPosts", "events", "newsArticles", "pressReleases"], siteId: $siteId, blogCategories: $category, ecosystems: $ecosystem, workingGroups: $group, limit: $limit, orderBy: "postDate desc") {
         sectionHandle
         id
         slug

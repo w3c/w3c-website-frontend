@@ -23,23 +23,20 @@ class Taxonomy extends GraphQLQuery
      * @param int      $limit
      * @param int|null $category
      * @param int|null $ecosystem
+     * @param int|null $group
      *
      * @throws GraphQLQueryException
      */
-    public function __construct(
-        int $siteId,
-        int $limit,
-        int $category = null,
-        int $ecosystem = null
-    ) {
+    public function __construct(int $siteId, int $limit, int $category = null, int $ecosystem = null, int $group = null)
+    {
         $this->setGraphQLFromFile(__DIR__ . '/../graphql/feeds/taxonomy.graphql')
-            ->addFragmentFromFile(__DIR__ . '/../graphql/fragments/defaultFlexibleComponents.graphql')
-            ->addFragmentFromFile(__DIR__ . '/../graphql/fragments/thumbnailImage.graphql')
-            ->setRootPropertyPath('[entries]')
-            ->addVariable('siteId', $siteId)
-            ->addVariable('limit', $limit)
-            ->addVariable('category', $category)
-            ->addVariable('ecosystem', $ecosystem)
-        ;
+             ->addFragmentFromFile(__DIR__ . '/../graphql/fragments/defaultFlexibleComponents.graphql')
+             ->addFragmentFromFile(__DIR__ . '/../graphql/fragments/thumbnailImage.graphql')
+             ->setRootPropertyPath('[entries]')
+             ->addVariable('siteId', $siteId)
+             ->addVariable('limit', $limit)
+             ->addVariable('category', $category)
+             ->addVariable('ecosystem', $ecosystem)
+             ->addVariable('group', $group);
     }
 }

@@ -35,7 +35,7 @@ class BlogController extends AbstractController
     private const LIMIT = 10;
 
     /**
-     * @Route("/")
+     * @Route("")
      *
      * @param QueryManager $manager
      * @param Site         $site
@@ -169,7 +169,7 @@ class BlogController extends AbstractController
         }
 
         if ($category['id'] == null) {
-            throw $this->createNotFoundException('Category not found');
+            throw $this->createNotFoundException('CategoryInfo not found');
         }
 
         $manager->add(

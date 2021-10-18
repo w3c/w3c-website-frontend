@@ -37,8 +37,7 @@ class Entry extends GraphQLQuery
 
             ->addVariable('siteId', $siteId)
             ->addVariable('slug', $slug)
-//            ->enableCache($cacheLifetime)
-            ->cacheTags($uri)
+            ->cache($cacheLifetime)
         ;
     }
 
