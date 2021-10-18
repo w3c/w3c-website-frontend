@@ -8,6 +8,7 @@ use App\Query\CraftCMS\Feeds\News;
 use App\Query\CraftCMS\Feeds\PressReleases;
 use App\Query\CraftCMS\Feeds\Taxonomy;
 use App\Query\CraftCMS\Taxonomies\CategoryInfo;
+use App\Query\CraftCMS\Taxonomies\GroupInfo;
 use DateTimeImmutable;
 use Exception;
 use Laminas\Feed\Writer\Entry;
@@ -239,6 +240,44 @@ class FeedController extends AbstractController
         );
 
         return $this->buildTaxonomyFeed($entries, $manager, $ecosystem['title'], $site, $feedUrl, $twig);
+    }
+
+    /**
+     * @Route("/feeds/group/{type}/{slug}")
+     *
+     * @param string       $type
+     * @param string       $slug
+     * @param QueryManager $manager
+     * @param Site         $site
+     * @param Environment  $twig
+     *
+     * @return Response
+     * @throws GraphQLQueryException
+     * @throws InvalidLocaleException
+     * @throws LoaderError
+     * @throws QueryManagerException
+     * @throws RuntimeError
+     * @throws SyntaxError
+     */
+    public function group(string $type, string $slug, QueryManager $manager, Site $site, Environment $twig): Response
+    {
+        $manager->add('group-info', new GroupInfo($site->siteId, $type, $slug));
+        $group = $manager->get('group-info');
+
+        if (!$group) {
+            throw $this->createNotFoundException('Category not found');
+        }
+
+        $manager->add('rss', new Taxonomy($site->siteId, self::LIMIT, null, null, $group['id']));
+
+        $entries = $manager->getCollection('rss');
+        $feedUrl = $this->generateUrl(
+            'app_feed_ecosystem',
+            ['slug' => $site->siteId],
+            UrlGeneratorInterface::ABSOLUTE_URL
+        );
+
+        return $this->buildTaxonomyFeed($entries, $manager, $group['title'], $site, $feedUrl, $twig);
     }
 
     /**
