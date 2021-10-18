@@ -243,7 +243,7 @@ class FeedController extends AbstractController
     }
 
     /**
-     * @Route("/feeds/group/{type}/{slug}")
+     * @Route("/feeds/groups/{type}/{slug}")
      *
      * @param string       $type
      * @param string       $slug
