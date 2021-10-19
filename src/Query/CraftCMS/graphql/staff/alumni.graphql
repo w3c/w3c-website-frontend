@@ -1,0 +1,13 @@
+query Alumni($siteId: [QueryArgument]) {
+    entries(section: "alumni", siteId: $siteId) {
+        id
+        expiryDate
+        ... on alumni_default_Entry {
+            given: title
+            last: lastName
+            biography: pageContent
+            start: startDate@formatDateTime(format: "Y-m-d")
+            end: endDate@formatDateTime(format: "Y-m-d")
+        }
+    }
+}

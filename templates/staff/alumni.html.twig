@@ -1,0 +1,22 @@
+{% extends '@W3CWebsiteTemplates/pages/listing.html.twig' %}
+
+{% block list %}
+    {# should be moved to the templates bundle #}
+    {% for alumnus in alumni %}
+        <div class="l-sidebar">
+            <div class="alumni">
+                <div class="not-sidebar">
+                    <div>
+                        <h2 class="txt-mars">{{ alumnus.given }} {{ alumnus.last }}</h2>
+                        <p>{{ alumnus.start|format('F Y') }} to {{ alumnus.end|format('F Y') }}</p>
+                        <p>
+                            {{ alumnus.biography }}
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+{% endblock %}
+
+{% block pagination %}{% endblock %}
