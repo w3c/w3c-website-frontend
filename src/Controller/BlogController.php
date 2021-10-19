@@ -432,10 +432,13 @@ class BlogController extends AbstractController
         $first      = $manager->get('filters', '[first]');
         $last       = $manager->get('filters', '[last]');
 
-        $archives = range(
-            (new DateTimeImmutable($first['postDate']))->format('Y'),
-            (new DateTimeImmutable($last['postDate']))->format('Y')
-        );
+        $archives = [];
+        if ($first && $last) {
+            $archives = range(
+                (new DateTimeImmutable($first['postDate']))->format('Y'),
+                (new DateTimeImmutable($last['postDate']))->format('Y')
+            );
+        }
 
         $page['seo']['expiry'] = $page['expiryDate'];
 

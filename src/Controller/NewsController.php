@@ -224,14 +224,17 @@ class NewsController extends AbstractController
             return $this->redirectToRoute('app_news_index', ['page' => 1]);
         }
 
-        $page       = $manager->get('newsListing', '[entry]');
-        $first      = $manager->get('filters', '[first]');
-        $last       = $manager->get('filters', '[last]');
+        $page  = $manager->get('newsListing', '[entry]');
+        $first = $manager->get('filters', '[first]');
+        $last  = $manager->get('filters', '[last]');
 
-        $archives = range(
-            (new DateTimeImmutable($first['postDate']))->format('Y'),
-            (new DateTimeImmutable($last['postDate']))->format('Y')
-        );
+        $archives = [];
+        if ($first && $last) {
+            $archives = range(
+                (new DateTimeImmutable($first['postDate']))->format('Y'),
+                (new DateTimeImmutable($last['postDate']))->format('Y')
+            );
+        }
 
         $page['seo']['expiry'] = $page['expiryDate'];
 
