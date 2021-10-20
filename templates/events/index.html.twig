@@ -1,0 +1,13 @@
+{% extends '@W3CWebsiteTemplates/pages/listing.html.twig' %}
+
+{% block filters %}
+    {{ include('@W3CWebsiteTemplates/components/listings/events/filters.html.twig') }}
+{% endblock %}
+
+{% block list %}
+
+    <div aria-live="polite" aria-atomic="true">This is page {{ entries.pagination.page }}, displaying
+        results {{ entries.pagination.from }}-{{ entries.pagination.to }}</div>
+
+    {{ include('@W3CWebsiteTemplates/components/listings/events/list.html.twig') }}
+{% endblock %}
