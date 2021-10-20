@@ -38,6 +38,8 @@ class RecentActivities extends GraphQLQuery
         $recentEventsEndDate = '>' . (new DateTimeImmutable())->format('c');
         $this->setGraphQLFromFile(__DIR__ . '/../graphql/ecosystems/recent-activities.graphql')
              ->addFragmentFromFile(__DIR__ . '/../graphql/fragments/thumbnailImage.graphql')
+             ->addFragmentFromFile(__DIR__ . '/../graphql/fragments/listingEvent.graphql')
+             ->addFragmentFromFile(__DIR__ . '/../graphql/fragments/listingExternalEvent.graphql')
              ->addVariable('ecosystemId', $ecosystemId)
              ->addVariable('endDatetime', $recentEventsEndDate)
              ->cache($cacheLifetime);
@@ -60,16 +62,19 @@ class RecentActivities extends GraphQLQuery
                 )
             ]),
             '[recentEvents]' => new MapArray('[recentEvents]', [
+                '[id]' => '[id]',
+                '[slug]' => '[slug]',
+                '[url]'              => new CallableData([$this, 'transformEventUrl']),
                 '[title]'            => '[title]',
                 '[start]'            => new DateTimeValue('[start]'),
                 '[end]'              => new DateTimeValue('[end]'),
-                '[location]'         => '[location]',
-                '[type]'             => '[eventType][0]',
+                '[category]'         => '[category][0]',
+                '[type]'             => '[type][0]',
                 '[excerpt]'          => '[excerpt]',
                 '[thumbnailImage]'   => '[thumbnailImage][0]',
                 '[thumbnailAltText]' => '[thumbnailAltText]',
-                '[uri]'              => '[uri]',
-                '[categories]'       => '[blogCategories]'
+                '[location]'         => '[location]',
+                '[host]'             => '[host]',
             ])
         ];
     }
@@ -91,5 +96,18 @@ class RecentActivities extends GraphQLQuery
         }
 
         return $this->router->generate($route, ['slug' => $slug, 'year' => $year]);
+    }
+
+    public function transformEventUrl(array $data): string
+    {
+        if (array_key_exists('urlLink', $data) && $data['urlLink']) {
+            return $data['urlLink'];
+        }
+
+        return $this->router->generate('app_events_show', [
+            'type' => $data['type'][0]['slug'],
+            'slug' => $data['slug'],
+            'year' => $data['year']
+        ]);
     }
 }

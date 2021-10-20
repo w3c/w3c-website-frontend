@@ -30,51 +30,11 @@ query RecentActivities($ecosystemId: [QueryArgument], $endDatetime: [QueryArgume
         }
     }
     recentEvents: entries(section: "events", ecosystems: $ecosystemId, endDatetime: $endDatetime, limit: 4, orderBy: "endDate ASC") {
-        id
-        title
         ... on events_default_Entry {
-            start: startDatetime
-            end: endDatetime
-            location
-            eventType {
-                id
-                slug
-                title
-            }
-            excerpt: eventExcerpt
-            thumbnailImage {
-                ...thumbnailImage
-            }
-            thumbnailAltText
-            uri
-            blogCategories {
-                id
-                slug
-                title
-                uri
-            }
+            ...listingEvent
         }
         ... on events_external_Entry {
-            start: startDatetime
-            end: endDatetime
-            location
-            eventType {
-                id
-                slug
-                title
-            }
-            uri: urlLink
-            excerpt: eventExcerpt
-            thumbnailImage {
-                ...thumbnailImage
-            }
-            thumbnailAltText
-            blogCategories {
-                id
-                slug
-                title
-                uri
-            }
+            ...listingExternalEvent
         }
     }
 }
