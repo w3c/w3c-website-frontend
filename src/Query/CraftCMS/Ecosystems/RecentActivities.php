@@ -64,7 +64,7 @@ class RecentActivities extends GraphQLQuery
                 '[start]'            => new DateTimeValue('[start]'),
                 '[end]'              => new DateTimeValue('[end]'),
                 '[location]'         => '[location]',
-                '[type]'             => '[eventType][0][slug]',
+                '[type]'             => '[eventType][0]',
                 '[excerpt]'          => '[excerpt]',
                 '[thumbnailImage]'   => '[thumbnailImage][0]',
                 '[thumbnailAltText]' => '[thumbnailAltText]',
