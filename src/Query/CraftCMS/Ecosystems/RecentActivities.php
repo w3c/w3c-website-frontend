@@ -47,12 +47,12 @@ class RecentActivities extends GraphQLQuery
     {
         return [
             '[recentEntries]' => new MapArray('[recentEntries]', [
-                '[sectionHandle]'    => '[sectionHandle]',
+                '[category]'    => '[sectionHandle]',
                 '[title]'            => '[title]',
-                '[excerpt]'          => '[excerpt]',
+                '[text]'          => '[excerpt]',
                 '[thumbnailImage]'   => '[thumbnailImage][0]',
                 '[thumbnailAltText]' => '[thumbnailAltText]',
-                '[uri]'              => new CallableData(
+                '[url]'              => new CallableData(
                     [$this, 'transformEntryUri'],
                     '[sectionHandle]',
                     '[slug]',
