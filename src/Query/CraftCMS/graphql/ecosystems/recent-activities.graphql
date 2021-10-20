@@ -1,5 +1,5 @@
 query RecentActivities($ecosystemId: [QueryArgument], $endDatetime: [QueryArgument]) {
-    recentEntries: entries(section: ["blogPosts", "newsArticles", "pressReleases"], ecosystems: $ecosystemId, limit: 3, orderBy: "postDate DESC") {
+    recentEntries: entries(section: ["blogPosts", "newsArticles", "pressReleases"], ecosystems: $ecosystemId, limit: 4, orderBy: "postDate DESC") {
         id
         slug
         sectionHandle
@@ -29,12 +29,13 @@ query RecentActivities($ecosystemId: [QueryArgument], $endDatetime: [QueryArgume
             thumbnailAltText
         }
     }
-    recentEvents: entries(section: "events", ecosystems: $ecosystemId, endDatetime: $endDatetime, limit: 2, orderBy: "endDate ASC") {
+    recentEvents: entries(section: "events", ecosystems: $ecosystemId, endDatetime: $endDatetime, limit: 4, orderBy: "endDate ASC") {
         id
         title
         ... on events_default_Entry {
             start: startDatetime
             end: endDatetime
+            location
             eventType {
                 id
                 slug
@@ -45,16 +46,35 @@ query RecentActivities($ecosystemId: [QueryArgument], $endDatetime: [QueryArgume
                 ...thumbnailImage
             }
             thumbnailAltText
+            uri
+            blogCategories {
+                id
+                slug
+                title
+                uri
+            }
         }
         ... on events_external_Entry {
             start: startDatetime
             end: endDatetime
+            location
+            eventType {
+                id
+                slug
+                title
+            }
             uri: urlLink
             excerpt: eventExcerpt
             thumbnailImage {
                 ...thumbnailImage
             }
             thumbnailAltText
+            blogCategories {
+                id
+                slug
+                title
+                uri
+            }
         }
     }
 }

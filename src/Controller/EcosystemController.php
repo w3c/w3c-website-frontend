@@ -54,7 +54,20 @@ class EcosystemController extends AbstractController
 
         $page['seo']['expiry'] = $page['expiryDate'];
         $page['groups'] = $groups;
-        $page['recent_activities'] = $recentActivities;
+        $page['recentActivities'] = $recentActivities;
+        if (sizeof($recentActivities['recentEntries']) < 2) {
+            $page['recentActivities']['recentEvents'] = array_slice($recentActivities['recentEvents'], 0, (4 - sizeof($recentActivities['recentEntries'])));
+        }
+        if (sizeof($recentActivities['recentEvents']) < 2) {
+            $page['recentActivities']['recentEntries'] = array_slice($recentActivities['recentEntries'], 0, (4 - sizeof($recentActivities['recentEvents'])));
+        }
+        if (
+            sizeof($page['recentActivities']['recentEntries']) > 2
+            && sizeof($page['recentActivities']['recentEvents']) > 2
+        ) {
+            $page['recentActivities']['recentEntries'] = array_slice($page['recentActivities']['recentEntries'], 0, 2);
+            $page['recentActivities']['recentEvents'] = array_slice($page['recentActivities']['recentEvents'], 0, 2);
+        }
         $page['testimonials'] = $testimonials;
         $page['members'] = $members->getCollection();
         $page['evangelists'] = $evangelists;
@@ -73,12 +86,7 @@ class EcosystemController extends AbstractController
 
         if ($this->getParameter('kernel.environment') == 'dev') {
             dump($singlesBreadcrumbs);
-            dump($recentActivities);
             dump($page);
-            dump($testimonials);
-            dump($evangelists);
-            dump($groups);
-            dump($members);
         }
 
         return $this->render('ecosystems/show.html.twig', [

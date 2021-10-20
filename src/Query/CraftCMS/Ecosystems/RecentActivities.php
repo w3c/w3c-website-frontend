@@ -63,11 +63,13 @@ class RecentActivities extends GraphQLQuery
                 '[title]'            => '[title]',
                 '[start]'            => new DateTimeValue('[start]'),
                 '[end]'              => new DateTimeValue('[end]'),
-                '[type]'             => '[eventType][0][title]',
+                '[location]'         => '[location]',
+                '[type]'             => '[eventType][0][slug]',
                 '[excerpt]'          => '[excerpt]',
                 '[thumbnailImage]'   => '[thumbnailImage][0]',
                 '[thumbnailAltText]' => '[thumbnailAltText]',
-                '[uri]'              => '[uri]'
+                '[uri]'              => '[uri]',
+                '[categories]'       => '[blogCategories]'
             ])
         ];
     }
