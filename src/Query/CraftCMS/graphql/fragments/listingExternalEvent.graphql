@@ -8,6 +8,7 @@ fragment listingExternalEvent on events_external_Entry {
     year: startDatetime @formatDateTime(format: "Y")
     category: blogCategories {
         id
+        slug
         uri
         title
     }
