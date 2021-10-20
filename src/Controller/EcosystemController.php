@@ -87,6 +87,7 @@ class EcosystemController extends AbstractController
         if ($this->getParameter('kernel.environment') == 'dev') {
             dump($singlesBreadcrumbs);
             dump($page);
+            dump($recentActivities);
         }
 
         return $this->render('ecosystems/show.html.twig', [
