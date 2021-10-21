@@ -62,13 +62,13 @@ class RecentActivities extends GraphQLQuery
                 )
             ]),
             '[recentEvents]' => new MapArray('[recentEvents]', [
-                '[id]' => '[id]',
-                '[slug]' => '[slug]',
+                '[id]'               => '[id]',
+                '[slug]'             => '[slug]',
                 '[url]'              => new CallableData([$this, 'transformEventUrl']),
                 '[title]'            => '[title]',
                 '[start]'            => new DateTimeValue('[start]'),
                 '[end]'              => new DateTimeValue('[end]'),
-                '[category]'         => '[category][0]',
+                '[category]'         => new CallableData([$this, 'transformEventCategory'], '[category][0]'),
                 '[type]'             => '[type][0]',
                 '[excerpt]'          => '[excerpt]',
                 '[thumbnailImage]'   => '[thumbnailImage][0]',
@@ -109,5 +109,19 @@ class RecentActivities extends GraphQLQuery
             'slug' => $data['slug'],
             'year' => $data['year']
         ]);
+    }
+
+    public function transformEventCategory(?array $data): ?array
+    {
+        if ($data) {
+            return [
+                'id'    => $data['id'],
+                'slug'  => $data['slug'],
+                'title' => $data['title'],
+                'url'   => $this->router->generate('app_events_category', ['slug' => $data['slug']])
+            ];
+        }
+
+        return null;
     }
 }
