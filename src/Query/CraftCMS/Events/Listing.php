@@ -77,24 +77,25 @@ class Listing extends GraphQLQuery
 
     public function getMapping()
     {
-        $mapping = new WildcardMappingStrategy();
-        $mapping->addMapping('entries', ['[entries]' => new MapArray('[entries]', [
-            '[id]'               => '[id]',
-            '[slug]'             => '[slug]',
-            '[url]'              => new CallableData([$this, 'transformEventUrl']),
-            '[title]'            => '[title]',
-            '[start]'            => new DateTimeValue('[start]'),
-            '[end]'              => new DateTimeValue('[end]'),
-            '[category]'         => '[category][0]',
-            '[type]'             => '[type][0]',
-            '[excerpt]'          => '[excerpt]',
-            '[thumbnailImage]'   => '[thumbnailImage][0]',
-            '[thumbnailAltText]' => '[thumbnailAltText]',
-            '[location]'         => '[location]',
-            '[host]'             => '[host]',
-        ])]);
-
-        return $mapping;
+        return [
+            '[entry]'   => '[entry]',
+            '[total]'   => '[total]',
+            '[entries]' => new MapArray('[entries]', [
+                '[id]'               => '[id]',
+                '[slug]'             => '[slug]',
+                '[url]'              => new CallableData([$this, 'transformEventUrl']),
+                '[title]'            => '[title]',
+                '[start]'            => new DateTimeValue('[start]'),
+                '[end]'              => new DateTimeValue('[end]'),
+                '[category]'         => '[category][0]',
+                '[type]'             => '[type][0]',
+                '[excerpt]'          => '[excerpt]',
+                '[thumbnailImage]'   => '[thumbnailImage][0]',
+                '[thumbnailAltText]' => '[thumbnailAltText]',
+                '[location]'         => '[location]',
+                '[host]'             => '[host]',
+            ])
+        ];
     }
 
     public function transformEventUrl(array $data): string
