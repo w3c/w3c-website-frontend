@@ -65,7 +65,9 @@ class EventsController extends AbstractController
 
         [$collection, $categories, $archives] = $this->buildListing($manager, $site, $currentPage);
         $page = $manager->get('page');
-        dump($page);
+        if ($this->getParameter('kernel.environment') == 'dev') {
+            dump($page);
+        }
         $page['seo']['expiry'] = $page['expiryDate'];
         $page['breadcrumbs'] = [
             'title'  => $page['title'],
