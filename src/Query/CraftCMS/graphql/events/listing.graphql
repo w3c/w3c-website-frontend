@@ -1,21 +1,4 @@
 query EventsListing($siteId: [QueryArgument], $category: [QueryArgument], $tag: [QueryArgument], $before: String, $after: String, $search: String, $limit: Int, $offset: Int) {
-    entry(section: "eventsListing", siteId: $siteId) {
-        id
-        slug
-        title
-        uri
-        expiryDate
-        breadcrumbs: parent {
-            ...breadcrumbs
-        }
-        ... on eventsListing_eventsListing_Entry {
-            excerpt
-            lead: pageLead
-            seo: seoOptions {
-                ...seoData
-            }
-        }
-    }
     total: entryCount(section: "events", siteId: $siteId, blogCategories: $category, blogTags: $tag, before: $before, after: $after, search: $search)
     entries(section: "events", siteId: $siteId, blogCategories: $category, blogTags: $tag, before: $before, after: $after, search: $search, limit: $limit, offset: $offset, orderBy: "postDate desc") {
         ... on events_default_Entry {

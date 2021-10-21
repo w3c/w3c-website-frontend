@@ -56,8 +56,6 @@ class Listing extends GraphQLQuery
         $this->setGraphQLFromFile(__DIR__ . '/../graphql/events/listing.graphql')
             ->addFragmentFromFile(__DIR__ . '/../graphql/fragments/listingEvent.graphql')
             ->addFragmentFromFile(__DIR__ . '/../graphql/fragments/listingExternalEvent.graphql')
-            ->addFragmentFromFile(__DIR__ . '/../graphql/fragments/seoData.graphql')
-            ->addFragmentFromFile(__DIR__ . '/../graphql/fragments/breadcrumbs.graphql')
             ->setRootPropertyPath('[entries]')
             ->setTotalResults('[total]')
             ->setResultsPerPage($limit)
@@ -78,23 +76,19 @@ class Listing extends GraphQLQuery
     public function getMapping()
     {
         return [
-            '[entry]'   => '[entry]',
-            '[total]'   => '[total]',
-            '[entries]' => new MapArray('[entries]', [
-                '[id]'               => '[id]',
-                '[slug]'             => '[slug]',
-                '[url]'              => new CallableData([$this, 'transformEventUrl']),
-                '[title]'            => '[title]',
-                '[start]'            => new DateTimeValue('[start]'),
-                '[end]'              => new DateTimeValue('[end]'),
-                '[category]'         => '[category][0]',
-                '[type]'             => '[type][0]',
-                '[excerpt]'          => '[excerpt]',
-                '[thumbnailImage]'   => '[thumbnailImage][0]',
-                '[thumbnailAltText]' => '[thumbnailAltText]',
-                '[location]'         => '[location]',
-                '[host]'             => '[host]',
-            ])
+            '[id]'               => '[id]',
+            '[slug]'             => '[slug]',
+            '[url]'              => new CallableData([$this, 'transformEventUrl']),
+            '[title]'            => '[title]',
+            '[start]'            => new DateTimeValue('[start]'),
+            '[end]'              => new DateTimeValue('[end]'),
+            '[category]'         => new CallableData([$this, 'transformCategory'], '[category][0]'),
+            '[type]'             => '[type][0]',
+            '[excerpt]'          => '[excerpt]',
+            '[thumbnailImage]'   => '[thumbnailImage][0]',
+            '[thumbnailAltText]' => '[thumbnailAltText]',
+            '[location]'         => '[location]',
+            '[host]'             => '[host]',
         ];
     }
 
@@ -109,5 +103,19 @@ class Listing extends GraphQLQuery
             'slug' => $data['slug'],
             'year' => $data['year']
         ]);
+    }
+
+    public function transformCategory(?array $data): ?array
+    {
+        if ($data) {
+            return [
+                'id' => $data['id'],
+                'slug' => $data['slug'],
+                'title' => $data['title'],
+                'url' => $this->router->generate('app_events_category', ['slug' => $data['slug']])
+            ];
+        }
+
+        return null;
     }
 }

@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Query\CraftCMS\Events\Entry;
 use App\Query\CraftCMS\Events\Filters;
 use App\Query\CraftCMS\Events\Listing;
+use App\Query\CraftCMS\Events\Page;
 use App\Query\CraftCMS\Taxonomies\Categories;
 use App\Query\CraftCMS\YouMayAlsoLikeRelatedEntries;
 use DateTimeImmutable;
@@ -46,6 +47,7 @@ class EventsController extends AbstractController
         $currentPage = $request->query->get('page', 1);
         $search = $request->query->get('search');
         
+        $manager->add('page', new Page($site->siteId));
         $manager->add(
             'eventsListing',
             new Listing(
@@ -61,7 +63,10 @@ class EventsController extends AbstractController
             )
         );
 
-        [$page, $collection, $categories, $archives] = $this->buildListing($manager, $site, $currentPage);
+        [$collection, $categories, $archives] = $this->buildListing($manager, $site, $currentPage);
+        $page = $manager->get('page');
+        dump($page);
+        $page['seo']['expiry'] = $page['expiryDate'];
         $page['breadcrumbs'] = [
             'title'  => $page['title'],
             'uri'    => $page['uri'],
@@ -100,53 +105,11 @@ class EventsController extends AbstractController
         Request $request,
         RouterInterface $router
     ): Response {
-        $currentPage = $request->query->get('page', 1);
-        $search = $request->query->get('search');
-
-        $manager->add(
-            'eventsListing',
-            new Listing(
-
-                $router,
-                $site->siteId,
-                null,
-                null,
-                $year + 1,
-                $year,
-                $search,
-                self::LIMIT,
-                $currentPage
-            )
-        );
-
-        $singlesBreadcrumbs = $manager->get('singles-breadcrumbs');
-
-        [$page, $collection, $categories, $archives] = $this->buildListing($manager, $site, $currentPage);
-        $page['breadcrumbs'] = [
-            'title' => $year,
-            'uri' => $singlesBreadcrumbs['events']['uri'] . '/' . $year,
-            'parent' => [
-                'title'  => $singlesBreadcrumbs['events']['title'],
-                'uri'    => $singlesBreadcrumbs['events']['uri'],
-                'parent' => null
-            ]
-        ];
-        $page['title'] = $page['title'] . ' - ' . $year;
-
-        return $this->render('events/index.html.twig', [
-            'site'       => $site,
-            'navigation' => $manager->getCollection('navigation'),
-            'page'       => $page,
-            'entries'    => $collection,
-            'pagination' => $collection->getPagination(),
-            'categories' => $categories,
-            'archives'   => $archives,
-            'search'     => $search
-        ]);
+        return new Response();
     }
 
     /**
-     * @Route("/category/{slug}", requirements={"slug": "[^/]+"})
+     * @Route("/categories/{slug}", requirements={"slug": "[^/]+"})
      *
      * @param QueryManager    $manager
      * @param string          $slug
@@ -166,63 +129,7 @@ class EventsController extends AbstractController
         RouterInterface $router
     ): Response
     {
-        $currentPage = $request->query->get('page', 1);
-        $search = $request->query->get('search');
-
-        $manager->add('categories', new Categories($site->siteId, 'blogCategories'));
-        $categories = $manager->getCollection('categories');
-
-        $category = [];
-        foreach ($categories as $categoryData) {
-            if ($categoryData['slug'] == $slug) {
-                $category = $categoryData;
-                break;
-            }
-        }
-
-        if ($category['id'] == null) {
-            throw $this->createNotFoundException('CategoryInfo not found');
-        }
-
-        $manager->add(
-            'eventsListing',
-            new Listing(
-                $router,
-                $site->siteId,
-                $category['id'],
-                null,
-                null,
-                null,
-                $search,
-                self::LIMIT,
-                $currentPage
-            )
-        );
-
-        [$page, $collection, $categories, $archives] = $this->buildListing($manager, $site, $currentPage);
-        $singlesBreadcrumbs = $manager->get('singles-breadcrumbs');
-
-        $page['breadcrumbs'] = [
-            'title'  => $category['title'],
-            'uri'    => $singlesBreadcrumbs['events']['uri'] . '/category/' . $slug,
-            'parent' => [
-                'title'  => $singlesBreadcrumbs['events']['title'],
-                'uri'    => $singlesBreadcrumbs['events']['uri'],
-                'parent' => null
-            ]
-        ];
-        $page['title']       = $page['title'] . ' - ' . $category['title'];
-
-        return $this->render('events/index.html.twig', [
-            'site'       => $site,
-            'navigation' => $manager->getCollection('navigation'),
-            'page'       => $page,
-            'entries'    => $collection,
-            'pagination' => $collection->getPagination(),
-            'categories' => $categories,
-            'archives'   => $archives,
-            'search'     => $search
-        ]);
+        return new Response();
     }
 
     /**
@@ -324,7 +231,6 @@ class EventsController extends AbstractController
             return $this->redirectToRoute('app_events_index', ['page' => 1]);
         }
 
-        $page       = $manager->get('eventsListing', '[entry]');
         $categories = $manager->getCollection('filters', '[categories]');
         $first      = $manager->get('filters', '[first]');
         $last       = $manager->get('filters', '[last]');
@@ -334,16 +240,13 @@ class EventsController extends AbstractController
             (new DateTimeImmutable($last['postDate']))->format('Y')
         );
 
-        $page['seo']['expiry'] = $page['expiryDate'];
-
         if ($this->getParameter('kernel.environment') == 'dev') {
             dump($archives);
-            dump($page);
             dump($collection);
             dump($pagination);
             dump($categories);
         }
 
-        return [$page, $collection, $categories, $archives];
+        return [$collection, $categories, $archives];
     }
 }
