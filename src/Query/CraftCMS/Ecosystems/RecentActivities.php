@@ -52,7 +52,7 @@ class RecentActivities extends GraphQLQuery
                 '[category]'    => '[sectionHandle]',
                 '[title]'            => '[title]',
                 '[text]'          => '[excerpt]',
-                '[thumbnailImage]'   => '[thumbnailImage][0]',
+                '[img]'   => '[thumbnailImage][0]',
                 '[thumbnailAltText]' => '[thumbnailAltText]',
                 '[url]'              => new CallableData(
                     [$this, 'transformEntryUri'],
