@@ -5,6 +5,7 @@ fragment listingExternalEvent on events_external_Entry {
     title
     start: startDatetime
     end: endDatetime
+    tz: startDatetime@formatDateTime(format: "e")
     year: startDatetime @formatDateTime(format: "Y")
     category: blogCategories {
         id

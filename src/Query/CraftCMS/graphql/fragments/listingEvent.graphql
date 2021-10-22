@@ -5,6 +5,7 @@ fragment listingEvent on events_default_Entry {
     title
     start: startDatetime
     end: endDatetime
+    tz: startDatetime@formatDateTime(format: "e")
     year: startDatetime @formatDateTime(format: "Y")
     category: blogCategories {
         id

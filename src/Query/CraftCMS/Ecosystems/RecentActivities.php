@@ -68,6 +68,7 @@ class RecentActivities extends GraphQLQuery
                 '[title]'            => '[title]',
                 '[start]'            => new DateTimeValue('[start]'),
                 '[end]'              => new DateTimeValue('[end]'),
+                '[tz]'               => '[tz]',
                 '[category]'         => new CallableData([$this, 'transformEventCategory'], '[category][0]'),
                 '[type]'             => '[type][0]',
                 '[excerpt]'          => '[excerpt]',
