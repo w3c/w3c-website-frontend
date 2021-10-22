@@ -27,7 +27,7 @@ query YouMayAlsoLike($uri: [String], $siteId: [QueryArgument]) {
 fragment youMayAlsoLikeRelatedEntries on youMayAlsoLikeRelatedEntries_MatrixField {
     ... on youMayAlsoLikeRelatedEntries_contentFromTheCms_BlockType {
         contentEntry {
-            category: typeHandle
+            category: sectionHandle
             title
             url: uri
             ... on blogPosts_default_Entry {
