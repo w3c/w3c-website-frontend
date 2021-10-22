@@ -1,0 +1,72 @@
+query Event($slug: [String], $siteId: [QueryArgument]) {
+    entry(slug: $slug, siteId: $siteId, section: "events") {
+        id
+        status
+        uri
+        title
+        slug
+        language
+        localized {
+            title
+            language_code: language
+            uri
+        }
+        postDate
+        dateUpdated
+        expiryDate
+        ... on events_default_Entry {
+            excerpt: eventExcerpt
+            speakersName
+            location
+            host
+            categories: blogCategories {
+                title
+                slug
+            }
+            tags: blogTags {
+                title
+                slug
+            }
+            groups: workingGroups {
+                title
+                slug
+            }
+            ecosystems {
+                title
+                slug
+            }
+            defaultFlexibleComponents(orderBy: "sortOrder") {
+                ...defaultFlexibleComponents
+            }
+            seo: seoOptions {
+                ...seoData
+            }
+        }
+        ... on events_external_Entry {
+            urlLink
+            excerpt: eventExcerpt
+            speakersName
+            location
+            host
+            categories: blogCategories {
+                title
+                slug
+            }
+            tags: blogTags {
+                title
+                slug
+            }
+            groups: workingGroups {
+                title
+                slug
+            }
+            ecosystems {
+                title
+                slug
+            }
+            seo: seoOptions {
+                ...seoData
+            }
+        }
+    }
+}

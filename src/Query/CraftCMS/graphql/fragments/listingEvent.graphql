@@ -1,0 +1,27 @@
+fragment listingEvent on events_default_Entry {
+    id
+    slug
+    uri
+    title
+    start: startDatetime
+    end: endDatetime
+    year: startDatetime @formatDateTime(format: "Y")
+    category: blogCategories {
+        id
+        slug
+        uri
+        title
+    }
+    type: eventType {
+        id
+        slug
+        title
+    }
+    excerpt: eventExcerpt
+    thumbnailImage {
+        ...thumbnailImage
+    }
+    thumbnailAltText
+    location
+    host
+}

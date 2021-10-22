@@ -1,0 +1,19 @@
+query EventsPage($siteId: [QueryArgument]) {
+    entry(section: "eventsListing", siteId: $siteId) {
+        id
+        slug
+        title
+        uri
+        expiryDate
+        breadcrumbs: parent {
+            ...breadcrumbs
+        }
+        ... on eventsListing_eventsListing_Entry {
+            excerpt
+            lead: pageLead
+            seo: seoOptions {
+                ...seoData
+            }
+        }
+    }
+}
