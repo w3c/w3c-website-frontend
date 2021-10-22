@@ -7146,12 +7146,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/w3c/w3c-website-templates-bundle.git",
-                "reference": "c44d607d105bb82f5c550981d2d8d19f1eee7557"
+                "reference": "a73481e8df5f9c81b28aad07317c34d250716429"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/w3c/w3c-website-templates-bundle/zipball/c44d607d105bb82f5c550981d2d8d19f1eee7557",
-                "reference": "c44d607d105bb82f5c550981d2d8d19f1eee7557",
+                "url": "https://api.github.com/repos/w3c/w3c-website-templates-bundle/zipball/a73481e8df5f9c81b28aad07317c34d250716429",
+                "reference": "a73481e8df5f9c81b28aad07317c34d250716429",
                 "shasum": ""
             },
             "require": {
@@ -7186,7 +7186,7 @@
             "support": {
                 "source": "https://github.com/w3c/w3c-website-templates-bundle/tree/main"
             },
-            "time": "2021-10-22T13:04:57+00:00"
+            "time": "2021-10-22T14:39:32+00:00"
         },
         {
             "name": "webmozart/assert",
@@ -10261,5 +10261,5 @@
     "platform-overrides": {
         "php": "7.4"
     },
-    "plugin-api-version": "2.0.0"
+    "plugin-api-version": "2.1.0"
 }
