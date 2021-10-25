@@ -139,11 +139,11 @@ class EventsController extends AbstractController
         IcalExporter $icalExporter,
         Request $request
     ): Response {
-        $manager->add('page', new Entry($site->siteId, $slug, $router));
+        $manager->add('event', new Entry($site->siteId, $slug, $router));
 
-        $event = $manager->get('page');
+        $event = $manager->get('event');
         if (empty($event)) {
-            throw $this->createNotFoundException('Page not found');
+            throw $this->createNotFoundException('Event not found');
         }
 
         $postYear = intval((new DateTimeImmutable($event['postDate']))->format('Y'));
