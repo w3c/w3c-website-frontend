@@ -58,6 +58,7 @@ class Entry extends GraphQLQuery
         $mapping->addMapping('categories', $this->mapTaxonomy('categories', 'transformCategory'));
         $mapping->addMapping('tags', $this->mapTaxonomy('tags', 'transformTag'));
         $mapping->addMapping('ecosystems', $this->mapTaxonomy('ecosystems', 'transformEcosystem'));
+        $mapping->addMapping('type', ['[type]' => '[type][0]']);
 
         return $mapping;
     }

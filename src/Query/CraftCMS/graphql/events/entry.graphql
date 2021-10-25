@@ -1,6 +1,7 @@
 query Event($slug: [String], $siteId: [QueryArgument]) {
     entry(slug: $slug, siteId: $siteId, section: "events") {
         id
+        uid
         status
         uri
         title
@@ -16,9 +17,18 @@ query Event($slug: [String], $siteId: [QueryArgument]) {
         expiryDate
         ... on events_default_Entry {
             excerpt: eventExcerpt
+            start: startDatetime
+            end: endDatetime
+            tz: startDatetime@formatDateTime(format: "e")
+            year: startDatetime @formatDateTime(format: "Y")
             speakersName
             location
             host
+            type: eventType {
+                id
+                slug
+                title
+            }
             categories: blogCategories {
                 title
                 slug
@@ -45,9 +55,18 @@ query Event($slug: [String], $siteId: [QueryArgument]) {
         ... on events_external_Entry {
             urlLink
             excerpt: eventExcerpt
+            start: startDatetime
+            end: endDatetime
+            tz: startDatetime@formatDateTime(format: "e")
+            year: startDatetime @formatDateTime(format: "Y")
             speakersName
             location
             host
+            type: eventType {
+                id
+                slug
+                title
+            }
             categories: blogCategories {
                 title
                 slug

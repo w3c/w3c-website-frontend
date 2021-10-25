@@ -8,6 +8,7 @@ use App\Query\CraftCMS\Events\Listing;
 use App\Query\CraftCMS\Events\Page;
 use App\Query\CraftCMS\Taxonomies\Categories;
 use App\Query\CraftCMS\YouMayAlsoLikeRelatedEntries;
+use App\Service\IcalExporter;
 use DateTimeImmutable;
 use Exception;
 use Strata\Data\Exception\GraphQLQueryException;
@@ -109,6 +110,57 @@ class EventsController extends AbstractController
         }
 
         return $this->buildListing($request, $type, $year, $manager, $site, $router);
+    }
+
+    /**
+     * @Route("/{type}/{year}/{slug}.ics", requirements={"year": "\d\d\d\d"})
+     *
+     * @param string          $type
+     * @param int             $year
+     * @param string          $slug
+     * @param QueryManager    $manager
+     * @param RouterInterface $router
+     * @param Site            $site
+     * @param IcalExporter    $icalExporter
+     * @param Request         $request
+     *
+     * @return Response
+     * @throws GraphQLQueryException
+     * @throws QueryManagerException
+     * @throws Exception
+     */
+    public function ical(
+        string $type,
+        int $year,
+        string $slug,
+        QueryManager $manager,
+        RouterInterface $router,
+        Site $site,
+        IcalExporter $icalExporter,
+        Request $request
+    ): Response {
+        $manager->add('page', new Entry($site->siteId, $slug, $router));
+
+        $event = $manager->get('page');
+        if (empty($event)) {
+            throw $this->createNotFoundException('Page not found');
+        }
+
+        $postYear = intval((new DateTimeImmutable($event['postDate']))->format('Y'));
+        if ($year !== $postYear) {
+            return $this->redirectToRoute('app_events_show', ['type' => $type, 'slug' => $slug, 'year' => $postYear]);
+        }
+
+        $manager->add(
+            'crosslinks',
+            new YouMayAlsoLikeRelatedEntries($site->siteId, substr($request->getPathInfo(), 1))
+        );
+
+        return new Response(
+            $icalExporter->exportEvent($event)->serialize(),
+            Response::HTTP_OK,
+            ['Content-Type' => 'text/calendar;charset=UTF-8']
+        );
     }
 
     /**
