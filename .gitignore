@@ -36,3 +36,8 @@ npm-debug.log
 /phpunit.xml
 .phpunit.result.cache
 ###< phpunit/phpunit ###
+
+###> PHPStorm graphql ###
+/.graphqlconfig
+/schema.graphql
+###< PHPStorm graphql ###
