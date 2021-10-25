@@ -15,7 +15,6 @@ use Strata\Data\Exception\QueryManagerException;
 use Strata\Data\Query\QueryManager;
 use Strata\Frontend\Site;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -32,7 +31,13 @@ class EventsController extends AbstractController
 
     /**
      * @Route("/")
+     * @Route(
+     *     "/{type}/",
+     *     name="app_events_index_type",
+     *     requirements={"type": "global|ac-meeting|tpac-meeting|workshops|talks|conferences"}
+     * )
      *
+     * @param string|null     $type
      * @param QueryManager    $manager
      * @param Site            $site
      * @param Request         $request
@@ -42,56 +47,41 @@ class EventsController extends AbstractController
      * @throws GraphQLQueryException
      * @throws QueryManagerException
      */
-    public function index(QueryManager $manager, Site $site, Request $request, RouterInterface $router): Response
-    {
-        $currentPage = $request->query->get('page', 1);
-        $search = $request->query->get('search');
-        
-        $manager->add('page', new Page($site->siteId));
-        $manager->add(
-            'eventsListing',
-            new Listing(
-                $router,
-                $site->siteId,
-                null,
-                null,
-                null,
-                null,
-                $search,
-                self::LIMIT,
-                $currentPage
-            )
-        );
+    public function index(
+        QueryManager $manager,
+        Site $site,
+        Request $request,
+        RouterInterface $router,
+        string $type = null
+    ): Response {
+        if ($request->query->get('type')) {
+            return $this->redirectToRoute('app_events_index_type', $request->query->all());
+        } elseif ($request->query->has('type')) {
+            // type is in the QS but has no value, redirect to app_events_index after removing this parameter
+            $params = array_filter($request->query->all(), function ($key) {
+                return $key != 'type';
+            }, ARRAY_FILTER_USE_KEY);
 
-        [$collection, $categories, $archives] = $this->buildListing($manager, $site, $currentPage);
-        $page = $manager->get('page');
-        if ($this->getParameter('kernel.environment') == 'dev') {
-            dump($page);
+            return $this->redirectToRoute('app_events_index', $params);
         }
-        $page['seo']['expiry'] = $page['expiryDate'];
-        $page['breadcrumbs'] = [
-            'title'  => $page['title'],
-            'uri'    => $page['uri'],
-            'parent' => null
-        ];
 
-        return $this->render('events/index.html.twig', [
-            'site'       => $site,
-            'navigation' => $manager->getCollection('navigation'),
-            'page'       => $page,
-            'entries'    => $collection,
-            'pagination' => $collection->getPagination(),
-            'categories' => $categories,
-            'archives'   => $archives,
-            'search'     => $search
-        ]);
+        return $this->buildListing($request, $type, null, $manager, $site, $router);
     }
 
     /**
-     * @Route("/{year}", requirements={"year": "\d\d\d\d"})
+     * @Route("/{year}/", requirements={"year": "\d\d\d\d"})
+     * @Route(
+     *     "/{type}/{year}/",
+     *     name="app_events_archive_type",
+     *     requirements={
+     *         "type": "global|ac-meeting|tpac-meeting|workshops|talks|conferences",
+     *         "year": "\d\d\d\d"
+     *     }
+     * )
      *
-     * @param QueryManager    $manager
+     * @param string|null     $type
      * @param int             $year
+     * @param QueryManager    $manager
      * @param Site            $site
      * @param Request         $request
      * @param RouterInterface $router
@@ -101,37 +91,24 @@ class EventsController extends AbstractController
      * @throws QueryManagerException
      */
     public function archive(
-        QueryManager $manager,
         int $year,
-        Site $site,
-        Request $request,
-        RouterInterface $router
-    ): Response {
-        return new Response();
-    }
-
-    /**
-     * @Route("/categories/{slug}", requirements={"slug": "[^/]+"})
-     *
-     * @param QueryManager    $manager
-     * @param string          $slug
-     * @param Site            $site
-     * @param Request         $request
-     * @param RouterInterface $router
-     *
-     * @return Response
-     * @throws GraphQLQueryException
-     * @throws QueryManagerException
-     */
-    public function category(
         QueryManager $manager,
-        string $slug,
         Site $site,
         Request $request,
-        RouterInterface $router
-    ): Response
-    {
-        return new Response();
+        RouterInterface $router,
+        string $type = null
+    ): Response {
+        if ($request->query->get('type')) {
+            return $this->redirectToRoute(
+                'app_events_archive_type',
+                array_merge(
+                    ['year' => $year],
+                    $request->query->all()
+                )
+            );
+        }
+
+        return $this->buildListing($request, $type, $year, $manager, $site, $router);
     }
 
     /**
@@ -148,6 +125,7 @@ class EventsController extends AbstractController
      * @return Response
      * @throws GraphQLQueryException
      * @throws QueryManagerException
+     * @throws Exception
      */
     public function show(
         string $type,
@@ -209,18 +187,75 @@ class EventsController extends AbstractController
     }
 
     /**
-     * @param QueryManager $manager
-     * @param Site         $site
-     * @param int          $currentPage
+     * @param Request         $request
+     * @param string|null     $type
+     * @param                 $year
+     * @param QueryManager    $manager
+     * @param Site            $site
+     * @param RouterInterface $router
      *
-     * @return RedirectResponse|array
+     * @return Response
      * @throws GraphQLQueryException
      * @throws QueryManagerException
-     * @throws Exception
      */
-    protected function buildListing(QueryManager $manager, Site $site, int $currentPage): array
-    {
+    private function buildListing(
+        Request $request,
+        ?string $type,
+        $year,
+        QueryManager $manager,
+        Site $site,
+        RouterInterface $router
+    ): Response {
+        $currentPage  = $request->query->get('page', 1);
+        $categorySlug = $request->query->get('category');
+
         $manager->add('filters', new Filters($site->siteId));
+        $filters     = $manager->get('filters');
+        $types       = $filters['types'];
+        $eventType   = [];
+        if ($type) {
+            foreach ($types as $eventTypeData) {
+                if ($eventTypeData['slug'] == $type) {
+                    $eventType   = $eventTypeData;
+                    break;
+                }
+            }
+
+            if (!$eventType) {
+                throw $this->createNotFoundException('Event Type not found');
+            }
+        }
+
+        $category = [];
+        if ($categorySlug) {
+            $manager->add('categories', new Categories($site->siteId, 'blogCategories'));
+            $categories = $manager->getCollection('categories');
+
+            foreach ($categories as $categoryData) {
+                if ($categoryData['slug'] == $categorySlug) {
+                    $category = $categoryData;
+                    break;
+                }
+            }
+
+            if (!$category) {
+                throw $this->createNotFoundException('Category not found');
+            }
+        }
+
+        $manager->add('page', new Page($site->siteId));
+        $manager->add(
+            'eventsListing',
+            new Listing(
+                $router,
+                $site->siteId,
+                array_key_exists('id', $eventType) ? $eventType['id'] : null,
+                array_key_exists('id', $category) ? $category['id'] : null,
+                $year,
+                self::LIMIT,
+                $currentPage
+            )
+        );
 
         $collection = $manager->getCollection('eventsListing');
         $pagination = $collection->getPagination();
@@ -234,21 +269,74 @@ class EventsController extends AbstractController
         }
 
         $categories = $manager->getCollection('filters', '[categories]');
-        $first      = $manager->get('filters', '[first]');
-        $last       = $manager->get('filters', '[last]');
 
-        $archives = range(
-            (new DateTimeImmutable($first['postDate']))->format('Y'),
-            (new DateTimeImmutable($last['postDate']))->format('Y')
-        );
+
+        $page = $manager->get('page');
+        $page['seo']['expiry'] = $page['expiryDate'];
+        $page['breadcrumbs'] = $this->breadcrumbs($page, $eventType, $router, $type, $year);
 
         if ($this->getParameter('kernel.environment') == 'dev') {
-            dump($archives);
+            dump($page);
             dump($collection);
             dump($pagination);
             dump($categories);
         }
 
-        return [$collection, $categories, $archives];
+        return $this->render('events/index.html.twig', [
+            'site'          => $site,
+            'navigation'    => $manager->getCollection('navigation'),
+            'page'          => $page,
+            'type_slug'     => $type,
+            'category_slug' => $categorySlug,
+            'entries'       => $collection,
+            'pagination'    => $collection->getPagination(),
+            'categories'    => $categories,
+            'types'         => $types,
+            'reset_url'     => $router->generate('app_events_index')
+        ]);
+    }
+
+    /**
+     * @param                 $page
+     * @param                 $eventType
+     * @param RouterInterface $router
+     * @param string|null     $type
+     * @param                 $year
+     *
+     * @return array          recursive breadcrumbs
+     */
+    private function breadcrumbs($page, $eventType, RouterInterface $router, ?string $type, $year): array
+    {
+        $breadcrumbs = [
+            'title'  => $page['title'],
+            'uri'    => $page['uri'],
+            'parent' => null
+        ];
+
+        if ($eventType) {
+            $breadcrumbs = [
+                'title'  => $eventType['title'],
+                'uri'    => $router->generate('app_events_index_type', ['type' => $type]),
+                'parent' => $breadcrumbs
+            ];
+        }
+
+        if ($year) {
+            if ($eventType) {
+                $breadcrumbs = [
+                    'title'  => $year,
+                    'uri'    => $router->generate('app_events_archive_type', ['year' => $year, 'type' => $type]),
+                    'parent' => $breadcrumbs
+                ];
+            } else {
+                $breadcrumbs = [
+                    'title'  => $year,
+                    'uri'    => $router->generate('app_events_archive', ['year' => $year]),
+                    'parent' => $breadcrumbs
+                ];
+            }
+        }
+
+        return $breadcrumbs;
     }
 }

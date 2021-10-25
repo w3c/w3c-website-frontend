@@ -26,28 +26,22 @@ class Listing extends GraphQLQuery
      *
      * @param RouterInterface $router
      * @param int             $siteId        Site ID of page content
+     * @param int|null        $eventType
      * @param int|null        $category
-     * @param int|null        $tag
-     * @param string|null     $before
-     * @param string|null     $after
-     * @param string|null     $search
+     * @param string|null     $year
      * @param int             $limit
      * @param int             $page
-     * @param int             $cacheLifetime Cache lifetime to store HTTP response for, defaults to 1 hour
      *
      * @throws GraphQLQueryException
      */
     public function __construct(
         RouterInterface $router,
         int $siteId,
+        int $eventType = null,
         int $category = null,
-        int $tag = null,
-        string $before = null,
-        string $after = null,
-        string $search = null,
+        string $year = null,
         int $limit = 10,
-        int $page = 1,
-        int $cacheLifetime = CacheLifetime::HOUR
+        int $page = 1
     ) {
         $this->router = $router;
 
@@ -58,17 +52,16 @@ class Listing extends GraphQLQuery
             ->setTotalResults('[total]')
             ->setResultsPerPage($limit)
             ->setCurrentPage($page)
-
             ->addVariable('siteId', $siteId)
+            ->addVariable('eventType', $eventType)
             ->addVariable('category', $category)
-            ->addVariable('tag', $tag)
-            ->addVariable('before', $before)
-            ->addVariable('after', $after)
-            ->addVariable('search', $search)
             ->addVariable('limit', $limit)
             ->addVariable('offset', ($page - 1) * $limit)
-            ->cache($cacheLifetime)
         ;
+
+        if ($year) {
+            $this->addVariable('range', ["and", '>=' . $year, '<' . ((int)$year + 1)]);
+        }
     }
 
     public function getMapping()
@@ -111,7 +104,7 @@ class Listing extends GraphQLQuery
                 'id' => $data['id'],
                 'slug' => $data['slug'],
                 'title' => $data['title'],
-                'url' => $this->router->generate('app_events_category', ['slug' => $data['slug']])
+                'url' => $this->router->generate('app_events_index', ['category' => $data['slug']])
             ];
         }
 

@@ -5,14 +5,13 @@ query EventFilters($siteId: [QueryArgument]) {
         uri
     }
     types: categories(siteId: $siteId, group: "eventType", orderBy: "title asc") {
+        id
         title
         slug
-        uri
-    }
-    first: entry(section: "events", siteId: $siteId, orderBy: "postDate asc") {
-        postDate
-    }
-    last: entry(section: "events", siteId: $siteId, orderBy: "postDate desc") {
-        postDate
+        level
+        children {
+            title
+            slug
+        }
     }
 }

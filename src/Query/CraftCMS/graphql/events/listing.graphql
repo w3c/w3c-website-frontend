@@ -1,6 +1,25 @@
-query EventsListing($siteId: [QueryArgument], $category: [QueryArgument], $tag: [QueryArgument], $before: String, $after: String, $search: String, $limit: Int, $offset: Int) {
-    total: entryCount(section: "events", siteId: $siteId, blogCategories: $category, blogTags: $tag, before: $before, after: $after, search: $search)
-    entries(section: "events", siteId: $siteId, blogCategories: $category, blogTags: $tag, before: $before, after: $after, search: $search, limit: $limit, offset: $offset, orderBy: "startDatetime desc") {
+query EventsListing(
+    $siteId: [QueryArgument],
+    $eventType: [QueryArgument],
+    $category: [QueryArgument],
+    $range: [QueryArgument],
+    $limit: Int,
+    $offset: Int) {
+    total: entryCount(
+        section: "events",
+        siteId: $siteId,
+        eventType: $eventType,
+        blogCategories: $category,
+        startDatetime: $range)
+    entries(
+        section: "events",
+        siteId: $siteId,
+        eventType: $eventType,
+        blogCategories: $category,
+        startDatetime: $range,
+        limit: $limit,
+        offset: $offset,
+        orderBy: "startDatetime desc") {
         ... on events_default_Entry {
             ...listingEvent
         }
