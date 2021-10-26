@@ -60,9 +60,9 @@ class Listing extends GraphQLQuery
             ->addVariable('offset', ($page - 1) * $limit)
         ;
 
-        if ($year) {
+        if ($year) { // archive
             $this->addVariable('start', ["and", '>=' . $year, '<' . ((int)$year + 1)]);
-        } else {
+        } else { // by default only get ongoing and future events
             $now = new DateTimeImmutable();
             $this->addVariable('end', '>' . $now->format('Y-m-d'));
         }
