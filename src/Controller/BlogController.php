@@ -141,7 +141,7 @@ class BlogController extends AbstractController
     }
 
     /**
-     * @Route("/categories/{slug}", requirements={"slug": "[^/]+"})
+     * @Route("/category/{slug}", requirements={"slug": "[^/]+"})
      *
      * @param QueryManager $manager
      * @param string       $slug
