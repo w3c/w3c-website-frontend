@@ -7,6 +7,7 @@ use App\Query\CraftCMS\Events\Filters;
 use App\Query\CraftCMS\Events\Listing;
 use App\Query\CraftCMS\Events\Page;
 use App\Query\CraftCMS\Taxonomies\Categories;
+use App\Query\CraftCMS\Taxonomies\Tags;
 use App\Query\CraftCMS\YouMayAlsoLikeRelatedEntries;
 use App\Service\IcalExporter;
 use DateTimeImmutable;
@@ -261,6 +262,7 @@ class EventsController extends AbstractController
     ): Response {
         $currentPage  = $request->query->get('page', 1);
         $categorySlug = $request->query->get('category');
+        $tagSlug      = $request->query->get('tag');
 
         $manager->add('filters', new Filters($site->siteId));
         $filters     = $manager->get('filters');
@@ -296,6 +298,23 @@ class EventsController extends AbstractController
             }
         }
 
+        $tag = [];
+        if ($tagSlug) {
+            $manager->add('tags', new Tags($site->siteId, 'blogTags'));
+            $tags = $manager->getCollection('tags');
+
+            foreach ($tags as $tagData) {
+                if ($tagData['slug'] == $tagSlug) {
+                    $tag = $tagData;
+                    break;
+                }
+            }
+
+            if (!$tag) {
+                throw $this->createNotFoundException('Tag not found');
+            }
+        }
+
         $manager->add('page', new Page($site->siteId));
         $manager->add(
             'eventsListing',
@@ -304,6 +323,7 @@ class EventsController extends AbstractController
                 $site->siteId,
                 array_key_exists('id', $eventType) ? $eventType['id'] : null,
                 array_key_exists('id', $category) ? $category['id'] : null,
+                array_key_exists('id', $tag) ? $tag['id'] : null,
                 $year,
                 self::LIMIT,
                 $currentPage

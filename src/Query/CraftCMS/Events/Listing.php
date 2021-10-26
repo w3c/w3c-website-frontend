@@ -29,6 +29,7 @@ class Listing extends GraphQLQuery
      * @param int             $siteId        Site ID of page content
      * @param int|null        $eventType
      * @param int|null        $category
+     * @param int|null        $tag
      * @param string|null     $year
      * @param int             $limit
      * @param int             $page
@@ -40,6 +41,7 @@ class Listing extends GraphQLQuery
         int $siteId,
         int $eventType = null,
         int $category = null,
+        int $tag = null,
         string $year = null,
         int $limit = 10,
         int $page = 1
@@ -56,6 +58,7 @@ class Listing extends GraphQLQuery
             ->addVariable('siteId', $siteId)
             ->addVariable('eventType', $eventType)
             ->addVariable('category', $category)
+            ->addVariable('tag', $tag)
             ->addVariable('limit', $limit)
             ->addVariable('offset', ($page - 1) * $limit)
         ;

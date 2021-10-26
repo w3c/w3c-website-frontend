@@ -2,6 +2,7 @@ query EventsListing(
     $siteId: [QueryArgument],
     $eventType: [QueryArgument],
     $category: [QueryArgument],
+    $tag: [QueryArgument],
     $start: [QueryArgument],
     $end: [QueryArgument],
     $limit: Int,
@@ -11,6 +12,7 @@ query EventsListing(
         siteId: $siteId,
         eventType: $eventType,
         blogCategories: $category,
+        blogTags: $tag,
         startDatetime: $start,
         endDatetime: $end)
     entries(
@@ -18,6 +20,7 @@ query EventsListing(
         siteId: $siteId,
         eventType: $eventType,
         blogCategories: $category,
+        blogTags: $tag,
         startDatetime: $start,
         endDatetime: $end,
         limit: $limit,
