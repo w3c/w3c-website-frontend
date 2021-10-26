@@ -2,7 +2,8 @@ query EventsListing(
     $siteId: [QueryArgument],
     $eventType: [QueryArgument],
     $category: [QueryArgument],
-    $range: [QueryArgument],
+    $start: [QueryArgument],
+    $end: [QueryArgument],
     $limit: Int,
     $offset: Int) {
     total: entryCount(
@@ -10,16 +11,18 @@ query EventsListing(
         siteId: $siteId,
         eventType: $eventType,
         blogCategories: $category,
-        startDatetime: $range)
+        startDatetime: $start,
+        endDatetime: $end)
     entries(
         section: "events",
         siteId: $siteId,
         eventType: $eventType,
         blogCategories: $category,
-        startDatetime: $range,
+        startDatetime: $start,
+        endDatetime: $end,
         limit: $limit,
         offset: $offset,
-        orderBy: "startDatetime desc") {
+        orderBy: "startDatetime asc") {
         ... on events_default_Entry {
             ...listingEvent
         }

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Query\CraftCMS\Events;
 
 use App\Service\CraftCMS;
+use DateTimeImmutable;
 use Strata\Data\Cache\CacheLifetime;
 use Strata\Data\Exception\GraphQLQueryException;
 use Strata\Data\Query\GraphQLQuery;
@@ -60,7 +61,10 @@ class Listing extends GraphQLQuery
         ;
 
         if ($year) {
-            $this->addVariable('range', ["and", '>=' . $year, '<' . ((int)$year + 1)]);
+            $this->addVariable('start', ["and", '>=' . $year, '<' . ((int)$year + 1)]);
+        } else {
+            $now = new DateTimeImmutable();
+            $this->addVariable('end', '>' . $now->format('Y-m-d'));
         }
     }
 
