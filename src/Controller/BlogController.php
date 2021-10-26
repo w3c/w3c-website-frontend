@@ -141,7 +141,7 @@ class BlogController extends AbstractController
     }
 
     /**
-     * @Route("/category/{slug}", requirements={"slug": "[^/]+"})
+     * @Route("/categories/{slug}", requirements={"slug": "[^/]+"})
      *
      * @param QueryManager $manager
      * @param string       $slug
@@ -191,7 +191,7 @@ class BlogController extends AbstractController
 
         $page['breadcrumbs'] = [
             'title'  => $category['title'],
-            'uri'    => $singlesBreadcrumbs['blog']['uri'] . '/category/' . $slug,
+            'uri'    => $singlesBreadcrumbs['blog']['uri'] . '/categories/' . $slug,
             'parent' => [
                 'title'  => $singlesBreadcrumbs['blog']['title'],
                 'uri'    => $singlesBreadcrumbs['blog']['uri'],
@@ -213,7 +213,7 @@ class BlogController extends AbstractController
     }
 
     /**
-     * @Route("/tag/{slug}", requirements={"tag": "[^/]+"})
+     * @Route("/tags/{slug}", requirements={"tag": "[^/]+"})
      *
      * @param QueryManager $manager
      * @param string       $slug
@@ -262,7 +262,7 @@ class BlogController extends AbstractController
 
         $page['breadcrumbs'] = [
             'title'  => $tag['title'],
-            'uri'    => $singlesBreadcrumbs['blog']['uri'] . '/tag/' . $slug,
+            'uri'    => $singlesBreadcrumbs['blog']['uri'] . '/tags/' . $slug,
             'parent' => [
                 'title'  => $singlesBreadcrumbs['blog']['title'],
                 'uri'    => $singlesBreadcrumbs['blog']['uri'],
