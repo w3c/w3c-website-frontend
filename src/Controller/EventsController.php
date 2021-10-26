@@ -249,6 +249,7 @@ class EventsController extends AbstractController
      * @return Response
      * @throws GraphQLQueryException
      * @throws QueryManagerException
+     * @throws Exception
      */
     private function buildListing(
         Request $request,
@@ -324,6 +325,14 @@ class EventsController extends AbstractController
 
 
         $page = $manager->get('page');
+        $first = $manager->get('filters', '[first]');
+        $last = $manager->get('filters', '[last]');
+
+        $archives = [];
+        if ($first && $last) {
+            $archives = range($first['year'], $last['year']);
+        }
+
         $page['seo']['expiry'] = $page['expiryDate'];
         $page['breadcrumbs'] = $this->breadcrumbs($page, $eventType, $router, $type, $year);
 
@@ -332,6 +341,7 @@ class EventsController extends AbstractController
             dump($collection);
             dump($pagination);
             dump($categories);
+            dump($archives);
         }
 
         return $this->render('events/index.html.twig', [

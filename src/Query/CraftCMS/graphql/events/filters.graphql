@@ -14,4 +14,20 @@ query EventFilters($siteId: [QueryArgument]) {
             slug
         }
     }
+    first: entry(section: "events", siteId: $siteId, orderBy: "startDatetime asc") {
+        ... on events_default_Entry {
+            year: startDatetime@formatDateTime(format: "Y")
+        }
+        ... on events_external_Entry {
+            year: startDatetime@formatDateTime(format: "Y")
+        }
+    }
+    last: entry(section: "events", siteId: $siteId, orderBy: "startDatetime desc") {
+        ... on events_default_Entry {
+            year: startDatetime@formatDateTime(format: "Y")
+        }
+        ... on events_external_Entry {
+            year: startDatetime@formatDateTime(format: "Y")
+        }
+    }
 }
