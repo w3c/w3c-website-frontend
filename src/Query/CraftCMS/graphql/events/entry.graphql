@@ -1,5 +1,5 @@
-query Event($slug: [String], $siteId: [QueryArgument]) {
-    entry(slug: $slug, siteId: $siteId, section: "events") {
+query Event($type: [QueryArgument], $start: [QueryArgument], $slug: [String], $siteId: [QueryArgument]) {
+    entry(eventType: $type, startDatetime: $start, slug: $slug, type: "default", siteId: $siteId, section: "events") {
         id
         uid
         status
@@ -20,7 +20,7 @@ query Event($slug: [String], $siteId: [QueryArgument]) {
             start: startDatetime
             end: endDatetime
             tz: startDatetime@formatDateTime(format: "e")
-            year: startDatetime @formatDateTime(format: "Y")
+            year: startDatetime@formatDateTime(format: "Y")
             speakersName
             location
             host
@@ -47,41 +47,6 @@ query Event($slug: [String], $siteId: [QueryArgument]) {
             }
             defaultFlexibleComponents(orderBy: "sortOrder") {
                 ...defaultFlexibleComponents
-            }
-            seo: seoOptions {
-                ...seoData
-            }
-        }
-        ... on events_external_Entry {
-            urlLink
-            excerpt: eventExcerpt
-            start: startDatetime
-            end: endDatetime
-            tz: startDatetime@formatDateTime(format: "e")
-            year: startDatetime @formatDateTime(format: "Y")
-            speakersName
-            location
-            host
-            type: eventType {
-                id
-                slug
-                title
-            }
-            categories: blogCategories {
-                title
-                slug
-            }
-            tags: blogTags {
-                title
-                slug
-            }
-            groups: workingGroups {
-                title
-                slug
-            }
-            ecosystems {
-                title
-                slug
             }
             seo: seoOptions {
                 ...seoData

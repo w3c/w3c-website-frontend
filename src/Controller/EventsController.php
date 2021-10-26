@@ -7,6 +7,7 @@ use App\Query\CraftCMS\Events\Filters;
 use App\Query\CraftCMS\Events\Listing;
 use App\Query\CraftCMS\Events\Page;
 use App\Query\CraftCMS\Taxonomies\Categories;
+use App\Query\CraftCMS\Taxonomies\CategoryInfo;
 use App\Query\CraftCMS\Taxonomies\Tags;
 use App\Query\CraftCMS\YouMayAlsoLikeRelatedEntries;
 use App\Service\IcalExporter;
@@ -140,7 +141,14 @@ class EventsController extends AbstractController
         IcalExporter $icalExporter,
         Request $request
     ): Response {
-        $manager->add('event', new Entry($site->siteId, $slug, $router));
+        $manager->add('event-type', new CategoryInfo($site->siteId, 'eventType', $type));
+        $eventType = $manager->get('event-type');
+
+        if (!$eventType) {
+            throw $this->createNotFoundException('Event type not found');
+        }
+
+        $manager->add('event', new Entry($site->siteId, $eventType['id'], $year, $slug, $router));
 
         $event = $manager->get('event');
         if (empty($event)) {
@@ -189,16 +197,18 @@ class EventsController extends AbstractController
         Site $site,
         Request $request
     ): Response {
-        $manager->add('page', new Entry($site->siteId, $slug, $router));
+        $manager->add('event-type', new CategoryInfo($site->siteId, 'eventType', $type));
+        $eventType = $manager->get('event-type');
+
+        if (!$eventType) {
+            throw $this->createNotFoundException('Event type not found');
+        }
+
+        $manager->add('page', new Entry($site->siteId, $eventType['id'], $year, $slug, $router));
 
         $page = $manager->get('page');
         if (empty($page)) {
-            throw $this->createNotFoundException('Page not found');
-        }
-
-        $postYear = intval((new DateTimeImmutable($page['postDate']))->format('Y'));
-        if ($year !== $postYear) {
-            return $this->redirectToRoute('app_events_show', ['type' => $type, 'slug' => $slug, 'year' => $postYear]);
+            throw $this->createNotFoundException('Event not found');
         }
 
         $manager->add(

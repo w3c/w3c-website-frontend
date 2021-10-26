@@ -34,6 +34,8 @@ class Entry extends GraphQLQuery
      */
     public function __construct(
         int $siteId,
+        string $type,
+        int $year,
         string $slug,
         RouterInterface $router,
         int $cacheLifetime = CacheLifetime::HOUR
@@ -47,6 +49,8 @@ class Entry extends GraphQLQuery
             ->setRootPropertyPath('[entry]')
 
             ->addVariable('siteId', $siteId)
+            ->addVariable('type', $type)
+            ->addVariable('start', ['and', '>=' . $year, '<' . ($year+1)])
             ->addVariable('slug', $slug)
             ->cache($cacheLifetime)
         ;
