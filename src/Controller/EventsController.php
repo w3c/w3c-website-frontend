@@ -353,6 +353,7 @@ class EventsController extends AbstractController
             'entries'       => $collection,
             'pagination'    => $collection->getPagination(),
             'categories'    => $categories,
+            'archives'      => $archives,
             'types'         => $types,
             'reset_url'     => $router->generate('app_events_index')
         ]);
