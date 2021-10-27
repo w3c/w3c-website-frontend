@@ -359,14 +359,10 @@ class FeedController extends AbstractController
                 $entry->setLink($data['urlLink']);
                 break;
             case 'entryContentIsACraftPage':
-                $page = $data['page'];
-                if (array_key_exists('excerpt', $page) && $page['excerpt']) {
-                    $entry->setDescription($page['excerpt']);
-                }
                 $entry->setLink(
                     $this->generateUrl(
                         'app_default_index',
-                        ['route' => $page['uri']],
+                        ['route' => $data['page']['uri']],
                         UrlGeneratorInterface::ABSOLUTE_URL
                     )
                 );

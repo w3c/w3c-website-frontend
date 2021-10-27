@@ -1,4 +1,4 @@
-fragment listingExternalEvent on events_external_Entry {
+fragment listingPageEvent on events_entryContentIsACraftPage_Entry {
     id
     typeHandle
     slug
@@ -19,12 +19,14 @@ fragment listingExternalEvent on events_external_Entry {
         slug
         title
     }
+    location
+    host
+    page: eventPage {
+        uri
+    }
     excerpt: eventExcerpt
     thumbnailImage {
         ...thumbnailImage
     }
     thumbnailAltText
-    location
-    host
-    urlLink
 }

@@ -86,23 +86,14 @@ query taxonomy($siteId: [QueryArgument], $category: [QueryArgument], $ecosystem:
             start: startDatetime
             end: endDatetime
             year: startDatetime@formatDateTime(format: "Y")
+            excerpt: eventExcerpt
+            thumbnailImage {
+                ...thumbnailImage
+            }
+            thumbnailAltText
             page: eventPage {
                 slug
                 uri
-                ... on pages_default_Entry {
-                    excerpt
-                    thumbnailImage {
-                        ...thumbnailImage
-                    }
-                    thumbnailAltText
-                }
-                ... on pages_landingPage_Entry {
-                    excerpt
-                    thumbnailImage {
-                        ...thumbnailImage
-                    }
-                    thumbnailAltText
-                }
             }
             type: eventType {
                 id

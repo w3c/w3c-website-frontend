@@ -32,6 +32,9 @@ query EventsListing(
         ... on events_external_Entry {
             ...listingExternalEvent
         }
+        ... on events_entryContentIsACraftPage_Entry {
+            ...listingPageEvent
+        }
     }
 }
 

@@ -1,5 +1,6 @@
 fragment listingEvent on events_default_Entry {
     id
+    typeHandle
     slug
     uri
     title
