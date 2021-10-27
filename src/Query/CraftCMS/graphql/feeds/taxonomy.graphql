@@ -1,6 +1,7 @@
 query taxonomy($siteId: [QueryArgument], $category: [QueryArgument], $ecosystem: [QueryArgument], $group: [QueryArgument], $limit: Int) {
     entries(section: ["blogPosts", "events", "newsArticles", "pressReleases"], siteId: $siteId, blogCategories: $category, ecosystems: $ecosystem, workingGroups: $group, limit: $limit, orderBy: "postDate desc") {
         sectionHandle
+        typeHandle
         id
         slug
         uri
@@ -10,6 +11,7 @@ query taxonomy($siteId: [QueryArgument], $category: [QueryArgument], $ecosystem:
                 ... authors
             }
             date: postDate
+            year: postDate@formatDateTime(format: "Y")
             excerpt
             defaultFlexibleComponents(orderBy: "sortOrder") {
                 ...defaultFlexibleComponents
@@ -20,20 +22,16 @@ query taxonomy($siteId: [QueryArgument], $category: [QueryArgument], $ecosystem:
             }
         }
         ... on newsArticles_default_Entry {
-            authors {
-                ... authors
-            }
             date: postDate
+            year: postDate@formatDateTime(format: "Y")
             excerpt
             defaultFlexibleComponents(orderBy: "sortOrder") {
                 ...defaultFlexibleComponents
             }
         }
         ... on pressReleases_default_Entry {
-            authors {
-                ... authors
-            }
             date: postDate
+            year: postDate@formatDateTime(format: "Y")
             excerpt
             defaultFlexibleComponents(orderBy: "sortOrder") {
                 ...defaultFlexibleComponents
@@ -43,6 +41,7 @@ query taxonomy($siteId: [QueryArgument], $category: [QueryArgument], $ecosystem:
             date: startDatetime
             start: startDatetime
             end: endDatetime
+            year: startDatetime@formatDateTime(format: "Y")
             excerpt: eventExcerpt
             type: eventType {
                 id
@@ -65,6 +64,7 @@ query taxonomy($siteId: [QueryArgument], $category: [QueryArgument], $ecosystem:
             date: startDatetime
             start: startDatetime
             end: endDatetime
+            year: startDatetime@formatDateTime(format: "Y")
             urlLink
             excerpt: eventExcerpt
             type: eventType {
@@ -76,6 +76,39 @@ query taxonomy($siteId: [QueryArgument], $category: [QueryArgument], $ecosystem:
                 ...thumbnailImage
             }
             thumbnailAltText
+            categories: blogCategories {
+                slug
+                title
+            }
+        }
+        ... on events_entryContentIsACraftPage_Entry {
+            date: startDatetime
+            start: startDatetime
+            end: endDatetime
+            year: startDatetime@formatDateTime(format: "Y")
+            page: eventPage {
+                slug
+                uri
+                ... on pages_default_Entry {
+                    excerpt
+                    thumbnailImage {
+                        ...thumbnailImage
+                    }
+                    thumbnailAltText
+                }
+                ... on pages_landingPage_Entry {
+                    excerpt
+                    thumbnailImage {
+                        ...thumbnailImage
+                    }
+                    thumbnailAltText
+                }
+            }
+            type: eventType {
+                id
+                slug
+                title
+            }
             categories: blogCategories {
                 slug
                 title
