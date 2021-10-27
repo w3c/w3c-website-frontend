@@ -150,16 +150,11 @@ class NewsController extends AbstractController
         Request $request,
         RouterInterface $router
     ): Response {
-        $manager->add('page', new Entry($site->siteId, $slug, $router));
+        $manager->add('page', new Entry($site->siteId, $year, $slug, $router));
 
         $page = $manager->get('page');
         if (empty($page)) {
             throw $this->createNotFoundException('Page not found');
-        }
-
-        $postYear = intval((new DateTimeImmutable($page['postDate']))->format('Y'));
-        if ($year !== $postYear) {
-            return $this->redirectToRoute('app_news_show', ['slug' => $slug, 'year' => $postYear]);
         }
 
         $manager->add(
