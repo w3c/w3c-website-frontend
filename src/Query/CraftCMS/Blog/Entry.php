@@ -26,14 +26,17 @@ class Entry extends GraphQLQuery
     /**
      * Set up query
      *
-     * @param int    $siteId        Site ID of page content
-     * @param string $slug
-     * @param int    $cacheLifetime Cache lifetime to store HTTP response for, defaults to 1 hour
+     * @param int             $siteId        Site ID of page content
+     * @param int             $year
+     * @param string          $slug
+     * @param RouterInterface $router
+     * @param int             $cacheLifetime Cache lifetime to store HTTP response for, defaults to 1 hour
      *
      * @throws GraphQLQueryException
      */
     public function __construct(
         int $siteId,
+        int $year,
         string $slug,
         RouterInterface $router,
         int $cacheLifetime = CacheLifetime::HOUR
@@ -47,6 +50,7 @@ class Entry extends GraphQLQuery
             ->setRootPropertyPath('[entry]')
 
             ->addVariable('siteId', $siteId)
+            ->addVariable('year', ['and', '>=' . $year, '<' . ($year + 1)])
             ->addVariable('slug', $slug)
             ->cache($cacheLifetime)
         ;

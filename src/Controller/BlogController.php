@@ -305,7 +305,7 @@ class BlogController extends AbstractController
         Site $site,
         Request $request
     ): Response {
-        $manager->add('page', new Entry($site->siteId, $slug, $router));
+        $manager->add('page', new Entry($site->siteId, $year, $slug, $router));
 
         $page = $manager->get('page');
         if (empty($page)) {
