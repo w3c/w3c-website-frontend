@@ -143,18 +143,12 @@ class PressReleasesController extends AbstractController
         RouterInterface $router,
         Site $site,
         Request $request
-    ): Response
-    {
-        $manager->add('page', new Entry($site->siteId, $slug, $router));
+    ): Response {
+        $manager->add('page', new Entry($site->siteId, $year, $slug, $router));
 
         $page = $manager->get('page');
         if (empty($page)) {
             throw $this->createNotFoundException('Page not found');
-        }
-
-        $postYear = intval((new DateTimeImmutable($page['postDate']))->format('Y'));
-        if ($year !== $postYear) {
-            return $this->redirectToRoute('app_pressreleases_show', ['slug' => $slug, 'year' => $postYear]);
         }
 
         $manager->add(
