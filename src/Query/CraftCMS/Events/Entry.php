@@ -75,7 +75,7 @@ class Entry extends GraphQLQuery
             [
                 '[title]' => '[title]',
                 '[slug]'  => '[slug]',
-                '[uri]'   => new CallableData([$this, $function])
+                '[url]'   => new CallableData([$this, $function])
             ]
         )];
     }
@@ -84,7 +84,7 @@ class Entry extends GraphQLQuery
     {
         $slug = $data['slug'];
 
-        return $this->router->generate('app_blog_category', ['slug' => $slug]);
+        return $this->router->generate('app_events_index', ['category' => $slug]);
     }
 
     public function transformEcosystem(array $data): string
@@ -97,6 +97,6 @@ class Entry extends GraphQLQuery
     {
         $slug = $data['slug'];
 
-        return $this->router->generate('app_blog_tag', ['slug' => $slug]);
+        return $this->router->generate('app_events_index', ['tag' => $slug]);
     }
 }
