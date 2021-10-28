@@ -51,5 +51,38 @@ query BlogPost($year: [String], $slug: [String], $siteId: [QueryArgument]) {
             }
             notes: postPageNotes
         }
+        ... on blogPosts_importedEntries_Entry {
+            excerpt
+            authors {
+                ... on authors_author_BlockType {
+                    name: authorName
+                    email: authorEmailAddress
+                }
+            }
+            categories: blogCategories {
+                title
+                slug
+            }
+            tags: blogTags {
+                title
+                slug
+            }
+            groups: workingGroups {
+                title
+                slug
+            }
+            specifications {
+                title
+                slug
+            }
+            ecosystems {
+                title
+                slug
+            }
+            seo: seoOptions {
+                ...seoData
+            }
+            pageContent
+        }
     }
 }

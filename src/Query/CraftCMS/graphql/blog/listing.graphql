@@ -48,6 +48,32 @@ query BlogListing($siteId: [QueryArgument], $category: [QueryArgument], $tag: [Q
             }
             thumbnailAltText
         }
+        ... on blogPosts_importedEntries_Entry {
+            author {
+                name
+                email
+            }
+            authors {
+                ... on authors_author_BlockType {
+                    name: authorName
+                    email: authorEmailAddress
+                }
+            }
+            categories: blogCategories {
+                uri
+                title
+            }
+            tags: blogTags {
+                title
+                slug
+            }
+            date: postDate
+            excerpt
+            thumbnailImage {
+                ...thumbnailImage
+            }
+            thumbnailAltText
+        }
     }
 }
 
