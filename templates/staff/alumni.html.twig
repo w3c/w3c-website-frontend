@@ -2,21 +2,23 @@
 
 {% block list %}
     {# should be moved to the templates bundle #}
-    {% for alumnus in alumni %}
-        <div class="l-sidebar">
-            <div class="alumni">
-                <div class="not-sidebar">
-                    <div>
-                        <h2 class="txt-mars">{{ alumnus.given }} {{ alumnus.last }}</h2>
-                        <p>{{ alumnus.start|format('F Y') }} to {{ alumnus.end|format('F Y') }}</p>
-                        <p>
-                            {{ alumnus.biography }}
-                        </p>
+    <div class="people-list">
+        {% for alumnus in alumni %}
+            <div class="l-sidebar">
+                <div class="alumni">
+                    <div class="not-sidebar">
+                        <div>
+                            <h2 class="txt-mars">{{ alumnus.given }} {{ alumnus.last }}</h2>
+                            <p>{{ alumnus.start|date('F Y') }} to {{ alumnus.end|date('F Y') }}</p>
+                            <p>
+                                {{ alumnus.biography|raw }}
+                            </p>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    {% endfor %}
+        {% endfor %}
+    </div>
 {% endblock %}
 
 {% block pagination %}{% endblock %}

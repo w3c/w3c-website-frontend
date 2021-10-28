@@ -4,16 +4,12 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
-use App\Query\CraftCMS\Page;
-use App\Query\CraftCMS\Staff\Alumni;
-use App\Query\CraftCMS\YouMayAlsoLikeRelatedEntries;
-use App\Query\W3C\Healthcheck;
+use App\Query\CraftCMS\Staff\AlumniListing;
 use Strata\Data\Exception\GraphQLQueryException;
 use Strata\Data\Exception\QueryManagerException;
 use Strata\Data\Query\QueryManager;
 use Strata\Frontend\Site;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -34,27 +30,31 @@ class StaffController extends AbstractController
      * @throws GraphQLQueryException
      * @throws QueryManagerException
      */
-    public function index(Site $site, QueryManager $manager): Response
+    public function alumni(Site $site, QueryManager $manager): Response
     {
-        $manager->add('alumni', new Alumni($site->siteId));
-        $alumni = $manager->getCollection('alumni');
-        $navigation = $manager->getCollection('navigation');
+        $manager->add('alumni-listing', new AlumniListing($site->siteId));
 
-        //Only for testing purposes in dev
-        $twig_variables = [
-            'navigation' => $navigation,
-            'alumni'     => $alumni
-        ];
+        $collection = $manager->getCollection('alumni-listing');
+        $page       = $manager->get('alumni-listing', '[entry]');
+
+        $page['seo']['expiry'] = $page['expiryDate'];
 
         if ($this->getParameter('kernel.environment') == 'dev') {
-            dump($twig_variables);
+            dump($page);
+            dump($collection);
         }
+
+        $page['breadcrumbs'] = [
+            'title'  => $page['title'],
+            'uri'    => $page['uri'],
+            'parent' => null
+        ];
 
         return $this->render('staff/alumni.html.twig', [
             'site'       => $site,
-            'navigation' => $navigation,
-            'page'       => [],
-            'alumni'     => $alumni,
+            'navigation' => $manager->getCollection('navigation'),
+            'page'       => $page,
+            'alumni'     => $collection,
         ]);
     }
 }
