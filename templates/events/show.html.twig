@@ -1,8 +1,3 @@
-{% extends '@W3CWebsiteTemplates/pages/post.html.twig' %}
-{%- import "@W3CWebsiteTemplates/components/styles/notes.html.twig" as note_macros -%}
+{% extends '@W3CWebsiteTemplates/pages/event.html.twig' %}
 
-{% set body_classes = 'post' %}
-
-{% block feed %}
-    {% include '@W3CWebsiteTemplates/components/styles/feed.html.twig' with { 'feed_url': '/blog/feed', 'feed_type': 'Blog' } %}
-{% endblock %}
+{% set body_classes = 'event' %}
