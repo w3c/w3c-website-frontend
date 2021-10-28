@@ -24,6 +24,10 @@ query Event($type: [QueryArgument], $start: [QueryArgument], $slug: [String], $s
             speakersName
             location
             host
+            website: relatedWebsite {
+                name: websiteName
+                url
+            }
             type: eventType {
                 id
                 slug
