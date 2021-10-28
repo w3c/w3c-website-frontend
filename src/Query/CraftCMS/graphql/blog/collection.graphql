@@ -1,0 +1,67 @@
+query BlogCollection($siteId: [QueryArgument], $category: [QueryArgument], $tag: [QueryArgument], $before: String, $after: String, $search: String, $limit: Int, $offset: Int) {
+    total: entryCount(section: "blogPosts", siteId: $siteId, blogCategories: $category, blogTags: $tag, before: $before, after: $after, search: $search)
+    entries(section: "blogPosts", siteId: $siteId, blogCategories: $category, blogTags: $tag, before: $before, after: $after, search: $search, limit: $limit, offset: $offset, orderBy: "postDate desc") {
+        id
+        slug
+        uri
+        title
+        ... on blogPosts_default_Entry {
+            author {
+                name
+                email
+            }
+            authors {
+                ... on authors_author_BlockType {
+                    name: authorName
+                    email: authorEmailAddress
+                }
+            }
+            categories: blogCategories {
+                slug
+                title
+            }
+            tags: blogTags {
+                title
+                slug
+            }
+            date: postDate
+            excerpt
+            thumbnailImage {
+                ...thumbnailImage
+            }
+            thumbnailAltText
+        }
+        ... on blogPosts_importedEntries_Entry {
+            author {
+                name
+                email
+            }
+            authors {
+                ... on authors_author_BlockType {
+                    name: authorName
+                    email: authorEmailAddress
+                }
+            }
+            categories: blogCategories {
+                slug
+                title
+            }
+            tags: blogTags {
+                title
+                slug
+            }
+            date: postDate
+            excerpt
+            thumbnailImage {
+                ...thumbnailImage
+            }
+            thumbnailAltText
+        }
+    }
+}
+
+fragment thumbnailImage on AssetInterface {
+    url(transform: "size360x270")
+    srcset(sizes: ["580"])
+}
+
