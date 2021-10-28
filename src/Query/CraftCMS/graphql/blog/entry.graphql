@@ -34,10 +34,16 @@ query BlogPost($year: [String], $slug: [String], $siteId: [QueryArgument]) {
             groups: workingGroups {
                 title
                 slug
+                ...on groups_Category {
+                  urlLink
+                }
             }
             specifications {
                 title
                 slug
+                ...on specifications_Category {
+                  urlLink
+                }
             }
             ecosystems {
                 title
