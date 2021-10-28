@@ -17,7 +17,7 @@ query AlumniListing($siteId: [QueryArgument]) {
         }
     }
     total: entryCount(section: "alumni", siteId: $siteId)
-    entries(section: "alumni", siteId: $siteId, orderBy: "title asc") {
+    entries(section: "alumni", siteId: $siteId, orderBy: "familyName asc, title asc") {
         ... on alumni_default_Entry {
             given: title
             last: familyName
