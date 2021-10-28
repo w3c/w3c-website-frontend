@@ -37,6 +37,8 @@ Beta:
 * https://www-dev.w3.org
 * https://www-dev.w3.org/_build_summary.json
 
+Access to https://www-dev.w3.org is restricted by IP.
+
 ### S24 Development
 * https://www-dev-w3c.studio24.dev
 * https://www-dev-w3c.studio24.dev/_build_summary.json
