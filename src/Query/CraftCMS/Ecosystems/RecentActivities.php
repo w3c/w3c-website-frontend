@@ -40,6 +40,7 @@ class RecentActivities extends GraphQLQuery
              ->addFragmentFromFile(__DIR__ . '/../graphql/fragments/thumbnailImage.graphql')
              ->addFragmentFromFile(__DIR__ . '/../graphql/fragments/listingEvent.graphql')
              ->addFragmentFromFile(__DIR__ . '/../graphql/fragments/listingExternalEvent.graphql')
+             ->addFragmentFromFile(__DIR__ . '/../graphql/fragments/listingPageEvent.graphql')
              ->addVariable('ecosystemId', $ecosystemId)
              ->addVariable('endDatetime', $recentEventsEndDate)
              ->cache($cacheLifetime);
@@ -101,15 +102,18 @@ class RecentActivities extends GraphQLQuery
 
     public function transformEventUrl(array $data): string
     {
-        if (array_key_exists('urlLink', $data) && $data['urlLink']) {
-            return $data['urlLink'];
+        switch ($data['typeHandle']) {
+            case 'external':
+                return $data['urlLink'];
+            case 'entryContentIsACraftPage':
+                return $this->router->generate('app_default_index', ['route' => $data['page'][0]['uri']]);
+            default:
+                return $this->router->generate('app_events_show', [
+                    'type' => $data['type'][0]['slug'],
+                    'slug' => $data['slug'],
+                    'year' => $data['year']
+                ]);
         }
-
-        return $this->router->generate('app_events_show', [
-            'type' => $data['type'][0]['slug'],
-            'slug' => $data['slug'],
-            'year' => $data['year']
-        ]);
     }
 
     public function transformEventCategory(?array $data): ?array
@@ -119,7 +123,7 @@ class RecentActivities extends GraphQLQuery
                 'id'    => $data['id'],
                 'slug'  => $data['slug'],
                 'title' => $data['title'],
-                'url'   => $this->router->generate('app_events_category', ['slug' => $data['slug']])
+                'url'   => $this->router->generate('app_events_index', ['category' => $data['slug']])
             ];
         }
 

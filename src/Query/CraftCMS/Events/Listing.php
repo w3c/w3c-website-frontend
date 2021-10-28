@@ -6,7 +6,6 @@ namespace App\Query\CraftCMS\Events;
 
 use App\Service\CraftCMS;
 use DateTimeImmutable;
-use Strata\Data\Cache\CacheLifetime;
 use Strata\Data\Exception\GraphQLQueryException;
 use Strata\Data\Query\GraphQLQuery;
 use Strata\Data\Transform\Data\CallableData;
@@ -51,6 +50,7 @@ class Listing extends GraphQLQuery
         $this->setGraphQLFromFile(__DIR__ . '/../graphql/events/listing.graphql')
             ->addFragmentFromFile(__DIR__ . '/../graphql/fragments/listingEvent.graphql')
             ->addFragmentFromFile(__DIR__ . '/../graphql/fragments/listingExternalEvent.graphql')
+            ->addFragmentFromFile(__DIR__ . '/../graphql/fragments/listingPageEvent.graphql')
             ->setRootPropertyPath('[entries]')
             ->setTotalResults('[total]')
             ->setResultsPerPage($limit)
@@ -75,6 +75,7 @@ class Listing extends GraphQLQuery
     {
         return [
             '[id]'               => '[id]',
+            '[typeHandle]'       => '[typeHandle]',
             '[slug]'             => '[slug]',
             '[url]'              => new CallableData([$this, 'transformEventUrl']),
             '[title]'            => '[title]',
@@ -93,15 +94,18 @@ class Listing extends GraphQLQuery
 
     public function transformEventUrl(array $data): string
     {
-        if (array_key_exists('urlLink', $data) && $data['urlLink']) {
-            return $data['urlLink'];
+        switch ($data['typeHandle']) {
+            case 'external':
+                return $data['urlLink'];
+            case 'entryContentIsACraftPage':
+                return $this->router->generate('app_default_index', ['route' => $data['page'][0]['uri']]);
+            default:
+                return $this->router->generate('app_events_show', [
+                    'type' => $data['type'][0]['slug'],
+                    'slug' => $data['slug'],
+                    'year' => $data['year']
+                ]);
         }
-
-        return $this->router->generate('app_events_show', [
-            'type' => $data['type'][0]['slug'],
-            'slug' => $data['slug'],
-            'year' => $data['year']
-        ]);
     }
 
     public function transformCategory(?array $data): ?array

@@ -3,6 +3,7 @@ query RecentActivities($ecosystemId: [QueryArgument], $endDatetime: [QueryArgume
         id
         slug
         sectionHandle
+        typeHandle
         title
         uri
         url
@@ -35,6 +36,9 @@ query RecentActivities($ecosystemId: [QueryArgument], $endDatetime: [QueryArgume
         }
         ... on events_external_Entry {
             ...listingExternalEvent
+        }
+        ... on events_entryContentIsACraftPage_Entry {
+            ...listingPageEvent
         }
     }
 }

@@ -326,7 +326,7 @@ class FeedController extends AbstractController
 
         $url = $this->generateUrl(
             'app_blog_show',
-            ['year' => $date->format('Y'), 'slug' => $data['slug']],
+            ['year' => $data['year'], 'slug' => $data['slug']],
             UrlGeneratorInterface::ABSOLUTE_URL
         );
         $entry->setLink($url);
@@ -354,15 +354,29 @@ class FeedController extends AbstractController
 
         $entry = $this->buildBasicEntry($data, $feed, $date, $twig);
 
-        if ($data['typeHandle'] === 'external') {
-            $entry->setLink($data['urlLink']);
-        } else {
-            /*$url = $this->generateUrl(
-                'app_blog_show',
-                ['year' => $year, 'slug' => $post['slug']],
-                UrlGeneratorInterface::ABSOLUTE_URL
-            );*/
+        switch ($data['typeHandle']) {
+            case 'external':
+                $entry->setLink($data['urlLink']);
+                break;
+            case 'entryContentIsACraftPage':
+                $entry->setLink(
+                    $this->generateUrl(
+                        'app_default_index',
+                        ['route' => $data['page']['uri']],
+                        UrlGeneratorInterface::ABSOLUTE_URL
+                    )
+                );
+                break;
+            default:
+                $entry->setLink(
+                    $this->generateUrl(
+                        'app_events_show',
+                        ['type' => $data['type'][0]['slug'], 'year' => $data['year'], 'slug' => $data['slug']],
+                        UrlGeneratorInterface::ABSOLUTE_URL
+                    )
+                );
         }
+
         $entry->addCategory(['term' => $data['type'][0]['slug'], 'label' => $data['type'][0]['title']]);
 
         return $entry;
@@ -388,7 +402,7 @@ class FeedController extends AbstractController
         $entry->setLink(
             $this->generateUrl(
                 'app_news_show',
-                ['year' => $date->format('Y'), 'slug' => $data['slug']],
+                ['year' => $data['year'], 'slug' => $data['slug']],
                 UrlGeneratorInterface::ABSOLUTE_URL
             )
         );
@@ -417,7 +431,7 @@ class FeedController extends AbstractController
         $entry->setLink(
             $this->generateUrl(
                 'app_pressreleases_show',
-                ['year' => $date->format('Y'), 'slug' => $data['slug']],
+                ['year' => $data['year'], 'slug' => $data['slug']],
                 UrlGeneratorInterface::ABSOLUTE_URL
             )
         );
@@ -456,7 +470,7 @@ class FeedController extends AbstractController
 
         //$entry->setDateModified(time());
         $entry->setDateCreated($date);
-        if ($data['excerpt']) {
+        if (array_key_exists('excerpt', $data) && $data['excerpt']) {
             $entry->setDescription($data['excerpt']);
         }
 
