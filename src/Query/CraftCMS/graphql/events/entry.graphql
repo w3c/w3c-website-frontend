@@ -21,7 +21,7 @@ query Event($type: [QueryArgument], $start: [QueryArgument], $slug: [String], $s
             end: endDatetime
             tz: startDatetime@formatDateTime(format: "e")
             year: startDatetime@formatDateTime(format: "Y")
-            speakersName
+            speakers: speakersName
             location
             host
             website: relatedWebsite {

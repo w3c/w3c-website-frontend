@@ -11,6 +11,7 @@ use Strata\Data\Mapper\MapArray;
 use Strata\Data\Mapper\WildcardMappingStrategy;
 use Strata\Data\Query\GraphQLQuery;
 use Strata\Data\Transform\Data\CallableData;
+use Strata\Data\Transform\Value\DateTimeValue;
 use Symfony\Component\Routing\RouterInterface;
 
 class Entry extends GraphQLQuery
@@ -64,7 +65,8 @@ class Entry extends GraphQLQuery
         $mapping->addMapping('ecosystems', $this->mapTaxonomy('ecosystems', 'transformEcosystem'));
         $mapping->addMapping('type', ['[type]' => '[type][0]']);
         $mapping->addMapping('website', ['[website]' => '[website][0]']);
-
+        $mapping->addMapping('start', ['[start]' => new DateTimeValue('[start]')]);
+        $mapping->addMapping('end', ['[end]' => new DateTimeValue('[end]')]);
         return $mapping;
     }
 
