@@ -233,13 +233,13 @@ class EventsController extends AbstractController
                 ]
             ]
         ];
+        $page['ical_url'] = $this->generateUrl('app_events_ical', ['slug' => $slug, 'type' => $eventType['slug'], 'year' => $year]);
 
         if ($this->getParameter('kernel.environment') == 'dev') {
             dump($page);
             dump($singlesBreadcrumbs);
         }
 
-        // @todo use events post template
         return $this->render('events/show.html.twig', [
             'site'          => $site,
             'navigation'    => $manager->getCollection('navigation'),
