@@ -35,14 +35,14 @@ query BlogPost($year: [String], $slug: [String], $siteId: [QueryArgument]) {
                 title
                 slug
                 ...on groups_Category {
-                  urlLink
+                  url: urlLink
                 }
             }
             specifications {
                 title
                 slug
                 ...on specifications_Category {
-                  urlLink
+                  url: urlLink
                 }
             }
             ecosystems {
