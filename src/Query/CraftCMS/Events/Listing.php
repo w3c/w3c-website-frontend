@@ -85,10 +85,22 @@ class Listing extends GraphQLQuery
             '[category]'         => new CallableData([$this, 'transformCategory'], '[category][0]'),
             '[type]'             => '[type][0]',
             '[excerpt]'          => '[excerpt]',
-            '[thumbnailImage]'   => '[thumbnailImage][0]',
+            '[thumbnailImage]' => new CallableData([$this, 'transformThumbnail'], '[thumbnailImage][0]'),
             '[thumbnailAltText]' => '[thumbnailAltText]',
             '[location]'         => '[location]',
             '[host]'             => '[host]',
+        ];
+    }
+
+    public function transformThumbnail(?array $data): array
+    {
+        if (!$data) {
+            return [];
+        }
+
+        return [
+            'url'    => $data['url'],
+            'srcset' => preg_replace('/ 580w/', ' 2x', $data['srcset'])
         ];
     }
 
