@@ -59,7 +59,7 @@ class Entry extends GraphQLQuery
                 [
                     '[title]' => '[title]',
                     '[slug]'  => '[slug]',
-                    '[uri]'   => new CallableData([$this, $function])
+                    '[url]'   => new CallableData([$this, $function])
                 ]
             )
         ];

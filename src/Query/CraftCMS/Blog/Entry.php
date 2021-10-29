@@ -80,7 +80,6 @@ class Entry extends GraphQLQuery
 
     public function mapCategory(array $data): array
     {
-        dump($data);
         if (count($data) > 0) {
             return [
                 'url'   => $this->router->generate('app_blog_category', ['slug' => $data[0]['slug']]),
