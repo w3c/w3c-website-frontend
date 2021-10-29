@@ -73,6 +73,7 @@ class Collection extends GraphQLQuery
             '[url]'              => new CallableData([$this, 'transformUrl'], '[slug]', '[year]'),
             '[title]'            => '[title]',
             '[date]'             => new DateTimeValue('[date]'),
+            '[year]'             => '[year]',
             '[excerpt]'          => '[excerpt]',
             '[thumbnailImage]'   => new CallableData([$this, 'transformThumbnail'], '[thumbnailImage][0]'),
             '[thumbnailAltText]' => '[thumbnailAltText]'
