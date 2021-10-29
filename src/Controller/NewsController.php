@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Query\CraftCMS\News\Collection;
 use App\Query\CraftCMS\News\Entry;
 use App\Query\CraftCMS\News\Filters;
 use App\Query\CraftCMS\News\Listing;
@@ -31,22 +32,25 @@ class NewsController extends AbstractController
     /**
      * @Route("/")
      *
-     * @param QueryManager $manager
-     * @param Site         $site
-     * @param Request      $request
+     * @param QueryManager    $manager
+     * @param Site            $site
+     * @param Request         $request
+     * @param RouterInterface $router
      *
      * @return Response
      * @throws GraphQLQueryException
      * @throws QueryManagerException
      */
-    public function index(QueryManager $manager, Site $site, Request $request): Response
+    public function index(QueryManager $manager, Site $site, Request $request, RouterInterface $router): Response
     {
         $currentPage = $request->query->get('page', 1);
         $search      = $request->query->get('search');
 
+        $manager->add('page', new Listing($site->siteId));
         $manager->add(
-            'newsListing',
-            new Listing(
+            'collection',
+            new Collection(
+                $router,
                 $site->siteId,
                 null,
                 null,
@@ -77,23 +81,31 @@ class NewsController extends AbstractController
     /**
      * @Route("/{year}", requirements={"year": "\d\d\d\d"})
      *
-     * @param QueryManager $manager
-     * @param int          $year
-     * @param Site         $site
-     * @param Request      $request
+     * @param QueryManager    $manager
+     * @param int             $year
+     * @param Site            $site
+     * @param Request         $request
+     * @param RouterInterface $router
      *
      * @return Response
      * @throws GraphQLQueryException
      * @throws QueryManagerException
      */
-    public function archive(QueryManager $manager, int $year, Site $site, Request $request): Response
-    {
+    public function archive(
+        QueryManager $manager,
+        int $year,
+        Site $site,
+        Request $request,
+        RouterInterface $router
+    ): Response {
         $currentPage = $request->query->get('page', 1);
         $search      = $request->query->get('search');
 
+        $manager->add('page', new Listing($site->siteId));
         $manager->add(
-            'newsListing',
-            new Listing(
+            'collection',
+            new Collection(
+                $router,
                 $site->siteId,
                 $year + 1,
                 $year,
@@ -209,17 +221,16 @@ class NewsController extends AbstractController
     {
         $manager->add('filters', new Filters($site->siteId));
 
-        $collection = $manager->getCollection('newsListing');
+        $collection = $manager->getCollection('collection');
         $pagination = $collection->getPagination();
 
-        if (
-            (empty($collection) && $currentPage !== 1) ||
+        if ((empty($collection) && $currentPage !== 1) ||
             ($currentPage > $pagination->getTotalPages() && $pagination->getTotalPages() > 0)
         ) {
             return $this->redirectToRoute('app_news_index', ['page' => 1]);
         }
 
-        $page  = $manager->get('newsListing', '[entry]');
+        $page = $manager->get('page');
         $first = $manager->get('filters', '[first]');
         $last  = $manager->get('filters', '[last]');
 
