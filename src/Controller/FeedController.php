@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Query\CraftCMS\Feeds\Blog;
 use App\Query\CraftCMS\Feeds\Comments;
+use App\Query\CraftCMS\Feeds\Events;
 use App\Query\CraftCMS\Feeds\News;
 use App\Query\CraftCMS\Feeds\PressReleases;
 use App\Query\CraftCMS\Feeds\Taxonomy;
@@ -281,6 +282,50 @@ class FeedController extends AbstractController
     }
 
     /**
+     * @Route("/events/feed/")
+     *
+     * @param string       $type
+     * @param string       $slug
+     * @param QueryManager $manager
+     * @param Site         $site
+     * @param Environment  $twig
+     *
+     * @return Response
+     * @throws GraphQLQueryException
+     * @throws InvalidLocaleException
+     * @throws LoaderError
+     * @throws QueryManagerException
+     * @throws RuntimeError
+     * @throws SyntaxError
+     */
+    public function events(QueryManager $manager, Site $site, Environment $twig): Response
+    {
+        $manager->add('rss', new Events($site->siteId, self::LIMIT));
+        $entries = $manager->getCollection('rss');
+
+        $feedUrl = $this->generateUrl('app_feed_events', [], UrlGeneratorInterface::ABSOLUTE_URL);
+        $pageUrl = $this->generateUrl('app_events_index', [], UrlGeneratorInterface::ABSOLUTE_URL);
+
+        $feed = new Feed();
+        $feed->setTitle("W3C - Events");
+        $feed->setLanguage($site->getLocale());
+
+        $feed->setLink($pageUrl);
+        $feed->setFeedLink($feedUrl, 'rss');
+
+        $feed->setDateModified(time());
+        $feed->setDescription('Description');
+
+        foreach ($entries as $data) {
+            $feed->addEntry($this->buildEventEntry($data, $feed, $twig));
+        }
+
+        $out = $feed->export('rss');
+
+        return new Response($out, Response::HTTP_OK, ['content-type' => 'application/rss+xml']);
+    }
+
+    /**
      * @param Collection   $entries
      * @param QueryManager $manager
      *
@@ -362,7 +407,7 @@ class FeedController extends AbstractController
                 $entry->setLink(
                     $this->generateUrl(
                         'app_default_index',
-                        ['route' => $data['page']['uri']],
+                        ['route' => $data['page'][0]['uri']],
                         UrlGeneratorInterface::ABSOLUTE_URL
                     )
                 );

@@ -4,6 +4,7 @@ fragment listingEvent on events_default_Entry {
     slug
     uri
     title
+    date: postDate
     start: startDatetime
     end: endDatetime
     tz: startDatetime@formatDateTime(format: "e")

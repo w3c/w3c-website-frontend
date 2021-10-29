@@ -1,0 +1,16 @@
+query Events($siteId: [QueryArgument], $limit: Int) {
+    entries(section: "events", siteId: $siteId, limit: $limit, orderBy: "postDate desc") {
+        ... on events_default_Entry {
+            ...listingEvent
+            defaultFlexibleComponents {
+                ...defaultFlexibleComponents
+            }
+        }
+        ... on events_external_Entry {
+            ...listingExternalEvent
+        }
+        ... on events_entryContentIsACraftPage_Entry {
+            ...listingPageEvent
+        }
+    }
+}

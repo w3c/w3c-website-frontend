@@ -4,6 +4,7 @@ fragment listingExternalEvent on events_external_Entry {
     slug
     uri
     title
+    date: postDate
     start: startDatetime
     end: endDatetime
     tz: startDatetime@formatDateTime(format: "e")
