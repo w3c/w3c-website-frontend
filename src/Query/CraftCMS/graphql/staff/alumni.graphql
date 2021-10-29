@@ -1,13 +1,29 @@
-query Alumni($siteId: [QueryArgument]) {
-    entries(section: "alumni", siteId: $siteId) {
+query AlumniListing($siteId: [QueryArgument]) {
+    entry(section: "alumniListing", siteId: $siteId) {
         id
+        slug
+        title
+        uri
         expiryDate
+        breadcrumbs: parent {
+            ...breadcrumbs
+        }
+        ... on alumniListing_alumniListing_Entry {
+            excerpt
+            lead: pageLead
+            seo: seoOptions {
+                ...seoData
+            }
+        }
+    }
+    total: entryCount(section: "alumni", siteId: $siteId)
+    entries(section: "alumni", siteId: $siteId, orderBy: "familyName asc, title asc") {
         ... on alumni_default_Entry {
             given: title
-            last: lastName
-            biography: pageContent
-            start: startDate@formatDateTime(format: "Y-m-d")
-            end: endDate@formatDateTime(format: "Y-m-d")
+            last: familyName
+            start: startDate
+            end: endDate
+            biography: shortBiography
         }
     }
 }

@@ -23,7 +23,7 @@ query BlogPost($year: [String], $slug: [String], $siteId: [QueryArgument]) {
                     email: authorEmailAddress
                 }
             }
-            categories: blogCategories {
+            category: blogCategories {
                 title
                 slug
             }
@@ -65,7 +65,7 @@ query BlogPost($year: [String], $slug: [String], $siteId: [QueryArgument]) {
                     email: authorEmailAddress
                 }
             }
-            categories: blogCategories {
+            category: blogCategories {
                 title
                 slug
             }

@@ -2,16 +2,14 @@
 
 declare(strict_types=1);
 
-namespace App\Query\CraftCMS\Blog;
+namespace App\Query\CraftCMS\Staff;
 
 use App\Service\CraftCMS;
 use Strata\Data\Cache\CacheLifetime;
 use Strata\Data\Exception\GraphQLQueryException;
-use Strata\Data\Mapper\MapArray;
 use Strata\Data\Query\GraphQLQuery;
-use Strata\Data\Transform\Data\CallableData;
 
-class Listing extends GraphQLQuery
+class AlumniListing extends GraphQLQuery
 {
 
     public function getRequiredDataProviderClass(): string
@@ -27,12 +25,16 @@ class Listing extends GraphQLQuery
      *
      * @throws GraphQLQueryException
      */
-    public function __construct(int $siteId, int $cacheLifetime = CacheLifetime::HOUR)
-    {
-        $this->setGraphQLFromFile(__DIR__ . '/../graphql/blog/listing.graphql')
+    public function __construct(
+        int $siteId,
+        int $cacheLifetime = CacheLifetime::HOUR
+    ) {
+        $this->setGraphQLFromFile(__DIR__ . '/../graphql/staff/alumni.graphql')
             ->addFragmentFromFile(__DIR__ . '/../graphql/fragments/seoData.graphql')
             ->addFragmentFromFile(__DIR__ . '/../graphql/fragments/breadcrumbs.graphql')
-            ->setRootPropertyPath('[entry]')
+            ->setRootPropertyPath('[entries]')
+            ->setTotalResults('[total]')
+
             ->addVariable('siteId', $siteId)
             ->cache($cacheLifetime)
         ;

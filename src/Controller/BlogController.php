@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Form\CommentType;
+use App\Query\CraftCMS\Blog\Collection as BlogCollection;
 use App\Query\CraftCMS\Blog\CreateComment;
 use App\Query\CraftCMS\Blog\Entry;
 use App\Query\CraftCMS\Blog\Filters;
@@ -37,22 +38,25 @@ class BlogController extends AbstractController
     /**
      * @Route("")
      *
-     * @param QueryManager $manager
-     * @param Site         $site
-     * @param Request      $request
+     * @param QueryManager    $manager
+     * @param Site            $site
+     * @param Request         $request
+     * @param RouterInterface $router
      *
      * @return Response
      * @throws GraphQLQueryException
      * @throws QueryManagerException
      */
-    public function index(QueryManager $manager, Site $site, Request $request): Response
+    public function index(QueryManager $manager, Site $site, Request $request, RouterInterface $router): Response
     {
         $currentPage = $request->query->get('page', 1);
         $search = $request->query->get('search');
         
+        $manager->add('page', new Listing($site->siteId));
         $manager->add(
-            'blogListing',
-            new Listing(
+            'collection',
+            new BlogCollection(
+                $router,
                 $site->siteId,
                 null,
                 null,
@@ -86,23 +90,31 @@ class BlogController extends AbstractController
     /**
      * @Route("/{year}", requirements={"year": "\d\d\d\d"})
      *
-     * @param QueryManager $manager
-     * @param int          $year
-     * @param Site         $site
-     * @param Request      $request
+     * @param QueryManager    $manager
+     * @param int             $year
+     * @param Site            $site
+     * @param Request         $request
+     * @param RouterInterface $router
      *
      * @return Response
      * @throws GraphQLQueryException
      * @throws QueryManagerException
      */
-    public function archive(QueryManager $manager, int $year, Site $site, Request $request): Response
-    {
+    public function archive(
+        QueryManager $manager,
+        int $year,
+        Site $site,
+        Request $request,
+        RouterInterface $router
+    ): Response {
         $currentPage = $request->query->get('page', 1);
         $search = $request->query->get('search');
 
+        $manager->add('page', new Listing($site->siteId));
         $manager->add(
-            'blogListing',
-            new Listing(
+            'collection',
+            new BlogCollection(
+                $router,
                 $site->siteId,
                 null,
                 null,
@@ -143,17 +155,23 @@ class BlogController extends AbstractController
     /**
      * @Route("/category/{slug}", requirements={"slug": "[^/]+"})
      *
-     * @param QueryManager $manager
-     * @param string       $slug
-     * @param Site         $site
-     * @param Request      $request
+     * @param QueryManager    $manager
+     * @param string          $slug
+     * @param Site            $site
+     * @param Request         $request
+     * @param RouterInterface $router
      *
      * @return Response
      * @throws GraphQLQueryException
      * @throws QueryManagerException
      */
-    public function category(QueryManager $manager, string $slug, Site $site, Request $request): Response
-    {
+    public function category(
+        QueryManager $manager,
+        string $slug,
+        Site $site,
+        Request $request,
+        RouterInterface $router
+    ): Response {
         $currentPage = $request->query->get('page', 1);
         $search = $request->query->get('search');
 
@@ -172,9 +190,11 @@ class BlogController extends AbstractController
             throw $this->createNotFoundException('CategoryInfo not found');
         }
 
+        $manager->add('page', new Listing($site->siteId));
         $manager->add(
-            'blogListing',
-            new Listing(
+            'collection',
+            new BlogCollection(
+                $router,
                 $site->siteId,
                 $category['id'],
                 null,
@@ -215,17 +235,23 @@ class BlogController extends AbstractController
     /**
      * @Route("/tags/{slug}", requirements={"tag": "[^/]+"})
      *
-     * @param QueryManager $manager
-     * @param string       $slug
-     * @param Site         $site
-     * @param Request      $request
+     * @param QueryManager    $manager
+     * @param string          $slug
+     * @param Site            $site
+     * @param Request         $request
+     * @param RouterInterface $router
      *
      * @return Response
      * @throws GraphQLQueryException
      * @throws QueryManagerException
      */
-    public function tag(QueryManager $manager, string $slug, Site $site, Request $request): Response
-    {
+    public function tag(
+        QueryManager $manager,
+        string $slug,
+        Site $site,
+        Request $request,
+        RouterInterface $router
+    ): Response {
         $currentPage = $request->query->get('page', 1);
         $search      = $request->query->get('search');
 
@@ -243,9 +269,11 @@ class BlogController extends AbstractController
             throw $this->createNotFoundException('Tag not found');
         }
 
+        $manager->add('page', new Listing($site->siteId));
         $manager->add(
-            'blogListing',
-            new Listing(
+            'collection',
+            new BlogCollection(
+                $router,
                 $site->siteId,
                 null,
                 $tag['id'],
@@ -416,7 +444,8 @@ class BlogController extends AbstractController
     {
         $manager->add('filters', new Filters($site->siteId));
 
-        $collection = $manager->getCollection('blogListing');
+        $collection = $manager->getCollection('collection');
+
         $pagination = $collection->getPagination();
 
         if (empty($collection) && $currentPage !== 1) {
@@ -427,7 +456,7 @@ class BlogController extends AbstractController
             return $this->redirectToRoute('app_blog_index', ['page' => 1]);
         }
 
-        $page       = $manager->get('blogListing', '[entry]');
+        $page       = $manager->get('page');
         $categories = $manager->getCollection('filters', '[categories]');
         $first      = $manager->get('filters', '[first]');
         $last       = $manager->get('filters', '[last]');

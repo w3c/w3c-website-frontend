@@ -59,7 +59,7 @@ class Entry extends GraphQLQuery
     public function getMapping()
     {
         $mapping = new WildcardMappingStrategy();
-        $mapping->addMapping('categories', $this->mapTaxonomy('categories', 'transformCategory'));
+        $mapping->addMapping('category', ['[category]' => new CallableData([$this, 'mapCategory'], '[category]')]);
         $mapping->addMapping('tags', $this->mapTaxonomy('tags', 'transformTag'));
         $mapping->addMapping('ecosystems', $this->mapTaxonomy('ecosystems', 'transformEcosystem'));
 
@@ -73,16 +73,22 @@ class Entry extends GraphQLQuery
             [
                 '[title]' => '[title]',
                 '[slug]'  => '[slug]',
-                '[uri]'   => new CallableData([$this, $function])
+                '[url]'   => new CallableData([$this, $function])
             ]
         )];
     }
 
-    public function transformCategory(array $data): string
+    public function mapCategory(array $data): array
     {
-        $slug = $data['slug'];
+        dump($data);
+        if (count($data) > 0) {
+            return [
+                'url'   => $this->router->generate('app_blog_category', ['slug' => $data[0]['slug']]),
+                'title' => $data[0]['title']
+            ];
+        }
 
-        return $this->router->generate('app_blog_category', ['slug' => $slug]);
+        return [];
     }
 
     public function transformEcosystem(array $data): string
