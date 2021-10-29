@@ -219,7 +219,7 @@ class EventsController extends AbstractController
 
         $singlesBreadcrumbs = $manager->get('singles-breadcrumbs');
 
-        $page['category'] = $page['categories'][0];
+        $page['category'] = (!empty($page['categories'])) ? $page['categories'][0] : [];
         unset($page['categories']);
         $page['seo']['expiry'] = $page['expiryDate'];
         $page['breadcrumbs'] = [
