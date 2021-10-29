@@ -32,6 +32,7 @@ class Listing extends GraphQLQuery
             ->addFragmentFromFile(__DIR__ . '/../graphql/fragments/seoData.graphql')
             ->addFragmentFromFile(__DIR__ . '/../graphql/fragments/breadcrumbs.graphql')
             ->setRootPropertyPath('[entry]')
+            ->addVariable('siteId', $siteId)
             ->cache($cacheLifetime)
         ;
     }
