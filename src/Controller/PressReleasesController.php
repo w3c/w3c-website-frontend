@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Query\CraftCMS\PressReleases\Collection;
 use App\Query\CraftCMS\PressReleases\Entry;
 use App\Query\CraftCMS\PressReleases\Filters;
 use App\Query\CraftCMS\PressReleases\Listing;
@@ -31,21 +32,24 @@ class PressReleasesController extends AbstractController
     /**
      * @Route("/")
      *
-     * @param QueryManager $manager
-     * @param Site         $site
-     * @param Request      $request
+     * @param QueryManager    $manager
+     * @param Site            $site
+     * @param Request         $request
+     * @param RouterInterface $router
      *
      * @return Response
      * @throws GraphQLQueryException
      * @throws QueryManagerException
      */
-    public function index(QueryManager $manager, Site $site, Request $request): Response
+    public function index(QueryManager $manager, Site $site, Request $request, RouterInterface $router): Response
     {
         $currentPage = $request->query->get('page', 1);
 
+        $manager->add('page', new Listing($site->siteId));
         $manager->add(
-            'pressReleasesListing',
-            new Listing(
+            'collection',
+            new Collection(
+                $router,
                 $site->siteId,
                 null,
                 null,
@@ -74,22 +78,30 @@ class PressReleasesController extends AbstractController
     /**
      * @Route("/{year}", requirements={"year": "\d\d\d\d"})
      *
-     * @param QueryManager $manager
-     * @param int          $year
-     * @param Site         $site
-     * @param Request      $request
+     * @param QueryManager    $manager
+     * @param int             $year
+     * @param Site            $site
+     * @param Request         $request
+     * @param RouterInterface $router
      *
      * @return Response
      * @throws GraphQLQueryException
      * @throws QueryManagerException
      */
-    public function archive(QueryManager $manager, int $year, Site $site, Request $request): Response
-    {
+    public function archive(
+        QueryManager $manager,
+        int $year,
+        Site $site,
+        Request $request,
+        RouterInterface $router
+    ): Response {
         $currentPage = $request->query->get('page', 1);
 
+        $manager->add('page', new Listing($site->siteId));
         $manager->add(
-            'pressReleasesListing',
-            new Listing(
+            'collection',
+            new Collection(
+                $router,
                 $site->siteId,
                 $year + 1,
                 $year,
@@ -202,20 +214,19 @@ class PressReleasesController extends AbstractController
     {
         $manager->add('filters', new Filters($site->siteId));
 
-        $collection = $manager->getCollection('pressReleasesListing');
+        $collection = $manager->getCollection('collection');
         $pagination = $collection->getPagination();
 
-        if (
-            (empty($collection) && $currentPage !== 1) ||
+        if ((empty($collection) && $currentPage !== 1) ||
             ($currentPage > $pagination->getTotalPages() && $pagination->getTotalPages() > 0)
         ) {
             return $this->redirectToRoute('app_pressreleases_index', ['page' => 1]);
         }
 
-        $page  = $manager->get('pressReleasesListing', '[entry]');
+        $page  = $manager->get('page');
         $first = $manager->get('filters', '[first]');
         $last  = $manager->get('filters', '[last]');
-
+dump($page);
         $archives = [];
         if ($first && $last) {
             $archives = range(

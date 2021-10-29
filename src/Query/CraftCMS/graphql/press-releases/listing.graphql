@@ -1,4 +1,4 @@
-query PressReleasesListing($siteId: [QueryArgument], $before: String, $after: String, $limit: Int, $offset: Int) {
+query PressReleasesListing($siteId: [QueryArgument]) {
     entry(section: "pressReleasesListing", siteId: $siteId) {
         id
         slug
@@ -16,24 +16,4 @@ query PressReleasesListing($siteId: [QueryArgument], $before: String, $after: St
             }
         }
     }
-    total: entryCount(section: "pressReleases", siteId: $siteId, before: $before, after: $after)
-    entries(section: "pressReleases", siteId: $siteId, before: $before, after: $after, limit: $limit, offset: $offset, orderBy: "postDate desc") {
-        id
-        slug
-        uri
-        title
-        ... on pressReleases_default_Entry {
-            date: postDate
-            excerpt
-            thumbnailImage {
-                ...thumbnailImage
-            }
-            thumbnailAltText
-        }
-    }
-}
-
-fragment thumbnailImage on AssetInterface {
-    url(transform: "size360x270")
-    srcset(sizes: ["580"])
 }
