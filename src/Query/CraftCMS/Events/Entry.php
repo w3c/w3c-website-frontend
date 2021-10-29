@@ -11,6 +11,7 @@ use Strata\Data\Mapper\MapArray;
 use Strata\Data\Mapper\WildcardMappingStrategy;
 use Strata\Data\Query\GraphQLQuery;
 use Strata\Data\Transform\Data\CallableData;
+use Strata\Data\Transform\Value\DateTimeValue;
 use Symfony\Component\Routing\RouterInterface;
 
 class Entry extends GraphQLQuery
@@ -63,7 +64,9 @@ class Entry extends GraphQLQuery
         $mapping->addMapping('tags', $this->mapTaxonomy('tags', 'transformTag'));
         $mapping->addMapping('ecosystems', $this->mapTaxonomy('ecosystems', 'transformEcosystem'));
         $mapping->addMapping('type', ['[type]' => '[type][0]']);
-
+        $mapping->addMapping('website', ['[website]' => '[website][0]']);
+        $mapping->addMapping('start', ['[start]' => new DateTimeValue('[start]')]);
+        $mapping->addMapping('end', ['[end]' => new DateTimeValue('[end]')]);
         return $mapping;
     }
 
@@ -74,7 +77,7 @@ class Entry extends GraphQLQuery
             [
                 '[title]' => '[title]',
                 '[slug]'  => '[slug]',
-                '[uri]'   => new CallableData([$this, $function])
+                '[url]'   => new CallableData([$this, $function])
             ]
         )];
     }
@@ -83,7 +86,7 @@ class Entry extends GraphQLQuery
     {
         $slug = $data['slug'];
 
-        return $this->router->generate('app_blog_category', ['slug' => $slug]);
+        return $this->router->generate('app_events_index', ['category' => $slug]);
     }
 
     public function transformEcosystem(array $data): string
@@ -96,6 +99,6 @@ class Entry extends GraphQLQuery
     {
         $slug = $data['slug'];
 
-        return $this->router->generate('app_blog_tag', ['slug' => $slug]);
+        return $this->router->generate('app_events_index', ['tag' => $slug]);
     }
 }
