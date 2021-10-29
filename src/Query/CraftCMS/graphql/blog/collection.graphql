@@ -25,6 +25,7 @@ query BlogCollection($siteId: [QueryArgument], $category: [QueryArgument], $tag:
                 slug
             }
             date: postDate
+            year: postDate@formatDateTime(format: "Y")
             excerpt
             thumbnailImage {
                 ...thumbnailImage
@@ -51,6 +52,7 @@ query BlogCollection($siteId: [QueryArgument], $category: [QueryArgument], $tag:
                 slug
             }
             date: postDate
+            year: postDate@formatDateTime(format: "Y")
             excerpt
             thumbnailImage {
                 ...thumbnailImage

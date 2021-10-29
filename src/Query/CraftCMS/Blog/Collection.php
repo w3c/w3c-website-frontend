@@ -76,7 +76,7 @@ class Collection extends GraphQLQuery
         return [
             '[id]' => '[id]',
             '[slug]' => '[slug]',
-            '[uri]' => '[uri]',
+            '[url]' => new CallableData([$this, 'transformUrl'], '[slug]', '[year]'),
             '[title]' => '[title]',
             '[author]' => '[author]',
             '[authors]' => '[authors]',
@@ -90,6 +90,11 @@ class Collection extends GraphQLQuery
             '[thumbnailImage]' => '[thumbnailImage][0]',
             '[thumbnailAltText]' => '[thumbnailAltText]'
         ];
+    }
+
+    public function transformUrl(string $slug, string $year): string
+    {
+        return $this->router->generate('app_blog_show', ['slug' => $slug, 'year' => $year]);
     }
 
     public function transformCategory(array $data): array
