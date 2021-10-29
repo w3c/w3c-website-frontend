@@ -19,10 +19,16 @@ query PressRelease($year: [String], $slug: [String], $siteId: [QueryArgument]) {
             groups: workingGroups {
                 title
                 slug
+                ...on groups_Category {
+                    url: urlLink
+                }
             }
             specifications {
                 title
                 slug
+                ...on specifications_Category {
+                    url: urlLink
+                }
             }
             ecosystems {
                 title
