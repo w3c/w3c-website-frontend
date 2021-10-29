@@ -87,8 +87,20 @@ class Collection extends GraphQLQuery
             ]),
             '[date]' => new DateTimeValue('[date]'),
             '[excerpt]' => '[excerpt]',
-            '[thumbnailImage]' => '[thumbnailImage][0]',
+            '[thumbnailImage]' => new CallableData([$this, 'transformThumbnail'], '[thumbnailImage][0]'),
             '[thumbnailAltText]' => '[thumbnailAltText]'
+        ];
+    }
+
+    public function transformThumbnail(?array $data): array
+    {
+        if (!$data) {
+            return [];
+        }
+
+        return [
+            'url'    => $data['url'],
+            'srcset' => preg_replace('/ 580w/', ' 2x', $data['srcset'])
         ];
     }
 

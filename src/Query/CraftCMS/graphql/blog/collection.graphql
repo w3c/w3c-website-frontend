@@ -64,6 +64,6 @@ query BlogCollection($siteId: [QueryArgument], $category: [QueryArgument], $tag:
 
 fragment thumbnailImage on AssetInterface {
     url(transform: "size360x270")
-    srcset(sizes: ["580"])
+    srcset(sizes: ["580w"])
 }
 
