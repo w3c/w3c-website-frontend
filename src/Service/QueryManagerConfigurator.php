@@ -12,6 +12,7 @@ use Strata\Data\Query\QueryManager;
 use Strata\Frontend\Site;
 use Symfony\Component\Cache\Adapter\FilesystemTagAwareAdapter;
 use Symfony\Component\DependencyInjection\ParameterBag\ContainerBagInterface;
+use Symfony\Component\Routing\RouterInterface;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 
 /**
@@ -31,6 +32,7 @@ class QueryManagerConfigurator
     private CacheItemPoolInterface $cache;
     private bool $enableCache;
     private HttpClientInterface $httpClient;
+    private RouterInterface $router;
 
     public function __construct(
         W3C $w3cApi,
@@ -39,7 +41,8 @@ class QueryManagerConfigurator
         EventDispatcherInterface $eventDispatcher,
         CacheItemPoolInterface $cache,
         ContainerBagInterface $params,
-        HttpClientInterface $httpClient
+        HttpClientInterface $httpClient,
+        RouterInterface $router
     ) {
         $this->w3CApi = $w3cApi;
         $this->craftCmsApi = $craftCmsApi;
@@ -48,6 +51,7 @@ class QueryManagerConfigurator
         $this->cache = $cache;
         $this->enableCache = (bool) $params->get('app.cacheEnable');
         $this->httpClient = $httpClient;
+        $this->router = $router;
     }
 
     /**
@@ -76,7 +80,7 @@ class QueryManagerConfigurator
         // Please note queries added here are not affected by preview mode disabling the cache
 
         // Add global navigation
-        $manager->add('navigation', new GlobalNavigation($this->site->siteId));
+        $manager->add('navigation', new GlobalNavigation($this->router, $this->site->siteId));
 
         // Add breadcrumbs for Craft singles
         $manager->add('singles-breadcrumbs', new SinglesBreadcrumbs($this->site->siteId));

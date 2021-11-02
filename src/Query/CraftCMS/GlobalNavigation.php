@@ -6,26 +6,40 @@ namespace App\Query\CraftCMS;
 
 use App\Service\CraftCMS;
 use Strata\Data\Cache\CacheLifetime;
+use Strata\Data\Exception\CacheException;
+use Strata\Data\Exception\GraphQLQueryException;
+use Strata\Data\Exception\QueryException;
 use Strata\Data\Mapper\MapArray;
 use Strata\Data\Query\GraphQLQuery;
 use Strata\Data\Transform\Data\CallableData;
+use Symfony\Component\Routing\RouterInterface;
 
 /**
  * Get global navigation
  */
 class GlobalNavigation extends GraphQLQuery
 {
+    private RouterInterface $router;
 
     /**
      * Set up query
      *
-     * @param int $siteId Site ID to generate global navigation for
-     * @param int $cacheLifetime Cache lifetime to store HTTP response for, defaults to 24 hours
-     * @param int $limit Results per page, defaults to 6
-     * @throws \Strata\Data\Exception\GraphQLQueryException
+     * @param RouterInterface $router
+     * @param int             $siteId        Site ID to generate global navigation for
+     * @param int             $cacheLifetime Cache lifetime to store HTTP response for, defaults to 24 hours
+     * @param int             $limit         Results per page, defaults to 6
+     *
+     * @throws CacheException
+     * @throws GraphQLQueryException
+     * @throws QueryException
      */
-    public function __construct(int $siteId, int $cacheLifetime = CacheLifetime::DAY, int $limit = 6)
-    {
+    public function __construct(
+        RouterInterface $router,
+        int $siteId,
+        int $cacheLifetime = CacheLifetime::DAY,
+        int $limit = 6
+    ) {
+        $this->router = $router;
         $this->setGraphQLFromFile(__DIR__ . '/graphql/global-navigation.graphql')
             ->setRootPropertyPath('[entries]')
             ->setTotalResults('[total]')
@@ -55,18 +69,27 @@ class GlobalNavigation extends GraphQLQuery
      * if "isTitleLinkInternal": true, then url = '/' + titleInternalLink.uri
      * if false, url =  titleExternalLink
      *
-     * @param array $data
+     * @param bool        $isTitleLinkInternal
+     * @param string|null $titleInternalLink
+     * @param string|null $titleExternalLink
+     *
      * @return string|null
      */
-    public function transformTitleLink(bool $isTitleLinkInternal, ?string $titleInternalLink, ?string $titleExternalLink): ?string
-    {
-        if ($isTitleLinkInternal && !empty($titleInternalLink)) {
-            return '/' . $titleInternalLink;
-        }
-        if (!$isTitleLinkInternal && !empty($titleExternalLink)) {
+    public function transformTitleLink(
+        bool $isTitleLinkInternal,
+        ?array $titleInternalLink,
+        ?string $titleExternalLink
+    ): ?string {
+        if (!$isTitleLinkInternal && $titleExternalLink) {
             return $titleExternalLink;
         }
-        return null;
+
+        switch ($titleInternalLink['sectionHandle']) {
+            case 'ecosystems':
+                return $this->router->generate('app_ecosystem_show', ['slug' => $titleInternalLink['slug']]);
+            default:
+                return $this->router->generate('app_default_index', ['route' => $titleInternalLink['uri']]);
+        }
     }
 
     /**
@@ -76,18 +99,22 @@ class GlobalNavigation extends GraphQLQuery
      * if isset internalLink.uri, url = '/' + internalLink.uri
      *
      * @param string|null $url
-     * @param string|null $internalUri
+     * @param array|null  $internalUri
+     *
      * @return string|null
      */
-    public function transformChildLink(?string $url, ?string $internalUri): ?string
+    public function transformChildLink(?string $url, ?array $internalUri): ?string
     {
-        if (!empty($internalUri)) {
-            return '/' . $internalUri;
-        }
-        if (!empty($url)) {
+        if ($url) {
             return $url;
         }
-        return null;
+
+        switch ($internalUri['sectionHandle']) {
+            case 'ecosystems':
+                return $this->router->generate('app_ecosystem_show', ['slug' => $internalUri['slug']]);
+            default:
+                return $this->router->generate('app_default_index', ['route' => $internalUri['uri']]);
+        }
     }
 
     /**
@@ -99,14 +126,18 @@ class GlobalNavigation extends GraphQLQuery
     {
         return [
             '[title]'      => '[title]',
-            '[titleLink]'  => new CallableData([$this, 'transformTitleLink'], '[isTitleLinkInternal]', '[titleInternalLink][0][uri]', '[titleExternalLink]'),
+            '[titleLink]' => new CallableData(
+                [$this, 'transformTitleLink'],
+                '[isTitleLinkInternal]',
+                '[titleInternalLink][0]',
+                '[titleExternalLink]'
+            ),
             '[introText]'  => '[introText]',
             '[introLinks]' => '[introLinks]',
             '[children]'   => new MapArray('[children]', [
                 '[title]' => '[title]',
-                '[url]'   => new CallableData([$this, 'transformChildLink'], '[url]', '[internalLink][0][uri]'),
+                '[url]' => new CallableData([$this, 'transformChildLink'], '[url]', '[internalLink][0]'),
             ]),
         ];
     }
-
 }
