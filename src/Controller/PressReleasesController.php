@@ -7,8 +7,6 @@ use App\Query\CraftCMS\PressReleases\Entry;
 use App\Query\CraftCMS\PressReleases\Filters;
 use App\Query\CraftCMS\PressReleases\Listing;
 use App\Query\CraftCMS\YouMayAlsoLikeRelatedEntries;
-use DateTimeImmutable;
-use Exception;
 use Strata\Data\Exception\GraphQLQueryException;
 use Strata\Data\Exception\QueryManagerException;
 use Strata\Data\Query\QueryManager;
@@ -19,6 +17,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Routing\RouterInterface;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
  * @author Jean-Guilhem Rouel <jean-gui@w3.org>
@@ -32,17 +31,23 @@ class PressReleasesController extends AbstractController
     /**
      * @Route("/")
      *
-     * @param QueryManager    $manager
-     * @param Site            $site
-     * @param Request         $request
-     * @param RouterInterface $router
+     * @param QueryManager        $manager
+     * @param Site                $site
+     * @param Request             $request
+     * @param RouterInterface     $router
+     * @param TranslatorInterface $translator
      *
      * @return Response
      * @throws GraphQLQueryException
      * @throws QueryManagerException
      */
-    public function index(QueryManager $manager, Site $site, Request $request, RouterInterface $router): Response
-    {
+    public function index(
+        QueryManager $manager,
+        Site $site,
+        Request $request,
+        RouterInterface $router,
+        TranslatorInterface $translator
+    ): Response {
         $currentPage = $request->query->get('page', 1);
 
         $manager->add('page', new Listing($site->siteId));
@@ -58,7 +63,7 @@ class PressReleasesController extends AbstractController
             )
         );
 
-        [$page, $collection, $archives] = $this->buildListing($manager, $site, $currentPage);
+        [$page, $collection, $archives] = $this->buildListing($manager, $site, $currentPage, $router, $translator);
         $page['breadcrumbs'] = [
             'title'  => $page['title'],
             'uri'    => $page['uri'],
@@ -78,11 +83,12 @@ class PressReleasesController extends AbstractController
     /**
      * @Route("/{year}", requirements={"year": "\d\d\d\d"})
      *
-     * @param QueryManager    $manager
-     * @param int             $year
-     * @param Site            $site
-     * @param Request         $request
-     * @param RouterInterface $router
+     * @param QueryManager        $manager
+     * @param int                 $year
+     * @param Site                $site
+     * @param Request             $request
+     * @param RouterInterface     $router
+     * @param TranslatorInterface $translator
      *
      * @return Response
      * @throws GraphQLQueryException
@@ -93,7 +99,8 @@ class PressReleasesController extends AbstractController
         int $year,
         Site $site,
         Request $request,
-        RouterInterface $router
+        RouterInterface $router,
+        TranslatorInterface $translator
     ): Response {
         $currentPage = $request->query->get('page', 1);
 
@@ -112,7 +119,7 @@ class PressReleasesController extends AbstractController
 
         $singlesBreadcrumbs = $manager->get('singles-breadcrumbs');
 
-        [$page, $collection, $archives] = $this->buildListing($manager, $site, $currentPage);
+        [$page, $collection, $archives] = $this->buildListing($manager, $site, $currentPage, $router, $translator);
         $page['breadcrumbs'] = [
             'title'  => $year,
             'uri'    => $singlesBreadcrumbs['pressReleases']['uri'] . '/' . $year,
@@ -201,18 +208,24 @@ class PressReleasesController extends AbstractController
     }
 
     /**
-     * @param QueryManager $manager
-     * @param Site         $site
-     * @param int          $currentPage
+     * @param QueryManager        $manager
+     * @param Site                $site
+     * @param int                 $currentPage
+     * @param RouterInterface     $router
+     * @param TranslatorInterface $translator
      *
      * @return RedirectResponse|array
      * @throws GraphQLQueryException
      * @throws QueryManagerException
-     * @throws Exception
      */
-    protected function buildListing(QueryManager $manager, Site $site, int $currentPage): array
-    {
-        $manager->add('filters', new Filters($site->siteId));
+    protected function buildListing(
+        QueryManager $manager,
+        Site $site,
+        int $currentPage,
+        RouterInterface $router,
+        TranslatorInterface $translator
+    ): array {
+        $manager->add('filters', new Filters($router, $translator, $site->siteId));
 
         $collection = $manager->getCollection('collection');
         $pagination = $collection->getPagination();
@@ -223,18 +236,9 @@ class PressReleasesController extends AbstractController
             return $this->redirectToRoute('app_pressreleases_index', ['page' => 1]);
         }
 
-        $page  = $manager->get('page');
-        $first = $manager->get('filters', '[first]');
-        $last  = $manager->get('filters', '[last]');
-dump($page);
-        $archives = [];
-        if ($first && $last) {
-            $archives = range(
-                (new DateTimeImmutable($first['postDate']))->format('Y'),
-                (new DateTimeImmutable($last['postDate']))->format('Y')
-            );
-        }
-
+        $page    = $manager->get('page');
+        $filters = $manager->get('filters');
+        $archives = $filters['archives'];
         $page['seo']['expiry'] = $page['expiryDate'];
 
         if ($this->getParameter('kernel.environment') == 'dev') {

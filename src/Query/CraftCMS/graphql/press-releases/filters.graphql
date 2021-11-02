@@ -1,8 +1,8 @@
 query PressReleasesFilters($siteId: [QueryArgument]) {
     first: entry(section: "pressReleases", siteId: $siteId, orderBy: "postDate asc") {
-        postDate
+        year: postDate@formatDateTime(format: "Y")
     }
     last: entry(section: "pressReleases", siteId: $siteId, orderBy: "postDate desc") {
-        postDate
+        year: postDate@formatDateTime(format: "Y")
     }
 }
