@@ -1,8 +1,8 @@
 query NewsFilters($siteId: [QueryArgument]) {
     first: entry(section: "newsArticles", siteId: $siteId, orderBy: "postDate asc") {
-        postDate
+        year: postDate@formatDateTime(format: "Y")
     }
     last: entry(section: "newsArticles", siteId: $siteId, orderBy: "postDate desc") {
-        postDate
+        year: postDate@formatDateTime(format: "Y")
     }
 }
