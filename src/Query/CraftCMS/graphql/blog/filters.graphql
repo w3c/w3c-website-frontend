@@ -5,9 +5,9 @@ query BlogFilters($siteId: [QueryArgument]) {
         uri
     }
     first: entry(section: "blogPosts", siteId: $siteId, orderBy: "postDate asc") {
-        postDate
+        year: postDate@formatDateTime(format: "Y")
     }
     last: entry(section: "blogPosts", siteId: $siteId, orderBy: "postDate desc") {
-        postDate
+        year: postDate@formatDateTime(format: "Y")
     }
 }

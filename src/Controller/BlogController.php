@@ -25,6 +25,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Routing\RouterInterface;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
  * @author Jean-Guilhem Rouel <jean-gui@w3.org>
@@ -38,17 +39,23 @@ class BlogController extends AbstractController
     /**
      * @Route("")
      *
-     * @param QueryManager    $manager
-     * @param Site            $site
-     * @param Request         $request
-     * @param RouterInterface $router
+     * @param QueryManager        $manager
+     * @param Site                $site
+     * @param Request             $request
+     * @param RouterInterface     $router
+     * @param TranslatorInterface $translator
      *
      * @return Response
      * @throws GraphQLQueryException
      * @throws QueryManagerException
      */
-    public function index(QueryManager $manager, Site $site, Request $request, RouterInterface $router): Response
-    {
+    public function index(
+        QueryManager $manager,
+        Site $site,
+        Request $request,
+        RouterInterface $router,
+        TranslatorInterface $translator
+    ): Response {
         $currentPage = $request->query->get('page', 1);
         $search = $request->query->get('search');
         
@@ -68,7 +75,13 @@ class BlogController extends AbstractController
             )
         );
 
-        [$page, $collection, $categories, $archives] = $this->buildListing($manager, $site, $currentPage);
+        [$page, $collection, $categories, $archives] = $this->buildListing(
+            $manager,
+            $site,
+            $currentPage,
+            $router,
+            $translator
+        );
         $page['breadcrumbs'] = [
             'title'  => $page['title'],
             'uri'    => $page['uri'],
@@ -90,11 +103,12 @@ class BlogController extends AbstractController
     /**
      * @Route("/{year}", requirements={"year": "\d\d\d\d"})
      *
-     * @param QueryManager    $manager
-     * @param int             $year
-     * @param Site            $site
-     * @param Request         $request
-     * @param RouterInterface $router
+     * @param QueryManager        $manager
+     * @param int                 $year
+     * @param Site                $site
+     * @param Request             $request
+     * @param RouterInterface     $router
+     * @param TranslatorInterface $translator
      *
      * @return Response
      * @throws GraphQLQueryException
@@ -105,7 +119,8 @@ class BlogController extends AbstractController
         int $year,
         Site $site,
         Request $request,
-        RouterInterface $router
+        RouterInterface $router,
+        TranslatorInterface $translator
     ): Response {
         $currentPage = $request->query->get('page', 1);
         $search = $request->query->get('search');
@@ -128,7 +143,13 @@ class BlogController extends AbstractController
 
         $singlesBreadcrumbs = $manager->get('singles-breadcrumbs');
 
-        [$page, $collection, $categories, $archives] = $this->buildListing($manager, $site, $currentPage);
+        [$page, $collection, $categories, $archives] = $this->buildListing(
+            $manager,
+            $site,
+            $currentPage,
+            $router,
+            $translator
+        );
         $page['breadcrumbs'] = [
             'title' => $year,
             'uri' => $singlesBreadcrumbs['blog']['uri'] . '/' . $year,
@@ -155,11 +176,12 @@ class BlogController extends AbstractController
     /**
      * @Route("/category/{slug}", requirements={"slug": "[^/]+"})
      *
-     * @param QueryManager    $manager
-     * @param string          $slug
-     * @param Site            $site
-     * @param Request         $request
-     * @param RouterInterface $router
+     * @param QueryManager        $manager
+     * @param string              $slug
+     * @param Site                $site
+     * @param Request             $request
+     * @param RouterInterface     $router
+     * @param TranslatorInterface $translator
      *
      * @return Response
      * @throws GraphQLQueryException
@@ -170,7 +192,8 @@ class BlogController extends AbstractController
         string $slug,
         Site $site,
         Request $request,
-        RouterInterface $router
+        RouterInterface $router,
+        TranslatorInterface $translator
     ): Response {
         $currentPage = $request->query->get('page', 1);
         $search = $request->query->get('search');
@@ -206,7 +229,13 @@ class BlogController extends AbstractController
             )
         );
 
-        [$page, $collection, $categories, $archives] = $this->buildListing($manager, $site, $currentPage);
+        [$page, $collection, $categories, $archives] = $this->buildListing(
+            $manager,
+            $site,
+            $currentPage,
+            $router,
+            $translator
+        );
         $singlesBreadcrumbs = $manager->get('singles-breadcrumbs');
 
         $page['breadcrumbs'] = [
@@ -235,11 +264,12 @@ class BlogController extends AbstractController
     /**
      * @Route("/tags/{slug}", requirements={"tag": "[^/]+"})
      *
-     * @param QueryManager    $manager
-     * @param string          $slug
-     * @param Site            $site
-     * @param Request         $request
-     * @param RouterInterface $router
+     * @param QueryManager        $manager
+     * @param string              $slug
+     * @param Site                $site
+     * @param Request             $request
+     * @param RouterInterface     $router
+     * @param TranslatorInterface $translator
      *
      * @return Response
      * @throws GraphQLQueryException
@@ -250,7 +280,8 @@ class BlogController extends AbstractController
         string $slug,
         Site $site,
         Request $request,
-        RouterInterface $router
+        RouterInterface $router,
+        TranslatorInterface $translator
     ): Response {
         $currentPage = $request->query->get('page', 1);
         $search      = $request->query->get('search');
@@ -285,7 +316,13 @@ class BlogController extends AbstractController
             )
         );
 
-        [$page, $collection, $categories, $archives] = $this->buildListing($manager, $site, $currentPage);
+        [$page, $collection, $categories, $archives] = $this->buildListing(
+            $manager,
+            $site,
+            $currentPage,
+            $router,
+            $translator
+        );
         $singlesBreadcrumbs = $manager->get('singles-breadcrumbs');
 
         $page['breadcrumbs'] = [
@@ -324,6 +361,7 @@ class BlogController extends AbstractController
      * @return Response
      * @throws GraphQLQueryException
      * @throws QueryManagerException
+     * @throws Exception
      */
     public function show(
         int $year,
@@ -414,7 +452,6 @@ class BlogController extends AbstractController
             dump($comments);
         }
 
-        // @todo use blog post template
         return $this->render('blog/show.html.twig', [
             'site'          => $site,
             'navigation'    => $manager->getCollection('navigation'),
@@ -431,18 +468,24 @@ class BlogController extends AbstractController
     }
 
     /**
-     * @param QueryManager $manager
-     * @param Site         $site
-     * @param int          $currentPage
+     * @param QueryManager        $manager
+     * @param Site                $site
+     * @param int                 $currentPage
+     * @param RouterInterface     $router
+     * @param TranslatorInterface $translator
      *
      * @return RedirectResponse|array
      * @throws GraphQLQueryException
      * @throws QueryManagerException
-     * @throws Exception
      */
-    protected function buildListing(QueryManager $manager, Site $site, int $currentPage): array
-    {
-        $manager->add('filters', new Filters($site->siteId));
+    protected function buildListing(
+        QueryManager $manager,
+        Site $site,
+        int $currentPage,
+        RouterInterface $router,
+        TranslatorInterface $translator
+    ): array {
+        $manager->add('filters', new Filters($router, $translator, $site->siteId));
 
         $collection = $manager->getCollection('collection');
 
@@ -456,27 +499,17 @@ class BlogController extends AbstractController
             return $this->redirectToRoute('app_blog_index', ['page' => 1]);
         }
 
-        $page       = $manager->get('page');
-        $categories = $manager->getCollection('filters', '[categories]');
-        $first      = $manager->get('filters', '[first]');
-        $last       = $manager->get('filters', '[last]');
-
-        $archives = [];
-        if ($first && $last) {
-            $archives = range(
-                (new DateTimeImmutable($first['postDate']))->format('Y'),
-                (new DateTimeImmutable($last['postDate']))->format('Y')
-            );
-        }
-
+        $page                  = $manager->get('page');
+        $filters               = $manager->get('filters');
+        $categories            = $filters['categories'];
+        $archives              = $filters['archives'];
         $page['seo']['expiry'] = $page['expiryDate'];
 
         if ($this->getParameter('kernel.environment') == 'dev') {
-            dump($archives);
             dump($page);
             dump($collection);
             dump($pagination);
-            dump($categories);
+            dump($filters);
         }
 
         return [$page, $collection, $categories, $archives];
