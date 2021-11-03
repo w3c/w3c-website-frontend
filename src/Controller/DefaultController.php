@@ -15,6 +15,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\RouterInterface;
 
 class DefaultController extends AbstractController
 {
@@ -48,20 +49,20 @@ class DefaultController extends AbstractController
      * @Route("/{route}", requirements={"route"=".+"}, defaults={"route"=""}, priority=-1)
      * @todo route priority is temporarily set to -1 as it's extremely greedy because of the {route} parameter.
      *
-     * @param string       $route
-     * @param Site         $site
-     * @param QueryManager $manager
-     * @param Request      $request
+     * @param string          $route
+     * @param Site            $site
+     * @param QueryManager    $manager
+     * @param RouterInterface $router
      *
      * @return Response
      * @throws GraphQLQueryException
      * @throws QueryManagerException
      */
-    public function index(string $route, Site $site, QueryManager $manager, Request $request): Response
+    public function index(string $route, Site $site, QueryManager $manager, RouterInterface $router): Response
     {
         // Build queries
         $manager->add('page', new Page($site->siteId, $route));
-        $manager->add('crosslinks', new YouMayAlsoLikeRelatedEntries($site->siteId, $route));
+        $manager->add('crosslinks', new YouMayAlsoLikeRelatedEntries($router, $site->siteId, $route));
 
         // If page not found, return Error 404
         $page = $manager->get('page');

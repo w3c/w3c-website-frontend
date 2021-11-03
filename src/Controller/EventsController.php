@@ -160,11 +160,6 @@ class EventsController extends AbstractController
             return $this->redirectToRoute('app_events_show', ['type' => $type, 'slug' => $slug, 'year' => $postYear]);
         }
 
-        $manager->add(
-            'crosslinks',
-            new YouMayAlsoLikeRelatedEntries($site->siteId, substr($request->getPathInfo(), 1))
-        );
-
         return new Response(
             $icalExporter->exportEvent($event)->serialize(),
             Response::HTTP_OK,
@@ -210,12 +205,6 @@ class EventsController extends AbstractController
         if (empty($page)) {
             throw $this->createNotFoundException('Event not found');
         }
-
-        $manager->add(
-            'crosslinks',
-            new YouMayAlsoLikeRelatedEntries($site->siteId, substr($request->getPathInfo(), 1))
-        );
-
 
         $singlesBreadcrumbs = $manager->get('singles-breadcrumbs');
 

@@ -10,24 +10,32 @@ use Strata\Data\Exception\GraphQLQueryException;
 use Strata\Data\Mapper\MapArray;
 use Strata\Data\Query\GraphQLQuery;
 use Strata\Data\Transform\Data\CallableData;
+use Symfony\Component\Routing\RouterInterface;
 
 /**
  * Get global navigation
  */
 class YouMayAlsoLikeRelatedEntries extends GraphQLQuery
 {
+    public RouterInterface $router;
 
     /**
      * Set up query
      *
-     * @param int    $siteId        Site ID to generate global navigation for
-     * @param string $uri
-     * @param int    $cacheLifetime Cache lifetime to store HTTP response for, defaults to 24 hours
+     * @param RouterInterface $router
+     * @param int             $siteId        Site ID to generate global navigation for
+     * @param string          $uri
+     * @param int             $cacheLifetime Cache lifetime to store HTTP response for, defaults to 24 hours
      *
      * @throws GraphQLQueryException
      */
-    public function __construct(int $siteId, string $uri, int $cacheLifetime = CacheLifetime::HOUR)
-    {
+    public function __construct(
+        RouterInterface $router,
+        int $siteId,
+        string $uri,
+        int $cacheLifetime = CacheLifetime::HOUR
+    ) {
+        $this->router = $router;
         $this
             ->setGraphQLFromFile(__DIR__ . '/graphql/youMayAlsoLikeRelatedEntries.graphql')
             ->addFragmentFromFile(__DIR__. '/graphql/fragments/thumbnailImage.graphql')
@@ -66,6 +74,44 @@ class YouMayAlsoLikeRelatedEntries extends GraphQLQuery
         return null;
     }
 
+    public function transformUrl(?array $entry): ?string
+    {
+        if (array_key_exists('contentEntry', $entry)) {
+            $entry = $entry['contentEntry'][0];
+        } else {
+            return $entry['url'];
+        }
+
+        switch ($entry['category']) {
+            case 'blogPosts':
+                return $this->router->generate('app_blog_show', ['year' => $entry['year'], 'slug' => $entry['slug']]);
+            case 'newsArticles':
+                return $this->router->generate('app_news_show', ['year' => $entry['year'], 'slug' => $entry['slug']]);
+            case 'pressReleases':
+                return $this->router->generate(
+                    'app_pressreleases_show',
+                    ['year' => $entry['year'], 'slug' => $entry['slug']]
+                );
+            case 'ecosystems':
+                return $this->router->generate('app_ecosystem_show', ['slug' => $entry['slug']]);
+            case 'events':
+                switch ($entry['typeHandle']) {
+                    case 'default':
+                        return $this->router->generate('app_events_show', [
+                            'year' => $entry['year'],
+                            'slug' => $entry['slug']
+                        ]);
+                    case 'external':
+                        return $entry['urlLink'];
+                    case 'entryContentIsACraftPage':
+                        return $this->router->generate('app_default_index', ['route' => $entry['page']['uri']]);
+                }
+                return null;
+            default:
+                return $this->router->generate('app_default_index', ['route' => $entry['uri']]);
+        }
+    }
+
     public function getMapping()
     {
         return [
@@ -75,7 +121,7 @@ class YouMayAlsoLikeRelatedEntries extends GraphQLQuery
                 '[youMayAlsoLikeRelatedEntries]',
                 [
                     '[title]'    => ['[title]', '[contentEntry][0][title]'],
-                    '[url]'      => ['[url]', '[contentEntry][0][url]'],
+                    '[url]'      => new CallableData([$this, 'transformUrl']),
                     '[category]' => ['[category]', '[contentEntry][0][category]'],
                     '[text]'     => ['[text]', '[contentEntry][0][text]'],
                     '[img]'      => new CallableData([$this, 'transformImage'])

@@ -28,9 +28,11 @@ fragment youMayAlsoLikeRelatedEntries on youMayAlsoLikeRelatedEntries_MatrixFiel
     ... on youMayAlsoLikeRelatedEntries_contentFromTheCms_BlockType {
         contentEntry {
             category: sectionHandle
+            typeHandle
             title
-            url: uri
-            ... on blogPosts_default_Entry {
+            uri
+            slug
+            ... on pages_default_Entry {
                 text: excerpt
                 thumbnailImage {
                     ...thumbnailImage
@@ -44,7 +46,16 @@ fragment youMayAlsoLikeRelatedEntries on youMayAlsoLikeRelatedEntries_MatrixFiel
                 }
                 thumbnailAltText
             }
+            ... on blogPosts_default_Entry {
+                year: postDate@formatDateTime(format: "Y")
+                text: excerpt
+                thumbnailImage {
+                    ...thumbnailImage
+                }
+                thumbnailAltText
+            }
             ... on pressReleases_default_Entry {
+                year: postDate@formatDateTime(format: "Y")
                 text: excerpt
                 thumbnailImage {
                     ...thumbnailImage
@@ -52,6 +63,7 @@ fragment youMayAlsoLikeRelatedEntries on youMayAlsoLikeRelatedEntries_MatrixFiel
                 thumbnailAltText
             }
             ... on newsArticles_default_Entry {
+                year: postDate@formatDateTime(format: "Y")
                 text: excerpt
                 thumbnailImage {
                     ...thumbnailImage
@@ -66,6 +78,7 @@ fragment youMayAlsoLikeRelatedEntries on youMayAlsoLikeRelatedEntries_MatrixFiel
                 thumbnailAltText
             }
             ... on events_default_Entry {
+                year: startDatetime@formatDateTime(format: "Y")
                 text: eventExcerpt
                 thumbnailImage {
                     ...thumbnailImage
@@ -80,6 +93,17 @@ fragment youMayAlsoLikeRelatedEntries on youMayAlsoLikeRelatedEntries_MatrixFiel
                 thumbnailAltText
             }
             ... on events_external_Entry {
+                urlLink
+                text: eventExcerpt
+                thumbnailImage {
+                    ...thumbnailImage
+                }
+                thumbnailAltText
+            }
+            ... on events_entryContentIsACraftPage_Entry {
+                page: eventPage {
+                    uri
+                }
                 text: eventExcerpt
                 thumbnailImage {
                     ...thumbnailImage

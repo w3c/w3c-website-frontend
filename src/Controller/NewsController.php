@@ -178,7 +178,7 @@ class NewsController extends AbstractController
 
         $manager->add(
             'crosslinks',
-            new YouMayAlsoLikeRelatedEntries($site->siteId, substr($request->getPathInfo(), 1))
+            new YouMayAlsoLikeRelatedEntries($router, $site->siteId, substr($request->getPathInfo(), 1))
         );
 
         $crosslinks         = $manager->get('crosslinks');
