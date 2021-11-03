@@ -34,7 +34,7 @@ class FeedController extends AbstractController
     private const LIMIT = 25;
 
     /**
-     * @Route("/blog/feed")
+     * @Route("/blog/feed/")
      *
      * @param QueryManager $manager
      * @param Site         $site
@@ -83,7 +83,7 @@ class FeedController extends AbstractController
     }
 
     /**
-     * @Route("/news/feed")
+     * @Route("/news/feed/")
      *
      * @param QueryManager $manager
      * @param Site         $site
@@ -126,7 +126,7 @@ class FeedController extends AbstractController
     }
 
     /**
-     * @Route("/press-releases/feed")
+     * @Route("/press-releases/feed/")
      *
      * @param QueryManager $manager
      * @param Site         $site
@@ -168,7 +168,7 @@ class FeedController extends AbstractController
     }
 
     /**
-     * @Route("/feeds/category/{slug}")
+     * @Route("/feeds/category/{slug}/")
      *
      * @param string       $slug
      * @param QueryManager $manager
@@ -206,7 +206,7 @@ class FeedController extends AbstractController
     }
 
     /**
-     * @Route("/feeds/ecosystem/{slug}")
+     * @Route("/feeds/ecosystem/{slug}/")
      *
      * @param string       $slug
      * @param QueryManager $manager
@@ -244,10 +244,8 @@ class FeedController extends AbstractController
     }
 
     /**
-     * @Route("/feeds/groups/{type}/{slug}")
+     * @Route("/feeds/groups/{type}/{slug}/")
      *
-     * @param string       $type
-     * @param string       $slug
      * @param QueryManager $manager
      * @param Site         $site
      * @param Environment  $twig

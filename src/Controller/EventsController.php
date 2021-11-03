@@ -168,7 +168,7 @@ class EventsController extends AbstractController
     }
 
     /**
-     * @Route("/{type}/{year}/{slug}", requirements={"year": "\d\d\d\d"})
+     * @Route("/{type}/{year}/{slug}/", requirements={"year": "\d\d\d\d"})
      *
      * @param string          $type
      * @param int             $year
