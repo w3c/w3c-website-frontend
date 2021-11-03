@@ -67,6 +67,8 @@ class Entry extends GraphQLQuery
         $mapping->addMapping('website', ['[website]' => '[website][0]']);
         $mapping->addMapping('start', ['[start]' => new DateTimeValue('[start]')]);
         $mapping->addMapping('end', ['[end]' => new DateTimeValue('[end]')]);
+        $mapping->addMapping('postDate', ['[postDate]' => new DateTimeValue('[postDate]')]);
+        $mapping->addMapping('dateUpdated', ['[dateUpdated]' => new DateTimeValue('[dateUpdated]')]);
         return $mapping;
     }
 

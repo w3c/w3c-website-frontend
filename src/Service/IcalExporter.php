@@ -31,11 +31,11 @@ class IcalExporter
         $vcalendar = new VCalendar();
         $vcalendar->add('NAME', $event['title']);
         $vcalendar->add('X-WR-CALNAME', $event['title']);
-
-        $start   = (new DateTimeImmutable($event['start']))->setTimezone(new DateTimeZone($event['tz']));
-        $end     = (new DateTimeImmutable($event['end']))->setTimezone(new DateTimeZone($event['tz']));
-        $created = (new DateTimeImmutable($event['postDate']))->setTimezone(new DateTimeZone('UTC'));
-        $updated = (new DateTimeImmutable($event['dateUpdated']))->setTimezone(new DateTimeZone('UTC'));
+dump($event);
+        $start   = $event['start']->setTimezone(new DateTimeZone($event['tz']));
+        $end     = $event['end']->setTimezone(new DateTimeZone($event['tz']));
+        $created = $event['postDate']->setTimezone(new DateTimeZone('UTC'));
+        $updated = $event['dateUpdated']->setTimezone(new DateTimeZone('UTC'));
 
         $tz = self::getVtimezone(
             $event['tz'],

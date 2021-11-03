@@ -155,7 +155,7 @@ class EventsController extends AbstractController
             throw $this->createNotFoundException('Event not found');
         }
 
-        $postYear = intval((new DateTimeImmutable($event['postDate']))->format('Y'));
+        $postYear = intval($event['year']);
         if ($year !== $postYear) {
             return $this->redirectToRoute('app_events_show', ['type' => $type, 'slug' => $slug, 'year' => $postYear]);
         }
