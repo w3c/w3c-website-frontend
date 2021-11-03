@@ -20,7 +20,7 @@ use Symfony\Component\Routing\RouterInterface;
 class EcosystemController extends AbstractController
 {
     /**
-     * @Route("/ecosystems/{slug}/", requirements={"slug"=".+"})
+     * @Route("/ecosystems/{slug}/", requirements={"slug"="[^/]+"})
      *
      * @param string          $slug
      * @param Site            $site
