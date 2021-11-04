@@ -22,17 +22,18 @@ class DefaultController extends AbstractController
 
     /**
      * @Route("/debug")
-     * @param QueryManager $manager
+     * @param QueryManager    $manager
+     * @param RouterInterface $router
      *
      * @return Response
      * @throws GraphQLQueryException
      * @throws QueryManagerException
      */
-    public function debug(QueryManager $manager): Response
+    public function debug(QueryManager $manager, RouterInterface $router): Response
     {
         // Add test page
         // @see https://cms-dev.w3.org/admin/entries/pages/48-w3c-mission-default?site=default
-        $manager->add('page', new Page(1, "landing-page/w3c-mission-default"));
+        $manager->add('page', new Page($router, 1, "landing-page/w3c-mission-default"));
         $manager->add('w3c_healthcheck', new Healthcheck());
 
         return $this->render('debug/test.html.twig', [
@@ -61,7 +62,7 @@ class DefaultController extends AbstractController
     public function index(string $route, Site $site, QueryManager $manager, RouterInterface $router): Response
     {
         // Build queries
-        $manager->add('page', new Page($site->siteId, $route));
+        $manager->add('page', new Page($router, $site->siteId, $route));
         $manager->add('crosslinks', new YouMayAlsoLikeRelatedEntries($router, $site->siteId, $route));
 
         // If page not found, return Error 404
