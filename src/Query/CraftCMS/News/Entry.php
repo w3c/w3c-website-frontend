@@ -48,8 +48,29 @@ class Entry extends GraphQLQuery
     {
         $mapping = new WildcardMappingStrategy();
         $mapping->addMapping('ecosystems', $this->mapTaxonomy('ecosystems', 'transformEcosystem'));
+        $mapping->addMapping('localized', [
+            '[localized]' => new MapArray('[localized]', [
+                '[title]'         => '[title]',
+                '[language_code]' => '[language_code]',
+                '[url]'           => new CallableData(
+                    [$this, 'transformLocalizedUrl'],
+                    '[language_code]',
+                    '[year]',
+                    '[slug]'
+                )
+            ])
+        ]);
 
         return $mapping;
+    }
+
+    public function transformLocalizedUrl(string $lang, string $year, string $slug)
+    {
+        return $this->router->generate('app_news_show', [
+            'year'    => $year,
+            'slug'    => $slug,
+            '_locale' => strtolower($lang)
+        ]);
     }
 
     private function mapTaxonomy(string $field, string $function): array

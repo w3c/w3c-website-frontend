@@ -33,7 +33,7 @@ class EcosystemController extends AbstractController
      */
     public function show(string $slug, Site $site, QueryManager $manager, RouterInterface $router): Response
     {
-        $manager->add('page', new CraftEcosystem($site->siteId, $slug));
+        $manager->add('page', new CraftEcosystem($router, $site->siteId, $slug));
         $page = $manager->get('page');
 
         if (empty($page)) {

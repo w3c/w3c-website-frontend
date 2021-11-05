@@ -16,8 +16,9 @@ use Symfony\Component\Routing\RouterInterface;
 
 class Entry extends GraphQLQuery
 {
-
     private RouterInterface $router;
+    private array $type;
+    private int $year;
 
     public function getRequiredDataProviderClass(): string
     {
@@ -27,21 +28,26 @@ class Entry extends GraphQLQuery
     /**
      * Set up query
      *
-     * @param int    $siteId        Site ID of page content
-     * @param string $slug
-     * @param int    $cacheLifetime Cache lifetime to store HTTP response for, defaults to 1 hour
+     * @param int             $siteId        Site ID of page content
+     * @param array          $type
+     * @param int             $year
+     * @param string          $slug
+     * @param RouterInterface $router
+     * @param int             $cacheLifetime Cache lifetime to store HTTP response for, defaults to 1 hour
      *
      * @throws GraphQLQueryException
      */
     public function __construct(
         int $siteId,
-        string $type,
+        array $type,
         int $year,
         string $slug,
         RouterInterface $router,
         int $cacheLifetime = CacheLifetime::HOUR
     ) {
         $this->router = $router;
+        $this->year   = $year;
+        $this->type   = $type;
 
         $this->setGraphQLFromFile(__DIR__ . '/../graphql/events/entry.graphql')
             ->addFragmentFromFile(__DIR__ . '/../graphql/fragments/defaultFlexibleComponents.graphql')
@@ -50,7 +56,7 @@ class Entry extends GraphQLQuery
             ->setRootPropertyPath('[entry]')
 
             ->addVariable('siteId', $siteId)
-            ->addVariable('type', $type)
+            ->addVariable('type', $type['id'])
             ->addVariable('start', ['and', '>=' . $year, '<' . ($year+1)])
             ->addVariable('slug', $slug)
             ->cache($cacheLifetime)
@@ -69,7 +75,29 @@ class Entry extends GraphQLQuery
         $mapping->addMapping('end', ['[end]' => new DateTimeValue('[end]')]);
         $mapping->addMapping('postDate', ['[postDate]' => new DateTimeValue('[postDate]')]);
         $mapping->addMapping('dateUpdated', ['[dateUpdated]' => new DateTimeValue('[dateUpdated]')]);
+        $mapping->addMapping('localized', [
+            '[localized]' => new MapArray('[localized]', [
+                '[title]'         => '[title]',
+                '[language_code]' => '[language_code]',
+                '[url]'           => new CallableData(
+                    [$this, 'transformLocalizedUrl'],
+                    '[language_code]',
+                    '[slug]',
+                )
+            ])
+        ]);
+
         return $mapping;
+    }
+
+    public function transformLocalizedUrl(string $lang, string $slug)
+    {
+        return $this->router->generate('app_events_show', [
+            'type'    => $this->type['slug'],
+            'year'    => $this->year,
+            'slug'    => $slug,
+            '_locale' => strtolower($lang)
+        ]);
     }
 
     private function mapTaxonomy(string $field, string $function): array

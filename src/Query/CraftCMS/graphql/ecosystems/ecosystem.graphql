@@ -8,7 +8,7 @@ query Ecosystem($slug: [String], $siteId: [QueryArgument]) {
         localized {
             title
             language_code: language
-            uri
+            slug
         }
         postDate
         dateUpdated

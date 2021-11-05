@@ -7,6 +7,7 @@ namespace App\Query\CraftCMS;
 use App\Service\CraftCMS;
 use Strata\Data\Cache\CacheLifetime;
 use Strata\Data\Exception\GraphQLQueryException;
+use Strata\Data\Mapper\MapArray;
 use Strata\Data\Mapper\WildcardMappingStrategy;
 use Strata\Data\Query\GraphQLQuery;
 use Strata\Data\Transform\Data\CallableData;
@@ -72,8 +73,18 @@ class Page extends GraphQLQuery
         $mapping->addMapping('breadcrumbs', [
             '[breadcrumbs]' => new CallableData([$this, 'mapBreadcrumbs'], '[breadcrumbs]', '[title]', '[uri]')
         ]);
+        $mapping->addMapping('localized', ['[localized]' => new MapArray('[localized]', [
+            '[title]' => '[title]',
+            '[language_code]' => '[language_code]',
+            '[url]' => new CallableData([$this, 'transformLocalizedUrl'], '[language_code]', '[uri]')
+        ])]);
 
         return $mapping;
+    }
+
+    public function transformLocalizedUrl(string $lang, string $uri)
+    {
+        return $this->router->generate('app_default_index', ['route' => $uri, '_locale' => $lang]);
     }
 
     public function mapSiblings(array $data): array

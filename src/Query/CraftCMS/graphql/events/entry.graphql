@@ -10,7 +10,7 @@ query Event($type: [QueryArgument], $start: [QueryArgument], $slug: [String], $s
         localized {
             title
             language_code: language
-            uri
+            slug
         }
         postDate
         dateUpdated

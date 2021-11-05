@@ -9,7 +9,8 @@ query BlogPost($year: [String], $slug: [String], $siteId: [QueryArgument]) {
         localized {
             title
             language_code: language
-            uri
+            slug
+            year: postDate@formatDateTime(format: "Y")
         }
         postDate
         dateUpdated

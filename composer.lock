@@ -1227,20 +1227,20 @@
         },
         {
             "name": "psr/container",
-            "version": "1.1.1",
+            "version": "1.1.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-fig/container.git",
-                "reference": "8622567409010282b7aeebe4bb841fe98b58dcaf"
+                "reference": "513e0666f7216c7459170d56df27dfcefe1689ea"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-fig/container/zipball/8622567409010282b7aeebe4bb841fe98b58dcaf",
-                "reference": "8622567409010282b7aeebe4bb841fe98b58dcaf",
+                "url": "https://api.github.com/repos/php-fig/container/zipball/513e0666f7216c7459170d56df27dfcefe1689ea",
+                "reference": "513e0666f7216c7459170d56df27dfcefe1689ea",
                 "shasum": ""
             },
             "require": {
-                "php": ">=7.2.0"
+                "php": ">=7.4.0"
             },
             "type": "library",
             "autoload": {
@@ -1269,9 +1269,9 @@
             ],
             "support": {
                 "issues": "https://github.com/php-fig/container/issues",
-                "source": "https://github.com/php-fig/container/tree/1.1.1"
+                "source": "https://github.com/php-fig/container/tree/1.1.2"
             },
-            "time": "2021-03-05T17:36:06+00:00"
+            "time": "2021-11-05T16:50:12+00:00"
         },
         {
             "name": "psr/event-dispatcher",
@@ -7377,12 +7377,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/w3c/w3c-website-templates-bundle.git",
-                "reference": "085cfa798f84234026fc63fe1c31d6add9ec4adf"
+                "reference": "6d54911e6e80a4e5eaa62c33e4319fdfa58d89de"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/w3c/w3c-website-templates-bundle/zipball/085cfa798f84234026fc63fe1c31d6add9ec4adf",
-                "reference": "085cfa798f84234026fc63fe1c31d6add9ec4adf",
+                "url": "https://api.github.com/repos/w3c/w3c-website-templates-bundle/zipball/6d54911e6e80a4e5eaa62c33e4319fdfa58d89de",
+                "reference": "6d54911e6e80a4e5eaa62c33e4319fdfa58d89de",
                 "shasum": ""
             },
             "require": {
@@ -7417,7 +7417,7 @@
             "support": {
                 "source": "https://github.com/w3c/w3c-website-templates-bundle/tree/main"
             },
-            "time": "2021-11-05T16:04:15+00:00"
+            "time": "2021-11-05T17:27:16+00:00"
         },
         {
             "name": "webmozart/assert",
