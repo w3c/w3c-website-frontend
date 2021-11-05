@@ -66,10 +66,11 @@ class NewsController extends AbstractController
         );
 
         [$page, $collection, $archives] = $this->buildListing($manager, $site, $currentPage, $router, $translator);
+        $singlesBreadcrumbs  = $manager->get('singles-breadcrumbs');
         $page['breadcrumbs'] = [
-            'title'  => $page['title'],
-            'uri'    => $page['uri'],
-            'parent' => null
+            'title'  => $singlesBreadcrumbs['news']['title'],
+            'url'    => $singlesBreadcrumbs['news']['url'],
+            'parent' => $singlesBreadcrumbs['homepage']
         ];
 
         return $this->render('news/index.html.twig', [
@@ -121,17 +122,16 @@ class NewsController extends AbstractController
                 $currentPage
             )
         );
-
-        $singlesBreadcrumbs = $manager->get('singles-breadcrumbs');
-
+        
         [$page, $collection, $archives] = $this->buildListing($manager, $site, $currentPage, $router, $translator);
+        $singlesBreadcrumbs  = $manager->get('singles-breadcrumbs');
         $page['breadcrumbs'] = [
             'title'  => $year,
-            'uri'    => '/news/' . $year,
+            'url'    => $this->generateUrl('app_news_archive', ['year' => $year]),
             'parent' => [
                 'title'  => $singlesBreadcrumbs['news']['title'],
-                'uri'    => $singlesBreadcrumbs['news']['uri'],
-                'parent' => null
+                'url'    => $singlesBreadcrumbs['news']['url'],
+                'parent' => $singlesBreadcrumbs['homepage']
             ]
         ];
         $page['title']       = $page['title'] . ' - ' . $year;
@@ -185,16 +185,16 @@ class NewsController extends AbstractController
         $singlesBreadcrumbs = $manager->get('singles-breadcrumbs');
 
         $page['seo']['expiry'] = $page['expiryDate'];
-        $page['breadcrumbs']   = [
+        $page['breadcrumbs'] = [
             'title'  => $page['title'],
-            'uri'    => $page['uri'],
+            'url'    => $this->generateUrl('app_news_show', ['year' => $year, 'slug' => $slug]),
             'parent' => [
                 'title'  => $year,
-                'uri'    => '/news/' . $year,
+                'url'    => $this->generateUrl('app_news_archive', ['year' => $year]),
                 'parent' => [
                     'title'  => $singlesBreadcrumbs['news']['title'],
-                    'uri'    => $singlesBreadcrumbs['news']['uri'],
-                    'parent' => null
+                    'url'    => $singlesBreadcrumbs['news']['url'],
+                    'parent' => $singlesBreadcrumbs['homepage']
                 ]
             ]
         ];

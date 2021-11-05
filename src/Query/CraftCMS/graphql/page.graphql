@@ -4,6 +4,7 @@ query Page($uri: [String], $siteId: [QueryArgument]) {
         typeHandle
         status
         uri
+        title
         language
         localized {
             title
@@ -17,7 +18,6 @@ query Page($uri: [String], $siteId: [QueryArgument]) {
             ...breadcrumbs
         }
         ... on pages_default_Entry {
-            title
             displayOnThisPageNavigation
             siblingNavigation: parent {
                 siblings: children {
@@ -34,7 +34,6 @@ query Page($uri: [String], $siteId: [QueryArgument]) {
             }
         }
         ... on pages_landingPage_Entry {
-            title
             pageLead
             heroIllustration {
                 url
@@ -52,7 +51,6 @@ query Page($uri: [String], $siteId: [QueryArgument]) {
             }
         }
         ... on ecosystemsLandingPage_ecosystemsLandingPage_Entry {
-            title
             pageLead
             heroIllustration {
                 url
@@ -63,6 +61,20 @@ query Page($uri: [String], $siteId: [QueryArgument]) {
             }
             landingFlexibleComponents(orderBy: "sortOrder") {
                 ...landingFlexibleComponents
+            }
+            excerpt
+            seo: seoOptions {
+                ...seoData
+            }
+        }
+        ... on homepage_homepage_Entry {
+            pageLead
+            heroIllustration {
+                url
+                mimeType
+                height
+                width
+                size
             }
             excerpt
             seo: seoOptions {

@@ -82,10 +82,12 @@ class BlogController extends AbstractController
             $router,
             $translator
         );
+
+        $singlesBreadcrumbs = $manager->get('singles-breadcrumbs');
         $page['breadcrumbs'] = [
-            'title'  => $page['title'],
-            'uri'    => $page['uri'],
-            'parent' => null
+            'title'  => $singlesBreadcrumbs['blog']['title'],
+            'url'    => $singlesBreadcrumbs['blog']['url'],
+            'parent' => $singlesBreadcrumbs['homepage']
         ];
 
         return $this->render('blog/index.html.twig', [
@@ -141,8 +143,6 @@ class BlogController extends AbstractController
             )
         );
 
-        $singlesBreadcrumbs = $manager->get('singles-breadcrumbs');
-
         [$page, $collection, $categories, $archives] = $this->buildListing(
             $manager,
             $site,
@@ -150,13 +150,15 @@ class BlogController extends AbstractController
             $router,
             $translator
         );
+
+        $singlesBreadcrumbs  = $manager->get('singles-breadcrumbs');
         $page['breadcrumbs'] = [
             'title' => $year,
-            'uri' => $singlesBreadcrumbs['blog']['uri'] . '/' . $year,
+            'url' => $this->generateUrl('app_blog_archive', ['year' => $year]),
             'parent' => [
                 'title'  => $singlesBreadcrumbs['blog']['title'],
-                'uri'    => $singlesBreadcrumbs['blog']['uri'],
-                'parent' => null
+                'url'    => $singlesBreadcrumbs['blog']['url'],
+                'parent' => $singlesBreadcrumbs['homepage']
             ]
         ];
         $page['title'] = $page['title'] . ' - ' . $year;
@@ -240,11 +242,11 @@ class BlogController extends AbstractController
 
         $page['breadcrumbs'] = [
             'title'  => $category['title'],
-            'uri'    => $singlesBreadcrumbs['blog']['uri'] . '/categories/' . $slug,
+            'url'    => $this->generateUrl('app_blog_category', ['slug' => $slug]),
             'parent' => [
                 'title'  => $singlesBreadcrumbs['blog']['title'],
-                'uri'    => $singlesBreadcrumbs['blog']['uri'],
-                'parent' => null
+                'url'    => $singlesBreadcrumbs['blog']['url'],
+                'parent' => $singlesBreadcrumbs['homepage']
             ]
         ];
         $page['title']       = $page['title'] . ' - ' . $category['title'];
@@ -327,11 +329,11 @@ class BlogController extends AbstractController
 
         $page['breadcrumbs'] = [
             'title'  => $tag['title'],
-            'uri'    => $singlesBreadcrumbs['blog']['uri'] . '/tags/' . $slug,
+            'url'    => $this->generateUrl('app_blog_tag', ['slug' => $slug]),
             'parent' => [
                 'title'  => $singlesBreadcrumbs['blog']['title'],
-                'uri'    => $singlesBreadcrumbs['blog']['uri'],
-                'parent' => null
+                'url'    => $singlesBreadcrumbs['blog']['url'],
+                'parent' => $singlesBreadcrumbs['homepage']
             ]
         ];
         $page['title']       = $page['title'] . ' - ' . $tag['title'];
@@ -433,14 +435,14 @@ class BlogController extends AbstractController
         $page['seo']['expiry'] = $page['expiryDate'];
         $page['breadcrumbs'] = [
             'title'  => $page['title'],
-            'uri'    => $page['uri'],
+            'url'    => $this->generateUrl('app_blog_show', ['year' => $year, 'slug' => $slug]),
             'parent' => [
                 'title'  => $year,
-                'uri'    => $singlesBreadcrumbs['blog']['uri'] . '/' . $year,
+                'url'    => $this->generateUrl('app_blog_archive', ['year' => $year]),
                 'parent' => [
                     'title'  => $singlesBreadcrumbs['blog']['title'],
-                    'uri'    => $singlesBreadcrumbs['blog']['uri'],
-                    'parent' => null
+                    'url'    => $singlesBreadcrumbs['blog']['url'],
+                    'parent' => $singlesBreadcrumbs['homepage']
                 ]
             ]
         ];

@@ -12,12 +12,10 @@ use Strata\Data\Query\GraphQLQuery;
 use Strata\Data\Transform\Data\CallableData;
 use Symfony\Component\Routing\RouterInterface;
 
-/**
- * Get global navigation
- */
 class Page extends GraphQLQuery
 {
     private RouterInterface $router;
+    private array $breadcrumbsRoot;
 
     public function getRequiredDataProviderClass(): string
     {
@@ -28,18 +26,22 @@ class Page extends GraphQLQuery
      * Set up query
      *
      * @param RouterInterface $router
-     * @param int $siteId Site ID of page content
-     * @param string $uri Page URI to return
-     * @param int $cacheLifetime Cache lifetime to store HTTP response for, defaults to 1 hour
+     * @param array           $breadcrumbsRoot
+     * @param int             $siteId        Site ID of page content
+     * @param string          $uri           Page URI to return
+     * @param int             $cacheLifetime Cache lifetime to store HTTP response for, defaults to 1 hour
+     *
      * @throws GraphQLQueryException
      */
     public function __construct(
         RouterInterface $router,
+        array $breadcrumbsRoot,
         int $siteId,
         string $uri,
         int $cacheLifetime = CacheLifetime::HOUR
     ) {
-        $this->router = $router;
+        $this->router          = $router;
+        $this->breadcrumbsRoot = $breadcrumbsRoot;
         $this->setGraphQLFromFile(__DIR__ . '/graphql/page.graphql')
             ->addFragmentFromFile(__DIR__ . '/graphql/fragments/defaultFlexibleComponents.graphql')
             ->addFragmentFromFile(__DIR__ . '/graphql/fragments/landingFlexibleComponents.graphql')
@@ -67,6 +69,9 @@ class Page extends GraphQLQuery
         $mapping->addMapping('siblingNavigation', [
             '[siblings]' => new CallableData([$this, 'mapSiblings'], '[siblingNavigation][siblings]')
         ]);
+        $mapping->addMapping('breadcrumbs', [
+            '[breadcrumbs]' => new CallableData([$this, 'mapBreadcrumbs'], '[breadcrumbs]', '[title]', '[uri]')
+        ]);
 
         return $mapping;
     }
@@ -82,5 +87,32 @@ class Page extends GraphQLQuery
         }
 
         return $siblings;
+    }
+
+    public function mapBreadcrumbs(?array $breadcrumbs, string $title, string $uri): array
+    {
+        if ($breadcrumbs) {
+            return [
+                'title'  => $title,
+                'url'    => $this->router->generate('app_default_index', ['route' => $uri]),
+                'parent' => $this->mapBreadcrumbsRecursive($breadcrumbs)
+            ];
+        }
+
+        return $this->mapBreadcrumbsRecursive($breadcrumbs);
+    }
+
+    private function mapBreadcrumbsRecursive(?array $breadcrumbs): array
+    {
+        if (!$breadcrumbs) {
+            return $this->breadcrumbsRoot;
+        }
+
+        return [
+            'title'  => $breadcrumbs['title'],
+            'url'    => $this->router->generate('app_default_index', ['route' => $breadcrumbs['uri']]),
+            'parent' => $this->mapBreadcrumbsRecursive($breadcrumbs['parent'])
+
+        ];
     }
 }

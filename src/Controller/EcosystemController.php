@@ -33,7 +33,7 @@ class EcosystemController extends AbstractController
      */
     public function show(string $slug, Site $site, QueryManager $manager, RouterInterface $router): Response
     {
-        $manager->add('page', new CraftEcosystem($site->siteId, 'ecosystems/' . $slug));
+        $manager->add('page', new CraftEcosystem($site->siteId, $slug));
         $page = $manager->get('page');
 
         if (empty($page)) {
@@ -52,35 +52,42 @@ class EcosystemController extends AbstractController
         $groups           = $manager->getCollection('groups');
         $members          = $manager->getCollection('members');
 
-        $page['seo']['expiry'] = $page['expiryDate'];
-        $page['groups'] = $groups;
+        $page['seo']['expiry']    = $page['expiryDate'];
+        $page['groups']           = $groups;
         $page['recentActivities'] = $recentActivities;
         if (sizeof($recentActivities['recentEntries']) < 2) {
-            $page['recentActivities']['recentEvents'] = array_slice($recentActivities['recentEvents'], 0, (4 - sizeof($recentActivities['recentEntries'])));
+            $page['recentActivities']['recentEvents'] = array_slice(
+                $recentActivities['recentEvents'],
+                0,
+                (4 - sizeof($recentActivities['recentEntries']))
+            );
         }
         if (sizeof($recentActivities['recentEvents']) < 2) {
-            $page['recentActivities']['recentEntries'] = array_slice($recentActivities['recentEntries'], 0, (4 - sizeof($recentActivities['recentEvents'])));
+            $page['recentActivities']['recentEntries'] = array_slice(
+                $recentActivities['recentEntries'],
+                0,
+                (4 - sizeof($recentActivities['recentEvents']))
+            );
         }
-        if (
-            sizeof($page['recentActivities']['recentEntries']) > 2
+        if (sizeof($page['recentActivities']['recentEntries']) > 2
             && sizeof($page['recentActivities']['recentEvents']) > 2
         ) {
             $page['recentActivities']['recentEntries'] = array_slice($page['recentActivities']['recentEntries'], 0, 2);
-            $page['recentActivities']['recentEvents'] = array_slice($page['recentActivities']['recentEvents'], 0, 2);
+            $page['recentActivities']['recentEvents']  = array_slice($page['recentActivities']['recentEvents'], 0, 2);
         }
         $page['testimonials'] = $testimonials;
-        $page['members'] = $members->getCollection();
-        $page['evangelists'] = $evangelists;
+        $page['members']      = $members->getCollection();
+        $page['evangelists']  = $evangelists;
 
         $singlesBreadcrumbs = $manager->get('singles-breadcrumbs');
 
         $page['breadcrumbs'] = [
             'title'  => $page['title'],
-            'uri'    => $page['uri'],
+            'url'    => $this->generateUrl('app_ecosystem_show', ['slug' => $slug]),
             'parent' => [
                 'title'  => $singlesBreadcrumbs['ecosystems']['title'],
-                'uri'    => $singlesBreadcrumbs['ecosystems']['uri'],
-                'parent' => null
+                'url'    => $singlesBreadcrumbs['ecosystems']['url'],
+                'parent' => $singlesBreadcrumbs['homepage']
             ]
         ];
 

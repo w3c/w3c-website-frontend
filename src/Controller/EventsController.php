@@ -9,9 +9,7 @@ use App\Query\CraftCMS\Events\Page;
 use App\Query\CraftCMS\Taxonomies\Categories;
 use App\Query\CraftCMS\Taxonomies\CategoryInfo;
 use App\Query\CraftCMS\Taxonomies\Tags;
-use App\Query\CraftCMS\YouMayAlsoLikeRelatedEntries;
 use App\Service\IcalExporter;
-use DateTimeImmutable;
 use Exception;
 use Strata\Data\Exception\GraphQLQueryException;
 use Strata\Data\Exception\QueryManagerException;
@@ -124,12 +122,10 @@ class EventsController extends AbstractController
      * @param RouterInterface $router
      * @param Site            $site
      * @param IcalExporter    $icalExporter
-     * @param Request         $request
      *
      * @return Response
      * @throws GraphQLQueryException
      * @throws QueryManagerException
-     * @throws Exception
      */
     public function ical(
         string $type,
@@ -138,8 +134,7 @@ class EventsController extends AbstractController
         QueryManager $manager,
         RouterInterface $router,
         Site $site,
-        IcalExporter $icalExporter,
-        Request $request
+        IcalExporter $icalExporter
     ): Response {
         $manager->add('event-type', new CategoryInfo($site->siteId, 'eventType', $type));
         $eventType = $manager->get('event-type');
@@ -176,7 +171,6 @@ class EventsController extends AbstractController
      * @param QueryManager    $manager
      * @param RouterInterface $router
      * @param Site            $site
-     * @param Request         $request
      *
      * @return Response
      * @throws GraphQLQueryException
@@ -189,8 +183,7 @@ class EventsController extends AbstractController
         string $slug,
         QueryManager $manager,
         RouterInterface $router,
-        Site $site,
-        Request $request
+        Site $site
     ): Response {
         $manager->add('event-type', new CategoryInfo($site->siteId, 'eventType', $type));
         $eventType = $manager->get('event-type');
@@ -213,18 +206,25 @@ class EventsController extends AbstractController
         $page['seo']['expiry'] = $page['expiryDate'];
         $page['breadcrumbs'] = [
             'title'  => $page['title'],
-            'uri'    => $page['uri'],
+            'url'    => $this->generateUrl('app_events_show', ['type' => $type, 'year' => $year, 'slug' => $slug]),
             'parent' => [
                 'title'  => $year,
-                'uri'    => $singlesBreadcrumbs['events']['uri'] . '/' . $year,
+                'url'    => $this->generateUrl('app_events_archive_type', ['type' => $type, 'year' => $year]),
                 'parent' => [
-                    'title'  => $singlesBreadcrumbs['events']['title'],
-                    'uri'    => $singlesBreadcrumbs['events']['uri'],
-                    'parent' => null
+                    'title'  => $eventType['title'],
+                    'url'    => $this->generateUrl('app_events_index_type', ['type' => $type]),
+                    'parent' => [
+                        'title'  => $singlesBreadcrumbs['events']['title'],
+                        'url'    => $singlesBreadcrumbs['events']['url'],
+                        'parent' => $singlesBreadcrumbs['homepage']
+                    ]
                 ]
             ]
         ];
-        $page['ical_url'] = $this->generateUrl('app_events_ical', ['slug' => $slug, 'type' => $eventType['slug'], 'year' => $year]);
+        $page['ical_url'] = $this->generateUrl(
+            'app_events_ical',
+            ['slug' => $slug, 'type' => $eventType['slug'], 'year' => $year]
+        );
 
         if ($this->getParameter('kernel.environment') == 'dev') {
             dump($page);
@@ -355,7 +355,7 @@ class EventsController extends AbstractController
         }
 
         $page['seo']['expiry'] = $page['expiryDate'];
-        $page['breadcrumbs'] = $this->breadcrumbs($page, $eventType, $router, $type, $year);
+        $page['breadcrumbs'] = $this->breadcrumbs($manager, $page, $eventType, $year);
 
         if ($this->getParameter('kernel.environment') == 'dev') {
             dump($page);
@@ -376,31 +376,36 @@ class EventsController extends AbstractController
             'categories'    => $categories,
             'archives'      => $archives,
             'types'         => $types,
-            'reset_url'     => $router->generate('app_events_index')
+            'reset_url'     => $this->generateUrl('app_events_index')
         ]);
     }
 
     /**
+     * @param QueryManager    $manager
      * @param                 $page
      * @param                 $eventType
-     * @param RouterInterface $router
-     * @param string|null     $type
      * @param                 $year
      *
      * @return array          recursive breadcrumbs
+     * @throws QueryManagerException
      */
-    private function breadcrumbs($page, $eventType, RouterInterface $router, ?string $type, $year): array
-    {
+    private function breadcrumbs(
+        QueryManager $manager,
+        $page,
+        $eventType,
+        $year
+    ): array {
+        $singlesBreadcrumbs = $manager->get('singles-breadcrumbs');
         $breadcrumbs = [
             'title'  => $page['title'],
-            'uri'    => $page['uri'],
-            'parent' => null
+            'url'    => $this->generateUrl('app_events_index'),
+            'parent' => $singlesBreadcrumbs['homepage']
         ];
 
         if ($eventType) {
             $breadcrumbs = [
                 'title'  => $eventType['title'],
-                'uri'    => $router->generate('app_events_index_type', ['type' => $type]),
+                'url'    => $this->generateUrl('app_events_index_type', ['type' => $eventType['slug']]),
                 'parent' => $breadcrumbs
             ];
         }
@@ -409,13 +414,16 @@ class EventsController extends AbstractController
             if ($eventType) {
                 $breadcrumbs = [
                     'title'  => $year,
-                    'uri'    => $router->generate('app_events_archive_type', ['year' => $year, 'type' => $type]),
+                    'url' => $this->generateUrl(
+                        'app_events_archive_type',
+                        ['year' => $year, 'type' => $eventType['slug']]
+                    ),
                     'parent' => $breadcrumbs
                 ];
             } else {
                 $breadcrumbs = [
                     'title'  => $year,
-                    'uri'    => $router->generate('app_events_archive', ['year' => $year]),
+                    'url'    => $this->generateUrl('app_events_archive', ['year' => $year]),
                     'parent' => $breadcrumbs
                 ];
             }

@@ -12,7 +12,6 @@ use Strata\Data\Exception\QueryManagerException;
 use Strata\Data\Query\QueryManager;
 use Strata\Frontend\Site;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Routing\RouterInterface;
@@ -22,8 +21,8 @@ class DefaultController extends AbstractController
 
     /**
      * @Route("/debug")
-     * @param QueryManager    $manager
-     * @param RouterInterface $router
+     * @param QueryManager        $manager
+     * @param RouterInterface     $router
      *
      * @return Response
      * @throws GraphQLQueryException
@@ -33,7 +32,11 @@ class DefaultController extends AbstractController
     {
         // Add test page
         // @see https://cms-dev.w3.org/admin/entries/pages/48-w3c-mission-default?site=default
-        $manager->add('page', new Page($router, 1, "landing-page/w3c-mission-default"));
+        $singlesBreadcrumbs = $manager->get('singles-breadcrumbs');
+        $manager->add(
+            'page',
+            new Page($router, $singlesBreadcrumbs['homepage'], 1, "landing-page/w3c-mission-default")
+        );
         $manager->add('w3c_healthcheck', new Healthcheck());
 
         return $this->render('debug/test.html.twig', [
@@ -47,22 +50,27 @@ class DefaultController extends AbstractController
     }
 
     /**
-     * @Route("/{route}", requirements={"route"=".+"}, defaults={"route"=""}, priority=-1)
-     * @todo route priority is temporarily set to -1 as it's extremely greedy because of the {route} parameter.
+     * @Route("/", name="app_default_home")
+     * @Route("/{route}/", requirements={"route"=".+"}, priority=-1)
      *
-     * @param string          $route
-     * @param Site            $site
-     * @param QueryManager    $manager
-     * @param RouterInterface $router
+     * @param Site                $site
+     * @param QueryManager        $manager
+     * @param RouterInterface     $router
+     * @param string $route
      *
      * @return Response
      * @throws GraphQLQueryException
      * @throws QueryManagerException
      */
-    public function index(string $route, Site $site, QueryManager $manager, RouterInterface $router): Response
-    {
+    public function index(
+        Site $site,
+        QueryManager $manager,
+        RouterInterface $router,
+        string $route = '__home__'
+    ): Response {
         // Build queries
-        $manager->add('page', new Page($router, $site->siteId, $route));
+        $singlesBreadcrumbs = $manager->get('singles-breadcrumbs');
+        $manager->add('page', new Page($router, $singlesBreadcrumbs['homepage'], $site->siteId, $route));
         $manager->add('crosslinks', new YouMayAlsoLikeRelatedEntries($router, $site->siteId, $route));
 
         // If page not found, return Error 404
@@ -70,13 +78,7 @@ class DefaultController extends AbstractController
         if (empty($page)) {
             throw $this->createNotFoundException('Page not found');
         }
-
         $page['seo']['expiry'] = $page['expiryDate'];
-        $page['breadcrumbs'] = [
-            'title'  => $page['title'],
-            'uri'    => $page['uri'],
-            'parent' => $page['breadcrumbs']
-        ];
 
         $navigation = $manager->getCollection('navigation');
         $crosslinks = $manager->get('crosslinks');

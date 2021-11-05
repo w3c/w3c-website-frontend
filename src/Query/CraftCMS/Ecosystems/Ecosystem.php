@@ -6,6 +6,7 @@ namespace App\Query\CraftCMS\Ecosystems;
 
 use App\Service\CraftCMS;
 use Strata\Data\Cache\CacheLifetime;
+use Strata\Data\Exception\GraphQLQueryException;
 use Strata\Data\Mapper\WildcardMappingStrategy;
 use Strata\Data\Query\GraphQLQuery;
 
@@ -23,12 +24,13 @@ class Ecosystem extends GraphQLQuery
     /**
      * Set up query
      *
-     * @param int $siteId Site ID of page content
-     * @param string $uri Page URI to return
-     * @param int $cacheLifetime Cache lifetime to store HTTP response for, defaults to 1 hour
-     * @throws \Strata\Data\Exception\GraphQLQueryException
+     * @param int    $siteId        Site ID of page content
+     * @param string $slug          ecosystem's slug
+     * @param int    $cacheLifetime Cache lifetime to store HTTP response for, defaults to 1 hour
+     *
+     * @throws GraphQLQueryException
      */
-    public function __construct(int $siteId, string $uri, int $cacheLifetime = CacheLifetime::HOUR)
+    public function __construct(int $siteId, string $slug, int $cacheLifetime = CacheLifetime::HOUR)
     {
         $this->setGraphQLFromFile(__DIR__ . '/../graphql/ecosystems/ecosystem.graphql')
             ->addFragmentFromFile(__DIR__ . '/../graphql/fragments/ecosystemsFlexibleComponents.graphql')
@@ -37,7 +39,7 @@ class Ecosystem extends GraphQLQuery
             ->addFragmentFromFile(__DIR__ . '/../graphql/fragments/seoData.graphql')
             ->addFragmentFromFile(__DIR__ . '/../graphql/fragments/breadcrumbs.graphql')
             ->setRootPropertyPath('[entry]')
-            ->addVariable('uri', $uri)
+            ->addVariable('slug', $slug)
             ->addVariable('siteId', $siteId)
             ->cache($cacheLifetime)
         ;

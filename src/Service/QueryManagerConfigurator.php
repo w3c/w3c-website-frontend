@@ -8,9 +8,13 @@ use App\Query\CraftCMS\GlobalNavigation;
 use App\Query\CraftCMS\SinglesBreadcrumbs;
 use Psr\Cache\CacheItemPoolInterface;
 use Psr\EventDispatcher\EventDispatcherInterface;
+use Strata\Data\Exception\CacheException;
+use Strata\Data\Exception\GraphQLQueryException;
+use Strata\Data\Exception\MissingDataProviderException;
+use Strata\Data\Exception\QueryException;
+use Strata\Data\Exception\QueryManagerException;
 use Strata\Data\Query\QueryManager;
 use Strata\Frontend\Site;
-use Symfony\Component\Cache\Adapter\FilesystemTagAwareAdapter;
 use Symfony\Component\DependencyInjection\ParameterBag\ContainerBagInterface;
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
@@ -56,7 +60,14 @@ class QueryManagerConfigurator
 
     /**
      * Configure the QueryManager
+     *
      * @param QueryManager $manager
+     *
+     * @throws CacheException
+     * @throws GraphQLQueryException
+     * @throws MissingDataProviderException
+     * @throws QueryException
+     * @throws QueryManagerException
      */
     public function configure(QueryManager $manager): void
     {
@@ -83,6 +94,6 @@ class QueryManagerConfigurator
         $manager->add('navigation', new GlobalNavigation($this->router, $this->site->siteId));
 
         // Add breadcrumbs for Craft singles
-        $manager->add('singles-breadcrumbs', new SinglesBreadcrumbs($this->site->siteId));
+        $manager->add('singles-breadcrumbs', new SinglesBreadcrumbs($this->router, $this->site->siteId));
     }
 }

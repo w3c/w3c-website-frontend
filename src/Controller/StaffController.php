@@ -44,10 +44,11 @@ class StaffController extends AbstractController
             dump($collection);
         }
 
+        $singlesBreadcrumbs = $manager->get('singles-breadcrumbs');
         $page['breadcrumbs'] = [
             'title'  => $page['title'],
-            'uri'    => $page['uri'],
-            'parent' => null
+            'url'    => $this->generateUrl('app_staff_alumni'),
+            'parent' => $singlesBreadcrumbs['homepage']
         ];
 
         return $this->render('staff/alumni.html.twig', [
