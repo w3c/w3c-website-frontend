@@ -353,12 +353,13 @@ class BlogController extends AbstractController
     /**
      * @Route("/{year}/{slug}", requirements={"year": "\d\d\d\d"})
      *
-     * @param int             $year
-     * @param string          $slug
-     * @param QueryManager    $manager
-     * @param RouterInterface $router
-     * @param Site            $site
-     * @param Request         $request
+     * @param int                 $year
+     * @param string              $slug
+     * @param QueryManager        $manager
+     * @param RouterInterface     $router
+     * @param Site                $site
+     * @param Request             $request
+     * @param TranslatorInterface $translator
      *
      * @return Response
      * @throws GraphQLQueryException
@@ -371,7 +372,8 @@ class BlogController extends AbstractController
         QueryManager $manager,
         RouterInterface $router,
         Site $site,
-        Request $request
+        Request $request,
+        TranslatorInterface $translator
     ): Response {
         $manager->add('page', new Entry($site->siteId, $year, $slug, $router));
 
@@ -405,7 +407,10 @@ class BlogController extends AbstractController
                 dump($response);
             }
 
-            $this->addFlash('success', 'blog.comments.form.success');
+            $this->addFlash(
+                'success',
+                $translator->trans('blog.comments.form.success', [])
+            );
 
             return $this->redirectToRoute('app_blog_show', ['year' => $year, 'slug' => $slug]);
         }

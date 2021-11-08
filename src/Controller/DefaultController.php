@@ -13,6 +13,7 @@ use Strata\Data\Query\QueryManager;
 use Strata\Frontend\Site;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Routing\RouterInterface;
 
@@ -106,5 +107,15 @@ class DefaultController extends AbstractController
             'crosslinks'    => $crosslinks,
             'related_links' => array_key_exists('siblings', $page) ? $page['siblings'] : null
         ]);
+    }
+
+    /**
+     * @Route(name="index_flashes", path="/notifications/", options={"expose"=true})
+     *
+     * @return Response
+     */
+    public function getFlashes(): Response
+    {
+        return $this->render('@W3CWebsiteTemplates/flashes.html.twig');
     }
 }

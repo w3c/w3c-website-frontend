@@ -49,3 +49,27 @@
     {{ parent() }}
     {{ note_macros.form_errors(comment_form) }}
 {% endblock %}
+
+{% block closing_body_scripts %}
+    <script>
+        var httpRequest = new XMLHttpRequest();
+
+        if (httpRequest) {
+            httpRequest.onreadystatechange = showFlashes;
+            httpRequest.open('GET', '{{ url('index_flashes') }}');
+            httpRequest.send();
+        }
+
+        function showFlashes() {
+            if (httpRequest.readyState === XMLHttpRequest.DONE && httpRequest.status === 200) {
+                try {
+                    var flashes = httpRequest.responseText;
+                } catch (err) {
+                    console.error(err);
+                    return;
+                }
+                document.querySelector("#main").insertAdjacentHTML('afterbegin', flashes);
+            }
+        }
+    </script>
+{% endblock %}
