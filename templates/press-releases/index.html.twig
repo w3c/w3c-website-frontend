@@ -6,7 +6,13 @@
 
 {% block list %}
 
-    <p>This is page {{ entries.pagination.page }}, displaying results {{ entries.pagination.from }}-{{ entries.pagination.to }}</p>
+    <div aria-live="polite" aria-atomic="true">
+        {{ 'pagination.summary'|trans({
+            'page': entries.pagination.page,
+            'from': entries.pagination.from,
+            'to': entries.pagination.to
+        }, 'w3c_website_templates_bundle') }}
+    </div>
 
     {{ include('@W3CWebsiteTemplates/components/listings/press-releases/list.html.twig') }}
 {% endblock %}
