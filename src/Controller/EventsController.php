@@ -20,6 +20,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Routing\RouterInterface;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
  * @author Jean-Guilhem Rouel <jean-gui@w3.org>
@@ -38,11 +39,12 @@ class EventsController extends AbstractController
      *     requirements={"type": "global|ac-meeting|tpac-meeting|workshops|talks|conferences"}
      * )
      *
-     * @param string|null     $type
-     * @param QueryManager    $manager
-     * @param Site            $site
-     * @param Request         $request
-     * @param RouterInterface $router
+     * @param QueryManager        $manager
+     * @param Site                $site
+     * @param Request             $request
+     * @param RouterInterface     $router
+     * @param TranslatorInterface $translator
+     * @param string|null         $type
      *
      * @return Response
      * @throws GraphQLQueryException
@@ -53,6 +55,7 @@ class EventsController extends AbstractController
         Site $site,
         Request $request,
         RouterInterface $router,
+        TranslatorInterface $translator,
         string $type = null
     ): Response {
         if ($request->query->get('type')) {
@@ -66,7 +69,7 @@ class EventsController extends AbstractController
             return $this->redirectToRoute('app_events_index', $params);
         }
 
-        return $this->buildListing($request, $type, null, $manager, $site, $router);
+        return $this->buildListing($request, $type, null, $manager, $site, $router, $translator);
     }
 
     /**
@@ -80,12 +83,13 @@ class EventsController extends AbstractController
      *     }
      * )
      *
-     * @param string|null     $type
-     * @param int             $year
-     * @param QueryManager    $manager
-     * @param Site            $site
-     * @param Request         $request
-     * @param RouterInterface $router
+     * @param int                 $year
+     * @param QueryManager        $manager
+     * @param Site                $site
+     * @param Request             $request
+     * @param RouterInterface     $router
+     * @param TranslatorInterface $translator
+     * @param string|null         $type
      *
      * @return Response
      * @throws GraphQLQueryException
@@ -97,6 +101,7 @@ class EventsController extends AbstractController
         Site $site,
         Request $request,
         RouterInterface $router,
+        TranslatorInterface $translator,
         string $type = null
     ): Response {
         if ($request->query->get('type')) {
@@ -109,7 +114,7 @@ class EventsController extends AbstractController
             );
         }
 
-        return $this->buildListing($request, $type, $year, $manager, $site, $router);
+        return $this->buildListing($request, $type, $year, $manager, $site, $router, $translator);
     }
 
     /**
@@ -241,17 +246,17 @@ class EventsController extends AbstractController
     }
 
     /**
-     * @param Request         $request
-     * @param string|null     $type
-     * @param                 $year
-     * @param QueryManager    $manager
-     * @param Site            $site
-     * @param RouterInterface $router
+     * @param Request             $request
+     * @param string|null         $type
+     * @param                     $year
+     * @param QueryManager        $manager
+     * @param Site                $site
+     * @param RouterInterface     $router
+     * @param TranslatorInterface $translator
      *
      * @return Response
      * @throws GraphQLQueryException
      * @throws QueryManagerException
-     * @throws Exception
      */
     private function buildListing(
         Request $request,
@@ -259,13 +264,14 @@ class EventsController extends AbstractController
         $year,
         QueryManager $manager,
         Site $site,
-        RouterInterface $router
+        RouterInterface $router,
+        TranslatorInterface $translator
     ): Response {
         $currentPage  = $request->query->get('page', 1);
         $categorySlug = $request->query->get('category');
         $tagSlug      = $request->query->get('tag');
 
-        $manager->add('filters', new Filters($site->siteId));
+        $manager->add('filters', new Filters($router, $translator, $site->siteId));
         $filters     = $manager->get('filters');
         $types       = $filters['types'];
         $eventType   = [];
@@ -342,17 +348,10 @@ class EventsController extends AbstractController
             return $this->redirectToRoute('app_events_index', ['page' => 1]);
         }
 
-        $categories = $manager->getCollection('filters', '[categories]');
-
+        $categories = $filters['categories'];
+        $archives = $filters['archives'];
 
         $page = $manager->get('page');
-        $first = $manager->get('filters', '[first]');
-        $last = $manager->get('filters', '[last]');
-
-        $archives = [];
-        if ($first && $last) {
-            $archives = range($first['year'], $last['year']);
-        }
 
         $page['seo']['expiry'] = $page['expiryDate'];
         $page['breadcrumbs'] = $this->breadcrumbs($manager, $page, $eventType, $year);
