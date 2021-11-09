@@ -1,0 +1,65 @@
+query Home($siteId: [QueryArgument]) {
+    entry(slug: "homepage", siteId: $siteId) {
+        title
+        postDate
+        dateUpdated
+        expiryDate
+        ... on homepage_homepage_Entry {
+            heroIllustration {
+                url
+                mimeType
+                height
+                width
+                size
+            }
+            heroCopy
+            heroCallToActionButton {
+                buttonText
+                url
+            }
+            workingWithIndustryTitle
+            workingWithIndustryIntroduction
+            workingWithIndustryCallToActionButton {
+                buttonText
+                url
+            }
+            homeFiftyFiftyComponents {
+                ...on homeFiftyFiftyComponents_fiftyFiftyComponent_BlockType {
+                    showImageBeforeText
+                    image {
+                        ...contentImage
+                    }
+                    informativeOrDecorative
+                    altText
+                    titleField
+                    mainContent
+                    ctaUrl
+                    ctaCopy
+                }
+            }
+            latestNewsTitle
+            latestNewsIntroduction
+            latestNewsFeaturedArticles {
+                slug
+                title
+                year: postDate@formatDateTime(format: "Y")
+                ...on blogPosts_default_Entry {
+                    excerpt
+                }
+                ...on blogPosts_importedEntries_Entry {
+                    excerpt
+                }
+                ...on newsArticles_default_Entry {
+                    excerpt
+                }
+                ...on pressReleases_default_Entry {
+                    excerpt
+                }
+            }
+            excerpt
+            seo: seoOptions {
+                ...seoData
+            }
+        }
+    }
+}
