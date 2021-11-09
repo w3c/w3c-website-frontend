@@ -1,5 +1,5 @@
-query RecentActivities($ecosystemId: [QueryArgument], $endDatetime: [QueryArgument]) {
-    recentEntries: entries(section: ["blogPosts", "newsArticles", "pressReleases"], ecosystems: $ecosystemId, limit: 4, orderBy: "postDate DESC") {
+query RecentActivities($siteId: [QueryArgument], $ecosystemId: [QueryArgument], $endDatetime: [QueryArgument]) {
+    recentEntries: entries(siteId: $siteId, section: ["blogPosts", "newsArticles", "pressReleases"], ecosystems: $ecosystemId, limit: 4, orderBy: "postDate DESC") {
         id
         slug
         sectionHandle
