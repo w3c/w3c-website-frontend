@@ -411,6 +411,10 @@ class BlogController extends AbstractController
                 'success',
                 $translator->trans('blog.comments.form.success', [])
             );
+            $this->addFlash(
+                'title-success',
+                $translator->trans('notes.successes.default_title', [], 'w3c_website_templates_bundle')
+            );
 
             return $this->redirectToRoute('app_blog_show', ['year' => $year, 'slug' => $slug]);
         }

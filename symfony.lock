@@ -1,4 +1,7 @@
 {
+    "clue/stream-filter": {
+        "version": "v1.5.0"
+    },
     "composer/package-versions-deprecated": {
         "version": "1.11.99.1"
     },
@@ -41,6 +44,12 @@
     "friendsofphp/proxy-manager-lts": {
         "version": "v1.0.3"
     },
+    "friendsofsymfony/http-cache": {
+        "version": "2.11.0"
+    },
+    "friendsofsymfony/http-cache-bundle": {
+        "version": "2.11.2"
+    },
     "laminas/laminas-code": {
         "version": "4.2.1"
     },
@@ -82,6 +91,24 @@
     },
     "phar-io/version": {
         "version": "3.1.0"
+    },
+    "php-http/client-common": {
+        "version": "2.4.0"
+    },
+    "php-http/discovery": {
+        "version": "1.14.1"
+    },
+    "php-http/httplug": {
+        "version": "2.2.0"
+    },
+    "php-http/message": {
+        "version": "1.12.0"
+    },
+    "php-http/message-factory": {
+        "version": "v1.0.2"
+    },
+    "php-http/promise": {
+        "version": "1.1.0"
     },
     "php-webdriver/webdriver": {
         "version": "1.11.0"
@@ -138,6 +165,15 @@
     },
     "psr/event-dispatcher": {
         "version": "1.0.0"
+    },
+    "psr/http-client": {
+        "version": "1.0.1"
+    },
+    "psr/http-factory": {
+        "version": "1.0.1"
+    },
+    "psr/http-message": {
+        "version": "1.0.1"
     },
     "psr/link": {
         "version": "1.0.0"
