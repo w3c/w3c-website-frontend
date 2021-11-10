@@ -40,7 +40,7 @@ class EcosystemController extends AbstractController
             throw $this->createNotFoundException('Page not found');
         }
 
-        $manager->add('recent-activities', new RecentActivities($page['taxonomy-id'], $router));
+        $manager->add('recent-activities', new RecentActivities($site->siteId, $page['taxonomy-id'], $router));
         $manager->add('testimonials', new Testimonials($page['taxonomy-id'], $site));
         $manager->add('evangelists', new Evangelists($page['taxonomy-slug']));
         $manager->add('groups', new Groups($page['taxonomy-slug']));

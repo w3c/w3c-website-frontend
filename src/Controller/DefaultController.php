@@ -4,16 +4,18 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
+use App\Query\CraftCMS\Home\Page as Homepage;
+use App\Query\CraftCMS\Home\RecentActivities;
 use App\Query\CraftCMS\Page;
 use App\Query\CraftCMS\YouMayAlsoLikeRelatedEntries;
 use App\Query\W3C\Healthcheck;
+use App\Query\W3C\Home\Members;
 use Strata\Data\Exception\GraphQLQueryException;
 use Strata\Data\Exception\QueryManagerException;
 use Strata\Data\Query\QueryManager;
 use Strata\Frontend\Site;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Routing\RouterInterface;
 
@@ -52,6 +54,46 @@ class DefaultController extends AbstractController
 
     /**
      * @Route("/", name="app_default_home")
+     *
+     * @param Site            $site
+     * @param QueryManager    $manager
+     * @param RouterInterface $router
+     *
+     * @return Response
+     * @throws GraphQLQueryException
+     * @throws QueryManagerException
+     */
+    public function home(
+        Site $site,
+        QueryManager $manager,
+        RouterInterface $router
+    ): Response {
+        $manager->add('page', new Homepage($site->siteId));
+        $manager->add('recent-activities', new RecentActivities($site->siteId, $router));
+        $manager->add('members', new Members());
+
+        $page    = $manager->get('page');
+        $recentActivities = $manager->getCollection('recent-activities');
+
+        // Get all members having a logo (there may be several pages)
+        $members = $manager->getCollection('members');
+        $memberPagination = $members->getPagination();
+        $members = $members->getCollection();
+        for ($i = 2; $i <= $memberPagination->getTotalPages(); $i++) {
+            $manager->add('members' . $i, new Members($i));
+            $members = array_merge($members, $manager->getCollection('members' . $i)->getCollection());
+        }
+
+        if ($this->getParameter('kernel.environment') == 'dev') {
+            dump($page);
+            dump($recentActivities);
+            dump($members);
+        }
+
+        return $this->render('pages/home.html.twig', ['page' => $page, 'members' => $members]);
+    }
+
+    /**
      * @Route("/{route}/", requirements={"route"=".+"}, priority=-1)
      *
      * @param Site                $site

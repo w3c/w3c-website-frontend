@@ -1,5 +1,5 @@
-query RecentActivities($siteId: [QueryArgument], $ecosystemId: [QueryArgument], $endDatetime: [QueryArgument]) {
-    recentEntries: entries(siteId: $siteId, section: ["blogPosts", "newsArticles", "pressReleases"], ecosystems: $ecosystemId, limit: 4, orderBy: "postDate DESC") {
+query RecentActivities($siteId: [QueryArgument]) {
+    recentEntries: entries(siteId: $siteId, section: ["blogPosts", "newsArticles", "pressReleases"], limit: 4, orderBy: "postDate DESC") {
         id
         slug
         sectionHandle
@@ -28,17 +28,6 @@ query RecentActivities($siteId: [QueryArgument], $ecosystemId: [QueryArgument], 
                 ...thumbnailImage
             }
             thumbnailAltText
-        }
-    }
-    recentEvents: entries(section: "events", ecosystems: $ecosystemId, endDatetime: $endDatetime, limit: 4, orderBy: "endDate ASC") {
-        ... on events_default_Entry {
-            ...listingEvent
-        }
-        ... on events_external_Entry {
-            ...listingExternalEvent
-        }
-        ... on events_entryContentIsACraftPage_Entry {
-            ...listingPageEvent
         }
     }
 }
