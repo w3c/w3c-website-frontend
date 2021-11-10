@@ -19,7 +19,7 @@ use Symfony\Component\Routing\RouterInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
- * @Route("/newsletters")
+ * @Route("/newsletter")
  */
 class NewsletterController extends AbstractController
 {
