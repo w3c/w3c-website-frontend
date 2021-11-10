@@ -942,16 +942,16 @@
         },
         {
             "name": "laminas/laminas-stdlib",
-            "version": "3.6.0",
+            "version": "3.6.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laminas/laminas-stdlib.git",
-                "reference": "c53d8537f108fac3fae652677a19735db730ba46"
+                "reference": "db581851a092246ad99e12d4fddf105184924c71"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laminas/laminas-stdlib/zipball/c53d8537f108fac3fae652677a19735db730ba46",
-                "reference": "c53d8537f108fac3fae652677a19735db730ba46",
+                "url": "https://api.github.com/repos/laminas/laminas-stdlib/zipball/db581851a092246ad99e12d4fddf105184924c71",
+                "reference": "db581851a092246ad99e12d4fddf105184924c71",
                 "shasum": ""
             },
             "require": {
@@ -997,7 +997,7 @@
                     "type": "community_bridge"
                 }
             ],
-            "time": "2021-09-02T16:11:32+00:00"
+            "time": "2021-11-10T11:33:52+00:00"
         },
         {
             "name": "league/commonmark",
@@ -8179,12 +8179,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/w3c/w3c-website-templates-bundle.git",
-                "reference": "0705ad8ad2520156e77a3eb832111e5229201e2e"
+                "reference": "f235b45be19363de2d2d64e93d4e48197fe40ebb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/w3c/w3c-website-templates-bundle/zipball/0705ad8ad2520156e77a3eb832111e5229201e2e",
-                "reference": "0705ad8ad2520156e77a3eb832111e5229201e2e",
+                "url": "https://api.github.com/repos/w3c/w3c-website-templates-bundle/zipball/f235b45be19363de2d2d64e93d4e48197fe40ebb",
+                "reference": "f235b45be19363de2d2d64e93d4e48197fe40ebb",
                 "shasum": ""
             },
             "require": {
@@ -8219,7 +8219,7 @@
             "support": {
                 "source": "https://github.com/w3c/w3c-website-templates-bundle/tree/main"
             },
-            "time": "2021-11-09T14:20:49+00:00"
+            "time": "2021-11-10T17:02:55+00:00"
         },
         {
             "name": "webmozart/assert",
