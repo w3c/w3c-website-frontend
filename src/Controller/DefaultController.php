@@ -68,7 +68,7 @@ class DefaultController extends AbstractController
         QueryManager $manager,
         RouterInterface $router
     ): Response {
-        $manager->add('page', new Homepage($site->siteId));
+        $manager->add('page', new Homepage($router, $site->siteId));
         $manager->add('recent-activities', new RecentActivities($site->siteId, $router));
         $manager->add('members', new Members());
 
