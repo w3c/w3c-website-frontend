@@ -67,19 +67,5 @@ query Page($uri: [String], $siteId: [QueryArgument]) {
                 ...seoData
             }
         }
-        ... on homepage_homepage_Entry {
-            pageLead
-            heroIllustration {
-                url
-                mimeType
-                height
-                width
-                size
-            }
-            excerpt
-            seo: seoOptions {
-                ...seoData
-            }
-        }
     }
 }

@@ -109,7 +109,7 @@ class DefaultController extends AbstractController
         Site $site,
         QueryManager $manager,
         RouterInterface $router,
-        string $route = '__home__'
+        string $route
     ): Response {
         // Build queries
         $singlesBreadcrumbs = $manager->get('singles-breadcrumbs');
