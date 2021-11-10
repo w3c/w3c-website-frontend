@@ -1,0 +1,8 @@
+query NewsletterEntry($date: [String], $siteId: [QueryArgument]) {
+    entry(postDate: $date, siteId: $siteId, section: "newsletter") {
+        title
+        ... on newsletter_default_Entry {
+            fullDocumentContent
+        }
+    }
+}
