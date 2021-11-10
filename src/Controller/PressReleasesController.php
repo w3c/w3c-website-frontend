@@ -82,7 +82,7 @@ class PressReleasesController extends AbstractController
     }
 
     /**
-     * @Route("/{year}", requirements={"year": "\d\d\d\d"})
+     * @Route("/{year}/", requirements={"year": "\d\d\d\d"})
      *
      * @param QueryManager        $manager
      * @param int                 $year
@@ -142,7 +142,7 @@ class PressReleasesController extends AbstractController
     }
 
     /**
-     * @Route("/{year}/{slug}", requirements={"year": "\d\d\d\d"})
+     * @Route("/{year}/{slug}/", requirements={"year": "\d\d\d\d"})
      *
      * @param QueryManager    $manager
      * @param int             $year
