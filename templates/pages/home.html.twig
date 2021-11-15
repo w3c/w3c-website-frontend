@@ -1,5 +1,23 @@
 {% extends '@W3CWebsiteTemplates/pages/home.html.twig' %}
 
 {% block components %}
+    {% if members%}
+{#  @todo add home members component here      #}
+    {% endif %}
+    {% if page.homeFiftyFiftyComponents %}
+        {% for fiftyFifty in page.homeFiftyFiftyComponents %}
+            {{ include('@W3CWebsiteTemplates/components/fifty_fifty.html.twig', {
+                'order': fiftyFifty.showImageBeforeText,
+                'title': fiftyFifty.titleField,
+                'content': fiftyFifty.mainContent,
+                'link_main_url': fiftyFifty.ctaUrl is defined ? fiftyFifty.ctaUrl : null,
+                'link_main_text': fiftyFifty.ctaCopy is defined ? fiftyFifty.ctaCopy : null,
+                'link_secondary_url': fiftyFifty.secondaryLinkUrl is defined ? fiftyFifty.secondaryLinkUrl : null,
+                'link_secondary_text': fiftyFifty.secondaryLinkCopy is defined ? fiftyFifty.secondaryLinkCopy : null,
+                'image': fiftyFifty.image[0],
+                'alt': fiftyFifty.altText,
+                'informative_or_decorative': fiftyFifty.informativeOrDecorative })
+            }}
+        {% endfor %}
+    {% endif %}
 {% endblock %}
-
