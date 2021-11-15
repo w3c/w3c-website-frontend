@@ -172,7 +172,7 @@ class PressReleasesController extends AbstractController
 
         $manager->add(
             'crosslinks',
-            new YouMayAlsoLikeRelatedEntries($router, $site->siteId, substr($request->getPathInfo(), 1))
+            new YouMayAlsoLikeRelatedEntries($router, $site->siteId, $page['id'])
         );
 
         $crosslinks         = $manager->get('crosslinks');

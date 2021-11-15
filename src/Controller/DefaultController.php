@@ -114,7 +114,6 @@ class DefaultController extends AbstractController
         // Build queries
         $singlesBreadcrumbs = $manager->get('singles-breadcrumbs');
         $manager->add('page', new Page($router, $singlesBreadcrumbs['homepage'], $site->siteId, $route));
-        $manager->add('crosslinks', new YouMayAlsoLikeRelatedEntries($router, $site->siteId, $route));
 
         // If page not found, return Error 404
         $page = $manager->get('page');
@@ -124,6 +123,8 @@ class DefaultController extends AbstractController
         $page['seo']['expiry'] = $page['expiryDate'];
 
         $navigation = $manager->getCollection('navigation');
+
+        $manager->add('crosslinks', new YouMayAlsoLikeRelatedEntries($router, $site->siteId, $page['id']));
         $crosslinks = $manager->get('crosslinks');
 
         //Only for testing purposes in dev

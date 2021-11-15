@@ -24,7 +24,7 @@ class YouMayAlsoLikeRelatedEntries extends GraphQLQuery
      *
      * @param RouterInterface $router
      * @param int             $siteId        Site ID to generate global navigation for
-     * @param string          $uri
+     * @param int             $id
      * @param int             $cacheLifetime Cache lifetime to store HTTP response for, defaults to 24 hours
      *
      * @throws GraphQLQueryException
@@ -32,7 +32,7 @@ class YouMayAlsoLikeRelatedEntries extends GraphQLQuery
     public function __construct(
         RouterInterface $router,
         int $siteId,
-        string $uri,
+        int $id,
         int $cacheLifetime = CacheLifetime::HOUR
     ) {
         $this->router = $router;
@@ -42,7 +42,7 @@ class YouMayAlsoLikeRelatedEntries extends GraphQLQuery
             ->setRootPropertyPath('[entry]')
 
             // Set page URI to retrieve navigation for
-            ->addVariable('uri', $uri)
+            ->addVariable('id', $id)
 
             // Set site ID to retrieve navigation for
             ->addVariable('siteId', $siteId)
