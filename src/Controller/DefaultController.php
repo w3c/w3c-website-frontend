@@ -72,6 +72,8 @@ class DefaultController extends AbstractController
         $manager->add('recent-activities', new RecentActivities($site->siteId, $router));
         $manager->add('members', new Members());
 
+        $navigation = $manager->getCollection('navigation');
+
         $page    = $manager->get('page');
         $recentActivities = $manager->getCollection('recent-activities');
 
@@ -90,7 +92,7 @@ class DefaultController extends AbstractController
             dump($members);
         }
 
-        return $this->render('pages/home.html.twig', ['page' => $page, 'members' => $members]);
+        return $this->render('pages/home.html.twig', ['page' => $page, 'members' => $members, 'navigation' => $navigation]);
     }
 
     /**
