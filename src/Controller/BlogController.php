@@ -426,7 +426,7 @@ class BlogController extends AbstractController
 
         $manager->add(
             'crosslinks',
-            new YouMayAlsoLikeRelatedEntries($router, $site->siteId, $page['id'])
+            new YouMayAlsoLikeRelatedEntries($router, $site->siteId, (int)$page['id'])
         );
 
         $manager->add('comments', new Comments($page['id']));

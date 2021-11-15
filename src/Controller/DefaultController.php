@@ -123,8 +123,8 @@ class DefaultController extends AbstractController
         $page['seo']['expiry'] = $page['expiryDate'];
 
         $navigation = $manager->getCollection('navigation');
-
-        $manager->add('crosslinks', new YouMayAlsoLikeRelatedEntries($router, $site->siteId, $page['id']));
+dump($page);
+        $manager->add('crosslinks', new YouMayAlsoLikeRelatedEntries($router, $site->siteId, (int)$page['id']));
         $crosslinks = $manager->get('crosslinks');
 
         //Only for testing purposes in dev
