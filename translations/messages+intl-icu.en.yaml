@@ -35,7 +35,7 @@ blog:
                 label: Email address
             submit: Post comment
             cancel: Cancel
-            success: Your comment has successfully been saved and will be moderated before becoming visible.
+            success: Your comment has successfully been saved and will be moderated before becoming visible. <a href="#comments">Back to comments</a>
 components:
     groups_list:
         title: Active groups
