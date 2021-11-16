@@ -49,3 +49,11 @@
     {{ parent() }}
     {{ note_macros.form_errors(comment_form) }}
 {% endblock %}
+
+{% block closing_body_scripts %}
+    <script>
+        var commentsScript = document.createElement('script');
+        commentsScript.src = "{{ asset('js/comments.js', 'main') }}";
+        document.querySelector('body').appendChild(commentsScript);
+    </script>
+{% endblock %}
