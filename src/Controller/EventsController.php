@@ -36,7 +36,7 @@ class EventsController extends AbstractController
      * @Route(
      *     "/{type}/",
      *     name="app_events_index_type",
-     *     requirements={"type": "global|ac-meeting|tpac-meeting|workshops|talks|conferences"}
+     *     requirements={"type": "ac|conferences|happenings|talks|tpac|workshops"}
      * )
      *
      * @param QueryManager        $manager
@@ -78,7 +78,7 @@ class EventsController extends AbstractController
      *     "/{type}/{year}/",
      *     name="app_events_archive_type",
      *     requirements={
-     *         "type": "global|ac-meeting|tpac-meeting|workshops|talks|conferences",
+     *         "type": "ac|conferences|happenings|talks|tpac|workshops",
      *         "year": "\d\d\d\d"
      *     }
      * )
