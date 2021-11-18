@@ -2709,12 +2709,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/strata/frontend.git",
-                "reference": "07f5e0b2450b964a83576900020ecb04e5c45222"
+                "reference": "43248facab7beb55e755d33c7958d80a66db8798"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/strata/frontend/zipball/07f5e0b2450b964a83576900020ecb04e5c45222",
-                "reference": "07f5e0b2450b964a83576900020ecb04e5c45222",
+                "url": "https://api.github.com/repos/strata/frontend/zipball/43248facab7beb55e755d33c7958d80a66db8798",
+                "reference": "43248facab7beb55e755d33c7958d80a66db8798",
                 "shasum": ""
             },
             "require": {
@@ -2768,7 +2768,7 @@
                 "issues": "https://github.com/strata/frontend/issues",
                 "source": "https://github.com/strata/frontend/tree/release/0.8.0"
             },
-            "time": "2021-10-26T17:36:51+00:00"
+            "time": "2021-11-18T15:03:23+00:00"
         },
         {
             "name": "strata/symfony-frontend",
@@ -8179,12 +8179,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/w3c/w3c-website-templates-bundle.git",
-                "reference": "30bfe53b87817561b7711fc0eb8f886c3498b21f"
+                "reference": "7be9dcfa0dbf2db2a65627247012d35f3f01e424"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/w3c/w3c-website-templates-bundle/zipball/30bfe53b87817561b7711fc0eb8f886c3498b21f",
-                "reference": "30bfe53b87817561b7711fc0eb8f886c3498b21f",
+                "url": "https://api.github.com/repos/w3c/w3c-website-templates-bundle/zipball/7be9dcfa0dbf2db2a65627247012d35f3f01e424",
+                "reference": "7be9dcfa0dbf2db2a65627247012d35f3f01e424",
                 "shasum": ""
             },
             "require": {
@@ -8219,7 +8219,7 @@
             "support": {
                 "source": "https://github.com/w3c/w3c-website-templates-bundle/tree/main"
             },
-            "time": "2021-11-18T13:28:54+00:00"
+            "time": "2021-11-18T14:05:09+00:00"
         },
         {
             "name": "webmozart/assert",
@@ -11289,5 +11289,5 @@
     "platform-overrides": {
         "php": "7.4"
     },
-    "plugin-api-version": "2.1.0"
+    "plugin-api-version": "2.0.0"
 }

@@ -68,6 +68,12 @@ class DefaultController extends AbstractController
         QueryManager $manager,
         RouterInterface $router
     ): Response {
+
+        // If locale homepage does not exist, redirect to default homepage
+        if (!$site->hasLocaleData('siteLink')) {
+            return $this->redirectToRoute('app_default_home', ['_locale' => $site->getDefaultLocale()]);
+        }
+
         $manager->add('page', new Homepage($router, $site->siteId));
         $manager->add('recent-activities', new RecentActivities($site->siteId, $router));
         $manager->add('members', new Members());
