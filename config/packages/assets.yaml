@@ -2,4 +2,4 @@ framework:
     assets:
         packages:
             website-2021:
-                base_urls: '%app.app_url%/bundles/w3cwebsitetemplates/dist/assets/'
+                base_urls: '%env(ASSETS_BASE_URL)%'
