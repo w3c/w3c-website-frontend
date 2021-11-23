@@ -67,6 +67,14 @@ set('default_stage', 'staging');
  * Host, stage and deploy path must be unique
  */
 
+host('production')
+    ->stage('production')
+    ->user('studio24')
+    ->hostname('128.30.52.34')
+    ->set('deploy_path', '/var/www/frontend')
+    ->set('url', 'https://www.w3.org')
+    ->set('composer_options', '{{composer_action}} --no-dev --verbose --no-progress --no-interaction --optimize-autoloader');
+
 host('staging')
     ->stage('staging')
     ->user('studio24')
