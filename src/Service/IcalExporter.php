@@ -31,7 +31,7 @@ class IcalExporter
         $vcalendar = new VCalendar();
         $vcalendar->add('NAME', $event['title']);
         $vcalendar->add('X-WR-CALNAME', $event['title']);
-dump($event);
+
         $start   = $event['start']->setTimezone(new DateTimeZone($event['tz']));
         $end     = $event['end']->setTimezone(new DateTimeZone($event['tz']));
         $created = $event['postDate']->setTimezone(new DateTimeZone('UTC'));

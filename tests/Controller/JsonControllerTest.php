@@ -16,8 +16,9 @@ class JsonControllerTest extends WebTestCase
         $messages = json_decode($client->getResponse()->getContent(), true);
 
         $this->assertResponseIsSuccessful();
-        $this->assertArrayHasKey('messages', $messages);
-        $this->assertArrayHasKey('w3c_website_templates_bundle', $messages);
+
+        $this->assertArrayHasKey('my-account', $messages);
+        $this->assertArrayHasKey('logout', $messages);
     }
 
     public function languageProvider(): array

@@ -70,5 +70,4 @@ class SiteConfigurator
             $site->setLocale($request->getLocale());
         }
     }
-
 }

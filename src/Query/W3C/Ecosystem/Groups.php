@@ -43,7 +43,8 @@ class Groups extends Query
     public function transformName(string $name)
     {
         return preg_replace(
-            '/\s+(((working|community|business|interest|incubator|coordination|other)\s+group)|(task\s+force)|(function))$/i',
+            '/\s+(((working|community|business|interest|incubator|coordination|other)\s+group)' .
+            '|(task\s+force)|(function))$/i',
             '',
             $name
         );
