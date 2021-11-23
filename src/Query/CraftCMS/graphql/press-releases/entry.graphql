@@ -1,5 +1,6 @@
 query PressRelease($year: [String], $slug: [String], $siteId: [QueryArgument]) {
     entry(postDate: $year, slug: $slug, siteId: $siteId, section: "pressReleases") {
+        id
         status
         uri
         title

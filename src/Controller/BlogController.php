@@ -37,7 +37,7 @@ class BlogController extends AbstractController
     private const LIMIT = 10;
 
     /**
-     * @Route("")
+     * @Route("/")
      *
      * @param QueryManager        $manager
      * @param Site                $site
@@ -103,7 +103,7 @@ class BlogController extends AbstractController
     }
 
     /**
-     * @Route("/{year}", requirements={"year": "\d\d\d\d"})
+     * @Route("/{year}/", requirements={"year": "\d\d\d\d"})
      *
      * @param QueryManager        $manager
      * @param int                 $year
@@ -176,7 +176,7 @@ class BlogController extends AbstractController
     }
 
     /**
-     * @Route("/category/{slug}", requirements={"slug": "[^/]+"})
+     * @Route("/category/{slug}/", requirements={"slug": "[^/]+"})
      *
      * @param QueryManager        $manager
      * @param string              $slug
@@ -264,7 +264,7 @@ class BlogController extends AbstractController
     }
 
     /**
-     * @Route("/tags/{slug}", requirements={"tag": "[^/]+"})
+     * @Route("/tags/{slug}/", requirements={"tag": "[^/]+"})
      *
      * @param QueryManager        $manager
      * @param string              $slug
@@ -351,7 +351,7 @@ class BlogController extends AbstractController
     }
 
     /**
-     * @Route("/{year}/{slug}", requirements={"year": "\d\d\d\d"})
+     * @Route("/{year}/{slug}/", requirements={"year": "\d\d\d\d"})
      *
      * @param int                 $year
      * @param string              $slug
@@ -426,7 +426,7 @@ class BlogController extends AbstractController
 
         $manager->add(
             'crosslinks',
-            new YouMayAlsoLikeRelatedEntries($router, $site->siteId, substr($request->getPathInfo(), 1))
+            new YouMayAlsoLikeRelatedEntries($router, $site->siteId, (int)$page['id'])
         );
 
         $manager->add('comments', new Comments($page['id']));

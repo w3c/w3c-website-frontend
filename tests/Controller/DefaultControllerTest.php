@@ -17,24 +17,23 @@ class DefaultControllerTest extends PantherTestCase
     /**
      * @dataProvider provider
      */
-    public function testIndex(string $lang, string $langPrefix, string $path): void
+    public function testIndex(string $lang, string $title, string $langPrefix, string $path): void
     {
         $crawler = $this->client->request('GET', $langPrefix . $path);
 
         $this->assertSelectorAttributeContains('html', 'lang', $lang);
-        $this->assertSelectorTextSame('#lang', $lang);
-        $this->assertSelectorTextContains('#route', $path);
+        $this->assertSelectorTextSame('h1', $title);
     }
 
     public function provider()
     {
         return [
-            ['lang' => 'en', 'lang_prefix' => '', 'path' => '/'],
-            ['lang' => 'en', 'lang_prefix' => '', 'path' => '/foo'],
-            ['lang' => 'en', 'lang_prefix' => '', 'path' => '/foo/bar'],
-            ['lang' => 'ja', 'lang_prefix' => '/ja', 'path' => '/'],
-            ['lang' => 'ja', 'lang_prefix' => '/ja', 'path' => '/foo'],
-            ['lang' => 'ja', 'lang_prefix' => '/ja', 'path' => '/foo/bar']
+            ['lang' => 'en', 'title' => 'Home', 'lang_prefix' => '', 'path' => '/'],
+            ['lang' => 'en', 'title' => 'Landing Page', 'lang_prefix' => '', 'path' => '/landing-page/'],
+            ['lang' => 'en', 'title' => 'Blog listing', 'lang_prefix' => '', 'path' => '/blog/'],
+            ['lang' => 'ja', 'title' => 'Homepage', 'lang_prefix' => '/ja', 'path' => '/'],
+            ['lang' => 'ja', 'title' => '日本語で Landing Page', 'lang_prefix' => '/ja', 'path' => '/landing-page/'],
+            ['lang' => 'ja', 'title' => 'Blog listing', 'lang_prefix' => '/ja', 'path' => '/blog/']
         ];
     }
 }

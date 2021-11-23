@@ -68,6 +68,12 @@ class DefaultController extends AbstractController
         QueryManager $manager,
         RouterInterface $router
     ): Response {
+
+        // If locale homepage does not exist, redirect to default homepage
+        if (!$site->hasLocaleData('siteLink')) {
+            return $this->redirectToRoute('app_default_home', ['_locale' => $site->getDefaultLocale()]);
+        }
+
         $manager->add('page', new Homepage($router, $site->siteId));
         $manager->add('recent-activities', new RecentActivities($site->siteId, $router));
         $manager->add('members', new Members());
@@ -111,12 +117,11 @@ class DefaultController extends AbstractController
         Site $site,
         QueryManager $manager,
         RouterInterface $router,
-        string $route = '__home__'
+        string $route
     ): Response {
         // Build queries
         $singlesBreadcrumbs = $manager->get('singles-breadcrumbs');
         $manager->add('page', new Page($router, $singlesBreadcrumbs['homepage'], $site->siteId, $route));
-        $manager->add('crosslinks', new YouMayAlsoLikeRelatedEntries($router, $site->siteId, $route));
 
         // If page not found, return Error 404
         $page = $manager->get('page');
@@ -126,6 +131,8 @@ class DefaultController extends AbstractController
         $page['seo']['expiry'] = $page['expiryDate'];
 
         $navigation = $manager->getCollection('navigation');
+
+        $manager->add('crosslinks', new YouMayAlsoLikeRelatedEntries($router, $site->siteId, (int)$page['id']));
         $crosslinks = $manager->get('crosslinks');
 
         //Only for testing purposes in dev

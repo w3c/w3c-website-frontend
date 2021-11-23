@@ -35,7 +35,10 @@ blog:
                 label: Email address
             submit: Post comment
             cancel: Cancel
-            success: Your comment has successfully been saved and will be moderated before becoming visible.
+            success: Your comment has successfully been saved and will be moderated before becoming visible. <a href="#comments">Back to comments</a>
 components:
     groups_list:
         title: Active groups
+error404:
+    title: Page not found
+    message: <p>Sorry, the page you were trying to reach does not exist. Here are some steps you may try to find the page you were looking for:</p><ul><li>If you typed the URL by hand then please make sure that it is exactly as it should be.</li><li>If you are looking for information on a particular subject, please start on the <a href="/">W3C home page</a>.</li><li>Try searching the site using the search icon at the top of this page.</li></ul>

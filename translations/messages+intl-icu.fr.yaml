@@ -23,3 +23,6 @@ specifications_found: >-
 components:
     groups_list:
         title: Groupes actifs
+error404:
+    title: __error404.title
+    message: __error404.message

@@ -2,11 +2,10 @@
 
 namespace App\Controller;
 
-use App\Query\CraftCMS\PressReleases\Collection;
-use App\Query\CraftCMS\PressReleases\Entry;
-use App\Query\CraftCMS\PressReleases\Filters;
-use App\Query\CraftCMS\PressReleases\Listing;
-use App\Query\CraftCMS\YouMayAlsoLikeRelatedEntries;
+use App\Query\CraftCMS\Newsletters\Listing;
+use App\Query\CraftCMS\Newsletters\Collection;
+use App\Query\CraftCMS\Newsletters\Entry;
+use App\Query\CraftCMS\Newsletters\Filters;
 use Strata\Data\Exception\GraphQLQueryException;
 use Strata\Data\Exception\QueryManagerException;
 use Strata\Data\Query\QueryManager;
@@ -20,11 +19,9 @@ use Symfony\Component\Routing\RouterInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
- * @author Jean-Guilhem Rouel <jean-gui@w3.org>
- *
- * @Route("/press-releases")
+ * @Route("/newsletter")
  */
-class PressReleasesController extends AbstractController
+class NewsletterController extends AbstractController
 {
     private const LIMIT = 10;
 
@@ -57,7 +54,6 @@ class PressReleasesController extends AbstractController
                 $router,
                 $site->siteId,
                 null,
-                null,
                 self::LIMIT,
                 $currentPage
             )
@@ -66,18 +62,18 @@ class PressReleasesController extends AbstractController
         [$page, $collection, $archives] = $this->buildListing($manager, $site, $currentPage, $router, $translator);
         $singlesBreadcrumbs  = $manager->get('singles-breadcrumbs');
         $page['breadcrumbs'] = [
-            'title'  => $singlesBreadcrumbs['pressReleases']['title'],
-            'url'    => $singlesBreadcrumbs['pressReleases']['url'],
+            'title'  => $singlesBreadcrumbs['news']['title'],
+            'url'    => $singlesBreadcrumbs['news']['url'],
             'parent' => $singlesBreadcrumbs['homepage']
         ];
 
-        return $this->render('press-releases/index.html.twig', [
+        return $this->render('newsletters/index.html.twig', [
             'site'       => $site,
             'navigation' => $manager->getCollection('navigation'),
             'page'       => $page,
             'entries'    => $collection,
             'pagination' => $collection->getPagination(),
-            'archives'   => $archives,
+            'archives'   => $archives
         ]);
     }
 
@@ -111,7 +107,6 @@ class PressReleasesController extends AbstractController
             new Collection(
                 $router,
                 $site->siteId,
-                $year + 1,
                 $year,
                 self::LIMIT,
                 $currentPage
@@ -122,16 +117,16 @@ class PressReleasesController extends AbstractController
         $singlesBreadcrumbs  = $manager->get('singles-breadcrumbs');
         $page['breadcrumbs'] = [
             'title'  => $year,
-            'url'    => $this->generateUrl('app_pressreleases_archive', ['year' => $year]),
+            'url'    => $this->generateUrl('app_news_archive', ['year' => $year]),
             'parent' => [
-                'title'  => $singlesBreadcrumbs['pressReleases']['title'],
-                'url'    => $singlesBreadcrumbs['pressReleases']['url'],
+                'title'  => $singlesBreadcrumbs['news']['title'],
+                'url'    => $singlesBreadcrumbs['news']['url'],
                 'parent' => $singlesBreadcrumbs['homepage']
             ]
         ];
         $page['title']       = $page['title'] . ' - ' . $year;
 
-        return $this->render('press-releases/index.html.twig', [
+        return $this->render('newsletters/index.html.twig', [
             'site'       => $site,
             'navigation' => $manager->getCollection('navigation'),
             'page'       => $page,
@@ -142,69 +137,32 @@ class PressReleasesController extends AbstractController
     }
 
     /**
-     * @Route("/{year}/{slug}/", requirements={"year": "\d\d\d\d"})
+     * @Route("/{year}-{month}-{day}/", requirements={"year": "\d\d\d\d", "month": "\d\d", "day": "\d\d"})
      *
      * @param QueryManager    $manager
      * @param int             $year
-     * @param string          $slug
-     * @param RouterInterface $router
+     * @param int             $month
+     * @param int             $day
      * @param Site            $site
-     * @param Request         $request
      *
      * @return Response
      * @throws GraphQLQueryException
      * @throws QueryManagerException
      */
-    public function show(
-        QueryManager $manager,
-        int $year,
-        string $slug,
-        RouterInterface $router,
-        Site $site,
-        Request $request
-    ): Response {
-        $manager->add('page', new Entry($site->siteId, $year, $slug, $router));
+    public function show(QueryManager $manager, int $year, int $month, int $day, Site $site): Response
+    {
+        $manager->add('page', new Entry($site->siteId, $year, $month, $day));
 
         $page = $manager->get('page');
         if (empty($page)) {
-            throw $this->createNotFoundException('Page not found');
+            throw $this->createNotFoundException('Newsletter not found');
         }
-
-        $manager->add(
-            'crosslinks',
-            new YouMayAlsoLikeRelatedEntries($router, $site->siteId, (int)$page['id'])
-        );
-
-        $crosslinks         = $manager->get('crosslinks');
-        $singlesBreadcrumbs = $manager->get('singles-breadcrumbs');
-
-        $page['seo']['expiry'] = $page['expiryDate'];
-        $page['breadcrumbs'] = [
-            'title'  => $page['title'],
-            'url'    => $this->generateUrl('app_pressreleases_show', ['year' => $year, 'slug' => $slug]),
-            'parent' => [
-                'title'  => $year,
-                'url'    => $this->generateUrl('app_pressreleases_archive', ['year' => $year]),
-                'parent' => [
-                    'title'  => $singlesBreadcrumbs['pressReleases']['title'],
-                    'url'    => $singlesBreadcrumbs['pressReleases']['url'],
-                    'parent' => $singlesBreadcrumbs['homepage']
-                ]
-            ]
-        ];
 
         if ($this->getParameter('kernel.environment') == 'dev') {
             dump($page);
-            dump($crosslinks);
-            dump($singlesBreadcrumbs);
         }
 
-        return $this->render('press-releases/show.html.twig', [
-            'site'       => $site,
-            'navigation' => $manager->getCollection('navigation'),
-            'page'       => $page,
-            'crosslinks' => $crosslinks,
-        ]);
+        return new Response($page['fullDocumentContent']);
     }
 
     /**
@@ -233,10 +191,10 @@ class PressReleasesController extends AbstractController
         if ((empty($collection) && $currentPage !== 1) ||
             ($currentPage > $pagination->getTotalPages() && $pagination->getTotalPages() > 0)
         ) {
-            return $this->redirectToRoute('app_pressreleases_index', ['page' => 1]);
+            return $this->redirectToRoute('app_news_index', ['page' => 1]);
         }
 
-        $page    = $manager->get('page');
+        $page = $manager->get('page');
         $filters = $manager->get('filters');
         $archives = $filters['archives'];
         $page['seo']['expiry'] = $page['expiryDate'];

@@ -37,5 +37,4 @@ class W3C extends Rest
             ]
         ]);
     }
-
 }

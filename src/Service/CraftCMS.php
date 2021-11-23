@@ -35,5 +35,4 @@ class CraftCMS extends GraphQL
             'auth_bearer' => $token
         ]);
     }
-    
 }

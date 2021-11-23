@@ -20,3 +20,6 @@ blog:
 components:
     groups_list:
         title: __components.groups_list.title__frontend(not bundle)
+error404:
+    title: __error404.title
+    message: __error404.message

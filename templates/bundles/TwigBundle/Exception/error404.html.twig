@@ -1,10 +1,18 @@
 {% extends '@W3CWebsiteTemplates/base.html.twig' %}
 
-{% block title %}{{ 'Page not found'|trans }}{% endblock %}
+{% block documenttitle %}{{ 'error404.title'|trans }} | W3C{% endblock %}
 
 {% block main %}
 
-            <h1>Page not found</h1>
-            <p>Error 404 page text</p>
+    <h1>{% block title %}{{ 'error404.title'|trans }}{% endblock %}</h1>
+
+    <figure class="component component--fifty-fifty reversed">
+        <div class="illustration">
+            <img src="{{ asset('svg/404.svg', 'main') }}" alt="" role="presentation"/>
+        </div>
+        <figcaption>
+            {{ 'error404.message'|trans |raw }}
+        </figcaption>
+    </figure>
 
 {% endblock %}

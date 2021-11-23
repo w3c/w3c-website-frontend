@@ -87,14 +87,16 @@ class Page extends GraphQLQuery
         return $this->router->generate('app_default_index', ['route' => $uri, '_locale' => $lang]);
     }
 
-    public function mapSiblings(array $data): array
+    public function mapSiblings(?array $data): array
     {
         $siblings = [];
-        foreach ($data as $sibling) {
-            $siblings[] = [
-                'title' => $sibling['title'],
-                'url'   => $this->router->generate('app_default_index', ['route' => $sibling['uri']])
-            ];
+        if ($data) {
+            foreach ($data as $sibling) {
+                $siblings[] = [
+                    'title' => $sibling['title'],
+                    'url'   => $this->router->generate('app_default_index', ['route' => $sibling['uri']])
+                ];
+            }
         }
 
         return $siblings;
