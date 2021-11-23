@@ -38,6 +38,7 @@ class Healthcheck extends Query
         if ($data['app'] === true && $data['database'] === true) {
             return true;
         }
-    }
 
+        return false;
+    }
 }

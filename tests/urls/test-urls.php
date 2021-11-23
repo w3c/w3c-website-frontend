@@ -20,8 +20,8 @@ $statusCode = 301;
 
 // Load URL CSV (read 1st column)
 $urls = [];
-if (($handle = fopen(__DIR__ . "/urls.csv", "r")) !== FALSE) {
-    while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
+if (($handle = fopen(__DIR__ . "/urls.csv", "r")) !== false) {
+    while (($data = fgetcsv($handle, 1000, ",")) !== false) {
         $urls[] = $data[0];
     }
     fclose($handle);
@@ -50,4 +50,3 @@ foreach ($responses as $response) {
 
 echo PHP_EOL;
 echo sprintf("Found %s URLs that match %s:\n%s", count($found), $statusCode, implode(PHP_EOL, $found));
-
