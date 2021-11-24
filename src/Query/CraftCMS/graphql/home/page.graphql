@@ -12,6 +12,7 @@ query Home($siteId: [QueryArgument]) {
                 width
                 size
             }
+            pageLead
             heroCopy
             heroCallToActionButton {
                 buttonText
