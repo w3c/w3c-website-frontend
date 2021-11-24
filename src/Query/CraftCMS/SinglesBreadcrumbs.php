@@ -52,51 +52,75 @@ class SinglesBreadcrumbs extends GraphQLQuery
         ];
     }
 
-    public function transformHomepage(array $data): array
+    public function transformHomepage(?array $data): array
     {
-        return [
-            'title' => $data['title'],
-            'url'   => $this->router->generate('app_default_home')
-        ];
+        if ($data) {
+            return [
+                'title' => $data['title'],
+                'url'   => $this->router->generate('app_default_home')
+            ];
+        }
+
+        return [];
     }
 
-    public function transformBlog(array $data): array
+    public function transformBlog(?array $data): array
     {
-        return [
-            'title' => $data['title'],
-            'url'   => $this->router->generate('app_blog_index')
-        ];
+        if ($data) {
+            return [
+                'title' => $data['title'],
+                'url'   => $this->router->generate('app_blog_index')
+            ];
+        }
+
+        return [];
     }
 
-    public function transformPressReleases(array $data): array
+    public function transformPressReleases(?array $data): array
     {
-        return [
-            'title' => $data['title'],
-            'url'   => $this->router->generate('app_pressreleases_index')
-        ];
+        if ($data) {
+            return [
+                'title' => $data['title'],
+                'url'   => $this->router->generate('app_pressreleases_index')
+            ];
+        }
+
+        return [];
     }
 
-    public function transformEvents(array $data): array
+    public function transformEvents(?array $data): array
     {
-        return [
-            'title' => $data['title'],
-            'url'   => $this->router->generate('app_events_index')
-        ];
+        if ($data) {
+            return [
+                'title' => $data['title'],
+                'url'   => $this->router->generate('app_events_index')
+            ];
+        }
+
+        return [];
     }
 
-    public function transformNews(array $data): array
+    public function transformNews(?array $data): array
     {
-        return [
-            'title' => $data['title'],
-            'url'   => $this->router->generate('app_news_index')
-        ];
+        if ($data) {
+            return [
+                'title' => $data['title'],
+                'url'   => $this->router->generate('app_news_index')
+            ];
+        }
+
+        return [];
     }
 
-    public function transformEcosystem(array $data): array
+    public function transformEcosystem(?array $data): array
     {
-        return [
-            'title' => $data['title'],
-            'url'   => $this->router->generate('app_default_index', ['route' => 'ecosystems'])
-        ];
+        if ($data) {
+            return [
+                'title' => $data['title'],
+                'url'   => $this->router->generate('app_default_index', ['route' => 'ecosystems'])
+            ];
+        }
+
+        return [];
     }
 }
