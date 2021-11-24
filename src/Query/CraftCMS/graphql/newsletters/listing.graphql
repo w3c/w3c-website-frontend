@@ -8,7 +8,7 @@ query NewslettersListing($siteId: [QueryArgument]) {
         breadcrumbs: parent {
             ...breadcrumbs
         }
-        ... on newsListing_newsListing_Entry {
+        ... on newsletterArchive_newsletterArchive_Entry {
             excerpt
             lead: pageLead
             seo: seoOptions {
