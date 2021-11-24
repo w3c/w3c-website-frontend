@@ -37,6 +37,18 @@
     {% endif %}
 {% endblock %}
 
+{% block crosslinks %}
+    {% if page.latestNewsFeaturedArticles %}
+        {{ include('@W3CWebsiteTemplates/components/styles/crosslinks--home.html.twig', {
+            'crosslinks': {
+                'title': page.latestNewsTitle,
+                'text': page.latestNewsIntroduction,
+                'links': page.latestNewsFeaturedArticles
+            }
+        }) }}
+    {% endif %}
+{% endblock %}
+
 {% block closing_body_scripts %}
     {% if members is not empty %}
         <script>

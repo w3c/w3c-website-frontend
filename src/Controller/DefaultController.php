@@ -83,6 +83,10 @@ class DefaultController extends AbstractController
         $page    = $manager->get('page');
         $recentActivities = $manager->getCollection('recent-activities');
 
+        if (sizeof($page['latestNewsFeaturedArticles']) < 4) {
+            $page['latestNewsFeaturedArticles'] = array_merge($page['latestNewsFeaturedArticles'], array_slice($recentActivities->getCollection(), 0, (4 - sizeof($page['latestNewsFeaturedArticles']))));
+        }
+
         // Get all members having a logo (there may be several pages)
         $members = $manager->getCollection('members');
         $memberPagination = $members->getPagination();
