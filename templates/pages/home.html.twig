@@ -1,8 +1,23 @@
 {% extends '@W3CWebsiteTemplates/pages/home.html.twig' %}
 
+{% block javascripts %}
+    {{ parent() }}
+    {% if members is not empty %}
+        <script>
+            var membersData = {{ members|json_encode|raw }};
+        </script>
+    {% endif %}
+{% endblock %}
+
 {% block components %}
     {% if members%}
-{#  @todo add home members component here      #}
+        {{ include('@W3CWebsiteTemplates/components/members--home.html.twig', {
+            'title': page.workingWithIndustryTitle,
+            'introduction': page.workingWithIndustryIntroduction,
+            'members': members,
+            'cta': page.workingWithIndustryCallToActionButton
+        })
+        }}
     {% endif %}
     {% if page.homeFiftyFiftyComponents %}
         {% for fiftyFifty in page.homeFiftyFiftyComponents %}
@@ -19,5 +34,15 @@
                 'informative_or_decorative': fiftyFifty.informativeOrDecorative })
             }}
         {% endfor %}
+    {% endif %}
+{% endblock %}
+
+{% block closing_body_scripts %}
+    {% if members is not empty %}
+        <script>
+            var membersScript = document.createElement('script');
+            membersScript.src = "{{ asset('js/members.js', 'main') }}";
+            document.querySelector('body').appendChild(membersScript);
+        </script>
     {% endif %}
 {% endblock %}
