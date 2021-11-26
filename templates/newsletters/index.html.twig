@@ -1,5 +1,9 @@
 {% extends '@W3CWebsiteTemplates/pages/listing.html.twig' %}
 
+{% block filters %}
+    {{ include('@W3CWebsiteTemplates/components/listings/newsletters/filters.html.twig') }}
+{% endblock %}
+
 {% block list %}
     <div aria-live="polite" aria-atomic="true">
         {{ 'pagination.summary'|trans({
