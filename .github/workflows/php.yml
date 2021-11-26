@@ -43,7 +43,10 @@ jobs:
         run: ./vendor/bin/phpcs
 
       - name: PHPUnit
-        run: ./bin/phpunit tests/
+        run: ./vendor/phpunit/phpunit/phpunit
+
+      - name: Redirects
+        run: php ./tests/urls/test-urls.php
 
       - name: Symfony lint service container
         run: php ./bin/console lint:container
