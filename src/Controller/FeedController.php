@@ -523,10 +523,14 @@ class FeedController extends AbstractController
             }
         }
 
-        if (array_key_exists('defaultFlexibleComponents', $data) && count($data['defaultFlexibleComponents']) > 0) {
+        if (array_key_exists('defaultFlexibleComponents', $data) &&
+            count($data['defaultFlexibleComponents']) > 0
+        ) {
             $entry->setContent(
                 $twig->render('rss_entry.html.twig', ['components' => $data['defaultFlexibleComponents']])
             );
+        } elseif (array_key_exists('pageContent', $data) && $data['pageContent']) {
+            $entry->setContent($data['pageContent']);
         }
 
         return $entry;
