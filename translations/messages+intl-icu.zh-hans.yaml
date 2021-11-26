@@ -1,14 +1,28 @@
-title: __title
-api_available.w3c: __api_available.w3c
-api_available.craft: __api_available.craft
-specifications_found: __specifications_found
-welcome: __welcome
+api_available:
+    w3c: >-
+        __api_available.w3c: {available, select,
+                1 {yes}
+            other {no}
+        }
+    craft: >-
+        __api_available.craft: {available, select,
+                1 {yes}
+            other {no}
+        }
+specifications_found: >-
+    __specifications_found Found {total, plural,
+           =0 {no specifications}
+          one {# specification}
+        other {# specifications}
+    } in W3C API ({cache, select,
+            1 {cache hit}
+        other {live request}
+    })
 blog:
     comments:
         form:
-            title: __blog.comments.form.title
             comment:
-                label: __blog.comments.form.comment.label
+                label: __blog.comments.form.comment.lable
                 help: __blog.comments.form.comment.help
             name:
                 label: __blog.comments.form.name.label
@@ -19,7 +33,7 @@ blog:
             success: __blog.comments.form.success
 components:
     groups_list:
-        title: __components.groups_list.title__frontend(not bundle)
+        title: __components.groups_list.title
 error404:
     title: __error404.title
     message: __error404.message

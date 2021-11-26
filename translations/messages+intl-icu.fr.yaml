@@ -1,5 +1,3 @@
-welcome: Bienvenue !
-title: Bonjour IndexController !
 api_available:
     w3c: >-
         Disponibilité de l'API W3C: {available, select,
@@ -20,6 +18,19 @@ specifications_found: >-
             1 {depuis le cache}
         other {requête directe}
     })
+blog:
+    comments:
+        form:
+            comment:
+                label: Commentaires
+                help: Votre adresse email ne sera pas publiée.
+            name:
+                label: Nom
+            email:
+                label: Adresse email
+            submit: Envoyez votre commentaire
+            cancel: Annuler
+            success: Votre commentaire a bien été recu. Il sera modéré avant d'etre publié. <a href="#comments">Allez aux commentaires</a>
 components:
     groups_list:
         title: Groupes actifs

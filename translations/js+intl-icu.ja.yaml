@@ -5,3 +5,5 @@ member-site: __member-site
 team-site: __team-site
 admin: __admin
 logout: __logout
+menu: __menu
+back-to-main-menu: __back-to-main-menu
