@@ -84,7 +84,10 @@ class DefaultController extends AbstractController
         $recentActivities = $manager->getCollection('recent-activities');
 
         if (sizeof($page['latestNewsFeaturedArticles']) < 4) {
-            $page['latestNewsFeaturedArticles'] = array_merge($page['latestNewsFeaturedArticles'], array_slice($recentActivities->getCollection(), 0, (4 - sizeof($page['latestNewsFeaturedArticles']))));
+            $page['latestNewsFeaturedArticles'] = array_merge(
+                $page['latestNewsFeaturedArticles'],
+                array_slice($recentActivities->getCollection(), 0, (4 - sizeof($page['latestNewsFeaturedArticles'])))
+            );
         }
 
         // Get all members having a logo (there may be several pages)
@@ -102,7 +105,10 @@ class DefaultController extends AbstractController
             dump($members);
         }
 
-        return $this->render('pages/home.html.twig', ['page' => $page, 'members' => $members, 'navigation' => $navigation]);
+        return $this->render(
+            'pages/home.html.twig',
+            ['page' => $page, 'members' => $members, 'navigation' => $navigation]
+        );
     }
 
     /**
