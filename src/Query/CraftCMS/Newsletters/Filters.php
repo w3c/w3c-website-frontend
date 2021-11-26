@@ -53,16 +53,7 @@ class Filters extends GraphQLQuery
 
     public function transformArchives(string $first, string $last): array
     {
-        $archives = [
-            [
-                'title' => $this->translator->trans(
-                    'listing.newsletters.filters.all',
-                    [],
-                    'w3c_website_templates_bundle'
-                ),
-                'url'   => $this->router->generate('app_newsletter_index')
-            ]
-        ];
+        $archives = [];
         for ($year = $first; $year <= $last; $year++) {
             $archives[] = [
                 'title' => $year,
