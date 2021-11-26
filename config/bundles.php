@@ -13,4 +13,5 @@ return [
     W3C\WebsiteTemplatesBundle\W3CWebsiteTemplatesBundle::class => ['all' => true],
     Strata\SymfonyBundle\StrataBundle::class => ['all' => true],
     FOS\HttpCacheBundle\FOSHttpCacheBundle::class => ['all' => true],
+    Nelmio\CorsBundle\NelmioCorsBundle::class => ['all' => true],
 ];
