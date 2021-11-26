@@ -26,58 +26,6 @@ class NewsletterController extends AbstractController
     private const LIMIT = 10;
 
     /**
-     * @Route("/")
-     *
-     * @param QueryManager        $manager
-     * @param Site                $site
-     * @param Request             $request
-     * @param RouterInterface     $router
-     * @param TranslatorInterface $translator
-     *
-     * @return Response
-     * @throws GraphQLQueryException
-     * @throws QueryManagerException
-     */
-    public function index(
-        QueryManager $manager,
-        Site $site,
-        Request $request,
-        RouterInterface $router,
-        TranslatorInterface $translator
-    ): Response {
-        $currentPage = $request->query->get('page', 1);
-
-        $manager->add('page', new Listing($site->siteId));
-        $manager->add(
-            'collection',
-            new Collection(
-                $router,
-                $site->siteId,
-                null,
-                self::LIMIT,
-                $currentPage
-            )
-        );
-
-        [$page, $collection, $archives] = $this->buildListing($manager, $site, $currentPage, $router, $translator);
-        $singlesBreadcrumbs  = $manager->get('singles-breadcrumbs');
-        $page['breadcrumbs'] = [
-            'title'  => $singlesBreadcrumbs['news']['title'],
-            'url'    => $singlesBreadcrumbs['news']['url'],
-            'parent' => $singlesBreadcrumbs['homepage']
-        ];
-
-        return $this->render('newsletters/index.html.twig', [
-            'site'       => $site,
-            'navigation' => $manager->getCollection('navigation'),
-            'page'       => $page,
-            'entries'    => $collection,
-            'pagination' => $collection->getPagination(),
-            'archives'   => $archives
-        ]);
-    }
-
-    /**
      * @Route("/{year}/", requirements={"year": "\d\d\d\d"})
      *
      * @param QueryManager        $manager
