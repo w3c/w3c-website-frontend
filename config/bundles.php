@@ -14,4 +14,5 @@ return [
     Strata\SymfonyBundle\StrataBundle::class => ['all' => true],
     FOS\HttpCacheBundle\FOSHttpCacheBundle::class => ['all' => true],
     Nelmio\CorsBundle\NelmioCorsBundle::class => ['all' => true],
+    Ekreative\HealthCheckBundle\EkreativeHealthCheckBundle::class => ['all' => true],
 ];
