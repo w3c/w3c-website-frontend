@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c77f83630524092f40ba931d889cf8d9",
+    "content-hash": "ef183a4f6944e08e8f7c9d6e17bd1964",
     "packages": [
         {
             "name": "clue/stream-filter",
@@ -364,62 +364,6 @@
                 }
             ],
             "time": "2021-10-11T09:18:27+00:00"
-        },
-        {
-            "name": "ekreative/health-check-bundle",
-            "version": "1.7.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/ekreative/health-check-bundle.git",
-                "reference": "e902054933b15b1f02a72c1bdc9b6ed6e894ca1a"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/ekreative/health-check-bundle/zipball/e902054933b15b1f02a72c1bdc9b6ed6e894ca1a",
-                "reference": "e902054933b15b1f02a72c1bdc9b6ed6e894ca1a",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=7.1",
-                "symfony/framework-bundle": "^3.4|^4.0|^5.0"
-            },
-            "require-dev": {
-                "doctrine/doctrine-bundle": "^1.10|^2.0",
-                "ext-redis": "*",
-                "friendsofphp/php-cs-fixer": "^2.16",
-                "phpunit/phpunit": "^9",
-                "symfony/browser-kit": "^3.4|^4.0|^5.0",
-                "symfony/monolog-bundle": "^3.3",
-                "symfony/phpunit-bridge": "^3.4|^4.0|^5.0",
-                "symfony/yaml": "^3.4|^4.0|^5.0"
-            },
-            "type": "symfony-bundle",
-            "autoload": {
-                "psr-4": {
-                    "Ekreative\\HealthCheckBundle\\": "src/Ekreative/HealthCheckBundle/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Fred Cox",
-                    "email": "mcfedr@gmail.com"
-                }
-            ],
-            "description": "A bundle that provides a simple /healthcheck route",
-            "keywords": [
-                "doctrine",
-                "healthcheck",
-                "redis"
-            ],
-            "support": {
-                "issues": "https://github.com/ekreative/health-check-bundle/issues",
-                "source": "https://github.com/ekreative/health-check-bundle/tree/master"
-            },
-            "time": "2020-08-11T06:54:18+00:00"
         },
         {
             "name": "erusev/parsedown",
@@ -11406,5 +11350,5 @@
     "platform-overrides": {
         "php": "7.4"
     },
-    "plugin-api-version": "2.1.0"
+    "plugin-api-version": "2.0.0"
 }

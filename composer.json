@@ -12,7 +12,6 @@
         "ext-json": "*",
         "composer/package-versions-deprecated": "1.11.99.1",
         "doctrine/annotations": "^1.0",
-        "ekreative/health-check-bundle": "^1.7",
         "friendsofsymfony/http-cache-bundle": "^2.11",
         "nelmio/cors-bundle": "^2.1",
         "phpdocumentor/reflection-docblock": "^5.2",

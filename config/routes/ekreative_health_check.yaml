@@ -1,2 +1,0 @@
-ekreative_health_check:
-    resource: '@EkreativeHealthCheckBundle/Resources/config/routes.xml'
