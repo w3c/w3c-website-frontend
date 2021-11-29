@@ -12,7 +12,7 @@ Below we'll use the character `{lc}` to refer to the locale code.
 You need to setup a site in Craft with the correct locale language. Make a note of the site ID since we need to set 
 this in the frontend app.
 
-TODO - Marie
+Please refer to the [instructions for adding a new language in Craft in the W3C website Craft repo](https://github.com/w3c/w3c-website-craft/blob/main/docs/new_language.md) 
 
 ## Routing
 
@@ -65,6 +65,8 @@ $site->addRtfLocale('ar', ['siteId' => 9]);
 
 Add a file to `translations/js+intl-icu.{lc}.yaml` (JavaScript messages) and `translations/messages+intl-icu.{lc}.yaml` 
 (website messages), using the English (`en`) file as the starting point.
+
+You will also need to add a translation file for the target language to the [template bundle codebase](https://github.com/w3c/w3c-website-templates-bundle). The file 
 
 Please note if a messages file does not exist the application defaults to English.  
 
