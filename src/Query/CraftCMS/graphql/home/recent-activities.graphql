@@ -1,0 +1,33 @@
+query RecentActivities($siteId: [QueryArgument]) {
+    recentEntries: entries(siteId: $siteId, section: ["blogPosts", "newsArticles", "pressReleases"], limit: 4, orderBy: "postDate DESC") {
+        id
+        slug
+        sectionHandle
+        typeHandle
+        title
+        uri
+        url
+        year: postDate @formatDateTime(format: "Y")
+        ... on blogPosts_default_Entry {
+            excerpt
+            thumbnailImage {
+                ...thumbnailImage
+            }
+            thumbnailAltText
+        }
+        ... on newsArticles_default_Entry {
+            excerpt
+            thumbnailImage {
+                ...thumbnailImage
+            }
+            thumbnailAltText
+        }
+        ... on pressReleases_default_Entry {
+            excerpt
+            thumbnailImage {
+                ...thumbnailImage
+            }
+            thumbnailAltText
+        }
+    }
+}

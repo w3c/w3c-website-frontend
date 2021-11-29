@@ -1,0 +1,32 @@
+query SinglesBreadcrumbs($siteId: [QueryArgument]) {
+    homepage: entry(section: "homepage", siteId: $siteId) {
+        slug
+        title
+        uri
+    }
+    blog: entry(section: "blogListing", siteId: $siteId) {
+        slug
+        title
+        uri
+    }
+    pressReleases: entry(section: "pressReleasesListing", siteId: $siteId) {
+        slug
+        title
+        uri
+    }
+    events: entry(section: "eventsListing", siteId: $siteId) {
+        slug
+        title
+        uri
+    }
+    news: entry(section: "newsListing", siteId: $siteId) {
+        slug
+        title
+        uri
+    }
+    ecosystems: entry(section: "ecosystemsLandingPage", siteId: $siteId) {
+        slug
+        title
+        uri
+    }
+}

@@ -1,0 +1,19 @@
+query PressReleasesListing($siteId: [QueryArgument]) {
+    entry(section: "pressReleasesListing", siteId: $siteId) {
+        id
+        slug
+        title
+        uri
+        expiryDate
+        breadcrumbs: parent {
+            ...breadcrumbs
+        }
+        ... on pressReleasesListing_pressReleasesListing_Entry {
+            excerpt
+            lead: pageLead
+            seo: seoOptions {
+                ...seoData
+            }
+        }
+    }
+}

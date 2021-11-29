@@ -1,0 +1,18 @@
+{% extends '@W3CWebsiteTemplates/pages/listing.html.twig' %}
+
+{% block filters %}
+    {{ include('@W3CWebsiteTemplates/components/listings/newsletters/filters.html.twig') }}
+{% endblock %}
+
+{% block list %}
+    <div aria-live="polite" aria-atomic="true">
+        {{ 'pagination.summary'|trans({
+            'page': entries.pagination.page,
+            'from': entries.pagination.from,
+            'to': entries.pagination.to
+        }, 'w3c_website_templates_bundle') }}
+    </div>
+
+    {# use same template as news #}
+    {{ include('@W3CWebsiteTemplates/components/listings/news/list.html.twig') }}
+{% endblock %}

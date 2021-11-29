@@ -1,0 +1,47 @@
+query blog($siteId: [QueryArgument], $category: [QueryArgument], $tag: [QueryArgument], $limit: Int) {
+    entries(section: "blogPosts", siteId: $siteId, blogCategories: $category, blogTags: $tag, limit: $limit, orderBy: "postDate desc") {
+        typeHandle
+        id
+        slug
+        uri
+        title
+        year: postDate@formatDateTime(format: "Y")
+        date: postDate
+        dateUpdated
+        ... on blogPosts_default_Entry {
+            authors {
+                ... on authors_author_BlockType {
+                    name: authorName
+                    email: authorEmailAddress
+                }
+            }
+            excerpt
+            defaultFlexibleComponents(orderBy: "sortOrder") {
+                ...defaultFlexibleComponents
+            }
+            categories: blogCategories {
+                slug
+                title
+            }
+        }
+        ... on blogPosts_importedEntries_Entry {
+            authors {
+                ... on authors_author_BlockType {
+                    name: authorName
+                    email: authorEmailAddress
+                }
+            }
+            excerpt
+            pageContent
+            categories: blogCategories {
+                slug
+                title
+            }
+        }
+    }
+}
+
+fragment contentImage on AssetInterface {
+    src: url(width: 580)
+    extension
+}

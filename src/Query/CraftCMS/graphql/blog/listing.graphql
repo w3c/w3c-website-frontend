@@ -1,0 +1,19 @@
+query BlogListing($siteId: [QueryArgument]) {
+    entry(section: "blogListing", siteId: $siteId) {
+        id
+        slug
+        title
+        uri
+        expiryDate
+        breadcrumbs: parent {
+            ...breadcrumbs
+        }
+        ... on blogListing_blogListing_Entry {
+            excerpt
+            lead: pageLead
+            seo: seoOptions {
+                ...seoData
+            }
+        }
+    }
+}

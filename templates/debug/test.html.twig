@@ -1,0 +1,52 @@
+<!doctype html>
+
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>W3C test page</title>
+
+    {% block stylesheets %}{% endblock %}
+    {% block javascripts %}{% endblock %}
+</head>
+<body>
+
+<h1>W3C test page</h1>
+
+<p>Example page with default page content outputted to a basic HTML template. Once this works, integrate me with the real templates!</p>
+
+<h2>Global navigation</h2>
+
+<p>Is navigation cached? {% if navigation_cached %}Yes{% else %}No{% endif %}</p>
+
+<ul>
+    {% for item in navigation %}
+        <ul>
+            <h3><a href="{{ item.titleLink }}">{{ item.title }}</a></h3>
+            <p>
+            {{ item.introText }}
+            {% if item.introLinks %}
+            <br>
+            {% for link in item.introLinks %}
+                <a href="{{ link.url }}">{{ link.title }}</a>
+            {% endfor %}
+            {% endif %}
+            </p>
+            {% if item.children %}
+                <ul>
+                    {% for child in item.children %}
+                        <li><a href="{{ child.url }}">{{ child.title }}</a></li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        </ul>
+    {% endfor %}
+</ul>
+
+<h2>Page: {{ page.title }}</h2>
+
+<p>Is page cached? {% if page_cached %}Yes{% else %}No{% endif %}</p>
+
+<p>W3C API available? {% if w3c_available %}Yes{% else %}No{% endif %}</p>
+
+</body>
+</html>

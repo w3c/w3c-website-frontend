@@ -1,0 +1,5 @@
+framework:
+    assets:
+        packages:
+            main:
+                base_urls: '%app.app_url%/bundles/w3cwebsitetemplates/dist/assets/'

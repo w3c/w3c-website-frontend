@@ -1,0 +1,12 @@
+blog:
+    comments:
+        form:
+            name:
+                blank: Enter a name
+            email:
+                blank: Enter an email address
+                format: Enter a valid email address
+            comment:
+                blank: Enter a comment
+            post:
+                blank: Comment must refer to a blog post

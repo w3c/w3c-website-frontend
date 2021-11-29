@@ -1,0 +1,32 @@
+query EventFilters($siteId: [QueryArgument]) {
+    categories(siteId: $siteId, group: "blogCategories", orderBy: "title asc") {
+        title
+        slug
+    }
+    types: categories(siteId: $siteId, group: "eventType", orderBy: "title asc") {
+        title
+        slug
+    }
+    first: entry(section: "events", siteId: $siteId, orderBy: "startDatetime asc") {
+        ... on events_default_Entry {
+            year: startDatetime@formatDateTime(format: "Y")
+        }
+        ... on events_external_Entry {
+            year: startDatetime@formatDateTime(format: "Y")
+        }
+        ... on events_entryContentIsACraftPage_Entry {
+            year: startDatetime@formatDateTime(format: "Y")
+        }
+    }
+    last: entry(section: "events", siteId: $siteId, orderBy: "startDatetime desc") {
+        ... on events_default_Entry {
+            year: startDatetime@formatDateTime(format: "Y")
+        }
+        ... on events_external_Entry {
+            year: startDatetime@formatDateTime(format: "Y")
+        }
+        ... on events_entryContentIsACraftPage_Entry {
+            year: startDatetime@formatDateTime(format: "Y")
+        }
+    }
+}

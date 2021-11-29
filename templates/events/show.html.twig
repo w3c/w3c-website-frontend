@@ -1,0 +1,9 @@
+{% extends '@W3CWebsiteTemplates/pages/event.html.twig' %}
+
+{% set body_classes = 'event' %}
+
+{% block components %}
+    {% for component in page.defaultFlexibleComponents %}
+        {{ include('partials/defaultFlexibleComponents.html.twig') }}
+    {% endfor %}
+{% endblock %}

@@ -1,0 +1,83 @@
+query Home($siteId: [QueryArgument]) {
+    entry(slug: "homepage", siteId: $siteId) {
+        title
+        postDate
+        dateUpdated
+        expiryDate
+        ... on homepage_homepage_Entry {
+            heroIllustration {
+                url
+                mimeType
+                height
+                width
+                size
+            }
+            pageLead
+            heroCopy
+            heroCallToActionButton {
+                buttonText
+                url
+            }
+            workingWithIndustryTitle
+            workingWithIndustryIntroduction
+            workingWithIndustryCallToActionButton {
+                buttonText
+                url
+            }
+            homeFiftyFiftyComponents {
+                ...on homeFiftyFiftyComponents_fiftyFiftyComponent_BlockType {
+                    showImageBeforeText
+                    image {
+                        ...contentImage
+                    }
+                    informativeOrDecorative
+                    altText
+                    titleField
+                    mainContent
+                    ctaUrl
+                    ctaCopy
+                }
+            }
+            latestNewsTitle
+            latestNewsIntroduction
+            latestNewsFeaturedArticles {
+                sectionHandle
+                slug
+                title
+                year: postDate@formatDateTime(format: "Y")
+                ...on blogPosts_default_Entry {
+                    excerpt
+                    thumbnailImage {
+                        ...thumbnailImage
+                    }
+                    thumbnailAltText
+                }
+                ...on blogPosts_importedEntries_Entry {
+                    excerpt
+                    thumbnailImage {
+                        ...thumbnailImage
+                    }
+                    thumbnailAltText
+                }
+                ...on newsArticles_default_Entry {
+                    excerpt
+                    thumbnailImage {
+                        ...thumbnailImage
+                    }
+                    thumbnailAltText
+                }
+                ...on pressReleases_default_Entry {
+                    excerpt
+                    thumbnailImage {
+                        ...thumbnailImage
+                    }
+                    thumbnailAltText
+                }
+            }
+            excerpt
+            seo: seoOptions {
+                ...seoData
+            }
+        }
+    }
+}

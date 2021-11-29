@@ -1,0 +1,45 @@
+query EventsListing(
+    $siteId: [QueryArgument],
+    $eventType: [QueryArgument],
+    $category: [QueryArgument],
+    $tag: [QueryArgument],
+    $start: [QueryArgument],
+    $end: [QueryArgument],
+    $limit: Int,
+    $offset: Int) {
+    total: entryCount(
+        section: "events",
+        siteId: $siteId,
+        eventType: $eventType,
+        blogCategories: $category,
+        blogTags: $tag,
+        startDatetime: $start,
+        endDatetime: $end)
+    entries(
+        section: "events",
+        siteId: $siteId,
+        eventType: $eventType,
+        blogCategories: $category,
+        blogTags: $tag,
+        startDatetime: $start,
+        endDatetime: $end,
+        limit: $limit,
+        offset: $offset,
+        orderBy: "startDatetime asc") {
+        ... on events_default_Entry {
+            ...listingEvent
+        }
+        ... on events_external_Entry {
+            ...listingExternalEvent
+        }
+        ... on events_entryContentIsACraftPage_Entry {
+            ...listingPageEvent
+        }
+    }
+}
+
+fragment thumbnailImage on AssetInterface {
+    url(transform: "size360x270")
+    srcset(sizes: ["580w"])
+}
+

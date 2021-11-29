@@ -1,0 +1,33 @@
+fragment listingPageEvent on events_entryContentIsACraftPage_Entry {
+    id
+    typeHandle
+    slug
+    uri
+    title
+    date: postDate
+    start: startDatetime
+    end: endDatetime
+    tz: startDatetime@formatDateTime(format: "e")
+    year: startDatetime @formatDateTime(format: "Y")
+    category: blogCategories {
+        id
+        slug
+        uri
+        title
+    }
+    type: eventType {
+        id
+        slug
+        title
+    }
+    location
+    host
+    page: eventPage {
+        uri
+    }
+    excerpt: eventExcerpt
+    thumbnailImage {
+        ...thumbnailImage
+    }
+    thumbnailAltText
+}

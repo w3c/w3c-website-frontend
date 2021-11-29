@@ -1,0 +1,87 @@
+fragment landingFlexibleComponents on landingFlexibleComponents_MatrixField {
+    ... on landingFlexibleComponents_textComponent_BlockType {
+        typeHandle
+        contentField
+    }
+    ... on landingFlexibleComponents_blockquoteComponent_BlockType {
+        typeHandle
+        citation
+        quoteText
+    }
+    ... on landingFlexibleComponents_fiftyFiftyComponent_BlockType {
+        typeHandle
+        showImageBeforeText
+        image  {
+            ...contentImage
+        }
+        informativeOrDecorative
+        altText
+        titleField
+        mainContent
+        ctaUrl
+        ctaCopy
+        secondaryLinkUrl
+        secondaryLinkCopy
+    }
+    ... on landingFlexibleComponents_imagesAndDescriptionsComponent_BlockType {
+        typeHandle
+        heading
+        description
+        cards {
+            ... on cards_BlockType {
+                image {
+                    ...thumbnailImage
+                }
+                AltText
+                heading
+                description
+                linkDestination
+                linkCopy
+            }
+        }
+    }
+    ... on landingFlexibleComponents_iconsAndDescriptionsComponent_BlockType {
+        typeHandle
+        heading
+        description
+        iconCards {
+            ... on iconCards_BlockType {
+                icon {
+                    ... on icon_Icon {
+                        inline
+                    }
+                }
+                heading
+                description
+                linkDestination
+                linkCopy
+            }
+        }
+    }
+    ... on landingFlexibleComponents_imageMediaComponent_BlockType {
+        typeHandle
+        image {
+            ...contentImage
+        }
+        altText
+        figureCaption
+        informativeOrDecorative
+    }
+    ... on landingFlexibleComponents_videoMediaComponent_BlockType {
+        typeHandle
+        videoTitle
+        videoUrl {
+            url
+            image
+            imageWidth
+            imageHeight
+            code
+            width
+            height
+            aspectRatio
+            providerName
+        }
+        videoCaption
+        linkToVideoTranscript
+    }
+}

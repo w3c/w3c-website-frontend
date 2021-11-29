@@ -1,0 +1,57 @@
+name: PHP tests
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+
+    strategy:
+      matrix:
+        php-versions: ['7.4', '8.0']
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      # https://github.com/marketplace/actions/setup-php-action
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php-versions }}
+          extensions: mbstring, intl
+          ini-values: post_max_size=256M, max_execution_time=180
+          tools: composer
+
+      - uses: actions/checkout@v2
+
+      - name: Check PHP version
+        run: php -v
+
+      - name: Install dependencies
+        run: composer install --prefer-dist
+
+      - name: Code lint PHP files
+        run: ./vendor/bin/phplint
+
+      - name: Coding standards
+        run: ./vendor/bin/phpcs
+
+      - name: PHPUnit
+        run: ./vendor/phpunit/phpunit/phpunit
+        env:
+          CRAFTCMS_API_READ_TOKEN: ${{ secrets.CRAFTCMS_API_READ_TOKEN }}
+          CRAFTCMS_API_PUBLISH_TOKEN: ${{ secrets.CRAFTCMS_API_PUBLISH_TOKEN }}
+          W3C_API_KEY: ${{ secrets.W3C_API_KEY }}
+          CACHE_ENABLE: 0
+
+      - name: Redirects
+        run: php ./tests/urls/test-urls.php
+
+      - name: Symfony lint service container
+        run: php ./bin/console lint:container

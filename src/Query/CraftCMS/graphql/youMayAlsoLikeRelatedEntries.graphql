@@ -1,0 +1,132 @@
+query YouMayAlsoLike($id: [QueryArgument], $siteId: [QueryArgument]) {
+    entry(id: $id, siteId: $siteId, displayYouMayAlsoLikeListing: true) {
+        ... on pages_default_Entry {
+            youMayAlsoLikeTitle
+            youMayAlsoLikeSectionIntroduction
+            youMayAlsoLikeRelatedEntries {
+                ...youMayAlsoLikeRelatedEntries
+            }
+        }
+        ... on pages_landingPage_Entry {
+            youMayAlsoLikeTitle
+            youMayAlsoLikeSectionIntroduction
+            youMayAlsoLikeRelatedEntries {
+                ...youMayAlsoLikeRelatedEntries
+            }
+        }
+        ... on blogPosts_default_Entry {
+            youMayAlsoLikeTitle
+            youMayAlsoLikeSectionIntroduction
+            youMayAlsoLikeRelatedEntries {
+                ...youMayAlsoLikeRelatedEntries
+            }
+        }
+    }
+}
+
+fragment youMayAlsoLikeRelatedEntries on youMayAlsoLikeRelatedEntries_MatrixField {
+    ... on youMayAlsoLikeRelatedEntries_contentFromTheCms_BlockType {
+        contentEntry {
+            category: sectionHandle
+            typeHandle
+            title
+            uri
+            slug
+            ... on pages_default_Entry {
+                text: excerpt
+                thumbnailImage {
+                    ...thumbnailImage
+                }
+                thumbnailAltText
+            }
+            ... on pages_landingPage_Entry {
+                text: excerpt
+                thumbnailImage {
+                    ...thumbnailImage
+                }
+                thumbnailAltText
+            }
+            ... on blogPosts_default_Entry {
+                year: postDate@formatDateTime(format: "Y")
+                text: excerpt
+                thumbnailImage {
+                    ...thumbnailImage
+                }
+                thumbnailAltText
+            }
+            ... on pressReleases_default_Entry {
+                year: postDate@formatDateTime(format: "Y")
+                text: excerpt
+                thumbnailImage {
+                    ...thumbnailImage
+                }
+                thumbnailAltText
+            }
+            ... on newsArticles_default_Entry {
+                year: postDate@formatDateTime(format: "Y")
+                text: excerpt
+                thumbnailImage {
+                    ...thumbnailImage
+                }
+                thumbnailAltText
+            }
+            ... on pages_default_Entry {
+                text: excerpt
+                thumbnailImage {
+                    ...thumbnailImage
+                }
+                thumbnailAltText
+            }
+            ... on events_default_Entry {
+                year: startDatetime@formatDateTime(format: "Y")
+                text: eventExcerpt
+                thumbnailImage {
+                    ...thumbnailImage
+                }
+                thumbnailAltText
+            }
+            ... on ecosystems_default_Entry {
+                text: excerpt
+                thumbnailImage {
+                    ...thumbnailImage
+                }
+                thumbnailAltText
+            }
+            ... on events_external_Entry {
+                urlLink
+                text: eventExcerpt
+                thumbnailImage {
+                    ...thumbnailImage
+                }
+                thumbnailAltText
+            }
+            ... on events_entryContentIsACraftPage_Entry {
+                page: eventPage {
+                    uri
+                }
+                text: eventExcerpt
+                thumbnailImage {
+                    ...thumbnailImage
+                }
+                thumbnailAltText
+            }
+            ... on homepage_homepage_Entry {
+                text: excerpt
+                thumbnailImage {
+                    ...thumbnailImage
+                }
+                thumbnailAltText
+            }
+        }
+    }
+    ... on youMayAlsoLikeRelatedEntries_contentFromAnotherSource_BlockType {
+        url: resourceUrl
+        thumbnailImage {
+            ...thumbnailImage
+        }
+        thumbnailAltText
+        title: resourceTitle
+        text: excerpt
+        category: typeOfContent
+    }
+}

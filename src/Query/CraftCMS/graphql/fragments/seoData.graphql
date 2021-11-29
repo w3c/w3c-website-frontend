@@ -1,0 +1,24 @@
+fragment seoData on Ether_SeoData {
+    title
+    description
+    advanced {
+        canonical
+        robots
+    }
+    social {
+        twitter {
+            title
+            description
+            image {
+                url(width: 1200, height: 600)
+            }
+        }
+        facebook {
+            title
+            description
+            image {
+                url(width: 1200, height: 630)
+            }
+        }
+    }
+}

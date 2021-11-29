@@ -1,0 +1,7 @@
+{% extends '@W3CWebsiteTemplates/pages/post.html.twig' %}
+
+{% set body_classes = 'post' %}
+
+{% block feed %}
+	{% include '@W3CWebsiteTemplates/components/styles/feed.html.twig' with { 'feed_url': '/news/feed', 'feed_type': 'News' } %}
+{% endblock %}

@@ -1,0 +1,8 @@
+query Comment($id: [QueryArgument]) {
+    comment(id: $id) {
+        level
+        parent {
+            id
+        }
+    }
+}

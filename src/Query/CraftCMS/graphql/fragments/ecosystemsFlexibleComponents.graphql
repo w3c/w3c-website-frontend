@@ -1,0 +1,61 @@
+fragment ecosystemsFlexibleComponents on ecosystemsFlexibleComponents_MatrixField {
+    ... on ecosystemsFlexibleComponents_textComponent_BlockType {
+        typeHandle
+        contentField
+    }
+    ... on ecosystemsFlexibleComponents_blockquoteComponent_BlockType {
+        typeHandle
+        quoteText
+        citation
+    }
+    ... on ecosystemsFlexibleComponents_fiftyFiftyComponent_BlockType {
+        typeHandle
+        showImageBeforeText
+        image  {
+            ...contentImage
+        }
+        informativeOrDecorative
+        altText
+        titleField
+        mainContent
+        ctaUrl
+        ctaCopy
+        secondaryLinkUrl
+        secondaryLinkCopy
+    }
+    ... on ecosystemsFlexibleComponents_imageMediaComponent_BlockType {
+        typeHandle
+        image {
+            ...contentImage
+        }
+        altText
+        figureCaption
+        informativeOrDecorative
+    }
+    ... on ecosystemsFlexibleComponents_videoMediaComponent_BlockType {
+        typeHandle
+        videoTitle
+        videoUrl {
+            url
+            image
+            imageWidth
+            imageHeight
+            code
+            width
+            height
+            aspectRatio
+            providerName
+        }
+        videoCaption
+        linkToVideoTranscript
+    }
+    ... on ecosystemsFlexibleComponents_groupsListingComponent_BlockType {
+        typeHandle
+        introduction
+    }
+    ... on ecosystemsFlexibleComponents_featuredEvangelistsComponent_BlockType {
+        typeHandle
+        title: evangelistsTitle
+        introduction
+    }
+}

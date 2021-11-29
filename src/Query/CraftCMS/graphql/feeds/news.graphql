@@ -1,0 +1,22 @@
+query news($siteId: [QueryArgument], $limit: Int) {
+    entries(section: "newsArticles", siteId: $siteId, limit: $limit, orderBy: "postDate desc") {
+        id
+        slug
+        uri
+        title
+        year: postDate@formatDateTime(format: "Y")
+        date: postDate
+        dateUpdated
+        ... on newsArticles_default_Entry {
+            excerpt
+            defaultFlexibleComponents(orderBy: "sortOrder") {
+                ...defaultFlexibleComponents
+            }
+        }
+    }
+}
+
+fragment contentImage on AssetInterface {
+    src: url(width: 580)
+    extension
+}

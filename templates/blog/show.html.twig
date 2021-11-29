@@ -1,0 +1,59 @@
+{% extends '@W3CWebsiteTemplates/pages/post.html.twig' %}
+{%- import "@W3CWebsiteTemplates/components/styles/notes.html.twig" as note_macros -%}
+{% form_theme comment_form '@W3CWebsiteTemplates/form/theme.html.twig' %}
+
+{% set body_classes = 'post' %}
+{% set rendered_form %}
+    <form id="comment-form" name="comment-form" method="post" novalidate>
+        {{ form_row(comment_form.comment) }}
+        <div class="l-switcher">
+            <div>
+                <div>
+                    {{ form_row(comment_form.name) }}
+                </div>
+                <div>
+                    {{ form_row(comment_form.email) }}
+                </div>
+            </div>
+        </div>
+        <div class="field">
+            <button class="button" type="submit">
+                {{ 'blog.comments.form.submit'|trans }}
+            </button>
+            <a href="{{ path('app_blog_show', {'year': year, 'slug': slug}) }}">
+                {{ 'blog.comments.form.cancel'|trans }}
+            </a>
+        </div>
+        {{ form_rest(comment_form) }}
+    </form>
+{% endset %}
+
+{% block feed %}
+    {% include '@W3CWebsiteTemplates/components/styles/feed.html.twig' with { 'feed_url': '/blog/feed', 'feed_type': 'Blog' } %}
+{% endblock %}
+
+{% block comments %}
+    {{ parent() }}
+    {% embed '@W3CWebsiteTemplates/components/styles/comments.html.twig' with {
+        'post': page,
+        'comments': comments,
+        'form': comment_form,
+        'rendered_form': rendered_form,
+        'form_errors': form_errors,
+        'reply_to': reply_to
+    } %}
+    {% endembed %}
+{% endblock %}
+
+{% block notes %}
+    {{ parent() }}
+    {{ note_macros.form_errors(comment_form) }}
+{% endblock %}
+
+{% block closing_body_scripts %}
+    <script>
+        var commentsScript = document.createElement('script');
+        commentsScript.src = "{{ asset('js/comments.js', 'main') }}";
+        document.querySelector('body').appendChild(commentsScript);
+    </script>
+{% endblock %}

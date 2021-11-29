@@ -1,0 +1,12 @@
+{% extends '@W3CWebsiteTemplates/pages/ecosystem.html.twig' %}
+
+{% block components %}
+    {% for component in page.ecosystemsFlexibleComponents %}
+        {{ include('partials/ecosystemsFlexibleComponents.html.twig') }}
+    {% endfor %}
+{% endblock %}
+{% block bottom_components %}
+    {% for component in page.ecosystemsBottomFlexibleComponents %}
+        {{ include('partials/ecosystemsFlexibleComponents.html.twig') }}
+    {% endfor %}
+{% endblock %}

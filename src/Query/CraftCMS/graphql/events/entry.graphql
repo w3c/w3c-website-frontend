@@ -1,0 +1,60 @@
+query Event($type: [QueryArgument], $start: [QueryArgument], $slug: [String], $siteId: [QueryArgument]) {
+    entry(eventType: $type, startDatetime: $start, slug: $slug, type: "default", siteId: $siteId, section: "events") {
+        id
+        uid
+        status
+        uri
+        title
+        slug
+        language
+        localized {
+            title
+            language_code: language
+            slug
+        }
+        postDate
+        dateUpdated
+        expiryDate
+        ... on events_default_Entry {
+            excerpt: eventExcerpt
+            start: startDatetime
+            end: endDatetime
+            tz: startDatetime@formatDateTime(format: "e")
+            year: startDatetime@formatDateTime(format: "Y")
+            speakers: speakersName
+            location
+            host
+            website: relatedWebsite {
+                name: websiteName
+                url
+            }
+            type: eventType {
+                id
+                slug
+                title
+            }
+            categories: blogCategories {
+                title
+                slug
+            }
+            tags: blogTags {
+                title
+                slug
+            }
+            groups: workingGroups {
+                title
+                slug
+            }
+            ecosystems {
+                title
+                slug
+            }
+            defaultFlexibleComponents(orderBy: "sortOrder") {
+                ...defaultFlexibleComponents
+            }
+            seo: seoOptions {
+                ...seoData
+            }
+        }
+    }
+}

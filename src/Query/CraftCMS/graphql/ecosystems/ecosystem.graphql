@@ -1,0 +1,46 @@
+query Ecosystem($slug: [String], $siteId: [QueryArgument]) {
+    entry(slug: $slug, section: "ecosystems", siteId: $siteId) {
+        id
+        status
+        uri
+        language
+        title
+        localized {
+            title
+            language_code: language
+            slug
+        }
+        postDate
+        dateUpdated
+        expiryDate
+        breadcrumbs: parent {
+            ...breadcrumbs
+        }
+        ... on ecosystems_default_Entry {
+            ecosystem {
+                slug
+                id
+            }
+            pageLead
+            heroIllustration {
+                url
+                mimeType
+                height
+                width
+                size
+            }
+            excerpt
+            seo: seoOptions {
+                ...seoData
+            }
+            ecosystemsFlexibleComponents {
+                ...ecosystemsFlexibleComponents
+            }
+            ecosystemsBottomFlexibleComponents {
+                ...ecosystemsBottomFlexibleComponents
+            }
+            recentActivitiesComponentTitle
+            recentActivitiesComponentIntroduction
+        }
+    }
+}

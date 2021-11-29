@@ -1,0 +1,71 @@
+query Page($uri: [String], $siteId: [QueryArgument]) {
+    entry(uri: $uri, siteId: $siteId) {
+        id
+        typeHandle
+        status
+        uri
+        title
+        language
+        localized {
+            title
+            language_code: language
+            uri
+        }
+        postDate
+        dateUpdated
+        expiryDate
+        breadcrumbs: parent {
+            ...breadcrumbs
+        }
+        ... on pages_default_Entry {
+            displayOnThisPageNavigation
+            siblingNavigation: parent {
+                siblings: children {
+                    title
+                    uri
+                }
+            }
+            defaultFlexibleComponents(orderBy: "sortOrder") {
+                ...defaultFlexibleComponents
+            }
+            excerpt
+            seo: seoOptions {
+                ...seoData
+            }
+        }
+        ... on pages_landingPage_Entry {
+            pageLead
+            heroIllustration {
+                url
+                mimeType
+                height
+                width
+                size
+            }
+            landingFlexibleComponents(orderBy: "sortOrder") {
+                ...landingFlexibleComponents
+            }
+            excerpt
+            seo: seoOptions {
+                ...seoData
+            }
+        }
+        ... on ecosystemsLandingPage_ecosystemsLandingPage_Entry {
+            pageLead
+            heroIllustration {
+                url
+                mimeType
+                height
+                width
+                size
+            }
+            landingFlexibleComponents(orderBy: "sortOrder") {
+                ...landingFlexibleComponents
+            }
+            excerpt
+            seo: seoOptions {
+                ...seoData
+            }
+        }
+    }
+}

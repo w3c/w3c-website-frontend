@@ -1,0 +1,35 @@
+query GlobalNavigation ($siteId: [QueryArgument], $limit: Int) {
+    total: entryCount(section: "mainNavigation", type: "topLevelItem", siteId: $siteId, limit: $limit)
+    entries(section: "mainNavigation", type: "topLevelItem", siteId: $siteId, limit: $limit) {
+        title
+        ... on mainNavigation_topLevelItem_Entry {
+            isTitleLinkInternal: mainNavigationInternalOrExternalLink
+            titleInternalLink: internalLink {
+                sectionHandle
+                uri
+                slug
+                year: postDate@formatDateTime(format: "Y")
+            }
+            titleExternalLink: urlLink
+            introText: mainNavigationDropdownIntroduction
+            introLinks: mainNavigationIntroductionLinks {
+                url: link
+                title: titleLabel
+            }
+            children {
+                title
+                ... on mainNavigation_externalLink_Entry {
+                    url: urlLink
+                }
+                ... on mainNavigation_internalLink_Entry {
+                    internalLink {
+                        sectionHandle
+                        uri
+                        slug
+                        year: postDate@formatDateTime(format: "Y")
+                    }
+                }
+            }
+        }
+    }
+}

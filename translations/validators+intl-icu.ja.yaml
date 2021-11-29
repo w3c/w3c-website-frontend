@@ -1,0 +1,12 @@
+blog:
+    comments:
+        form:
+            name:
+                blank: __blog.comments.form.name.blank
+            email:
+                blank: __blog.comments.form.email.blank
+                format: __blog.comments.form.email.format
+            comment:
+                blank: __blog.comments.form.comment.blank
+            post:
+                blank: __blog.comments.form.post.blank

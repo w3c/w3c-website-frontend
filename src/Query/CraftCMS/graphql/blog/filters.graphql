@@ -1,0 +1,13 @@
+query BlogFilters($siteId: [QueryArgument]) {
+    categories(siteId: $siteId, group: "blogCategories", orderBy: "title asc") {
+        title
+        slug
+        uri
+    }
+    first: entry(section: "blogPosts", siteId: $siteId, orderBy: "postDate asc") {
+        year: postDate@formatDateTime(format: "Y")
+    }
+    last: entry(section: "blogPosts", siteId: $siteId, orderBy: "postDate desc") {
+        year: postDate@formatDateTime(format: "Y")
+    }
+}
