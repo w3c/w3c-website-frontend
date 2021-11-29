@@ -33,7 +33,7 @@ $client = HttpClient::create([
 $responses = [];
 $found = [];
 
-echo sprintf("Testing %s URLs to see whether they are already setup as 301 redirects", count($urls));
+echo sprintf("Testing %s URLs to see whether they are already setup as 301 redirects\n", count($urls));
 
 foreach ($urls as $url) {
     $responses[] = $client->request('GET', $url);

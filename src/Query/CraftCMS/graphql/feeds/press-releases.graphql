@@ -4,15 +4,10 @@ query pressReleases($siteId: [QueryArgument], $limit: Int) {
         slug
         uri
         title
+        year: postDate@formatDateTime(format: "Y")
+        date: postDate
+        dateUpdated
         ... on pressReleases_default_Entry {
-            authors {
-                ... on authors_author_BlockType {
-                    name: authorName
-                    email: authorEmailAddress
-                }
-            }
-            date: postDate
-            dateUpdated
             excerpt
             defaultFlexibleComponents(orderBy: "sortOrder") {
                 ...defaultFlexibleComponents

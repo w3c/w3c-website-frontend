@@ -28,10 +28,10 @@ class DefaultControllerTest extends PantherTestCase
     public function provider()
     {
         return [
-            ['lang' => 'en', 'title' => 'Home', 'lang_prefix' => '', 'path' => '/'],
+            ['lang' => 'en', 'title' => 'We believe in one web for all', 'lang_prefix' => '', 'path' => '/'],
             ['lang' => 'en', 'title' => 'Landing Page', 'lang_prefix' => '', 'path' => '/landing-page/'],
             ['lang' => 'en', 'title' => 'Blog listing', 'lang_prefix' => '', 'path' => '/blog/'],
-            ['lang' => 'ja', 'title' => 'Homepage', 'lang_prefix' => '/ja', 'path' => '/'],
+            ['lang' => 'ja', 'title' => 'W3C Home', 'lang_prefix' => '/ja', 'path' => '/'],
             ['lang' => 'ja', 'title' => '日本語で Landing Page', 'lang_prefix' => '/ja', 'path' => '/landing-page/'],
             ['lang' => 'ja', 'title' => 'Blog listing', 'lang_prefix' => '/ja', 'path' => '/blog/']
         ];
