@@ -8356,12 +8356,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/w3c/w3c-website-templates-bundle.git",
-                "reference": "477fce7230b43c38ba7bb2e7afa2114e5d096cc8"
+                "reference": "e35d9d09bb22ba420e72f65e16f6bf9b22bf7e18"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/w3c/w3c-website-templates-bundle/zipball/477fce7230b43c38ba7bb2e7afa2114e5d096cc8",
-                "reference": "477fce7230b43c38ba7bb2e7afa2114e5d096cc8",
+                "url": "https://api.github.com/repos/w3c/w3c-website-templates-bundle/zipball/e35d9d09bb22ba420e72f65e16f6bf9b22bf7e18",
+                "reference": "e35d9d09bb22ba420e72f65e16f6bf9b22bf7e18",
                 "shasum": ""
             },
             "require": {
@@ -8397,7 +8397,7 @@
             "support": {
                 "source": "https://github.com/w3c/w3c-website-templates-bundle/tree/main"
             },
-            "time": "2021-12-01T16:41:29+00:00"
+            "time": "2021-12-02T18:07:55+00:00"
         },
         {
             "name": "webmozart/assert",
@@ -9293,16 +9293,16 @@
         },
         {
             "name": "phpunit/php-file-iterator",
-            "version": "3.0.5",
+            "version": "3.0.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/php-file-iterator.git",
-                "reference": "aa4be8575f26070b100fccb67faabb28f21f66f8"
+                "reference": "cf1c2e7c203ac650e352f4cc675a7021e7d1b3cf"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/php-file-iterator/zipball/aa4be8575f26070b100fccb67faabb28f21f66f8",
-                "reference": "aa4be8575f26070b100fccb67faabb28f21f66f8",
+                "url": "https://api.github.com/repos/sebastianbergmann/php-file-iterator/zipball/cf1c2e7c203ac650e352f4cc675a7021e7d1b3cf",
+                "reference": "cf1c2e7c203ac650e352f4cc675a7021e7d1b3cf",
                 "shasum": ""
             },
             "require": {
@@ -9341,7 +9341,7 @@
             ],
             "support": {
                 "issues": "https://github.com/sebastianbergmann/php-file-iterator/issues",
-                "source": "https://github.com/sebastianbergmann/php-file-iterator/tree/3.0.5"
+                "source": "https://github.com/sebastianbergmann/php-file-iterator/tree/3.0.6"
             },
             "funding": [
                 {
@@ -9349,7 +9349,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2020-09-28T05:57:25+00:00"
+            "time": "2021-12-02T12:48:52+00:00"
         },
         {
             "name": "phpunit/php-invoker",

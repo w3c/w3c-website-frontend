@@ -1,5 +1,5 @@
 framework:
     assets:
         packages:
-            main:
+            website-2021:
                 base_urls: '%app.app_url%/bundles/w3cwebsitetemplates/dist/assets/'

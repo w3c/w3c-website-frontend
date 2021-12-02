@@ -53,7 +53,7 @@
 {% block closing_body_scripts %}
     <script>
         var commentsScript = document.createElement('script');
-        commentsScript.src = "{{ asset('js/comments.js', 'main') }}";
+        commentsScript.src = "{{ asset('js/comments.js', 'website-2021') }}";
         document.querySelector('body').appendChild(commentsScript);
     </script>
 {% endblock %}
