@@ -2,4 +2,4 @@ framework:
     assets:
         packages:
             website-2021:
-                base_urls: '%env(ASSETS_BASE_URL)%'
+                base_urls: '%env(ASSETS_WEBSITE_2021)%'
