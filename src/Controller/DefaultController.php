@@ -175,13 +175,12 @@ class DefaultController extends AbstractController
      * @Route("/global-nav/")
      * @Cache(expires="tomorrow", public=true)
      *
-     * @param Site         $site
      * @param QueryManager $manager
      *
      * @return Response
      * @throws QueryManagerException
      */
-    public function globalNav(Site $site, QueryManager $manager)
+    public function globalNav(QueryManager $manager)
     {
         $navigation = $manager->getCollection('navigation');
 
