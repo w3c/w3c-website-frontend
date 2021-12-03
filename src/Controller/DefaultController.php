@@ -10,6 +10,7 @@ use App\Query\CraftCMS\Page;
 use App\Query\CraftCMS\YouMayAlsoLikeRelatedEntries;
 use App\Query\W3C\Healthcheck;
 use App\Query\W3C\Home\Members;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
 use Strata\Data\Exception\GraphQLQueryException;
 use Strata\Data\Exception\QueryManagerException;
 use Strata\Data\Query\QueryManager;
@@ -168,5 +169,41 @@ class DefaultController extends AbstractController
             'crosslinks'    => $crosslinks,
             'related_links' => array_key_exists('siblings', $page) ? $page['siblings'] : null
         ]);
+    }
+
+    /**
+     * @Route("/global-nav/")
+     * @Cache(expires="tomorrow", public=true)
+     *
+     * @param Site         $site
+     * @param QueryManager $manager
+     *
+     * @return Response
+     * @throws QueryManagerException
+     */
+    public function globalNav(Site $site, QueryManager $manager)
+    {
+        $navigation = $manager->getCollection('navigation');
+
+        return $this->render(
+            '@W3CWebsiteTemplates/components/styles/global_nav.html.twig',
+            ['navigation' => $navigation]
+        );
+    }
+
+    /**
+     * @Route("/lang-nav/")
+     * @Cache(expires="tomorrow", public=true)
+     *
+     * @param Site         $site
+     *
+     * @return Response
+     */
+    public function langNav(Site $site)
+    {
+        return $this->render(
+            '@W3CWebsiteTemplates/components/styles/lang_nav.html.twig',
+            ['site' => $site]
+        );
     }
 }
