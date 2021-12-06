@@ -1,6 +1,7 @@
 query BlogPost($year: [String], $slug: [String], $siteId: [QueryArgument]) {
     entry(postDate: $year, slug: $slug, siteId: $siteId, section: "blogPosts") {
         id
+        typeHandle
         status
         uri
         title
