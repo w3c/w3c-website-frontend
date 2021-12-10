@@ -384,7 +384,10 @@ class BlogController extends AbstractController
 
         $replyTo    = $request->query->get('replytocom');
         $newComment = ['post' => $page['id'], 'parent' => $replyTo];
-        $form = $this->createForm(CommentType::class, $newComment);
+        $form = $this->createForm(CommentType::class, $newComment, [
+            'action' => $this->generateUrl('app_blog_show', ['year' => $year, 'slug' => $slug]),
+            'method' => 'POST'
+        ]);
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
