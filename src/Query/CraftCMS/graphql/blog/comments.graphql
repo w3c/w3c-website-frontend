@@ -1,5 +1,5 @@
 query Comments($postId: [QueryArgument]) {
-    comments (ownerId: $postId, orderBy: "commentDate DESC") {
+    comments (ownerId: $postId, orderBy: "commentDate ASC") {
         ...comment
     }
 }
