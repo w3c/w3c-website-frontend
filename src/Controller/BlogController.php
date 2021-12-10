@@ -12,6 +12,7 @@ use App\Query\CraftCMS\Blog\Listing;
 use App\Query\CraftCMS\Taxonomies\Categories;
 use App\Query\CraftCMS\Taxonomies\Tags;
 use App\Query\CraftCMS\YouMayAlsoLikeRelatedEntries;
+use DateInterval;
 use DateTimeImmutable;
 use Exception;
 use Strata\Data\Collection;
@@ -35,6 +36,7 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 class BlogController extends AbstractController
 {
     private const LIMIT = 10;
+    private const COMMENTS_OPEN_DAYS = '90';
 
     /**
      * @Route("/")
@@ -381,48 +383,56 @@ class BlogController extends AbstractController
         if (empty($page)) {
             throw $this->createNotFoundException('Page not found');
         }
+        $postDate = new DateTimeImmutable($page['postDate']);
+        $closingDate = $postDate->add(new DateInterval('P' . self::COMMENTS_OPEN_DAYS . 'D'));
 
-        $replyTo    = $request->query->get('replytocom');
-        $newComment = ['post' => $page['id'], 'parent' => $replyTo];
-        $form = $this->createForm(CommentType::class, $newComment, [
-            'action' => $this->generateUrl('app_blog_show', ['year' => $year, 'slug' => $slug]),
-            'method' => 'POST'
-        ]);
+        $replyTo = null;
+        $form    = null;
+        $commentsOpen = $page['typeHandle'] !== 'importedEntries' && new DateTimeImmutable() < $closingDate;
 
-        $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
-            $newComment = $form->getData();
+        if ($commentsOpen) {
+            $replyTo    = $request->query->get('replytocom');
+            $newComment = ['post' => $page['id'], 'parent' => $replyTo];
+            $form       = $this->createForm(CommentType::class, $newComment, [
+                'action' => $this->generateUrl('app_blog_show', ['year' => $year, 'slug' => $slug]),
+                'method' => 'POST'
+            ]);
 
-            $manager->add(
-                'create-comment',
-                (new CreateComment(
-                    $newComment['post'],
-                    $newComment['name'],
-                    $newComment['email'],
-                    $newComment['comment'],
-                    $newComment['parent']
-                ))->setOptions(['auth_bearer' => $this->getParameter('app.craftcms_api_publish_token')])
-            );
+            $form->handleRequest($request);
+            if ($form->isSubmitted() && $form->isValid()) {
+                $newComment = $form->getData();
 
-            $response = $manager->get('create-comment');
+                $manager->add(
+                    'create-comment',
+                    (new CreateComment(
+                        $newComment['post'],
+                        $newComment['name'],
+                        $newComment['email'],
+                        $newComment['comment'],
+                        $newComment['parent']
+                    ))->setOptions(['auth_bearer' => $this->getParameter('app.craftcms_api_publish_token')])
+                );
 
-            if ($this->getParameter('kernel.environment') == 'dev') {
-                dump($response);
+                $response = $manager->get('create-comment');
+
+                if ($this->getParameter('kernel.environment') == 'dev') {
+                    dump($response);
+                }
+
+                $this->addFlash(
+                    'success',
+                    $translator->trans('blog.comments.form.success', [])
+                );
+                $this->addFlash(
+                    'title-success',
+                    $translator->trans('notes.successes.default_title', [], 'w3c_website_templates_bundle')
+                );
+
+                return $this->redirectToRoute('app_blog_show', ['year' => $year, 'slug' => $slug]);
             }
-
-            $this->addFlash(
-                'success',
-                $translator->trans('blog.comments.form.success', [])
-            );
-            $this->addFlash(
-                'title-success',
-                $translator->trans('notes.successes.default_title', [], 'w3c_website_templates_bundle')
-            );
-
-            return $this->redirectToRoute('app_blog_show', ['year' => $year, 'slug' => $slug]);
         }
 
-        $postYear = intval((new DateTimeImmutable($page['postDate']))->format('Y'));
+        $postYear = intval(($postDate)->format('Y'));
         if ($year !== $postYear) {
             return $this->redirectToRoute('app_blog_show', ['slug' => $slug, 'year' => $postYear]);
         }
@@ -475,8 +485,8 @@ class BlogController extends AbstractController
             'commentsCount' => count($comments),
             'year'          => $year,
             'slug'          => $slug,
-            'comment_form'  => $form->createView(),
-            'form_errors'   => $form->getErrors(true),
+            'comments_open' => $commentsOpen,
+            'comment_form'  => $form ? $form->createView() : null,
             'reply_to'      => $replyTo
         ]);
     }
