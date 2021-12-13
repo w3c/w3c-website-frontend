@@ -8355,12 +8355,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/w3c/w3c-website-templates-bundle.git",
-                "reference": "ac9d6642340a4193b4c86dc76fc117bf8d6316ab"
+                "reference": "4aeef39c07bce9a8c902ecdc821b7aa3b1c80129"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/w3c/w3c-website-templates-bundle/zipball/ac9d6642340a4193b4c86dc76fc117bf8d6316ab",
-                "reference": "ac9d6642340a4193b4c86dc76fc117bf8d6316ab",
+                "url": "https://api.github.com/repos/w3c/w3c-website-templates-bundle/zipball/4aeef39c07bce9a8c902ecdc821b7aa3b1c80129",
+                "reference": "4aeef39c07bce9a8c902ecdc821b7aa3b1c80129",
                 "shasum": ""
             },
             "require": {
@@ -8396,7 +8396,7 @@
             "support": {
                 "source": "https://github.com/w3c/w3c-website-templates-bundle/tree/main"
             },
-            "time": "2021-12-10T16:41:42+00:00"
+            "time": "2021-12-13T15:01:40+00:00"
         },
         {
             "name": "webmozart/assert",
@@ -10653,16 +10653,16 @@
         },
         {
             "name": "squizlabs/php_codesniffer",
-            "version": "3.6.1",
+            "version": "3.6.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/squizlabs/PHP_CodeSniffer.git",
-                "reference": "f268ca40d54617c6e06757f83f699775c9b3ff2e"
+                "reference": "5e4e71592f69da17871dba6e80dd51bce74a351a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/squizlabs/PHP_CodeSniffer/zipball/f268ca40d54617c6e06757f83f699775c9b3ff2e",
-                "reference": "f268ca40d54617c6e06757f83f699775c9b3ff2e",
+                "url": "https://api.github.com/repos/squizlabs/PHP_CodeSniffer/zipball/5e4e71592f69da17871dba6e80dd51bce74a351a",
+                "reference": "5e4e71592f69da17871dba6e80dd51bce74a351a",
                 "shasum": ""
             },
             "require": {
@@ -10705,7 +10705,7 @@
                 "source": "https://github.com/squizlabs/PHP_CodeSniffer",
                 "wiki": "https://github.com/squizlabs/PHP_CodeSniffer/wiki"
             },
-            "time": "2021-10-11T04:00:11+00:00"
+            "time": "2021-12-12T21:44:58+00:00"
         },
         {
             "name": "studio24/deployer-recipes",
