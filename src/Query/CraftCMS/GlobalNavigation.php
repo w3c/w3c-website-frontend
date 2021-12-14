@@ -70,7 +70,7 @@ class GlobalNavigation extends GraphQLQuery
      * if false, url =  titleExternalLink
      *
      * @param bool        $isTitleLinkInternal
-     * @param string|null $titleInternalLink
+     * @param array|null  $titleInternalLink
      * @param string|null $titleExternalLink
      *
      * @return string|null
@@ -84,12 +84,16 @@ class GlobalNavigation extends GraphQLQuery
             return $titleExternalLink;
         }
 
-        switch ($titleInternalLink['sectionHandle']) {
-            case 'ecosystems':
-                return $this->router->generate('app_ecosystem_show', ['slug' => $titleInternalLink['slug']]);
-            default:
-                return $this->router->generate('app_default_index', ['route' => $titleInternalLink['uri']]);
+        if ($titleInternalLink && array_key_exists('sectionHandle', $titleInternalLink)) {
+            switch ($titleInternalLink['sectionHandle']) {
+                case 'ecosystems':
+                    return $this->router->generate('app_ecosystem_show', ['slug' => $titleInternalLink['slug']]);
+                default:
+                    return $this->router->generate('app_default_index', ['route' => $titleInternalLink['uri']]);
+            }
         }
+
+        return null;
     }
 
     /**
