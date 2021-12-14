@@ -84,7 +84,7 @@ class Page extends GraphQLQuery
 
     public function transformLocalizedUrl(string $lang, string $uri)
     {
-        return $this->router->generate('app_default_index', ['route' => $uri, '_locale' => $lang]);
+        return $this->router->generate('app_default_index', ['route' => $uri, '_locale' => strtolower($lang)]);
     }
 
     public function mapSiblings(?array $data): array

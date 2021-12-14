@@ -74,6 +74,6 @@ class Ecosystem extends GraphQLQuery
 
     public function transformLocalizedUrl(string $lang, string $slug)
     {
-        return $this->router->generate('app_ecosystem_show', ['slug' => $slug, '_locale' => $lang]);
+        return $this->router->generate('app_ecosystem_show', ['slug' => $slug, '_locale' => strtolower($lang)]);
     }
 }
