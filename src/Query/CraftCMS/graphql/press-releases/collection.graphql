@@ -14,6 +14,13 @@ query PressReleasesCollection($siteId: [QueryArgument], $before: String, $after:
             }
             thumbnailAltText
         }
+        ... on pressReleases_importedEntries_Entry {
+            excerpt
+            thumbnailImage {
+                ...thumbnailImage
+            }
+            thumbnailAltText
+        }
     }
 }
 

@@ -63,10 +63,11 @@ $site->addRtfLocale('ar', ['siteId' => 9]);
 
 ## Translation messages file
 
-Add a file to `translations/js+intl-icu.{lc}.yaml` (JavaScript messages) and `translations/messages+intl-icu.{lc}.yaml` 
-(website messages), using the English (`en`) file as the starting point.
+Add a file named `translations/messages+intl-icu.{lc}.yaml`, copy and paste the contents of the English (`en`) file as the starting point.
 
-You will also need to add a translation file for the target language to the [template bundle codebase](https://github.com/w3c/w3c-website-templates-bundle). The file 
+Do the same in the [template bundle codebase](https://github.com/w3c/w3c-website-templates-bundle). In the translations folder, add a file named 
+`w3c_website_templates_bundle+intl-icu.{lc}.yaml`. Copy and past the contents of the English yaml file and replace the entry values with translations in the 
+target language.
 
 Please note if a messages file does not exist the application defaults to English.  
 

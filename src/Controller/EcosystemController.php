@@ -5,6 +5,8 @@ namespace App\Controller;
 use App\Query\CraftCMS\Ecosystems\Ecosystem as CraftEcosystem;
 use App\Query\CraftCMS\Ecosystems\RecentActivities;
 use App\Query\CraftCMS\Ecosystems\Testimonials;
+use App\Query\W3C\Ecosystem\Bizdev;
+use App\Query\W3C\Ecosystem\BizdevLead;
 use App\Query\W3C\Ecosystem\Evangelists;
 use App\Query\W3C\Ecosystem\Groups;
 use App\Query\W3C\Ecosystem\Members;
@@ -51,6 +53,17 @@ class EcosystemController extends AbstractController
         $evangelists      = $manager->getCollection('evangelists');
         $groups           = $manager->getCollection('groups');
         $members          = $manager->getCollection('members');
+
+        // No evangelists, retrieve bizdev lead
+        if (count($evangelists) == 0) {
+            $manager->add('bizdev', new Bizdev());
+            $bizdev = $manager->get('bizdev');
+            $leadUrl = $bizdev['_links']['lead']['href'];
+            $leadHash = explode('/', $leadUrl);
+            $leadHash = $leadHash[count($leadHash) - 1];
+            $manager->add('lead', new BizdevLead($leadHash));
+            $evangelists[] = $manager->get('lead');
+        }
 
         $page['seo']['expiry']    = $page['expiryDate'];
         $page['groups']           = $groups;

@@ -10,6 +10,7 @@
         "ext-ctype": "*",
         "ext-iconv": "*",
         "ext-json": "*",
+        "chrisguitarguy/request-id-bundle": "^4.2",
         "composer/package-versions-deprecated": "1.11.99.1",
         "doctrine/annotations": "^1.0",
         "friendsofsymfony/http-cache-bundle": "^2.11",

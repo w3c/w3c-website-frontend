@@ -1,4 +1,10 @@
 {
+    "brick/math": {
+        "version": "0.9.3"
+    },
+    "chrisguitarguy/request-id-bundle": {
+        "version": "v4.2.1"
+    },
     "clue/stream-filter": {
         "version": "v1.5.0"
     },
@@ -40,6 +46,21 @@
     },
     "erusev/parsedown-extra": {
         "version": "0.8.1"
+    },
+    "exercise/htmlpurifier-bundle": {
+        "version": "2.0",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "master",
+            "version": "0.2",
+            "ref": "0b76657841c2ba52647bb1b4a5595a0e3b9f485c"
+        },
+        "files": [
+            "config/packages/exercise_html_purifier.yaml"
+        ]
+    },
+    "ezyang/htmlpurifier": {
+        "version": "v4.13.0"
     },
     "friendsofphp/proxy-manager-lts": {
         "version": "v1.0.3"
@@ -195,6 +216,12 @@
     },
     "psr/simple-cache": {
         "version": "1.0.1"
+    },
+    "ramsey/collection": {
+        "version": "1.2.2"
+    },
+    "ramsey/uuid": {
+        "version": "4.2.3"
     },
     "sabre/uri": {
         "version": "2.2.1"

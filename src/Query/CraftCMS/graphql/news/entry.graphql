@@ -44,5 +44,30 @@ query NewsArticle($year: [String], $slug: [String], $siteId: [QueryArgument]) {
             }
             notes: postPageNotes
         }
+        ... on newsArticles_importedEntries_Entry {
+            excerpt
+            groups: workingGroups {
+                title
+                slug
+                ...on groups_Category {
+                    url: urlLink
+                }
+            }
+            specifications {
+                title
+                slug
+                ...on specifications_Category {
+                    url: urlLink
+                }
+            }
+            ecosystems {
+                title
+                slug
+            }
+            seo: seoOptions {
+                ...seoData
+            }
+            pageContent
+        }
     }
 }
