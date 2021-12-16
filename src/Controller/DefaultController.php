@@ -11,6 +11,7 @@ use App\Query\CraftCMS\YouMayAlsoLikeRelatedEntries;
 use App\Query\W3C\Healthcheck;
 use App\Query\W3C\Home\Members;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
+use Strata\Data\Cache\CacheLifetime;
 use Strata\Data\Exception\GraphQLQueryException;
 use Strata\Data\Exception\QueryManagerException;
 use Strata\Data\Query\QueryManager;
@@ -43,7 +44,7 @@ class DefaultController extends AbstractController
         );
         $manager->add('w3c_healthcheck', new Healthcheck());
 
-        return $this->render('debug/test.html.twig', [
+        $response = $this->render('debug/test.html.twig', [
             'title'             => 'Debug page',
             'navigation'        => $manager->getCollection('navigation'),
             'navigation_cached' => $manager->isHit('navigation'),
@@ -51,6 +52,11 @@ class DefaultController extends AbstractController
             'page'              => $manager->get('page'),
             'page_cached'       => $manager->isHit('page'),
         ]);
+
+        // @todo testing caching
+        $response->setCache(['private' => true, 'no_cache' => true, 'no_store' => true]);
+        $response->headers->set('X-STRATA-CACHE', 'no-cache');
+        return $response;
     }
 
     /**
@@ -106,10 +112,16 @@ class DefaultController extends AbstractController
             dump($members);
         }
 
-        return $this->render(
+        $response = $this->render(
             'pages/home.html.twig',
             ['page' => $page, 'members' => $members, 'navigation' => $navigation]
         );
+
+        // @todo testing caching
+        $response->setSharedMaxAge(CacheLifetime::DAY);
+        $response->headers->addCacheControlDirective('must-revalidate', true);
+        $response->headers->set('X-STRATA-CACHE', 'cache');
+        return $response;
     }
 
     /**
