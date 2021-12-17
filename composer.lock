@@ -1095,16 +1095,16 @@
         },
         {
             "name": "laminas/laminas-feed",
-            "version": "2.15.0",
+            "version": "2.16.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laminas/laminas-feed.git",
-                "reference": "3ef837a12833c74b438d2c3780023c4244e0abae"
+                "reference": "cbd0e10c867a1efa6594164d229d8caf4a4ae4c7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laminas/laminas-feed/zipball/3ef837a12833c74b438d2c3780023c4244e0abae",
-                "reference": "3ef837a12833c74b438d2c3780023c4244e0abae",
+                "url": "https://api.github.com/repos/laminas/laminas-feed/zipball/cbd0e10c867a1efa6594164d229d8caf4a4ae4c7",
+                "reference": "cbd0e10c867a1efa6594164d229d8caf4a4ae4c7",
                 "shasum": ""
             },
             "require": {
@@ -1168,7 +1168,7 @@
                     "type": "community_bridge"
                 }
             ],
-            "time": "2021-09-20T18:11:11+00:00"
+            "time": "2021-12-17T09:12:35+00:00"
         },
         {
             "name": "laminas/laminas-stdlib",
@@ -8647,15 +8647,16 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/w3c/w3c-website-templates-bundle.git",
-                "reference": "451b15ccf7ea4cc2d69d89c604292854242fc806"
+                "reference": "6ffc6163fb5dd8b338800e0020acc36189f8a0ad"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/w3c/w3c-website-templates-bundle/zipball/451b15ccf7ea4cc2d69d89c604292854242fc806",
-                "reference": "451b15ccf7ea4cc2d69d89c604292854242fc806",
+                "url": "https://api.github.com/repos/w3c/w3c-website-templates-bundle/zipball/6ffc6163fb5dd8b338800e0020acc36189f8a0ad",
+                "reference": "6ffc6163fb5dd8b338800e0020acc36189f8a0ad",
                 "shasum": ""
             },
             "require": {
+                "chrisguitarguy/request-id-bundle": "^4.2",
                 "exercise/htmlpurifier-bundle": "^2.0",
                 "ext-dom": "*",
                 "ext-simplexml": "*",
@@ -8688,7 +8689,7 @@
             "support": {
                 "source": "https://github.com/w3c/w3c-website-templates-bundle/tree/main"
             },
-            "time": "2021-12-16T18:14:56+00:00"
+            "time": "2021-12-17T14:25:36+00:00"
         },
         {
             "name": "webmozart/assert",
