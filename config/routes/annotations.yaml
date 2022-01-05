@@ -1,7 +1,6 @@
 controllers:
     resource: ../../src/Controller/
     type: annotation
-    schemes: ['https']
     prefix:
         fr: '/fr'
         ja: '/ja'
