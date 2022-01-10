@@ -1,6 +1,17 @@
-{% extends '@W3CWebsiteTemplates/pages/post.html.twig' %}
+{% extends '@W3CWebsiteTemplates/pages/default.html.twig' %}
 
-{% set body_classes = 'post' %}
+{% set body_classes = 'default' %}
+
+{% block components %}
+	{% if page.defaultFlexibleComponents is defined and page.defaultFlexibleComponents %}
+		{% for component in page.defaultFlexibleComponents %}
+			{{ include('partials/defaultFlexibleComponents.html.twig') }}
+		{% endfor %}
+	{% endif %}
+	{% if page.pageContent is defined and page.pageContent %}
+		{{ page.pageContent|raw }}
+	{% endif %}
+{% endblock components %}
 
 {% block feed %}
 	{% include '@W3CWebsiteTemplates/components/styles/feed.html.twig' with { 'feed_url': '/press-releases/feed', 'feed_type': 'Press Release' } %}
