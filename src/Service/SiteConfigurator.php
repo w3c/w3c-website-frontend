@@ -57,12 +57,12 @@ class SiteConfigurator
                 'url'   => $this->router->generate('app_default_home.zh-hans'),
             ]
         ]);
-        $site->addLocale('pt-br', ['siteId' => 3]);
-        $site->addLocale('hu', ['siteId' => 5]);
-        $site->addLocale('fr', ['siteId' => 6]);
-        $site->addLocale('es', ['siteId' => 7]);
-        $site->addLocale('de', ['siteId' => 8]);
         $site->addLocaleRtl('ar', ['siteId' => 9]);
+        $site->addLocale('de', ['siteId' => 8]);
+        $site->addLocale('es', ['siteId' => 7]);
+        $site->addLocale('fr', ['siteId' => 6]);
+        $site->addLocale('hu', ['siteId' => 5]);
+        $site->addLocale('pt-br', ['siteId' => 3]);
 
         // Set current locale
         $request = $this->requestStack->getCurrentRequest();
