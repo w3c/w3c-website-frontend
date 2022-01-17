@@ -51,8 +51,12 @@ class Filters extends GraphQLQuery
         ];
     }
 
-    public function transformArchives(string $first, string $last): array
+    public function transformArchives(string $first = null, string $last = null): array
     {
+        if (!$first) {
+            return [];
+        }
+
         $archives = [];
         for ($year = $first; $year <= $last; $year++) {
             $archives[] = [
