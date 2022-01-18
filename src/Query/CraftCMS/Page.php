@@ -104,15 +104,11 @@ class Page extends GraphQLQuery
 
     public function mapBreadcrumbs(?array $breadcrumbs, string $title, string $uri): array
     {
-        if ($breadcrumbs) {
-            return [
-                'title'  => $title,
-                'url'    => $this->router->generate('app_default_index', ['route' => $uri]),
-                'parent' => $this->mapBreadcrumbsRecursive($breadcrumbs)
-            ];
-        }
-
-        return $this->mapBreadcrumbsRecursive($breadcrumbs);
+        return [
+            'title'  => $title,
+            'url'    => $this->router->generate('app_default_index', ['route' => $uri]),
+            'parent' => $this->mapBreadcrumbsRecursive($breadcrumbs)
+        ];
     }
 
     private function mapBreadcrumbsRecursive(?array $breadcrumbs): array
