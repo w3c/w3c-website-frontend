@@ -67,7 +67,7 @@ class Filters extends GraphQLQuery
                 'url'   => $this->router->generate('app_pressreleases_index')
             ]
         ];
-        for ($year = $first; $year <= $last; $year++) {
+        for ($year = $last; $year >= $first; $year--) {
             $archives[] = [
                 'title' => $year,
                 'url'   => $this->router->generate('app_pressreleases_archive', ['year' => $year])
