@@ -57,12 +57,31 @@ class SiteConfigurator
                 'url'   => $this->router->generate('app_default_home.zh-hans'),
             ]
         ]);
-        $site->addLocaleRtl('ar', ['siteId' => 9]);
-        $site->addLocale('de', ['siteId' => 8]);
-        $site->addLocale('es', ['siteId' => 7]);
-        $site->addLocale('fr', ['siteId' => 6]);
-        $site->addLocale('hu', ['siteId' => 5]);
         $site->addLocale('pt-br', ['siteId' => 3]);
+        $site->addLocale('hu', ['siteId' => 5]);
+        $site->addLocale('fr', ['siteId' => 6]);
+        $site->addLocale('es', ['siteId' => 7]);
+        $site->addLocale('de', ['siteId' => 8]);
+        $site->addLocaleRtl('ar', ['siteId' => 9]);
+        $site->addLocale('ru', ['siteId' => 10]);
+        $site->addLocale('it', ['siteId' => 11]);
+        $site->addLocale('sv', ['siteId' => 12]);
+        $site->addLocale('ko', ['siteId' => 13]);
+        $site->addLocale('el', ['siteId' => 14]);
+        $site->addLocale('bg', ['siteId' => 15]);
+        $site->addLocale('cs', ['siteId' => 16]);
+        $site->addLocale('da', ['siteId' => 17]);
+        $site->addLocale('et', ['siteId' => 18]);
+        $site->addLocale('fi', ['siteId' => 19]);
+        $site->addLocale('ga', ['siteId' => 20]);
+        $site->addLocale('lt', ['siteId' => 21]);
+        $site->addLocale('lv', ['siteId' => 22]);
+        $site->addLocale('mt', ['siteId' => 23]);
+        $site->addLocale('nl', ['siteId' => 24]);
+        $site->addLocale('pt', ['siteId' => 25]);
+        $site->addLocale('ro', ['siteId' => 26]);
+        $site->addLocale('sk', ['siteId' => 27]);
+        $site->addLocale('sl', ['siteId' => 28]);
 
         // Set current locale
         $request = $this->requestStack->getCurrentRequest();
