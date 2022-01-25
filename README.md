@@ -39,10 +39,6 @@ Beta:
 
 Access to https://www-dev.w3.org is restricted by IP.
 
-### S24 Development
-* https://www-dev-w3c.studio24.dev
-* https://www-dev-w3c.studio24.dev/_build_summary.json
-
 ### Local
 * http://localhost:8000/ (see [running application locally](#running-application-locally)) 
 
