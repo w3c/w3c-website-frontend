@@ -1,5 +1,5 @@
-query EventsPage($siteId: [QueryArgument]) {
-    entry(section: "eventsListing", siteId: $siteId) {
+query EventsPage($site: [String]) {
+    entry(section: "eventsListing", site: $site) {
         id
         slug
         title

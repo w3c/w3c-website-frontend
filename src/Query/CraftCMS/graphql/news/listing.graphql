@@ -1,5 +1,5 @@
-query NewsListing($siteId: [QueryArgument]) {
-    entry(section: "newsListing", siteId: $siteId) {
+query NewsListing($site: [String]) {
+    entry(section: "newsListing", site: $site) {
         id
         slug
         title

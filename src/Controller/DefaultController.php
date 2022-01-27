@@ -75,8 +75,8 @@ class DefaultController extends AbstractController
             return $this->redirectToRoute('app_default_home', ['_locale' => $site->getDefaultLocale()]);
         }
 
-        $manager->add('page', new Homepage($router, $site->siteId));
-        $manager->add('recent-activities', new RecentActivities($site->siteId, $router));
+        $manager->add('page', new Homepage($router, $site->siteHandle));
+        $manager->add('recent-activities', new RecentActivities($site->siteHandle, $router));
         $manager->add('members', new Members());
 
         $navigation = $manager->getCollection('navigation');
@@ -132,7 +132,7 @@ class DefaultController extends AbstractController
     ): Response {
         // Build queries
         $singlesBreadcrumbs = $manager->get('singles-breadcrumbs');
-        $manager->add('page', new Page($router, $singlesBreadcrumbs['homepage'], $site->siteId, $route));
+        $manager->add('page', new Page($router, $singlesBreadcrumbs['homepage'], $site->siteHandle, $route));
 
         // If page not found, return Error 404
         $page = $manager->get('page');
@@ -143,7 +143,7 @@ class DefaultController extends AbstractController
 
         $navigation = $manager->getCollection('navigation');
 
-        $manager->add('crosslinks', new YouMayAlsoLikeRelatedEntries($router, $site->siteId, (int)$page['id']));
+        $manager->add('crosslinks', new YouMayAlsoLikeRelatedEntries($router, $site->siteHandle, (int)$page['id']));
         $crosslinks = $manager->get('crosslinks');
 
         //Only for testing purposes in dev

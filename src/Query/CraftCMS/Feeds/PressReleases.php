@@ -19,16 +19,16 @@ class PressReleases extends GraphQLQuery
     /**
      * Query to retrieve
      *
-     * @param int $siteId Site ID of page content
+     * @param string $siteHandle Site ID of page content
      *
      * @throws GraphQLQueryException
      */
-    public function __construct(int $siteId, int $limit)
+    public function __construct(string $siteHandle, int $limit)
     {
         $this->setGraphQLFromFile(__DIR__ . '/../graphql/feeds/press-releases.graphql')
             ->addFragmentFromFile(__DIR__ . '/../graphql/fragments/defaultFlexibleComponents.graphql')
             ->setRootPropertyPath('[entries]')
-            ->addVariable('siteId', $siteId)
+            ->addVariable('site', $siteHandle)
             ->addVariable('limit', $limit)
         ;
     }

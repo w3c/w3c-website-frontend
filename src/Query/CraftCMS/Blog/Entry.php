@@ -26,7 +26,7 @@ class Entry extends GraphQLQuery
     /**
      * Set up query
      *
-     * @param int             $siteId        Site ID of page content
+     * @param string $siteHandle Site Handle of page content
      * @param int             $year
      * @param string          $slug
      * @param RouterInterface $router
@@ -35,7 +35,7 @@ class Entry extends GraphQLQuery
      * @throws GraphQLQueryException
      */
     public function __construct(
-        int $siteId,
+        string $siteHandle,
         int $year,
         string $slug,
         RouterInterface $router,
@@ -49,7 +49,7 @@ class Entry extends GraphQLQuery
             ->addFragmentFromFile(__DIR__ . '/../graphql/fragments/contentImage.graphql')
             ->setRootPropertyPath('[entry]')
 
-            ->addVariable('siteId', $siteId)
+            ->addVariable('site', $siteHandle)
             ->addVariable('year', ['and', '>=' . $year, '<' . ($year + 1)])
             ->addVariable('slug', $slug)
             ->cache($cacheLifetime)

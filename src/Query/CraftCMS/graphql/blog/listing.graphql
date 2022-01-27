@@ -1,5 +1,5 @@
-query BlogListing($siteId: [QueryArgument]) {
-    entry(section: "blogListing", siteId: $siteId) {
+query BlogListing($site: [String]) {
+    entry(section: "blogListing", site: $site) {
         id
         slug
         title

@@ -1,5 +1,5 @@
-query PressReleasesListing($siteId: [QueryArgument]) {
-    entry(section: "pressReleasesListing", siteId: $siteId) {
+query PressReleasesListing($site: [String]) {
+    entry(section: "pressReleasesListing", site: $site) {
         id
         slug
         title

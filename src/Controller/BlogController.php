@@ -61,12 +61,12 @@ class BlogController extends AbstractController
         $currentPage = $request->query->get('page', 1);
         $search = $request->query->get('search');
         
-        $manager->add('page', new Listing($site->siteId));
+        $manager->add('page', new Listing($site->siteHandle));
         $manager->add(
             'collection',
             new BlogCollection(
                 $router,
-                $site->siteId,
+                $site->siteHandle,
                 null,
                 null,
                 null,
@@ -129,12 +129,12 @@ class BlogController extends AbstractController
         $currentPage = $request->query->get('page', 1);
         $search = $request->query->get('search');
 
-        $manager->add('page', new Listing($site->siteId));
+        $manager->add('page', new Listing($site->siteHandle));
         $manager->add(
             'collection',
             new BlogCollection(
                 $router,
-                $site->siteId,
+                $site->siteHandle,
                 null,
                 null,
                 $year + 1,
@@ -202,7 +202,7 @@ class BlogController extends AbstractController
         $currentPage = $request->query->get('page', 1);
         $search = $request->query->get('search');
 
-        $manager->add('categories', new Categories($site->siteId, 'blogCategories'));
+        $manager->add('categories', new Categories($site->siteHandle, 'blogCategories'));
         $categories = $manager->getCollection('categories');
 
         $category = [];
@@ -217,12 +217,12 @@ class BlogController extends AbstractController
             throw $this->createNotFoundException('CategoryInfo not found');
         }
 
-        $manager->add('page', new Listing($site->siteId));
+        $manager->add('page', new Listing($site->siteHandle));
         $manager->add(
             'collection',
             new BlogCollection(
                 $router,
-                $site->siteId,
+                $site->siteHandle,
                 $category['id'],
                 null,
                 null,
@@ -290,7 +290,7 @@ class BlogController extends AbstractController
         $currentPage = $request->query->get('page', 1);
         $search      = $request->query->get('search');
 
-        $manager->add('tags', new Tags($site->siteId, 'blogTags'));
+        $manager->add('tags', new Tags($site->siteHandle, 'blogTags'));
         $tags = $manager->getCollection('tags');
         $tag = [];
         foreach ($tags as $tagData) {
@@ -304,12 +304,12 @@ class BlogController extends AbstractController
             throw $this->createNotFoundException('Tag not found');
         }
 
-        $manager->add('page', new Listing($site->siteId));
+        $manager->add('page', new Listing($site->siteHandle));
         $manager->add(
             'collection',
             new BlogCollection(
                 $router,
-                $site->siteId,
+                $site->siteHandle,
                 null,
                 $tag['id'],
                 null,
@@ -377,7 +377,7 @@ class BlogController extends AbstractController
         Request $request,
         TranslatorInterface $translator
     ): Response {
-        $manager->add('page', new Entry($site->siteId, $year, $slug, $router));
+        $manager->add('page', new Entry($site->siteHandle, $year, $slug, $router));
 
         $page = $manager->get('page');
         if (empty($page)) {
@@ -439,7 +439,7 @@ class BlogController extends AbstractController
 
         $manager->add(
             'crosslinks',
-            new YouMayAlsoLikeRelatedEntries($router, $site->siteId, (int)$page['id'])
+            new YouMayAlsoLikeRelatedEntries($router, $site->siteHandle, (int)$page['id'])
         );
 
         $manager->add('comments', new Comments($page['id']));
@@ -509,7 +509,7 @@ class BlogController extends AbstractController
         RouterInterface $router,
         TranslatorInterface $translator
     ): array {
-        $manager->add('filters', new Filters($router, $translator, $site->siteId));
+        $manager->add('filters', new Filters($router, $translator, $site->siteHandle));
 
         $collection = $manager->getCollection('collection');
 

@@ -1,6 +1,6 @@
-query NewsCollection($siteId: [QueryArgument], $before: String, $after: String, $search: String, $limit: Int, $offset: Int) {
-    total: entryCount(section: "newsArticles", siteId: $siteId, before: $before, after: $after, search: $search)
-    entries(section: "newsArticles", siteId: $siteId, before: $before, after: $after, search: $search, limit: $limit, offset: $offset, orderBy: "postDate desc") {
+query NewsCollection($site: [String], $before: String, $after: String, $search: String, $limit: Int, $offset: Int) {
+    total: entryCount(section: "newsArticles", site: $site, before: $before, after: $after, search: $search)
+    entries(section: "newsArticles", site: $site, before: $before, after: $after, search: $search, limit: $limit, offset: $offset, orderBy: "postDate desc") {
         id
         slug
         uri

@@ -1,6 +1,6 @@
-query PressReleasesCollection($siteId: [QueryArgument], $before: String, $after: String, $limit: Int, $offset: Int) {
-    total: entryCount(section: "pressReleases", siteId: $siteId, before: $before, after: $after)
-    entries(section: "pressReleases", siteId: $siteId, before: $before, after: $after, limit: $limit, offset: $offset, orderBy: "postDate desc") {
+query PressReleasesCollection($site: [String], $before: String, $after: String, $limit: Int, $offset: Int) {
+    total: entryCount(section: "pressReleases", site: $site, before: $before, after: $after)
+    entries(section: "pressReleases", site: $site, before: $before, after: $after, limit: $limit, offset: $offset, orderBy: "postDate desc") {
         id
         slug
         uri

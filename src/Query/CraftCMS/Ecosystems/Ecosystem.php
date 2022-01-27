@@ -29,7 +29,7 @@ class Ecosystem extends GraphQLQuery
      * Set up query
      *
      * @param RouterInterface $router
-     * @param int             $siteId        Site ID of page content
+     * @param string $siteHandle Site Handle of page content
      * @param string          $slug          ecosystem's slug
      * @param int             $cacheLifetime Cache lifetime to store HTTP response for, defaults to 1 hour
      *
@@ -37,7 +37,7 @@ class Ecosystem extends GraphQLQuery
      */
     public function __construct(
         RouterInterface $router,
-        int $siteId,
+        string $siteHandle,
         string $slug,
         int $cacheLifetime = CacheLifetime::HOUR
     ) {
@@ -50,7 +50,7 @@ class Ecosystem extends GraphQLQuery
             ->addFragmentFromFile(__DIR__ . '/../graphql/fragments/breadcrumbs.graphql')
             ->setRootPropertyPath('[entry]')
             ->addVariable('slug', $slug)
-            ->addVariable('siteId', $siteId)
+            ->addVariable('site', $siteHandle)
             ->cache($cacheLifetime)
         ;
     }

@@ -49,12 +49,12 @@ class NewsletterController extends AbstractController
     ): Response {
         $currentPage = $request->query->get('page', 1);
 
-        $manager->add('page', new Listing($site->siteId));
+        $manager->add('page', new Listing($site->siteHandle));
         $manager->add(
             'collection',
             new Collection(
                 $router,
-                $site->siteId,
+                $site->siteHandle,
                 $year,
                 self::LIMIT,
                 $currentPage
@@ -99,7 +99,7 @@ class NewsletterController extends AbstractController
      */
     public function show(QueryManager $manager, int $year, int $month, int $day, Site $site): Response
     {
-        $manager->add('page', new Entry($site->siteId, $year, $month, $day));
+        $manager->add('page', new Entry($site->siteHandle, $year, $month, $day));
 
         $page = $manager->get('page');
         if (empty($page)) {
@@ -131,7 +131,7 @@ class NewsletterController extends AbstractController
         RouterInterface $router,
         TranslatorInterface $translator
     ): array {
-        $manager->add('filters', new Filters($router, $translator, $site->siteId));
+        $manager->add('filters', new Filters($router, $translator, $site->siteHandle));
 
         $collection = $manager->getCollection('collection');
         $pagination = $collection->getPagination();

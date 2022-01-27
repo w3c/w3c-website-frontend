@@ -1,5 +1,5 @@
-query YouMayAlsoLike($id: [QueryArgument], $siteId: [QueryArgument]) {
-    entry(id: $id, siteId: $siteId, displayYouMayAlsoLikeListing: true) {
+query YouMayAlsoLike($id: [QueryArgument], $site: [String]) {
+    entry(id: $id, site: $site, displayYouMayAlsoLikeListing: true) {
         ... on pages_default_Entry {
             youMayAlsoLikeTitle
             youMayAlsoLikeSectionIntroduction

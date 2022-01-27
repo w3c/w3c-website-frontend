@@ -37,51 +37,51 @@ class SiteConfigurator
         // Setup locales
         // @todo replace hardcoded labels with translations
         $site->addDefaultLocale('en', [
-            'siteId' => 1,
+            'siteHandle'   => 'default',
             'siteLink' =>  [
                 'label' => 'English homepage',
                 'url'   => $this->router->generate('app_default_home.en'),
             ]
         ]);
         $site->addLocale('ja', [
-            'siteId' => 2,
+            'siteHandle' => 'w3c_japan',
             'siteLink' =>  [
                 'label' => '日本語ホームページ',
                 'url'   => $this->router->generate('app_default_home.ja'),
             ]
         ]);
         $site->addLocale('zh-hans', [
-            'siteId' => 4,
+            'siteHandle' => 'w3c_china',
             'siteLink' =>  [
                 'label' => '简体中文首页',
                 'url'   => $this->router->generate('app_default_home.zh-hans'),
             ]
         ]);
-        $site->addLocale('pt-br', ['siteId' => 3]);
-        $site->addLocale('hu', ['siteId' => 5]);
-        $site->addLocale('fr', ['siteId' => 6]);
-        $site->addLocale('es', ['siteId' => 7]);
-        $site->addLocale('de', ['siteId' => 8]);
-        $site->addLocaleRtl('ar', ['siteId' => 9]);
-        $site->addLocale('ru', ['siteId' => 10]);
-        $site->addLocale('it', ['siteId' => 11]);
-        $site->addLocale('sv', ['siteId' => 12]);
-        $site->addLocale('ko', ['siteId' => 13]);
-        $site->addLocale('el', ['siteId' => 14]);
-        $site->addLocale('bg', ['siteId' => 15]);
-        $site->addLocale('cs', ['siteId' => 16]);
-        $site->addLocale('da', ['siteId' => 17]);
-        $site->addLocale('et', ['siteId' => 18]);
-        $site->addLocale('fi', ['siteId' => 19]);
-        $site->addLocale('ga', ['siteId' => 20]);
-        $site->addLocale('lt', ['siteId' => 21]);
-        $site->addLocale('lv', ['siteId' => 22]);
-        $site->addLocale('mt', ['siteId' => 23]);
-        $site->addLocale('nl', ['siteId' => 24]);
-        $site->addLocale('pt', ['siteId' => 25]);
-        $site->addLocale('ro', ['siteId' => 26]);
-        $site->addLocale('sk', ['siteId' => 27]);
-        $site->addLocale('sl', ['siteId' => 28]);
+        $site->addLocale('pt-br', ['siteHandle' => 'brazilianPortuguese']);
+        $site->addLocale('hu', ['siteHandle' => 'hungarian']);
+        $site->addLocale('fr', ['siteHandle' => 'french']);
+        $site->addLocale('es', ['siteHandle' => 'spanish']);
+        $site->addLocale('de', ['siteHandle' => 'german']);
+        $site->addLocaleRtl('ar', ['siteHandle' => 'arabic']);
+        $site->addLocale('ru', ['siteHandle' => 'russian']);
+        $site->addLocale('it', ['siteHandle' => 'italian']);
+        $site->addLocale('sv', ['siteHandle' => 'swedish']);
+        $site->addLocale('ko', ['siteHandle' => 'korean']);
+        $site->addLocale('el', ['siteHandle' => 'greek']);
+        $site->addLocale('bg', ['siteHandle' => 'bulgarian']);
+        $site->addLocale('cs', ['siteHandle' => 'czech']);
+        $site->addLocale('da', ['siteHandle' => 'danish']);
+        $site->addLocale('et', ['siteHandle' => 'estonian']);
+        $site->addLocale('fi', ['siteHandle' => 'finnish']);
+        $site->addLocale('ga', ['siteHandle' => 'gaelic']);
+        $site->addLocale('lt', ['siteHandle' => 'lithuanian']);
+        $site->addLocale('lv', ['siteHandle' => 'latvian']);
+        $site->addLocale('mt', ['siteHandle' => 'maltese']);
+        $site->addLocale('nl', ['siteHandle' => 'dutch']);
+        $site->addLocale('pt', ['siteHandle' => 'portuguese']);
+        $site->addLocale('ro', ['siteHandle' => 'romanian']);
+        $site->addLocale('sk', ['siteHandle' => 'slovak']);
+        $site->addLocale('sl', ['siteHandle' => 'slovenian']);
 
         // Set current locale
         $request = $this->requestStack->getCurrentRequest();
