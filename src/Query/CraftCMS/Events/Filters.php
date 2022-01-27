@@ -29,7 +29,7 @@ class Filters extends GraphQLQuery
      *
      * @param RouterInterface     $router
      * @param TranslatorInterface $translator
-     * @param int                 $siteId        Site ID of page content
+     * @param string $siteHandle Site Handle of page content
      * @param int                 $cacheLifetime Cache lifetime to store HTTP response for, defaults to 1 hour
      *
      * @throws GraphQLQueryException
@@ -37,13 +37,13 @@ class Filters extends GraphQLQuery
     public function __construct(
         RouterInterface $router,
         TranslatorInterface $translator,
-        int $siteId,
+        string $siteHandle,
         int $cacheLifetime = CacheLifetime::HOUR
     ) {
         $this->router     = $router;
         $this->translator = $translator;
         $this->setGraphQLFromFile(__DIR__ . '/../graphql/events/filters.graphql')
-            ->addVariable('siteId', $siteId)
+            ->addVariable('site', $siteHandle)
             ->cache($cacheLifetime)
         ;
     }

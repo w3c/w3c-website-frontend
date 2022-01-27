@@ -50,12 +50,12 @@ class PressReleasesController extends AbstractController
     ): Response {
         $currentPage = $request->query->get('page', 1);
 
-        $manager->add('page', new Listing($site->siteId));
+        $manager->add('page', new Listing($site->siteHandle));
         $manager->add(
             'collection',
             new Collection(
                 $router,
-                $site->siteId,
+                $site->siteHandle,
                 null,
                 null,
                 self::LIMIT,
@@ -105,12 +105,12 @@ class PressReleasesController extends AbstractController
     ): Response {
         $currentPage = $request->query->get('page', 1);
 
-        $manager->add('page', new Listing($site->siteId));
+        $manager->add('page', new Listing($site->siteHandle));
         $manager->add(
             'collection',
             new Collection(
                 $router,
-                $site->siteId,
+                $site->siteHandle,
                 $year + 1,
                 $year,
                 self::LIMIT,
@@ -163,7 +163,7 @@ class PressReleasesController extends AbstractController
         Site $site,
         Request $request
     ): Response {
-        $manager->add('page', new Entry($site->siteId, $year, $slug, $router));
+        $manager->add('page', new Entry($site->siteHandle, $year, $slug, $router));
 
         $page = $manager->get('page');
         if (empty($page)) {
@@ -172,7 +172,7 @@ class PressReleasesController extends AbstractController
 
         $manager->add(
             'crosslinks',
-            new YouMayAlsoLikeRelatedEntries($router, $site->siteId, (int)$page['id'])
+            new YouMayAlsoLikeRelatedEntries($router, $site->siteHandle, (int)$page['id'])
         );
 
         $crosslinks         = $manager->get('crosslinks');
@@ -210,7 +210,7 @@ class PressReleasesController extends AbstractController
         RouterInterface $router,
         TranslatorInterface $translator
     ): array {
-        $manager->add('filters', new Filters($router, $translator, $site->siteId));
+        $manager->add('filters', new Filters($router, $translator, $site->siteHandle));
 
         $collection = $manager->getCollection('collection');
         $pagination = $collection->getPagination();

@@ -35,14 +35,14 @@ class EcosystemController extends AbstractController
      */
     public function show(string $slug, Site $site, QueryManager $manager, RouterInterface $router): Response
     {
-        $manager->add('page', new CraftEcosystem($router, $site->siteId, $slug));
+        $manager->add('page', new CraftEcosystem($router, $site->siteHandle, $slug));
         $page = $manager->get('page');
 
         if (empty($page)) {
             throw $this->createNotFoundException('Page not found');
         }
 
-        $manager->add('recent-activities', new RecentActivities($site->siteId, $page['taxonomy-id'], $router));
+        $manager->add('recent-activities', new RecentActivities($site->siteHandle, $page['taxonomy-id'], $router));
         $manager->add('testimonials', new Testimonials($page['taxonomy-id'], $site));
         $manager->add('evangelists', new Evangelists($page['taxonomy-slug']));
         $manager->add('groups', new Groups($page['taxonomy-slug']));

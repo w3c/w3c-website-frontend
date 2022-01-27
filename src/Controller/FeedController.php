@@ -51,7 +51,7 @@ class FeedController extends AbstractController
      */
     public function blog(QueryManager $manager, Site $site, Environment $twig): Response
     {
-        $manager->add('rss', new Blog($site->siteId, self::LIMIT));
+        $manager->add('rss', new Blog($site->siteHandle, self::LIMIT));
         $feedUrl = $this->generateUrl('app_feed_blog', [], UrlGeneratorInterface::ABSOLUTE_URL);
         $pageUrl = $this->generateUrl('app_blog_index', [], UrlGeneratorInterface::ABSOLUTE_URL);
 
@@ -100,7 +100,7 @@ class FeedController extends AbstractController
      */
     public function news(QueryManager $manager, Site $site, Environment $twig): Response
     {
-        $manager->add('rss', new News($site->siteId, self::LIMIT));
+        $manager->add('rss', new News($site->siteHandle, self::LIMIT));
         $entries = $manager->getCollection('rss');
 
         $feedUrl = $this->generateUrl('app_feed_news', [], UrlGeneratorInterface::ABSOLUTE_URL);
@@ -142,7 +142,7 @@ class FeedController extends AbstractController
      */
     public function pressReleases(QueryManager $manager, Site $site, Environment $twig): Response
     {
-        $manager->add('rss', new PressReleases($site->siteId, self::LIMIT));
+        $manager->add('rss', new PressReleases($site->siteHandle, self::LIMIT));
         $entries = $manager->getCollection('rss');
 
         $feedUrl = $this->generateUrl('app_feed_pressreleases', [], UrlGeneratorInterface::ABSOLUTE_URL);
@@ -186,19 +186,19 @@ class FeedController extends AbstractController
      */
     public function category(string $slug, QueryManager $manager, Site $site, Environment $twig): Response
     {
-        $manager->add('category-info', new CategoryInfo($site->siteId, 'blogCategories', $slug));
+        $manager->add('category-info', new CategoryInfo($site->siteHandle, 'blogCategories', $slug));
         $category = $manager->get('category-info');
 
         if (!$category) {
             throw $this->createNotFoundException('Category not found');
         }
 
-        $manager->add('rss', new Taxonomy($site->siteId, self::LIMIT, $category['id']));
+        $manager->add('rss', new Taxonomy($site->siteHandle, self::LIMIT, $category['id']));
 
         $entries = $manager->getCollection('rss');
         $feedUrl = $this->generateUrl(
             'app_feed_category',
-            ['slug' => $site->siteId],
+            ['slug' => $site->siteHandle],
             UrlGeneratorInterface::ABSOLUTE_URL
         );
 
@@ -224,19 +224,19 @@ class FeedController extends AbstractController
      */
     public function ecosystem(string $slug, QueryManager $manager, Site $site, Environment $twig): Response
     {
-        $manager->add('ecosystem-info', new CategoryInfo($site->siteId, 'ecosystems', $slug));
+        $manager->add('ecosystem-info', new CategoryInfo($site->siteHandle, 'ecosystems', $slug));
         $ecosystem = $manager->get('ecosystem-info');
 
         if (!$ecosystem) {
             throw $this->createNotFoundException('Category not found');
         }
 
-        $manager->add('rss', new Taxonomy($site->siteId, self::LIMIT, null, $ecosystem['id']));
+        $manager->add('rss', new Taxonomy($site->siteHandle, self::LIMIT, null, $ecosystem['id']));
 
         $entries = $manager->getCollection('rss');
         $feedUrl = $this->generateUrl(
             'app_feed_ecosystem',
-            ['slug' => $site->siteId],
+            ['slug' => $site->siteHandle],
             UrlGeneratorInterface::ABSOLUTE_URL
         );
 
@@ -260,19 +260,19 @@ class FeedController extends AbstractController
      */
     public function group(string $type, string $slug, QueryManager $manager, Site $site, Environment $twig): Response
     {
-        $manager->add('group-info', new GroupInfo($site->siteId, $type, $slug));
+        $manager->add('group-info', new GroupInfo($site->siteHandle, $type, $slug));
         $group = $manager->get('group-info');
 
         if (!$group) {
             throw $this->createNotFoundException('Category not found');
         }
 
-        $manager->add('rss', new Taxonomy($site->siteId, self::LIMIT, null, null, $group['id']));
+        $manager->add('rss', new Taxonomy($site->siteHandle, self::LIMIT, null, null, $group['id']));
 
         $entries = $manager->getCollection('rss');
         $feedUrl = $this->generateUrl(
             'app_feed_ecosystem',
-            ['slug' => $site->siteId],
+            ['slug' => $site->siteHandle],
             UrlGeneratorInterface::ABSOLUTE_URL
         );
 
@@ -298,7 +298,7 @@ class FeedController extends AbstractController
      */
     public function events(QueryManager $manager, Site $site, Environment $twig): Response
     {
-        $manager->add('rss', new Events($site->siteId, self::LIMIT));
+        $manager->add('rss', new Events($site->siteHandle, self::LIMIT));
         $entries = $manager->getCollection('rss');
 
         $feedUrl = $this->generateUrl('app_feed_events', [], UrlGeneratorInterface::ABSOLUTE_URL);

@@ -32,7 +32,7 @@ class StaffController extends AbstractController
      */
     public function alumni(Site $site, QueryManager $manager): Response
     {
-        $manager->add('alumni-listing', new AlumniListing($site->siteId));
+        $manager->add('alumni-listing', new AlumniListing($site->siteHandle));
 
         $collection = $manager->getCollection('alumni-listing');
         $page       = $manager->get('alumni-listing', '[entry]');

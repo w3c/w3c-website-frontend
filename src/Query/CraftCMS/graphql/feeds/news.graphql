@@ -1,5 +1,5 @@
-query news($siteId: [QueryArgument], $limit: Int) {
-    entries(section: "newsArticles", siteId: $siteId, limit: $limit, orderBy: "postDate desc") {
+query news($site: [String], $limit: Int) {
+    entries(section: "newsArticles", site: $site, limit: $limit, orderBy: "postDate desc") {
         id
         slug
         uri

@@ -1,5 +1,5 @@
 query EventsListing(
-    $siteId: [QueryArgument],
+    $site: [String],
     $eventType: [QueryArgument],
     $category: [QueryArgument],
     $tag: [QueryArgument],
@@ -9,7 +9,7 @@ query EventsListing(
     $offset: Int) {
     total: entryCount(
         section: "events",
-        siteId: $siteId,
+        site: $site,
         eventType: $eventType,
         blogCategories: $category,
         blogTags: $tag,
@@ -17,7 +17,7 @@ query EventsListing(
         endDatetime: $end)
     entries(
         section: "events",
-        siteId: $siteId,
+        site: $site,
         eventType: $eventType,
         blogCategories: $category,
         blogTags: $tag,

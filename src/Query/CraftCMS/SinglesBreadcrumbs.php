@@ -26,16 +26,16 @@ class SinglesBreadcrumbs extends GraphQLQuery
      * Set up query
      *
      * @param RouterInterface $router
-     * @param int             $siteId        Site ID of page content
+     * @param string $siteHandle Site Handle of page content
      * @param int             $cacheLifetime Cache lifetime to store HTTP response for, defaults to 1 hour
      *
      * @throws GraphQLQueryException
      */
-    public function __construct(RouterInterface $router, int $siteId, int $cacheLifetime = CacheLifetime::HOUR)
+    public function __construct(RouterInterface $router, string $siteHandle, int $cacheLifetime = CacheLifetime::HOUR)
     {
         $this->router = $router;
         $this->setGraphQLFromFile(__DIR__ . '/graphql/singles-breadcrumbs.graphql')
-            ->addVariable('siteId', $siteId)
+            ->addVariable('site', $siteHandle)
             ->cache($cacheLifetime)
         ;
     }

@@ -19,11 +19,11 @@ class Events extends GraphQLQuery
     /**
      * Query to retrieve
      *
-     * @param int $siteId Site ID of page content
+     * @param string $siteHandle Site ID of page content
      *
      * @throws GraphQLQueryException
      */
-    public function __construct(int $siteId, int $limit)
+    public function __construct(string $siteHandle, int $limit)
     {
         $this->setGraphQLFromFile(__DIR__ . '/../graphql/feeds/events.graphql')
             ->addFragmentFromFile(__DIR__ . '/../graphql/fragments/listingEvent.graphql')
@@ -33,7 +33,7 @@ class Events extends GraphQLQuery
             ->addFragmentFromFile(__DIR__ . '/../graphql/fragments/thumbnailImage.graphql')
             ->addFragmentFromFile(__DIR__ . '/../graphql/fragments/contentImage.graphql')
             ->setRootPropertyPath('[entries]')
-            ->addVariable('siteId', $siteId)
+            ->addVariable('site', $siteHandle)
             ->addVariable('limit', $limit)
         ;
     }

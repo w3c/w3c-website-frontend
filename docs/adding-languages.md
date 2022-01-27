@@ -40,25 +40,25 @@ TODO - W3C
 
 ## Frontend site setup
 
-Edit the `src/Service/SiteConfigurator.php` file and add the locale along with the CraftCMS site ID. This helps auto-set the
-correct site ID when retrieving content. It also helps set whether content is left-to-right (default) or right-to-left.
+Edit the `src/Service/SiteConfigurator.php` file and add the locale along with the CraftCMS site handle. This helps auto-set the
+correct site handle when retrieving content. It also helps set whether content is left-to-right (default) or right-to-left.
 
 In the format:
 
 ```php
-$site->addLocale('{lc}', ['siteId' => {number}]);
+$site->addLocale('{lc}', ['siteHandle' => {handle}]);
 ```
 
 For example, to add German:
 
 ```php
-$site->addLocale('de', ['siteId' => 8]);
+$site->addLocale('de', ['siteHandle' => 'german']);
 ```
 
 You can use `$site->addRtfLocale()` to add a right-to-left locale. For example, to add Arabic:
 
 ```php
-$site->addRtfLocale('ar', ['siteId' => 9]);
+$site->addRtfLocale('ar', ['siteHandle' => 'arabic']);
 ```
 
 ## Translation messages file

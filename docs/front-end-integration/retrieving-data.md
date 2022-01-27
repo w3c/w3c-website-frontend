@@ -49,7 +49,7 @@ use App\Query\CraftCMS\Page;
 $navigation = $manager->getCollection('navigation');
 
 // Return current page content based on site ID and URI
-$manager->add('page', new Page($siteId, $uri));
+$manager->add('page', new Page($siteHandle, $uri));
 $page = $manager->get('page');
 ```
 
@@ -180,11 +180,11 @@ class Page extends GraphQLQuery {
     /**
      * Set up query
      *
-     * @param int $siteId Site ID of page content
+     * @param string $siteHandle Site ID of page content
      * @param string $uri Page URI to return
      * @param int $cacheLifetime Cache lifetime to store HTTP response for, defaults to 30 minutes
      */
-    public function __construct(int $siteId, string $uri, int $cacheLifetime = CacheLifetime::MINUTE * 30)
+    public function __construct(string $siteHandle, string $uri, int $cacheLifetime = CacheLifetime::MINUTE * 30)
     {
         $this->setGraphQLFromFile(__DIR__ . '/graphql/page.graphql')
             ->addFragmentFromFile(__DIR__ . '/graphql/fragments/defaultFlexibleComponents.graphql')
@@ -194,7 +194,7 @@ class Page extends GraphQLQuery {
             ->addVariable('uri', $uri)
 
             // Set site ID to retrieve navigation for
-            ->addVariable('siteId', $siteId)
+            ->addVariable('site', $siteHandle)
 
             // Cache page response
             ->enableCache($cacheLifetime)
@@ -218,8 +218,8 @@ to all instances of the Query Manager in the [`QueryManagerConfigurator`](../../
 public function page(Request $request, QueryManager $manager): Response
 {
   // Add query to query manager
-  $siteId = 1;
-  $manager->add('page', new Page($siteId, $request->getRequestUri()));
+  $siteHandle = 'default';
+  $manager->add('page', new Page($siteHandle, $request->getRequestUri()));
   
   // Pass retrieved data to view (query runs on access)
   return $this->render('debug/page.html.twig', [

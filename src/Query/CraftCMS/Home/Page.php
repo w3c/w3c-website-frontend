@@ -25,11 +25,11 @@ class Page extends GraphQLQuery
      * Set up query
      *
      * @param RouterInterface $router
-     * @param int $siteId Site ID of page content
+     * @param string $siteHandle Site ID of page content
      *
      * @throws GraphQLQueryException
      */
-    public function __construct(RouterInterface $router, int $siteId)
+    public function __construct(RouterInterface $router, string $siteHandle)
     {
         $this->router = $router;
         $this->setGraphQLFromFile(__DIR__ . '/../graphql/home/page.graphql')
@@ -39,7 +39,7 @@ class Page extends GraphQLQuery
              ->setRootPropertyPath('[entry]')
 
             // Set site ID to retrieve navigation for
-             ->addVariable('siteId', $siteId)
+             ->addVariable('site', $siteHandle)
 
             // Caching
              ->doNotCache();

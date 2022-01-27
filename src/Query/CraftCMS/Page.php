@@ -28,7 +28,7 @@ class Page extends GraphQLQuery
      *
      * @param RouterInterface $router
      * @param array           $breadcrumbsRoot
-     * @param int             $siteId        Site ID of page content
+     * @param string $siteHandle Site Handle of page content
      * @param string          $uri           Page URI to return
      * @param int             $cacheLifetime Cache lifetime to store HTTP response for, defaults to 1 hour
      *
@@ -37,7 +37,7 @@ class Page extends GraphQLQuery
     public function __construct(
         RouterInterface $router,
         array $breadcrumbsRoot,
-        int $siteId,
+        string $siteHandle,
         string $uri,
         int $cacheLifetime = CacheLifetime::HOUR
     ) {
@@ -56,7 +56,7 @@ class Page extends GraphQLQuery
             ->addVariable('uri', $uri)
 
             // Set site ID to retrieve navigation for
-            ->addVariable('siteId', $siteId)
+            ->addVariable('site', $siteHandle)
 
             // Caching
             ->doNotCache()

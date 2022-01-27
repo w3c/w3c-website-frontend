@@ -1,5 +1,5 @@
-query pressReleases($siteId: [QueryArgument], $limit: Int) {
-    entries(section: "pressReleases", siteId: $siteId, limit: $limit, orderBy: "postDate desc") {
+query pressReleases($site: [String], $limit: Int) {
+    entries(section: "pressReleases", site: $site, limit: $limit, orderBy: "postDate desc") {
         id
         slug
         uri
@@ -14,7 +14,7 @@ query pressReleases($siteId: [QueryArgument], $limit: Int) {
             }
         }
     }
-    comments(siteId: $siteId) {
+    comments(site: $site) {
         ownerId
     }
 }

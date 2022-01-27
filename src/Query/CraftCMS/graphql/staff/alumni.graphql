@@ -1,5 +1,5 @@
-query AlumniListing($siteId: [QueryArgument]) {
-    entry(section: "alumniListing", siteId: $siteId) {
+query AlumniListing($site: [String]) {
+    entry(section: "alumniListing", site: $site) {
         id
         slug
         title
@@ -16,8 +16,8 @@ query AlumniListing($siteId: [QueryArgument]) {
             }
         }
     }
-    total: entryCount(section: "alumni", siteId: $siteId)
-    entries(section: "alumni", siteId: $siteId, orderBy: "familyName asc, title asc") {
+    total: entryCount(section: "alumni", site: $site)
+    entries(section: "alumni", site: $site, orderBy: "familyName asc, title asc") {
         ... on alumni_default_Entry {
             given: title
             last: familyName

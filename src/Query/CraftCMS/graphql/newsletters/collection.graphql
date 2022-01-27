@@ -1,6 +1,6 @@
-query NewsletterCollection($siteId: [QueryArgument], $year: [String], $limit: Int, $offset: Int) {
-    total: entryCount(section: "newsletter", siteId: $siteId, postDate: $year)
-    entries(section: "newsletter", siteId: $siteId, postDate: $year, limit: $limit, offset: $offset, orderBy: "postDate desc") {
+query NewsletterCollection($site: [String], $year: [String], $limit: Int, $offset: Int) {
+    total: entryCount(section: "newsletter", site: $site, postDate: $year)
+    entries(section: "newsletter", site: $site, postDate: $year, limit: $limit, offset: $offset, orderBy: "postDate desc") {
         title
         date: postDate
         year: postDate@formatDateTime(format: "Y")

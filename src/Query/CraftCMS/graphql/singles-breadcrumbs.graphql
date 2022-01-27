@@ -1,30 +1,30 @@
-query SinglesBreadcrumbs($siteId: [QueryArgument]) {
-    homepage: entry(section: "homepage", siteId: $siteId) {
+query SinglesBreadcrumbs($site: [String]) {
+    homepage: entry(section: "homepage", site: $site) {
         slug
         title
         uri
     }
-    blog: entry(section: "blogListing", siteId: $siteId) {
+    blog: entry(section: "blogListing", site: $site) {
         slug
         title
         uri
     }
-    pressReleases: entry(section: "pressReleasesListing", siteId: $siteId) {
+    pressReleases: entry(section: "pressReleasesListing", site: $site) {
         slug
         title
         uri
     }
-    events: entry(section: "eventsListing", siteId: $siteId) {
+    events: entry(section: "eventsListing", site: $site) {
         slug
         title
         uri
     }
-    news: entry(section: "newsListing", siteId: $siteId) {
+    news: entry(section: "newsListing", site: $site) {
         slug
         title
         uri
     }
-    ecosystems: entry(section: "ecosystemsLandingPage", siteId: $siteId) {
+    ecosystems: entry(section: "ecosystemsLandingPage", site: $site) {
         slug
         title
         uri

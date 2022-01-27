@@ -25,7 +25,7 @@ class GlobalNavigation extends GraphQLQuery
      * Set up query
      *
      * @param RouterInterface $router
-     * @param int             $siteId        Site ID to generate global navigation for
+     * @param string          $siteHandle    Site handle to generate global navigation for
      * @param int             $cacheLifetime Cache lifetime to store HTTP response for, defaults to 24 hours
      * @param int             $limit         Results per page, defaults to 6
      *
@@ -35,7 +35,7 @@ class GlobalNavigation extends GraphQLQuery
      */
     public function __construct(
         RouterInterface $router,
-        int $siteId,
+        string $siteHandle,
         int $cacheLifetime = CacheLifetime::DAY,
         int $limit = 6
     ) {
@@ -46,7 +46,7 @@ class GlobalNavigation extends GraphQLQuery
             ->setResultsPerPage($limit)
 
             // Set site ID to retrieve navigation for
-            ->addVariable('siteId', $siteId)
+            ->addVariable('site', $siteHandle)
 
             // Limit results so we don't break the nav layout
             ->addVariable('limit', $limit)
@@ -112,7 +112,7 @@ class GlobalNavigation extends GraphQLQuery
         if ($url) {
             return $url;
         }
-
+        dump($internalUri);
         switch ($internalUri['sectionHandle']) {
             case 'ecosystems':
                 return $this->router->generate('app_ecosystem_show', ['slug' => $internalUri['slug']]);
