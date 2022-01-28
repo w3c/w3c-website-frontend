@@ -112,7 +112,7 @@ class GlobalNavigation extends GraphQLQuery
         if ($url) {
             return $url;
         }
-        dump($internalUri);
+
         switch ($internalUri['sectionHandle']) {
             case 'ecosystems':
                 return $this->router->generate('app_ecosystem_show', ['slug' => $internalUri['slug']]);
