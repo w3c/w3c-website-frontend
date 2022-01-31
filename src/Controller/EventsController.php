@@ -359,6 +359,11 @@ class EventsController extends AbstractController
 
         if ($eventType) {
             $page['lead'] = $eventType['pageLead'];
+            $page['title'] = $eventType['title'];
+            $page['seo']['title'] = $eventType['title'];
+            foreach ($page['seo']['social'] as $key => $data) {
+                $page['seo']['social'][$key]['title'] = $eventType['title'];
+            }
         }
 
         if ($this->getParameter('kernel.environment') == 'dev') {
