@@ -4,8 +4,12 @@ query EventFilters($site: [String]) {
         slug
     }
     types: categories(site: $site, group: "eventType", orderBy: "title asc") {
+        id
         title
         slug
+        ... on eventType_Category {
+            pageLead
+        }
     }
     first: entry(section: "events", site: $site, orderBy: "startDatetime asc") {
         ... on events_default_Entry {

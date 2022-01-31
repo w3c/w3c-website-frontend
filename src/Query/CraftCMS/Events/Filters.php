@@ -67,8 +67,10 @@ class Filters extends GraphQLQuery
         ];
         foreach ($types as $type) {
             $result[] = [
-                'title' => $type['title'],
-                'slug'   => $type['slug']
+                'id'       => $type['id'],
+                'title'    => $type['title'],
+                'slug'     => $type['slug'],
+                'pageLead' => $type['pageLead']
             ];
         }
 

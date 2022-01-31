@@ -275,6 +275,7 @@ class EventsController extends AbstractController
         $filters     = $manager->get('filters');
         $types       = $filters['types'];
         $eventType   = [];
+
         if ($type) {
             foreach ($types as $eventTypeData) {
                 if ($eventTypeData['slug'] == $type) {
@@ -356,8 +357,13 @@ class EventsController extends AbstractController
         $page['seo']['expiry'] = $page['expiryDate'];
         $page['breadcrumbs'] = $this->breadcrumbs($manager, $page, $eventType, $year);
 
+        if ($eventType) {
+            $page['lead'] = $eventType['pageLead'];
+        }
+
         if ($this->getParameter('kernel.environment') == 'dev') {
             dump($page);
+            dump($filters);
             dump($collection);
             dump($pagination);
             dump($categories);
