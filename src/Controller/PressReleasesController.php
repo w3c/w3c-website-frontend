@@ -176,12 +176,27 @@ class PressReleasesController extends AbstractController
         );
 
         $crosslinks         = $manager->get('crosslinks');
+        $singlesBreadcrumbs = $manager->get('singles-breadcrumbs');
 
         $page['seo']['expiry'] = $page['expiryDate'];
+        $page['breadcrumbs'] = [
+            'title'  => $page['title'],
+            'url'    => $this->generateUrl('app_pressreleases_show', ['year' => $year, 'slug' => $slug]),
+            'parent' => [
+                'title'  => $year,
+                'url'    => $this->generateUrl('app_pressreleases_archive', ['year' => $year]),
+                'parent' => [
+                    'title'  => $singlesBreadcrumbs['pressReleases']['title'],
+                    'url'    => $singlesBreadcrumbs['pressReleases']['url'],
+                    'parent' => $singlesBreadcrumbs['homepage']
+                ]
+            ]
+        ];
 
         if ($this->getParameter('kernel.environment') == 'dev') {
             dump($page);
             dump($crosslinks);
+            dump($singlesBreadcrumbs);
         }
 
         return $this->render('press-releases/show.html.twig', [
