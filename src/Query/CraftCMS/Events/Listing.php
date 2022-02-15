@@ -25,7 +25,7 @@ class Listing extends GraphQLQuery
      * Set up query
      *
      * @param RouterInterface $router
-     * @param int             $siteId        Site ID of page content
+     * @param string $siteHandle Site Handle of page content
      * @param int|null        $eventType
      * @param int|null        $category
      * @param int|null        $tag
@@ -37,7 +37,7 @@ class Listing extends GraphQLQuery
      */
     public function __construct(
         RouterInterface $router,
-        int $siteId,
+        string $siteHandle,
         int $eventType = null,
         int $category = null,
         int $tag = null,
@@ -55,7 +55,7 @@ class Listing extends GraphQLQuery
             ->setTotalResults('[total]')
             ->setResultsPerPage($limit)
             ->setCurrentPage($page)
-            ->addVariable('siteId', $siteId)
+            ->addVariable('site', $siteHandle)
             ->addVariable('eventType', $eventType)
             ->addVariable('category', $category)
             ->addVariable('tag', $tag)

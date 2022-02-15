@@ -26,7 +26,7 @@ If you are using variables copy these into the _Query Variables_ window as JSON,
 ```json
 {
   "uri": "landing-page/w3c-mission-default",
-  "siteId": 1
+  "siteHandle": "default"
 }
 ```
 

@@ -1,5 +1,5 @@
-query blog($siteId: [QueryArgument], $category: [QueryArgument], $tag: [QueryArgument], $limit: Int) {
-    entries(section: "blogPosts", siteId: $siteId, blogCategories: $category, blogTags: $tag, limit: $limit, orderBy: "postDate desc") {
+query blog($site: [String], $category: [QueryArgument], $tag: [QueryArgument], $limit: Int) {
+    entries(section: "blogPosts", site: $site, blogCategories: $category, blogTags: $tag, limit: $limit, orderBy: "postDate desc") {
         typeHandle
         id
         slug

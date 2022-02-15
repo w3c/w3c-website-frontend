@@ -5,10 +5,7 @@ declare(strict_types=1);
 namespace App\Query\W3C\Ecosystem;
 
 use App\Service\W3C;
-use Strata\Data\Mapper\MapArray;
-use Strata\Data\Mapper\WildcardMappingStrategy;
 use Strata\Data\Query\Query;
-use Strata\Data\Transform\Data\CallableData;
 
 class Groups extends Query
 {
@@ -33,20 +30,10 @@ class Groups extends Query
     public function getMapping(): array
     {
         return [
-            '[name]'        => new CallableData([$this, 'transformName'], '[name]'),
+            '[name]'        => '[name]',
             '[type]'        => '[type]',
             '[description]' => '[description]',
             '[url]'         => '[_links][homepage][href]',
         ];
-    }
-
-    public function transformName(string $name)
-    {
-        return preg_replace(
-            '/\s+(((working|community|business|interest|incubator|coordination|other)\s+group)' .
-            '|(task\s+force)|(function))$/i',
-            '',
-            $name
-        );
     }
 }

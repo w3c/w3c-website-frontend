@@ -1,5 +1,5 @@
-query Tags($siteId: [QueryArgument], $handle: [String]) {
-    tags(siteId: $siteId, group: $handle) {
+query Tags($site: [String], $handle: [String]) {
+    tags(site: $site, group: $handle) {
         id
         title
         slug

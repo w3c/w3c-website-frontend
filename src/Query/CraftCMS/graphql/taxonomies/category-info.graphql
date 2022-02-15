@@ -1,5 +1,5 @@
-query CategoryInfo($siteId: [QueryArgument], $handle: [String], $slug: [String]) {
-    category(siteId: $siteId, group: $handle, slug: $slug) {
+query CategoryInfo($site: [String], $handle: [String], $slug: [String]) {
+    category(site: $site, group: $handle, slug: $slug) {
         id
         title
         uri

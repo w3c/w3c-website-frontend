@@ -91,9 +91,9 @@ class QueryManagerConfigurator
         // Please note queries added here are not affected by preview mode disabling the cache
 
         // Add global navigation
-        $manager->add('navigation', new GlobalNavigation($this->router, $this->site->siteId));
+        $manager->add('navigation', new GlobalNavigation($this->router, $this->site->siteHandle));
 
         // Add breadcrumbs for Craft singles
-        $manager->add('singles-breadcrumbs', new SinglesBreadcrumbs($this->router, $this->site->siteId));
+        $manager->add('singles-breadcrumbs', new SinglesBreadcrumbs($this->router, $this->site->siteHandle));
     }
 }

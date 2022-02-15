@@ -1,5 +1,5 @@
-query Home($siteId: [QueryArgument]) {
-    entry(slug: "homepage", siteId: $siteId) {
+query Home($site: [String]) {
+    entry(slug: "homepage", site: $site) {
         title
         postDate
         dateUpdated

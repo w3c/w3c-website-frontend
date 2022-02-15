@@ -17,16 +17,16 @@ class Tags extends GraphQLQuery
     /**
      * Set up query
      *
-     * @param int    $siteId        Site ID of page content
+     * @param string $siteHandle Site Handle of page content
      * @param string $handle        Taxonomy handle
      * @param int    $cacheLifetime Cache lifetime to store HTTP response for, defaults to 1 hour
      *
      * @throws GraphQLQueryException
      */
-    public function __construct(int $siteId, string $handle, int $cacheLifetime = CacheLifetime::HOUR)
+    public function __construct(string $siteHandle, string $handle, int $cacheLifetime = CacheLifetime::HOUR)
     {
         $this->setGraphQLFromFile(__DIR__ . '/../graphql/taxonomies/tags.graphql')
-             ->addVariable('siteId', $siteId)
+             ->addVariable('site', $siteHandle)
              ->addVariable('handle', $handle)
              ->setRootPropertyPath('[tags]')
              ->cache($cacheLifetime)

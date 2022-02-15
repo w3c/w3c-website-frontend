@@ -29,7 +29,7 @@ class Filters extends GraphQLQuery
      *
      * @param RouterInterface     $router
      * @param TranslatorInterface $translator
-     * @param int                 $siteId        Site ID of page content
+     * @param string $siteHandle Site Handle of page content
      * @param int                 $cacheLifetime Cache lifetime to store HTTP response for, defaults to 1 hour
      *
      * @throws GraphQLQueryException
@@ -37,13 +37,13 @@ class Filters extends GraphQLQuery
     public function __construct(
         RouterInterface $router,
         TranslatorInterface $translator,
-        int $siteId,
+        string $siteHandle,
         int $cacheLifetime = CacheLifetime::HOUR
     ) {
         $this->router     = $router;
         $this->translator = $translator;
         $this->setGraphQLFromFile(__DIR__ . '/../graphql/events/filters.graphql')
-            ->addVariable('siteId', $siteId)
+            ->addVariable('site', $siteHandle)
             ->cache($cacheLifetime)
         ;
     }
@@ -67,8 +67,10 @@ class Filters extends GraphQLQuery
         ];
         foreach ($types as $type) {
             $result[] = [
-                'title' => $type['title'],
-                'slug'   => $type['slug']
+                'id'       => $type['id'],
+                'title'    => $type['title'],
+                'slug'     => $type['slug'],
+                'pageLead' => $type['pageLead']
             ];
         }
 
@@ -93,15 +95,19 @@ class Filters extends GraphQLQuery
         return $result;
     }
 
-    public function transformArchives(string $first, string $last): array
+    public function transformArchives(string $first = null, string $last = null): array
     {
+        if (!$first) {
+            return [];
+        }
+
         $archives = [
             [
-                'title' => $this->translator->trans('listing.blog.filters.all', [], 'w3c_website_templates_bundle'),
+                'title' => $this->translator->trans('listing.events.filters.all', [], 'w3c_website_templates_bundle'),
                 'url'   => $this->router->generate('app_blog_index')
             ]
         ];
-        for ($year = $first; $year <= $last; $year++) {
+        for ($year = $last; $year >= $first; $year--) {
             $archives[] = [
                 'title' => $year,
                 'url'   => $this->router->generate('app_blog_archive', ['year' => $year])

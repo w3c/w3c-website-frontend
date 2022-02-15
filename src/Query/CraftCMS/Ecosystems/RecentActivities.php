@@ -26,14 +26,14 @@ class RecentActivities extends GraphQLQuery
     /**
      * Set up query
      *
-     * @param int $siteId
+     * @param string $siteHandle
      * @param int $ecosystemId   Ecosystem ID to get recent activities for
      * @param int $cacheLifetime Cache lifetime to store HTTP response for, defaults to 1 hour
      *
      * @throws GraphQLQueryException
      */
     public function __construct(
-        int $siteId,
+        string $siteHandle,
         int $ecosystemId,
         RouterInterface $router,
         int $cacheLifetime = CacheLifetime::HOUR
@@ -46,7 +46,7 @@ class RecentActivities extends GraphQLQuery
              ->addFragmentFromFile(__DIR__ . '/../graphql/fragments/listingEvent.graphql')
              ->addFragmentFromFile(__DIR__ . '/../graphql/fragments/listingExternalEvent.graphql')
              ->addFragmentFromFile(__DIR__ . '/../graphql/fragments/listingPageEvent.graphql')
-             ->addVariable('siteId', $siteId)
+             ->addVariable('site', $siteHandle)
              ->addVariable('ecosystemId', $ecosystemId)
              ->addVariable('endDatetime', $recentEventsEndDate)
              ->cache($cacheLifetime);

@@ -1,5 +1,5 @@
-query NewsletterEntry($date: [String], $siteId: [QueryArgument]) {
-    entry(postDate: $date, siteId: $siteId, section: "newsletter") {
+query NewsletterEntry($date: [String], $site: [String]) {
+    entry(postDate: $date, site: $site, section: "newsletter") {
         title
         ... on newsletter_default_Entry {
             fullDocumentContent

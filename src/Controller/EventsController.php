@@ -141,14 +141,14 @@ class EventsController extends AbstractController
         Site $site,
         IcalExporter $icalExporter
     ): Response {
-        $manager->add('event-type', new CategoryInfo($site->siteId, 'eventType', $type));
+        $manager->add('event-type', new CategoryInfo($site->siteHandle, 'eventType', $type));
         $eventType = $manager->get('event-type');
 
         if (!$eventType) {
             throw $this->createNotFoundException('Event type not found');
         }
 
-        $manager->add('event', new Entry($site->siteId, $eventType['id'], $year, $slug, $router));
+        $manager->add('event', new Entry($site->siteHandle, $eventType['id'], $year, $slug, $router));
 
         $event = $manager->get('event');
         if (empty($event)) {
@@ -190,14 +190,14 @@ class EventsController extends AbstractController
         RouterInterface $router,
         Site $site
     ): Response {
-        $manager->add('event-type', new CategoryInfo($site->siteId, 'eventType', $type));
+        $manager->add('event-type', new CategoryInfo($site->siteHandle, 'eventType', $type));
         $eventType = $manager->get('event-type');
 
         if (!$eventType) {
             throw $this->createNotFoundException('Event type not found');
         }
 
-        $manager->add('page', new Entry($site->siteId, $eventType, $year, $slug, $router));
+        $manager->add('page', new Entry($site->siteHandle, $eventType, $year, $slug, $router));
 
         $page = $manager->get('page');
         if (empty($page)) {
@@ -271,10 +271,11 @@ class EventsController extends AbstractController
         $categorySlug = $request->query->get('category');
         $tagSlug      = $request->query->get('tag');
 
-        $manager->add('filters', new Filters($router, $translator, $site->siteId));
+        $manager->add('filters', new Filters($router, $translator, $site->siteHandle));
         $filters     = $manager->get('filters');
         $types       = $filters['types'];
         $eventType   = [];
+
         if ($type) {
             foreach ($types as $eventTypeData) {
                 if ($eventTypeData['slug'] == $type) {
@@ -290,7 +291,7 @@ class EventsController extends AbstractController
 
         $category = [];
         if ($categorySlug) {
-            $manager->add('categories', new Categories($site->siteId, 'blogCategories'));
+            $manager->add('categories', new Categories($site->siteHandle, 'blogCategories'));
             $categories = $manager->getCollection('categories');
 
             foreach ($categories as $categoryData) {
@@ -307,7 +308,7 @@ class EventsController extends AbstractController
 
         $tag = [];
         if ($tagSlug) {
-            $manager->add('tags', new Tags($site->siteId, 'blogTags'));
+            $manager->add('tags', new Tags($site->siteHandle, 'blogTags'));
             $tags = $manager->getCollection('tags');
 
             foreach ($tags as $tagData) {
@@ -322,12 +323,12 @@ class EventsController extends AbstractController
             }
         }
 
-        $manager->add('page', new Page($site->siteId));
+        $manager->add('page', new Page($site->siteHandle));
         $manager->add(
             'eventsListing',
             new Listing(
                 $router,
-                $site->siteId,
+                $site->siteHandle,
                 array_key_exists('id', $eventType) ? $eventType['id'] : null,
                 array_key_exists('id', $category) ? $category['id'] : null,
                 array_key_exists('id', $tag) ? $tag['id'] : null,
@@ -356,8 +357,18 @@ class EventsController extends AbstractController
         $page['seo']['expiry'] = $page['expiryDate'];
         $page['breadcrumbs'] = $this->breadcrumbs($manager, $page, $eventType, $year);
 
+        if ($eventType) {
+            $page['lead'] = $eventType['pageLead'];
+            $page['title'] = $eventType['title'];
+            $page['seo']['title'] = $eventType['title'];
+            foreach ($page['seo']['social'] as $key => $data) {
+                $page['seo']['social'][$key]['title'] = $eventType['title'];
+            }
+        }
+
         if ($this->getParameter('kernel.environment') == 'dev') {
             dump($page);
+            dump($filters);
             dump($collection);
             dump($pagination);
             dump($categories);

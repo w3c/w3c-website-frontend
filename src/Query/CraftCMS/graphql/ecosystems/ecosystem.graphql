@@ -1,5 +1,5 @@
-query Ecosystem($slug: [String], $siteId: [QueryArgument]) {
-    entry(slug: $slug, section: "ecosystems", siteId: $siteId) {
+query Ecosystem($slug: [String], $site: [String]) {
+    entry(slug: $slug, section: "ecosystems", site: $site) {
         id
         status
         uri

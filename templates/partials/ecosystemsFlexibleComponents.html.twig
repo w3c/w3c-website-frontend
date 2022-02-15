@@ -19,12 +19,17 @@
     } %}
     {% endembed %}
 {% elseif component.typeHandle == 'videoMediaComponent' %}
-    {% embed '@W3CWebsiteTemplates/components/video.html.twig' with {
-        'iframe': component.videoUrl.code|preg_replace('/^<iframe/', '<iframe title="' ~ component.videoTitle|e('html_attr') ~ '"'),
+    {% if component.videoUrl.code is defined and component.videoUrl.code %}
+        {% set params = {'iframe': component.videoUrl.code|preg_replace('/^<iframe/', '<iframe title="' ~ component.videoTitle|e('html_attr') ~ '"')} %}
+    {% else %}
+        {% set params = {'url': component.videoUrl.url} %}
+    {% endif %}
+    {% set params = params | merge({
         'title': component.videoTitle,
         'caption': component.videoCaption is defined ? component.videoCaption : null,
         'transcript': component.linkToVideoTranscript is defined ? component.linkToVideoTranscript : null
-    } %}
+    }) %}
+    {% embed '@W3CWebsiteTemplates/components/video.html.twig' with params %}
     {% endembed %}
 {% elseif component.typeHandle == 'fiftyFiftyComponent' %}
     {% embed '@W3CWebsiteTemplates/components/fifty_fifty.html.twig' with {

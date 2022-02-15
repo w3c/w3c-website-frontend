@@ -1,13 +1,17 @@
-query EventFilters($siteId: [QueryArgument]) {
-    categories(siteId: $siteId, group: "blogCategories", orderBy: "title asc") {
+query EventFilters($site: [String]) {
+    categories(site: $site, group: "blogCategories", orderBy: "title asc") {
         title
         slug
     }
-    types: categories(siteId: $siteId, group: "eventType", orderBy: "title asc") {
+    types: categories(site: $site, group: "eventType", orderBy: "title asc") {
+        id
         title
         slug
+        ... on eventType_Category {
+            pageLead
+        }
     }
-    first: entry(section: "events", siteId: $siteId, orderBy: "startDatetime asc") {
+    first: entry(section: "events", site: $site, orderBy: "startDatetime asc") {
         ... on events_default_Entry {
             year: startDatetime@formatDateTime(format: "Y")
         }
@@ -18,7 +22,7 @@ query EventFilters($siteId: [QueryArgument]) {
             year: startDatetime@formatDateTime(format: "Y")
         }
     }
-    last: entry(section: "events", siteId: $siteId, orderBy: "startDatetime desc") {
+    last: entry(section: "events", site: $site, orderBy: "startDatetime desc") {
         ... on events_default_Entry {
             year: startDatetime@formatDateTime(format: "Y")
         }

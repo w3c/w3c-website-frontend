@@ -17,17 +17,17 @@ class CategoryInfo extends GraphQLQuery
     /**
      * Set up query
      *
-     * @param int    $siteId        Site ID of page content
+     * @param string $siteHandle Site Handle of page content
      * @param string $handle        Taxonomy handle
      * @param string $slug
      * @param int    $cacheLifetime Cache lifetime to store HTTP response for, defaults to 1 hour
      *
      * @throws GraphQLQueryException
      */
-    public function __construct(int $siteId, string $handle, string $slug, int $cacheLifetime = CacheLifetime::HOUR)
+    public function __construct(string $siteHandle, string $handle, string $slug, int $cacheLifetime = CacheLifetime::HOUR)
     {
         $this->setGraphQLFromFile(__DIR__ . '/../graphql/taxonomies/category-info.graphql')
-            ->addVariable('siteId', $siteId)
+            ->addVariable('site', $siteHandle)
             ->addVariable('handle', $handle)
             ->addVariable('slug', $slug)
             ->setRootPropertyPath('[category]')

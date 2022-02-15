@@ -32,7 +32,7 @@ $shared_directories = [
 
 // Sets directories as writable (e.g. uploaded images)
 $writable_directories = [
-
+    'var/cache'
 ];
 
 /**
