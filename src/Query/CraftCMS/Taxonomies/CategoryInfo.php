@@ -24,8 +24,12 @@ class CategoryInfo extends GraphQLQuery
      *
      * @throws GraphQLQueryException
      */
-    public function __construct(string $siteHandle, string $handle, string $slug, int $cacheLifetime = CacheLifetime::HOUR)
-    {
+    public function __construct(
+        string $siteHandle,
+        string $handle,
+        string $slug,
+        int $cacheLifetime = CacheLifetime::HOUR
+    ) {
         $this->setGraphQLFromFile(__DIR__ . '/../graphql/taxonomies/category-info.graphql')
             ->addVariable('site', $siteHandle)
             ->addVariable('handle', $handle)

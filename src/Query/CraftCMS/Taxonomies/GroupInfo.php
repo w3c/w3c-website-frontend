@@ -24,8 +24,12 @@ class GroupInfo extends GraphQLQuery
      *
      * @throws GraphQLQueryException
      */
-    public function __construct(string $siteHandle, string $type, string $slug, int $cacheLifetime = CacheLifetime::HOUR)
-    {
+    public function __construct(
+        string $siteHandle,
+        string $type,
+        string $slug,
+        int $cacheLifetime = CacheLifetime::HOUR
+    ) {
         $this->setGraphQLFromFile(__DIR__ . '/../graphql/taxonomies/group-info.graphql')
              ->addVariable('site', $siteHandle)
              ->addVariable('type', $type)
