@@ -60,7 +60,7 @@ class Filters extends GraphQLQuery
         $archives = [
             [
                 'title' => $this->translator->trans('listing.news.filters.all', [], 'w3c_website_templates_bundle'),
-                'url'   => $this->router->generate('app_blog_index')
+                'url'   => $this->router->generate('app_news_index')
             ]
         ];
         for ($year = $last; $year >= $first; $year--) {

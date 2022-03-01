@@ -1,0 +1,11 @@
+{% extends '@!W3CWebsiteTemplates/components/styles/global_nav.html.twig' %}
+
+{% set lang = site.localeData('siteLink') %}
+
+{% block homepage_link %}
+    {%- if lang is defined and lang %}{{ lang.url }}{% else %}{{ path('app_default_home.en') }}{% endif -%}
+{% endblock %}
+{% block homepage_hreflang %}
+    {%- if lang is defined and lang %}{{ site.locale }}{% else %}{{ site.defaultLocale }}{% endif -%}
+{% endblock %}
+
