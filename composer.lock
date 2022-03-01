@@ -2698,12 +2698,12 @@
                 }
             },
             "autoload": {
-                "psr-4": {
-                    "Ramsey\\Uuid\\": "src/"
-                },
                 "files": [
                     "src/functions.php"
-                ]
+                ],
+                "psr-4": {
+                    "Ramsey\\Uuid\\": "src/"
+                }
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -8668,12 +8668,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/w3c/w3c-website-templates-bundle.git",
-                "reference": "ffa479284ca629521552cca4a4d807f6df642931"
+                "reference": "403e164c17f477ebeda252b7bf83549291e97219"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/w3c/w3c-website-templates-bundle/zipball/ffa479284ca629521552cca4a4d807f6df642931",
-                "reference": "ffa479284ca629521552cca4a4d807f6df642931",
+                "url": "https://api.github.com/repos/w3c/w3c-website-templates-bundle/zipball/403e164c17f477ebeda252b7bf83549291e97219",
+                "reference": "403e164c17f477ebeda252b7bf83549291e97219",
                 "shasum": ""
             },
             "require": {
@@ -8711,7 +8711,7 @@
             "support": {
                 "source": "https://github.com/w3c/w3c-website-templates-bundle/tree/main"
             },
-            "time": "2022-02-28T18:22:13+00:00"
+            "time": "2022-03-01T17:10:26+00:00"
         },
         {
             "name": "webmozart/assert",
