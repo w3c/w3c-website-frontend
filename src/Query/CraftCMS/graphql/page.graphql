@@ -1,5 +1,5 @@
-query Page($uri: [String], $siteId: [QueryArgument]) {
-    entry(uri: $uri, siteId: $siteId) {
+query Page($uri: [String], $site: [String]) {
+    entry(uri: $uri, site: $site) {
         id
         typeHandle
         status

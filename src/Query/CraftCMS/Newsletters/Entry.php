@@ -23,7 +23,7 @@ class Entry extends GraphQLQuery
      * @throws Exception
      */
     public function __construct(
-        int $siteId,
+        string $siteHandle,
         int $year,
         int $month,
         int $day
@@ -34,7 +34,7 @@ class Entry extends GraphQLQuery
         $this->setGraphQLFromFile(__DIR__ . '/../graphql/newsletters/entry.graphql')
             ->setRootPropertyPath('[entry]')
 
-            ->addVariable('siteId', $siteId)
+            ->addVariable('site', $siteHandle)
             ->addVariable('date', ['and', '>=' . $date->format('Y-m-d'), '<' . $nextDay->format('Y-m-d')])
         ;
     }

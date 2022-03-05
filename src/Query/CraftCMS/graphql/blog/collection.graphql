@@ -1,6 +1,6 @@
-query BlogCollection($siteId: [QueryArgument], $category: [QueryArgument], $tag: [QueryArgument], $before: String, $after: String, $search: String, $limit: Int, $offset: Int) {
-    total: entryCount(section: "blogPosts", siteId: $siteId, blogCategories: $category, blogTags: $tag, before: $before, after: $after, search: $search)
-    entries(section: "blogPosts", siteId: $siteId, blogCategories: $category, blogTags: $tag, before: $before, after: $after, search: $search, limit: $limit, offset: $offset, orderBy: "postDate desc") {
+query BlogCollection($site: [String], $category: [QueryArgument], $tag: [QueryArgument], $before: String, $after: String, $search: String, $limit: Int, $offset: Int) {
+    total: entryCount(section: "blogPosts", site: $site, blogCategories: $category, blogTags: $tag, before: $before, after: $after, search: $search)
+    entries(section: "blogPosts", site: $site, blogCategories: $category, blogTags: $tag, before: $before, after: $after, search: $search, limit: $limit, offset: $offset, orderBy: "postDate desc") {
         id
         slug
         uri

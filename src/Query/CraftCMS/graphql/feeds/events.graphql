@@ -1,5 +1,5 @@
-query Events($siteId: [QueryArgument], $limit: Int) {
-    entries(section: "events", siteId: $siteId, limit: $limit, orderBy: "postDate desc") {
+query Events($site: [String], $limit: Int) {
+    entries(section: "events", site: $site, limit: $limit, orderBy: "postDate desc") {
         ... on events_default_Entry {
             ...listingEvent
             defaultFlexibleComponents {

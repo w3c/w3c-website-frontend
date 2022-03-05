@@ -1,6 +1,6 @@
-query GlobalNavigation ($siteId: [QueryArgument], $limit: Int) {
-    total: entryCount(section: "mainNavigation", type: "topLevelItem", siteId: $siteId, limit: $limit)
-    entries(section: "mainNavigation", type: "topLevelItem", siteId: $siteId, limit: $limit) {
+query GlobalNavigation ($site: [String], $limit: Int) {
+    total: entryCount(section: "mainNavigation", type: "topLevelItem", site: $site, limit: $limit)
+    entries(section: "mainNavigation", type: "topLevelItem", site: $site, limit: $limit) {
         title
         ... on mainNavigation_topLevelItem_Entry {
             isTitleLinkInternal: mainNavigationInternalOrExternalLink

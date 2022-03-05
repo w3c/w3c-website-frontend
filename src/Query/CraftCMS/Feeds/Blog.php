@@ -19,18 +19,8 @@ class Blog extends GraphQLQuery
         return CraftCMS::class;
     }
 
-    /**
-     * Query to retrieve blog posts for feeds
-     *
-     * @param int      $siteId Site ID of page content
-     * @param int      $limit
-     * @param int|null $category
-     * @param int|null $tag
-     *
-     * @throws GraphQLQueryException
-     */
     public function __construct(
-        int $siteId,
+        string $siteHandle,
         int $limit,
         int $category = null,
         int $tag = null
@@ -38,7 +28,7 @@ class Blog extends GraphQLQuery
         $this->setGraphQLFromFile(__DIR__ . '/../graphql/feeds/blog.graphql')
             ->addFragmentFromFile(__DIR__ . '/../graphql/fragments/defaultFlexibleComponents.graphql')
             ->setRootPropertyPath('[entries]')
-            ->addVariable('siteId', $siteId)
+            ->addVariable('site', $siteHandle)
             ->addVariable('limit', $limit)
             ->addVariable('category', $category)
             ->addVariable('tag', $tag)

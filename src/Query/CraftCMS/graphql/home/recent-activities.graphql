@@ -1,5 +1,5 @@
-query RecentActivities($siteId: [QueryArgument]) {
-    recentEntries: entries(siteId: $siteId, section: ["blogPosts", "newsArticles", "pressReleases"], limit: 4, orderBy: "postDate DESC") {
+query RecentActivities($site: [String]) {
+    recentEntries: entries(site: $site, section: ["blogPosts", "newsArticles", "pressReleases"], limit: 4, orderBy: "postDate DESC") {
         id
         slug
         sectionHandle

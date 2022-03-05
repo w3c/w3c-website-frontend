@@ -30,13 +30,13 @@ class RecentActivities extends GraphQLQuery
      *
      * @throws GraphQLQueryException
      */
-    public function __construct(int $siteId, RouterInterface $router, int $cacheLifetime = CacheLifetime::HOUR)
+    public function __construct(string $siteHandle, RouterInterface $router, int $cacheLifetime = CacheLifetime::HOUR)
     {
         $this->router = $router;
         $this->setGraphQLFromFile(__DIR__ . '/../graphql/home/recent-activities.graphql')
              ->addFragmentFromFile(__DIR__ . '/../graphql/fragments/thumbnailImage.graphql')
              ->setRootPropertyPath('[recentEntries]')
-             ->addParam('siteId', $siteId)
+             ->addParam('site', $siteHandle)
              ->cache($cacheLifetime);
     }
 

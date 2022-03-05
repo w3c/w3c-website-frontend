@@ -1,0 +1,30 @@
+chrisguitarguy_request_id:
+    # The header which the bundle inspects for the incoming request ID
+    # if this is not set an ID will be generated and set at this header
+    request_header: X-Request-Id
+
+    # Whether or not to trust the incoming request header. This is turned
+    # on by default. If true a value in the `Request-Id` header in the request
+    # will be used as the request ID for the rest of the request. If false
+    # those values are ignored.
+    trust_request_header: true
+
+    # The header which the bundle will set the request ID to on
+    # the response
+    response_header: X-Request-Id
+
+    # The service key of an object that implements
+    # Chrisguitarguy\RequestId\RequestIdStorage
+    # optional, defaults to `SimpleIdStorage`
+    storage_service: ~
+
+    # The service key of an object that implements
+    # Chrisguitarguy\RequestId\RequestIdGenerator
+    # optional, defaults to a UUID v4 based generator
+    generator_service: ~
+
+    # Whether or not to add the monolog process (see below), defaults to true
+    enable_monolog: true
+
+    # Whether or not to add the twig extension (see below), defaults to true
+    enable_twig: true

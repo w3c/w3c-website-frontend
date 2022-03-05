@@ -28,7 +28,7 @@ class Collection extends GraphQLQuery
      * Set up query
      *
      * @param RouterInterface $router
-     * @param int             $siteId Site ID of page content
+     * @param string          $siteHandle Site handle of page content
      * @param int|null        $year
      * @param int             $limit
      * @param int             $page
@@ -37,7 +37,7 @@ class Collection extends GraphQLQuery
      */
     public function __construct(
         RouterInterface $router,
-        int $siteId,
+        string $siteHandle,
         int $year = null,
         int $limit = 10,
         int $page = 1
@@ -49,7 +49,7 @@ class Collection extends GraphQLQuery
             ->setTotalResults('[total]')
             ->setResultsPerPage($limit)
             ->setCurrentPage($page)
-            ->addVariable('siteId', $siteId)
+            ->addVariable('site', $siteHandle)
             ->addVariable('limit', $limit)
             ->addVariable('offset', ($page - 1) * $limit)
         ;

@@ -32,7 +32,7 @@ $shared_directories = [
 
 // Sets directories as writable (e.g. uploaded images)
 $writable_directories = [
-
+    'var/cache'
 ];
 
 /**
@@ -90,16 +90,6 @@ host('development')
     ->set('deploy_path', '/var/www/frontend-dev')
     ->set('url', 'https://www-dev.w3.org')
     ->set('composer_options', '{{composer_action}} --verbose --no-progress --no-interaction --optimize-autoloader');
-
-host('s24-development')
-    ->stage('s24-development')
-    ->user('deploy')
-    ->hostname('52.31.200.8')
-    ->set('http_user', 'apache')
-    ->set('deploy_path', '/data/var/www/vhosts/w3c/www-w3c/development')
-    ->set('url', 'https://www-dev-w3c.studio24.dev')
-    ->set('composer_options', '{{composer_action}} --verbose --no-progress --no-interaction --optimize-autoloader');
-
 
 /**
  * Deployment task

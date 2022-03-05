@@ -1,5 +1,5 @@
 query testimonials($ecosystemId: [QueryArgument]) {
-    entries(section: "testimonial", ecosystems: $ecosystemId, siteId: "*") {
+    entries(section: "testimonial", ecosystems: $ecosystemId, site: "*") {
         id
         language
         ... on testimonial_default_Entry {

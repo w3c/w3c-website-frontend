@@ -15,4 +15,5 @@ return [
     FOS\HttpCacheBundle\FOSHttpCacheBundle::class => ['all' => true],
     Nelmio\CorsBundle\NelmioCorsBundle::class => ['all' => true],
     Exercise\HTMLPurifierBundle\ExerciseHTMLPurifierBundle::class => ['all' => true],
+    Chrisguitarguy\RequestId\ChrisguitarguyRequestIdBundle::class => ['all' => true],
 ];

@@ -23,7 +23,7 @@ class Entry extends GraphQLQuery
     }
 
     public function __construct(
-        int $siteId,
+        string $siteHandle,
         int $year,
         string $slug,
         RouterInterface $router,
@@ -36,7 +36,7 @@ class Entry extends GraphQLQuery
             ->addFragmentFromFile(__DIR__ . '/../graphql/fragments/contentImage.graphql')
             ->setRootPropertyPath('[entry]')
 
-            ->addVariable('siteId', $siteId)
+            ->addVariable('site', $siteHandle)
             ->addVariable('year', ['and', '>=' . $year, '<' . ($year + 1)])
             ->addVariable('slug', $slug)
             ->cache($cacheLifetime)
