@@ -17,6 +17,9 @@
     "deployer/phar-update": {
         "version": "v2.2.0"
     },
+    "dflydev/dot-access-data": {
+        "version": "v3.0.1"
+    },
     "doctrine/annotations": {
         "version": "1.0",
         "recipe": {
@@ -86,6 +89,9 @@
     "league/commonmark": {
         "version": "1.6.0"
     },
+    "league/config": {
+        "version": "v1.1.1"
+    },
     "masterminds/html5": {
         "version": "2.7.4"
     },
@@ -109,6 +115,12 @@
         "files": [
             "config/packages/nelmio_cors.yaml"
         ]
+    },
+    "nette/schema": {
+        "version": "v1.2.2"
+    },
+    "nette/utils": {
+        "version": "v3.2.7"
     },
     "nikic/php-parser": {
         "version": "v4.10.5"
