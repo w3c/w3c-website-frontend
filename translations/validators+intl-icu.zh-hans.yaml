@@ -4,9 +4,9 @@ blog:
             name:
                 blank: 请输入姓名
             email:
-                blank: 输入电子邮箱地址
-                format: 输入一个有效的电子邮箱地址
+                blank: 请输入电子邮箱地址
+                format: 请输入有效的电子邮箱地址
             comment:
-                blank: 输入一段评论
+                blank: 请输入评论
             post:
                 blank: 评论必须提及某一博客链接
