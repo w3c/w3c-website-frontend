@@ -8,6 +8,7 @@ new W3C site uses JavaScript to update the user menu client-side to help enable 
 Our strategy is:
 
 * All public content pages are cached via Cloudflare to aid performance (full-page caching)
+* Any personalised content (e.g. user account menu) is requested over JavaScript (XMLHttpRequest)
 * Any restricted access pages (i.e. behind user login) must not be cached
 * Only use data caching for data that is shared across multiple pages (data associated with an individual page is more efficiently cached via full-page caching) 
 * When content is changed in Craft CMS (or elsewhere) the cache is cleared (invalidated) to ensure fresh content is served to users
@@ -24,7 +25,7 @@ For example, the W3C homepage currently contains the following data components:
 * Recent activity: across blog posts, news articles, press releases (from Craft CMS)
 * List of W3C members (from W3C API)
 
-It's simple enough to identify the homepage content by its entry ID in the CMS.
+It's simple enough to identify the homepage content by its URL.
 
 We use cache tags to help identify other data components. For example:
 
@@ -42,7 +43,7 @@ Any changes to content marked as global will clear the cache for all pages using
 It's recommended you take care when using the 
 `global` cache tag since it's likely to purge the majority of pages in the cache.
 
-You can apply this tag from a query via:
+You can apply this tag from a query object via:
 
 ```php
 $query->cacheTagGlobal();
@@ -50,8 +51,8 @@ $query->cacheTagGlobal();
 
 ### sections
 
-Any changes to any content within a section. Sections can have any name, for example, `blogPosts` for the blog posts 
-section from the CMS (this uses the `sectionHandle` string from Craft CMS).
+Any changes to any content within a section. Sections can have any name. For content in Craft CMS we recommend 
+using the `sectionHandle` string from Craft CMS, for example, `blogPosts` for the blog posts.
 
 Any changes to content within this section will purge this cache tag. You should use this cache tag sparingly and only 
 when it's really important to update content (since it could purge the cache for lots of pages). 
@@ -79,13 +80,20 @@ $query->cacheTagNew('blogPosts');
 $query->cacheTagsNew('blogPosts', 'newsPosts');
 ```
 
+This results in the `new-` prefix to the cache tag.
+
 ## Marking pages as cacheable
 
-See [caching headers](https://foshttpcachebundle.readthedocs.io/en/latest/features/headers.html) in FOSHttpCacheBundle.
+We are currently using configuration to setup caching response headers in the Symfony app. 
 
-## Marking a page with cache tags
+See [caching headers](https://foshttpcachebundle.readthedocs.io/en/latest/features/headers.html) in FOSHttpCacheBundle 
+and the configuratio file [fos_http_cache.yaml](../config/packages/fos_http_cache.yaml).
 
-To output cache tags from queries to your page response add the following event subscriber in your `services.yaml` file:
+To set cache headers requires adding the cache tags to query objects (see above for example code).
+
+## Adding cache tags to the response
+
+To automatically output cache tags from query objects to your page response add the following event subscriber in your `services.yaml` file:
 
 ```yaml
    strata.event_subscriber.response_helper:
@@ -98,18 +106,27 @@ To output cache tags from queries to your page response add the following event 
 
 ## Marking pages as not cacheable
 
-TODO
+Update the [fos_http_cache.yaml](../config/packages/fos_http_cache.yaml) configuration and set the cache_control to:
 
-To mark a page as this must not be cached:
-
-```php
-// @todo
-something->doNotCache();
+```
+cache_control: { private: true, no_cache: true, no_store: true }
 ```
 
 ## Clearing the cache
 
+### Console application
+
+_TODO: work-in-progress._
+
+This clears the Cloudflare and local data cache by:
+
+* Clear entire cache
+* Clear cache by cache-tag
+* Clear cache by URL
+
 ### Craft CMS
+
+_TODO: work-in-progress._
 
 We have a CraftCMS plugin that clears the cache when content is updated. This also includes the facility to manually 
 clear the entire cache (purge all files) and purge by URL.
@@ -121,22 +138,9 @@ Functionality:
 * Manually clear cache by URL (only works for the frontend URL)
 * Manually clear cache by cache tag
 
-### Frontend application
-
-You can also clear the cache programmatically in a number of ways.
-
-To clear the data cache in the Symfony frontend application and in Cloudflare, you can send 
-API requests to the front-end app. This can clear the cache by:
-
-* Clear all cache
-* Clear by tag
-* Clear by URL (this retrieves cache tags from the URL, then clears by cache tag)
-
-TODO
-
 ### FOSHttpCache
 
-To only clear the Cloudflare cache you can use [FOSHttpCache](https://foshttpcache.readthedocs.io/):
+To clear the Cloudflare cache you can use [FOSHttpCache](https://foshttpcache.readthedocs.io/):
 
 ```php
 use FOS\HttpCache\CacheInvalidator;
@@ -166,38 +170,3 @@ $cacheInvalidator->invalidateTags(['tag-one', 'tag-two'])->flush();
 ```
 
 See FOSHttpCache [Cloudflare client docs](https://foshttpcache.readthedocs.io/en/latest/proxy-clients.html#cloudflare-client).
-
-## Frontend API
-
-* Ensure `/strata-api/` not full-page cached
-
-```
-POST frontend-url/strata-api/clear-cache?url={token}&token={token}
-```
-
-How this works:
-
-* Authenticate request
-* Clear cache by tag, if by URL request page to get tags
-* Invalidate cache by URL and tags (Cloudflare & local Symfony data cache)
-* Return success code
-
-By default, exclude 'global' cache from page-level cache clearing.
-
-## Cache tags
-
->  For me the biggest challenge seems to be how to track all the data components that might cause a given page to be invalidated
-
-Strategy:
-* Clear URL
-* How about other resources linked, e.g. listing page for a blog page? How do we track these?
-* What about Resource tags? (then set cache-tags)
-
-E.g.
-
-```
-// type, ID
-$response->setResourceTag('blog', 534);
-
-```
-
