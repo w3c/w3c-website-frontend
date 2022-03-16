@@ -29,8 +29,8 @@ It's simple enough to identify the homepage content by its entry ID in the CMS.
 We use cache tags to help identify other data components. For example:
 
 * Navigation: `global`
-* Recent activity: `new-craft-blogPosts`, `new-craft-newsArticles`, `new-craft-pressReleases`
-* List of W3C members: `w3c-members`
+* Recent activity: `new-blogPosts`, `new-newsArticles`, `new-pressReleases`
+* List of W3C members: `members`
 
 The cache tags are explained below...
 
@@ -42,14 +42,27 @@ Any changes to content marked as global will clear the cache for all pages using
 It's recommended you take care when using the 
 `global` cache tag since it's likely to purge the majority of pages in the cache.
 
+You can apply this tag from a query via:
+
+```php
+$query->cacheTagGlobal();
+```
+
 ### sections
 
-Any changes to any content within a section. Sections can have any name, but we recommend following the format 
-`[source]-[name]`. For example, `craft-blogPosts` for the blog posts section from Craft CMS (this uses the `sectionHandle` 
-string from Craft).
+Any changes to any content within a section. Sections can have any name, for example, `blogPosts` for the blog posts 
+section from the CMS (this uses the `sectionHandle` string from Craft CMS).
 
 Any changes to content within this section will purge this cache tag. You should use this cache tag sparingly and only 
 when it's really important to update content (since it could purge the cache for lots of pages). 
+
+```php
+// One tag
+$query->cacheTag('blogPosts');
+
+// Multiple tags
+$query->cacheTags(['blogPosts', 'newsPosts']);
+```
 
 ### new content in sections
 
@@ -58,32 +71,34 @@ To make it easier to conditionally clear the cache the special `new-[section]` c
 This purges the tag only when new entries are added to a section or if any changes happen to the 10 most recent items in a section. This helps reduce 
 cache invalidation when it may not be required.
 
+```php
+// One tag
+$query->cacheTagNew('blogPosts');
+
+// Multiple tags
+$query->cacheTagsNew('blogPosts', 'newsPosts');
+```
+
 ## Marking pages as cacheable
 
-TODO
-
-```php
-// @todo
-something->cachable();
-```
+See [caching headers](https://foshttpcachebundle.readthedocs.io/en/latest/features/headers.html) in FOSHttpCacheBundle.
 
 ## Marking a page with cache tags
 
-Apply the cache tag for blog posts (this would apply the cache tag `craft-blogPosts`:
+To output cache tags from queries to your page response add the following event subscriber in your `services.yaml` file:
 
-```php
-// @todo
-something->cacheTag('blogPosts', 'craft');
-```
+```yaml
+   strata.event_subscriber.response_helper:
+      class: Strata\SymfonyBundle\EventSubscriber\ResponseHelperEventSubscriber
+      arguments:
+        $responseTagger: '@fos_http_cache.http.symfony_response_tagger'
+        $manager: '@strata.query_manager'
 
-Or to apply the cache tag for new entries only (this would apply the cache tag `new-craft-blogPosts`:
-
-```php
-// @todo
-something->cacheTagNewEntries('blogPosts', 'craft');
 ```
 
 ## Marking pages as not cacheable
+
+TODO
 
 To mark a page as this must not be cached:
 

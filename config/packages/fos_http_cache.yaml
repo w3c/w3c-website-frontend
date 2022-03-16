@@ -1,3 +1,20 @@
 fos_http_cache:
     flash_message:
         enabled: true
+    tags:
+        enabled: true
+    proxy_client:
+        default: noop
+        noop: ~
+    cache_control:
+        defaults:
+            overwrite: false
+        rules:
+            # match everything to set defaults
+            - match:
+                  path: ^/
+              headers:
+                  cache_control:
+                      public: true
+                      max_age: 86400
+                  etag: true

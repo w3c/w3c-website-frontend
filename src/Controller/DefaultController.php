@@ -116,11 +116,7 @@ class DefaultController extends AbstractController
             'pages/home.html.twig',
             ['page' => $page, 'members' => $members, 'navigation' => $navigation]
         );
-
-        // @todo testing caching
-        $response->setSharedMaxAge(CacheLifetime::DAY);
-        $response->headers->addCacheControlDirective('must-revalidate', true);
-        $response->headers->set('X-STRATA-CACHE', 'cache');
+        
         return $response;
     }
 
