@@ -733,12 +733,12 @@
             },
             "type": "library",
             "autoload": {
-                "files": [
-                    "library/HTMLPurifier.composer.php"
-                ],
                 "psr-0": {
                     "HTMLPurifier": "library/"
                 },
+                "files": [
+                    "library/HTMLPurifier.composer.php"
+                ],
                 "exclude-from-classmap": [
                     "/library/HTMLPurifier/Language/"
                 ]
@@ -1065,12 +1065,12 @@
             },
             "type": "library",
             "autoload": {
-                "files": [
-                    "polyfill/ReflectionEnumPolyfill.php"
-                ],
                 "psr-4": {
                     "Laminas\\Code\\": "src/"
-                }
+                },
+                "files": [
+                    "polyfill/ReflectionEnumPolyfill.php"
+                ]
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -3013,12 +3013,12 @@
                 }
             },
             "autoload": {
-                "files": [
-                    "src/functions.php"
-                ],
                 "psr-4": {
                     "Ramsey\\Uuid\\": "src/"
-                }
+                },
+                "files": [
+                    "src/functions.php"
+                ]
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -3236,13 +3236,13 @@
             },
             "type": "library",
             "autoload": {
+                "psr-4": {
+                    "Sabre\\Xml\\": "lib/"
+                },
                 "files": [
                     "lib/Deserializer/functions.php",
                     "lib/Serializer/functions.php"
-                ],
-                "psr-4": {
-                    "Sabre\\Xml\\": "lib/"
-                }
+                ]
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -7830,12 +7830,12 @@
             },
             "type": "library",
             "autoload": {
-                "files": [
-                    "Resources/functions.php"
-                ],
                 "psr-4": {
                     "Symfony\\Component\\String\\": ""
                 },
+                "files": [
+                    "Resources/functions.php"
+                ],
                 "exclude-from-classmap": [
                     "/Tests/"
                 ]
@@ -8983,12 +8983,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/w3c/w3c-website-templates-bundle.git",
-                "reference": "e66b5df37741860b963625b1f41a8e1f51feddff"
+                "reference": "a595240cced1cdb121e7c71c867702187529586c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/w3c/w3c-website-templates-bundle/zipball/e66b5df37741860b963625b1f41a8e1f51feddff",
-                "reference": "e66b5df37741860b963625b1f41a8e1f51feddff",
+                "url": "https://api.github.com/repos/w3c/w3c-website-templates-bundle/zipball/a595240cced1cdb121e7c71c867702187529586c",
+                "reference": "a595240cced1cdb121e7c71c867702187529586c",
                 "shasum": ""
             },
             "require": {
@@ -9010,7 +9010,6 @@
                 "studio24/deployer-recipes": "^1.1",
                 "studio24/design-system": "dev-main"
             },
-            "default-branch": true,
             "type": "symfony-bundle",
             "autoload": {
                 "psr-4": {
@@ -9023,10 +9022,7 @@
             ],
             "description": "W3C Website Templates",
             "homepage": "https://github.com/w3c/w3c-website-templates-bundle",
-            "support": {
-                "source": "https://github.com/w3c/w3c-website-templates-bundle/tree/main"
-            },
-            "time": "2022-03-09T16:52:07+00:00"
+            "time": "2022-04-05T07:29:07+00:00"
         },
         {
             "name": "webmozart/assert",
@@ -9118,13 +9114,13 @@
             ],
             "type": "library",
             "autoload": {
+                "psr-4": {
+                    "Deployer\\": "src/"
+                },
                 "files": [
                     "src/Support/helpers.php",
                     "src/functions.php"
-                ],
-                "psr-4": {
-                    "Deployer\\": "src/"
-                }
+                ]
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -9752,12 +9748,12 @@
             },
             "type": "library",
             "autoload": {
-                "files": [
-                    "lib/Exception/TimeoutException.php"
-                ],
                 "psr-4": {
                     "Facebook\\WebDriver\\": "lib/"
-                }
+                },
+                "files": [
+                    "lib/Exception/TimeoutException.php"
+                ]
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -12078,10 +12074,10 @@
     ],
     "aliases": [
         {
-            "package": "strata/symfony-frontend",
-            "version": "dev-release/0.8.0",
             "alias": "0.8.0",
-            "alias_normalized": "0.8.0.0"
+            "alias_normalized": "0.8.0.0",
+            "version": "dev-release/0.8.0",
+            "package": "strata/symfony-frontend"
         }
     ],
     "minimum-stability": "dev",
@@ -12101,5 +12097,5 @@
     "platform-overrides": {
         "php": "7.4"
     },
-    "plugin-api-version": "2.1.0"
+    "plugin-api-version": "1.1.0"
 }
