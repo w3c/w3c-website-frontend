@@ -3342,16 +3342,16 @@
         },
         {
             "name": "spatie/yaml-front-matter",
-            "version": "2.0.6",
+            "version": "2.0.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/yaml-front-matter.git",
-                "reference": "96379e38b527b02380d8f83056a52a8f6489b4cf"
+                "reference": "f49f228994de70827ca857efffdd3bd7703aea34"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/yaml-front-matter/zipball/96379e38b527b02380d8f83056a52a8f6489b4cf",
-                "reference": "96379e38b527b02380d8f83056a52a8f6489b4cf",
+                "url": "https://api.github.com/repos/spatie/yaml-front-matter/zipball/f49f228994de70827ca857efffdd3bd7703aea34",
+                "reference": "f49f228994de70827ca857efffdd3bd7703aea34",
                 "shasum": ""
             },
             "require": {
@@ -3387,9 +3387,6 @@
                 "spatie",
                 "yaml"
             ],
-            "support": {
-                "source": "https://github.com/spatie/yaml-front-matter/tree/2.0.6"
-            },
             "funding": [
                 {
                     "url": "https://spatie.be/open-source/support-us",
@@ -3400,7 +3397,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2021-12-22T04:57:13+00:00"
+            "time": "2022-04-06T12:03:55+00:00"
         },
         {
             "name": "strata/data",
@@ -3530,12 +3527,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/strata/symfony-frontend.git",
-                "reference": "67e8c46dd240abfe37104b12b3f762f4b8df9433"
+                "reference": "2472098ab97fc1593463d2e4a63cbaa463e8da42"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/strata/symfony-frontend/zipball/67e8c46dd240abfe37104b12b3f762f4b8df9433",
-                "reference": "67e8c46dd240abfe37104b12b3f762f4b8df9433",
+                "url": "https://api.github.com/repos/strata/symfony-frontend/zipball/2472098ab97fc1593463d2e4a63cbaa463e8da42",
+                "reference": "2472098ab97fc1593463d2e4a63cbaa463e8da42",
                 "shasum": ""
             },
             "require": {
@@ -3568,7 +3565,7 @@
                 }
             ],
             "description": "TODO",
-            "time": "2022-03-29T09:28:33+00:00"
+            "time": "2022-04-06T13:41:33+00:00"
         },
         {
             "name": "symfony/asset",
@@ -8860,12 +8857,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/w3c/w3c-website-templates-bundle.git",
-                "reference": "166f9f1f042d4fea37bdf2d31ef6c2ee219f5924"
+                "reference": "7eeaa2bff87fd6faf3aa9c63eceae94ef93c90e4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/w3c/w3c-website-templates-bundle/zipball/166f9f1f042d4fea37bdf2d31ef6c2ee219f5924",
-                "reference": "166f9f1f042d4fea37bdf2d31ef6c2ee219f5924",
+                "url": "https://api.github.com/repos/w3c/w3c-website-templates-bundle/zipball/7eeaa2bff87fd6faf3aa9c63eceae94ef93c90e4",
+                "reference": "7eeaa2bff87fd6faf3aa9c63eceae94ef93c90e4",
                 "shasum": ""
             },
             "require": {
@@ -8899,7 +8896,7 @@
             ],
             "description": "W3C Website Templates",
             "homepage": "https://github.com/w3c/w3c-website-templates-bundle",
-            "time": "2022-04-06T11:39:53+00:00"
+            "time": "2022-04-06T12:47:24+00:00"
         },
         {
             "name": "webmozart/assert",
