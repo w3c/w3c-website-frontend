@@ -10,11 +10,18 @@ fos_http_cache:
         defaults:
             overwrite: false
         rules:
+            # do not cache these pages
+            -
+                match:
+                    path: ^/(debug|account/)
+                headers:
+                    cache_control: { no_cache: true }
+                    etag: false
+
             # match everything to set defaults
-            - match:
-                  path: ^/
-              headers:
-                  cache_control:
-                      public: true
-                      max_age: 86400
-                  etag: true
+            -
+                match:
+                    path: ^/
+                headers:
+                    cache_control: { public: true, max_age: 86400 }
+                    etag: true

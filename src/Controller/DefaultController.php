@@ -52,11 +52,6 @@ class DefaultController extends AbstractController
             'page'              => $manager->get('page'),
             'page_cached'       => $manager->isHit('page'),
         ]);
-
-        // @todo testing caching
-        $response->setCache(['private' => true, 'no_cache' => true, 'no_store' => true]);
-        $response->headers->set('X-STRATA-CACHE', 'no-cache');
-        return $response;
     }
 
     /**
