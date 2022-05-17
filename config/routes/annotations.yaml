@@ -2,6 +2,7 @@ controllers:
     resource: ../../src/Controller/
     type: annotation
     prefix:
+        af: '/af'
         ar: '/ar'
         bg: '/bg'
         cs: '/cs'
@@ -13,6 +14,7 @@ controllers:
         fi: '/fi'
         fr: '/fr'
         ga: '/ga'
+        hi: '/hi'
         hu: '/hu'
         it: '/it'
         ja: '/ja'
@@ -29,6 +31,7 @@ controllers:
         sl: '/sl'
         sv: '/sv'
         zh-hans: '/zh-hans'
+        zu: '/zu'
         en: '' # safety net: this is last to ensure a URL containing a locale is not considered as a parameter for an English route
 
 kernel:
