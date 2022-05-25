@@ -3,3 +3,5 @@ framework:
         packages:
             website-2021:
                 base_urls: '%env(ASSETS_WEBSITE_2021)%'
+            logos:
+                base_urls: '%env(ASSETS_LOGOS)%'

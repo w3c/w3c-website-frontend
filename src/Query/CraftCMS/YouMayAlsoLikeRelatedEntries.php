@@ -63,7 +63,7 @@ class YouMayAlsoLikeRelatedEntries extends GraphQLQuery
             $entry = $entry['contentEntry'][0];
         }
 
-        if (array_key_exists('thumbnailImage', $entry) && count($entry['thumbnailImage']) > 0) {
+        if (is_array($entry) && array_key_exists('thumbnailImage', $entry) && count($entry['thumbnailImage']) > 0) {
             if (array_key_exists('thumbnailAltText', $entry)) {
                 return array_merge($entry['thumbnailImage'][0], ['alt' => $entry['thumbnailAltText']]);
             }

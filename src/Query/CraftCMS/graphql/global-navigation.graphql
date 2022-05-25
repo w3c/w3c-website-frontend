@@ -20,8 +20,10 @@ query GlobalNavigation ($site: [String], $limit: Int) {
                 title
                 ... on mainNavigation_externalLink_Entry {
                     url: urlLink
+                    startNewColumn
                 }
                 ... on mainNavigation_internalLink_Entry {
+                    startNewColumn
                     internalLink {
                         sectionHandle
                         uri

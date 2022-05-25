@@ -48,7 +48,11 @@ class StaffController extends AbstractController
         $page['breadcrumbs'] = [
             'title'  => $page['title'],
             'url'    => $this->generateUrl('app_staff_alumni'),
-            'parent' => $singlesBreadcrumbs['homepage']
+            'parent' => [
+                'title'  => 'Staff',
+                'url'    => '/staff/',
+                'parent' => $singlesBreadcrumbs['homepage']
+            ]
         ];
 
         return $this->render('staff/alumni.html.twig', [
