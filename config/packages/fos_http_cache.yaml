@@ -10,4 +10,4 @@ fos_http_cache:
                     cache_control:
                         public: true
                         s_maxage: 600
-                        must_revalidate: true
+                        proxy_revalidate: true
