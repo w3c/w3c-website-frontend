@@ -1,3 +1,13 @@
 fos_http_cache:
     flash_message:
         enabled: true
+    cache_control:
+        rules:
+            -
+                match:
+                    path: ^/
+                headers:
+                    cache_control:
+                        public: true
+                        s_maxage: 600
+                        must_revalidate: true
