@@ -38,7 +38,7 @@ class RecentActivities extends GraphQLQuery
              ->setRootPropertyPath('[recentEntries]')
              ->addParam('site', $siteHandle)
              ->cache($cacheLifetime)
-             ->cacheTagsNew(['blogPosts', 'newsArticles', 'pressReleases'])
+             ->cacheTags(['blogPosts', 'newsArticles', 'pressReleases'])
         ;
     }
 
