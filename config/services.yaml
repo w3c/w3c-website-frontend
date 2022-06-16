@@ -56,9 +56,3 @@ services:
     strata.site:
         class: Strata\Frontend\Site
         configurator: [ '@App\Service\SiteConfigurator', 'configure' ]
-
-    strata.event_subscriber.response_helper:
-        class: Strata\SymfonyBundle\EventSubscriber\ResponseHelperEventSubscriber
-        arguments:
-            $responseTagger: '@fos_http_cache.http.symfony_response_tagger'
-            $manager: '@strata.query_manager'
