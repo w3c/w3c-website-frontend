@@ -23,5 +23,8 @@ fos_http_cache:
                 match:
                     path: ^/
                 headers:
-                    cache_control: { public: true, max_age: 86400 }
+                    cache_control:
+                        public: true
+                        s_maxage: 600
+                        proxy_revalidate: true
                     etag: true

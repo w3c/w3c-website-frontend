@@ -141,6 +141,7 @@ class GlobalNavigation extends GraphQLQuery
             '[children]'   => new MapArray('[children]', [
                 '[title]' => '[title]',
                 '[url]' => new CallableData([$this, 'transformChildLink'], '[url]', '[internalLink][0]'),
+                '[startNewColumn]' => '[startNewColumn]',
             ]),
         ];
     }
