@@ -1,6 +1,6 @@
 {
     "name": "w3c/website-frontend",
-    "description": "W3C Website frontend application",
+    "description": "W3C website frontend application",
     "type": "project",
     "license": "proprietary",
     "minimum-stability": "dev",
@@ -41,7 +41,7 @@
         "symfony/serializer": "5.4.*",
         "symfony/string": "5.4.*",
         "symfony/translation": "5.4.*",
-        "symfony/twig-bundle": "^5.3",
+        "symfony/twig-bundle": "^5.4",
         "symfony/validator": "5.4.*",
         "symfony/web-link": "5.4.*",
         "symfony/yaml": "5.4.*",
@@ -50,19 +50,20 @@
         "w3c/website-templates-bundle": "dev-main"
     },
     "require-dev": {
-        "overtrue/phplint": "^2.3",
+        "roave/security-advisories": "dev-latest",
+        "overtrue/phplint": "^3.0",
         "phpunit/phpunit": "^9.5",
         "squizlabs/php_codesniffer": "^3.5",
         "studio24/deployer-recipes": "^1.0",
-        "symfony/browser-kit": "^5.3",
-        "symfony/css-selector": "^5.3",
-        "symfony/debug-bundle": "^5.3",
+        "symfony/browser-kit": "^5.4",
+        "symfony/css-selector": "^5.4",
+        "symfony/debug-bundle": "^5.4",
         "symfony/maker-bundle": "^1.30",
         "symfony/panther": "^1.0",
-        "symfony/phpunit-bridge": "^5.3",
-        "symfony/stopwatch": "^5.3",
-        "symfony/var-dumper": "^5.3",
-        "symfony/web-profiler-bundle": "^5.3"
+        "symfony/phpunit-bridge": "^5.4",
+        "symfony/stopwatch": "^5.4",
+        "symfony/var-dumper": "^5.4",
+        "symfony/web-profiler-bundle": "^5.4"
     },
     "config": {
         "optimize-autoloader": true,
@@ -103,7 +104,16 @@
         ],
         "post-update-cmd": [
             "@auto-scripts"
+        ],
+        "test": [
+            "./vendor/bin/phplint",
+            "./vendor/bin/phpcs",
+            "php ./bin/console lint:container",
+            "./vendor/bin/phpunit"
         ]
+    },
+    "scripts-descriptions": {
+        "test": "Run all required tests"
     },
     "conflict": {
         "symfony/symfony": "*"

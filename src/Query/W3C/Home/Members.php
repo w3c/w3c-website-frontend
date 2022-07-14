@@ -22,6 +22,7 @@ class Members extends Query
             ->setCurrentPage('[page]')
             ->setTotalResults('[total]')
             ->setResultsPerPage('[limit]')
+            ->cacheTag('members')
         ;
     }
 

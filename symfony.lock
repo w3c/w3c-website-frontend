@@ -232,6 +232,9 @@
     "ramsey/uuid": {
         "version": "4.2.3"
     },
+    "roave/security-advisories": {
+        "version": "dev-latest"
+    },
     "sabre/uri": {
         "version": "2.2.1"
     },

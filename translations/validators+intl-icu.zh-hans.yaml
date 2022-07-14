@@ -2,11 +2,11 @@ blog:
     comments:
         form:
             name:
-                blank: __blog.comments.form.name.blank
+                blank: 请输入姓名
             email:
-                blank: __blog.comments.form.email.blank
-                format: __blog.comments.form.email.format
+                blank: 请输入电子邮箱地址
+                format: 请输入有效的电子邮箱地址
             comment:
-                blank: __blog.comments.form.comment.blank
+                blank: 请输入评论
             post:
-                blank: __blog.comments.form.post.blank
+                blank: 评论必须提及某一博客链接

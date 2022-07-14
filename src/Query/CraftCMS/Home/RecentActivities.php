@@ -37,7 +37,9 @@ class RecentActivities extends GraphQLQuery
              ->addFragmentFromFile(__DIR__ . '/../graphql/fragments/thumbnailImage.graphql')
              ->setRootPropertyPath('[recentEntries]')
              ->addParam('site', $siteHandle)
-             ->cache($cacheLifetime);
+             ->cache($cacheLifetime)
+             ->cacheTags(['blogPosts', 'newsArticles', 'pressReleases'])
+        ;
     }
 
     public function getMapping()

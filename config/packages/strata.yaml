@@ -1,3 +1,5 @@
 strata:
+    tags:
+        enabled: true
     preview_mode:
         data_provider: 'craft'
