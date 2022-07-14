@@ -3560,12 +3560,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/strata/symfony-frontend.git",
-                "reference": "2472098ab97fc1593463d2e4a63cbaa463e8da42"
+                "reference": "bab7db6d7b69bfedfa534e1ad68cd335191a2526"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/strata/symfony-frontend/zipball/2472098ab97fc1593463d2e4a63cbaa463e8da42",
-                "reference": "2472098ab97fc1593463d2e4a63cbaa463e8da42",
+                "url": "https://api.github.com/repos/strata/symfony-frontend/zipball/bab7db6d7b69bfedfa534e1ad68cd335191a2526",
+                "reference": "bab7db6d7b69bfedfa534e1ad68cd335191a2526",
                 "shasum": ""
             },
             "require": {
@@ -3602,7 +3602,7 @@
                 "issues": "https://github.com/strata/symfony-frontend/issues",
                 "source": "https://github.com/strata/symfony-frontend/tree/release/0.8.0"
             },
-            "time": "2022-04-06T13:41:33+00:00"
+            "time": "2022-06-30T08:14:40+00:00"
         },
         {
             "name": "symfony/asset",

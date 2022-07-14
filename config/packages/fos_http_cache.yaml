@@ -3,6 +3,7 @@ fos_http_cache:
         enabled: true
     tags:
         enabled: true
+        response_header: X-Cache-Tag
     proxy_client:
         default: noop
         noop: ~
