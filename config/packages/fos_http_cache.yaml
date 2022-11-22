@@ -1,8 +1,25 @@
 fos_http_cache:
     flash_message:
         enabled: true
+    tags:
+        enabled: true
+        response_header: X-Cache-Tag
+    proxy_client:
+        default: noop
+        noop: ~
     cache_control:
+        defaults:
+            overwrite: false
         rules:
+            # do not cache these pages
+            -
+                match:
+                    path: ^/(debug|account/)
+                headers:
+                    cache_control: { no_cache: true }
+                    etag: false
+
+            # match everything to set defaults
             -
                 match:
                     path: ^/
@@ -11,3 +28,4 @@ fos_http_cache:
                         public: true
                         s_maxage: 600
                         proxy_revalidate: true
+                    etag: true
