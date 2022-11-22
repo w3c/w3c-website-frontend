@@ -34,6 +34,7 @@ class Listing extends GraphQLQuery
             ->setRootPropertyPath('[entry]')
             ->addVariable('site', $siteHandle)
             ->cache($cacheLifetime)
+            ->cacheTags(['newsArticles'])
         ;
     }
 }

@@ -52,6 +52,7 @@ class Ecosystem extends GraphQLQuery
             ->addVariable('slug', $slug)
             ->addVariable('site', $siteHandle)
             ->cache($cacheLifetime)
+            ->cacheTags(['ecosystems'])
         ;
     }
 

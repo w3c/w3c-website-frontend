@@ -28,10 +28,9 @@ class Testimonials extends GraphQLQuery
 
         $this->setGraphQLFromFile(__DIR__ . '/../graphql/ecosystems/testimonials.graphql')
             ->setRootPropertyPath('[entries]')
-
             ->addVariable('ecosystemId', $ecosystemId)
-//            ->enableCache($cacheLifetime)
-            //->setCacheTags($uri)
+            ->cache($cacheLifetime)
+            ->cacheTags(['testimonial'])
         ;
 
         $this->site = $site;

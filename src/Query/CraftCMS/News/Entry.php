@@ -41,6 +41,7 @@ class Entry extends GraphQLQuery
             ->addVariable('year', ['and', '>=' . $year, '<' . ($year + 1)])
             ->addVariable('slug', $slug)
             ->cache($cacheLifetime)
+            ->cacheTags(['newsArticles'])
         ;
     }
 

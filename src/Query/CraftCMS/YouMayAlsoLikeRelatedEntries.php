@@ -49,7 +49,7 @@ class YouMayAlsoLikeRelatedEntries extends GraphQLQuery
 
             // Cache page response
             ->cache($cacheLifetime)
-        ;
+            ->cacheTags(['blogPosts', 'pages']);
     }
 
     public function getRequiredDataProviderClass(): string

@@ -57,6 +57,7 @@ class Collection extends GraphQLQuery
             ->addVariable('limit', $limit)
             ->addVariable('offset', ($page - 1) * $limit)
             ->cache($cacheLifetime)
+            ->cacheTags(['pressReleases'])
         ;
     }
 

@@ -49,7 +49,9 @@ class RecentActivities extends GraphQLQuery
              ->addVariable('site', $siteHandle)
              ->addVariable('ecosystemId', $ecosystemId)
              ->addVariable('endDatetime', $recentEventsEndDate)
-             ->cache($cacheLifetime);
+             ->cache($cacheLifetime)
+             ->cacheTags(['blogPosts', 'newsArticles', 'pressReleases'])
+        ;
     }
 
     public function getMapping()

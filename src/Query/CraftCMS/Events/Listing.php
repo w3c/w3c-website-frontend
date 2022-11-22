@@ -55,6 +55,7 @@ class Listing extends GraphQLQuery
             ->setTotalResults('[total]')
             ->setResultsPerPage($limit)
             ->setCurrentPage($page)
+            ->cacheTags(['events'])
             ->addVariable('site', $siteHandle)
             ->addVariable('eventType', $eventType)
             ->addVariable('category', $category)
