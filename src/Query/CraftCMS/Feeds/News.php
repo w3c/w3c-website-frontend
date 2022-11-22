@@ -30,6 +30,7 @@ class News extends GraphQLQuery
             ->setRootPropertyPath('[entries]')
             ->addVariable('site', $siteHandle)
             ->addVariable('limit', $limit)
+            ->cacheTags(['newsArticles'])
         ;
     }
 }

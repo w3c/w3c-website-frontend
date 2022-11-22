@@ -37,7 +37,16 @@ class SinglesBreadcrumbs extends GraphQLQuery
         $this->setGraphQLFromFile(__DIR__ . '/graphql/singles-breadcrumbs.graphql')
             ->addVariable('site', $siteHandle)
             ->cache($cacheLifetime)
-        ;
+            ->cacheTags(
+                [
+                    'homepage',
+                    'blogListing',
+                    'pressReleasesListing',
+                    'eventsListing',
+                    'newsListing',
+                    'ecosystemsLandingPage'
+                ]
+            );
     }
 
     public function getMapping()

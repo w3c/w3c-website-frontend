@@ -30,6 +30,7 @@ class PressReleases extends GraphQLQuery
             ->setRootPropertyPath('[entries]')
             ->addVariable('site', $siteHandle)
             ->addVariable('limit', $limit)
+            ->cacheTags(['pressReleases'])
         ;
     }
 }

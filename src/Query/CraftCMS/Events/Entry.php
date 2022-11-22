@@ -60,6 +60,7 @@ class Entry extends GraphQLQuery
             ->addVariable('start', ['and', '>=' . $year, '<' . ($year+1)])
             ->addVariable('slug', $slug)
             ->cache($cacheLifetime)
+            ->cacheTags(['events'])
         ;
     }
 

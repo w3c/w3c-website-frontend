@@ -37,6 +37,7 @@ class AlumniListing extends GraphQLQuery
 
             ->addVariable('site', $siteHandle)
             ->cache($cacheLifetime)
+            ->cacheTags(['alumniListing'])
         ;
     }
 }

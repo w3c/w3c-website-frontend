@@ -35,6 +35,7 @@ class Page extends GraphQLQuery
 
             ->addVariable('site', $siteHandle)
             ->cache($cacheLifetime)
+            ->cacheTags(['events'])
         ;
     }
 }

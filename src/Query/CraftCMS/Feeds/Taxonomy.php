@@ -32,7 +32,9 @@ class Taxonomy extends GraphQLQuery
              ->addVariable('limit', $limit)
              ->addVariable('category', $category)
              ->addVariable('ecosystem', $ecosystem)
-             ->addVariable('group', $group);
+             ->addVariable('group', $group)
+             ->cacheTags(['blogPosts', 'events', 'newsArticles', 'pressReleases'])
+        ;
     }
 
     public function getMapping()

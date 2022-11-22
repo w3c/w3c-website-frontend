@@ -33,9 +33,9 @@ class Entry extends GraphQLQuery
 
         $this->setGraphQLFromFile(__DIR__ . '/../graphql/newsletters/entry.graphql')
             ->setRootPropertyPath('[entry]')
-
             ->addVariable('site', $siteHandle)
             ->addVariable('date', ['and', '>=' . $date->format('Y-m-d'), '<' . $nextDay->format('Y-m-d')])
+            ->cacheTags(['newsletter'])
         ;
     }
 }

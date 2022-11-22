@@ -49,6 +49,7 @@ class Collection extends GraphQLQuery
             ->setTotalResults('[total]')
             ->setResultsPerPage($limit)
             ->setCurrentPage($page)
+            ->cacheTags(['newsletter'])
             ->addVariable('site', $siteHandle)
             ->addVariable('limit', $limit)
             ->addVariable('offset', ($page - 1) * $limit)

@@ -32,6 +32,7 @@ class Blog extends GraphQLQuery
             ->addVariable('limit', $limit)
             ->addVariable('category', $category)
             ->addVariable('tag', $tag)
+            ->cacheTags(['blogPosts'])
         ;
     }
 }

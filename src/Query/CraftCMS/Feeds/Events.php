@@ -35,6 +35,7 @@ class Events extends GraphQLQuery
             ->setRootPropertyPath('[entries]')
             ->addVariable('site', $siteHandle)
             ->addVariable('limit', $limit)
+            ->cacheTags(['events'])
         ;
     }
 }
