@@ -52,7 +52,7 @@ class Entry extends GraphQLQuery
             ->addVariable('site', $siteHandle)
             ->addVariable('year', ['and', '>=' . $year, '<' . ($year + 1)])
             ->addVariable('slug', $slug)
-            ->cache($cacheLifetime)
+            ->doNotCache()
             ->cacheTags(['blogPosts'])
         ;
     }

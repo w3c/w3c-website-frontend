@@ -67,7 +67,7 @@ class Collection extends GraphQLQuery
             ->addVariable('search', $search)
             ->addVariable('limit', $limit)
             ->addVariable('offset', ($page - 1) * $limit)
-            ->cache($cacheLifetime)
+            ->doNotCache()
             ->cacheTags(['blogPosts'])
         ;
     }
