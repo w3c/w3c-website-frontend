@@ -42,7 +42,7 @@ class Page extends GraphQLQuery
              ->addVariable('site', $siteHandle)
 
             // Caching
-             ->doNotCache();
+            ->doNotCache();
     }
 
     public function getMapping()

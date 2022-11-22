@@ -41,3 +41,5 @@ npm-debug.log
 /.graphqlconfig
 /schema.graphql
 ###< PHPStorm graphql ###
+
+test-cache-clear.php

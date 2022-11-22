@@ -53,7 +53,7 @@ class GlobalNavigation extends GraphQLQuery
 
             // Cache navigation response
             ->cache($cacheLifetime)
-            ->cacheTags(['global'])
+            ->cacheTagGlobal()
         ;
     }
 
@@ -141,6 +141,7 @@ class GlobalNavigation extends GraphQLQuery
             '[children]'   => new MapArray('[children]', [
                 '[title]' => '[title]',
                 '[url]' => new CallableData([$this, 'transformChildLink'], '[url]', '[internalLink][0]'),
+                '[startNewColumn]' => '[startNewColumn]',
             ]),
         ];
     }

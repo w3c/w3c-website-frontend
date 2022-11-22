@@ -89,7 +89,7 @@ Run `composer install`
 
 Create a local environment file and populate the required variables (see `.env.local.dist`).
 
-```angular2html
+```
 cp .env.local.dist .env.local
 ```
 

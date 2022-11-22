@@ -57,31 +57,34 @@ class SiteConfigurator
                 'url'   => $this->router->generate('app_default_home.zh-hans'),
             ]
         ]);
-        $site->addLocale('pt-br', ['siteHandle' => 'brazilianPortuguese']);
-        $site->addLocale('hu', ['siteHandle' => 'hungarian']);
-        $site->addLocale('fr', ['siteHandle' => 'french']);
-        $site->addLocale('es', ['siteHandle' => 'spanish']);
-        $site->addLocale('de', ['siteHandle' => 'german']);
+        $site->addLocale('af', ['siteHandle' => 'afrikaans']);
         $site->addLocaleRtl('ar', ['siteHandle' => 'arabic']);
-        $site->addLocale('ru', ['siteHandle' => 'russian']);
-        $site->addLocale('it', ['siteHandle' => 'italian']);
-        $site->addLocale('sv', ['siteHandle' => 'swedish']);
-        $site->addLocale('ko', ['siteHandle' => 'korean']);
-        $site->addLocale('el', ['siteHandle' => 'greek']);
         $site->addLocale('bg', ['siteHandle' => 'bulgarian']);
         $site->addLocale('cs', ['siteHandle' => 'czech']);
         $site->addLocale('da', ['siteHandle' => 'danish']);
+        $site->addLocale('de', ['siteHandle' => 'german']);
+        $site->addLocale('el', ['siteHandle' => 'greek']);
+        $site->addLocale('es', ['siteHandle' => 'spanish']);
         $site->addLocale('et', ['siteHandle' => 'estonian']);
         $site->addLocale('fi', ['siteHandle' => 'finnish']);
+        $site->addLocale('fr', ['siteHandle' => 'french']);
         $site->addLocale('ga', ['siteHandle' => 'gaelic']);
+        $site->addLocale('hi', ['siteHandle' => 'hindi']);
+        $site->addLocale('hu', ['siteHandle' => 'hungarian']);
+        $site->addLocale('it', ['siteHandle' => 'italian']);
+        $site->addLocale('ko', ['siteHandle' => 'korean']);
         $site->addLocale('lt', ['siteHandle' => 'lithuanian']);
         $site->addLocale('lv', ['siteHandle' => 'latvian']);
         $site->addLocale('mt', ['siteHandle' => 'maltese']);
         $site->addLocale('nl', ['siteHandle' => 'dutch']);
+        $site->addLocale('pt-br', ['siteHandle' => 'brazilianPortuguese']);
         $site->addLocale('pt', ['siteHandle' => 'portuguese']);
         $site->addLocale('ro', ['siteHandle' => 'romanian']);
+        $site->addLocale('ru', ['siteHandle' => 'russian']);
         $site->addLocale('sk', ['siteHandle' => 'slovak']);
         $site->addLocale('sl', ['siteHandle' => 'slovenian']);
+        $site->addLocale('sv', ['siteHandle' => 'swedish']);
+        $site->addLocale('zu', ['siteHandle' => 'zulu']);
 
         // Set current locale
         $request = $this->requestStack->getCurrentRequest();
