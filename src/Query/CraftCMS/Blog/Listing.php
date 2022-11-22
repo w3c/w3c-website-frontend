@@ -34,7 +34,7 @@ class Listing extends GraphQLQuery
             ->addFragmentFromFile(__DIR__ . '/../graphql/fragments/breadcrumbs.graphql')
             ->setRootPropertyPath('[entry]')
             ->addVariable('site', $siteHandle)
-            ->cache($cacheLifetime)
+            ->doNotCache()
             ->cacheTags(['blogPosts'])
         ;
     }
