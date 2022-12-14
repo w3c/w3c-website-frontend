@@ -8,6 +8,7 @@ use App\Query\CraftCMS\PressReleases\Filters;
 use App\Query\CraftCMS\PressReleases\Listing;
 use App\Query\CraftCMS\YouMayAlsoLikeRelatedEntries;
 use Strata\Data\Exception\GraphQLQueryException;
+use Strata\Data\Exception\PaginationException;
 use Strata\Data\Exception\QueryManagerException;
 use Strata\Data\Query\QueryManager;
 use Strata\Frontend\Site;
@@ -48,7 +49,10 @@ class PressReleasesController extends AbstractController
         RouterInterface $router,
         TranslatorInterface $translator
     ): Response {
-        $currentPage = $request->query->get('page', 1);
+        $currentPage = $request->query->getInt('page', 1);
+        if ($currentPage < 1) {
+            throw $this->createNotFoundException();
+        }
 
         $manager->add('page', new Listing($site->siteHandle));
         $manager->add(
@@ -103,7 +107,10 @@ class PressReleasesController extends AbstractController
         RouterInterface $router,
         TranslatorInterface $translator
     ): Response {
-        $currentPage = $request->query->get('page', 1);
+        $currentPage = $request->query->getInt('page', 1);
+        if ($currentPage < 1) {
+            throw $this->createNotFoundException();
+        }
 
         $manager->add('page', new Listing($site->siteHandle));
         $manager->add(
@@ -227,7 +234,12 @@ class PressReleasesController extends AbstractController
     ): array {
         $manager->add('filters', new Filters($router, $translator, $site->siteHandle));
 
-        $collection = $manager->getCollection('collection');
+        try {
+            $collection = $manager->getCollection('collection');
+        } catch (PaginationException $e) {
+            throw $this->createNotFoundException();
+        }
+
         $pagination = $collection->getPagination();
 
         if ((empty($collection) && $currentPage !== 1) ||

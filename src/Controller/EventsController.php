@@ -267,7 +267,10 @@ class EventsController extends AbstractController
         RouterInterface $router,
         TranslatorInterface $translator
     ): Response {
-        $currentPage  = $request->query->get('page', 1);
+        $currentPage  = $request->query->getInt('page', 1);
+        if ($currentPage < 1) {
+            throw $this->createNotFoundException();
+        }
         $categorySlug = $request->query->get('category');
         $tagSlug      = $request->query->get('tag');
 

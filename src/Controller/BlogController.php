@@ -58,7 +58,10 @@ class BlogController extends AbstractController
         RouterInterface $router,
         TranslatorInterface $translator
     ): Response {
-        $currentPage = $request->query->get('page', 1);
+        $currentPage = $request->query->getInt('page', 1);
+        if ($currentPage < 1) {
+            throw $this->createNotFoundException();
+        }
         $search = $request->query->get('search');
         
         $manager->add('page', new Listing($site->siteHandle));
@@ -126,7 +129,10 @@ class BlogController extends AbstractController
         RouterInterface $router,
         TranslatorInterface $translator
     ): Response {
-        $currentPage = $request->query->get('page', 1);
+        $currentPage = $request->query->getInt('page', 1);
+        if ($currentPage < 1) {
+            throw $this->createNotFoundException();
+        }
         $search = $request->query->get('search');
 
         $manager->add('page', new Listing($site->siteHandle));
@@ -199,7 +205,10 @@ class BlogController extends AbstractController
         RouterInterface $router,
         TranslatorInterface $translator
     ): Response {
-        $currentPage = $request->query->get('page', 1);
+        $currentPage = $request->query->getInt('page', 1);
+        if ($currentPage < 1) {
+            throw $this->createNotFoundException();
+        }
         $search = $request->query->get('search');
 
         $manager->add('categories', new Categories($site->siteHandle, 'blogCategories'));
@@ -287,7 +296,10 @@ class BlogController extends AbstractController
         RouterInterface $router,
         TranslatorInterface $translator
     ): Response {
-        $currentPage = $request->query->get('page', 1);
+        $currentPage = $request->query->getInt('page', 1);
+        if ($currentPage < 1) {
+            throw $this->createNotFoundException();
+        }
         $search      = $request->query->get('search');
 
         $manager->add('tags', new Tags($site->siteHandle, 'blogTags'));
