@@ -103,14 +103,14 @@ class Filters extends GraphQLQuery
 
         $archives = [
             [
-                'title' => $this->translator->trans('listing.events.filters.all', [], 'w3c_website_templates_bundle'),
-                'url'   => $this->router->generate('app_blog_index')
+                'title' => $this->translator->trans('listing.events.filters.upcoming', [], 'w3c_website_templates_bundle'),
+                'url'   => $this->router->generate('app_events_index')
             ]
         ];
         for ($year = $last; $year >= $first; $year--) {
             $archives[] = [
                 'title' => $year,
-                'url'   => $this->router->generate('app_blog_archive', ['year' => $year])
+                'url'   => $this->router->generate('app_events_archive', ['year' => $year])
             ];
         }
 
