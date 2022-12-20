@@ -15,4 +15,13 @@
     </div>
 
     {{ include('@W3CWebsiteTemplates/components/listings/press-releases/list.html.twig') }}
+
+    {% block pre_footer %}
+        {% embed '@W3CWebsiteTemplates/components/pre-footer.html.twig' %}
+            {% block feed %}
+                {% include '@W3CWebsiteTemplates/components/styles/feed.html.twig' with { 'feed_url': path('app_feed_pressreleases'), 'feed_type': 'press releases' } %}
+            {% endblock %}
+        {% endembed %}
+    {% endblock %}
+
 {% endblock %}

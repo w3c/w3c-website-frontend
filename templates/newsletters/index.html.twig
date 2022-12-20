@@ -16,3 +16,9 @@
     {# use same template as news #}
     {{ include('@W3CWebsiteTemplates/components/listings/news/list.html.twig') }}
 {% endblock %}
+
+{% block pre_footer %}
+    {% embed '@W3CWebsiteTemplates/components/pre-footer.html.twig' %}
+        {% block feed %}{% endblock %}
+    {% endembed %}
+{% endblock %}
