@@ -18,7 +18,7 @@
 
 {% block pre_footer %}
     {% embed '@W3CWebsiteTemplates/components/pre-footer.html.twig' %}
-        {% block feed %}
+        {% block content %}
             {% include '@W3CWebsiteTemplates/components/styles/feed.html.twig' with { 'feed_url': path('app_feed_blog'), 'feed_type': 'blog' } %}
         {% endblock %}
     {% endembed %}

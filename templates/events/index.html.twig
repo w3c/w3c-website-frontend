@@ -18,10 +18,9 @@
 
 {% block pre_footer %}
     {% embed '@W3CWebsiteTemplates/components/pre-footer.html.twig' %}
-        {% block feed %}
-            {% include '@W3CWebsiteTemplates/components/styles/feed.html.twig' with { 'feed_url': path('app_feed_events'), 'feed_type': 'events' } %}
-        {% endblock %}
         {% block content %}
+            {% include '@W3CWebsiteTemplates/components/styles/feed.html.twig' with { 'feed_url': path('app_feed_events'), 'feed_type': 'events' } %}
+
             {% if archives is defined and archives|length > 0 %}
                 <section class="archive-links">
                     <h2 class="txt-jupiter">W3C archived events</h2>
