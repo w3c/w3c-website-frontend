@@ -25,7 +25,7 @@ query EventsListing(
         endDatetime: $end,
         limit: $limit,
         offset: $offset,
-        orderBy: "startDatetime asc") {
+        orderBy: "startDatetime desc") {
         ... on events_default_Entry {
             ...listingEvent
         }

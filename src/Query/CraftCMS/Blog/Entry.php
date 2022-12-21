@@ -104,7 +104,8 @@ class Entry extends GraphQLQuery
         if (count($data) > 0) {
             return [
                 'url'   => $this->router->generate('app_blog_category', ['slug' => $data[0]['slug']]),
-                'title' => $data[0]['title']
+                'title' => $data[0]['title'],
+                'slug'  => $data[0]['slug']
             ];
         }
 

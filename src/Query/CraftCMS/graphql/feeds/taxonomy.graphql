@@ -20,6 +20,51 @@ query taxonomy($site: [String], $category: [QueryArgument], $ecosystem: [QueryAr
                 slug
                 title
             }
+            groups: workingGroups {
+                slug
+                title
+            }
+            specifications {
+                slug
+                title
+            }
+            ecosystems {
+                title
+                slug
+            }
+            tags: blogTags {
+                title
+                slug
+            }
+        }
+        ... on blogPosts_importedEntries_Entry {
+            authors {
+                ... authors
+            }
+            date: postDate
+            year: postDate@formatDateTime(format: "Y")
+            excerpt
+            pageContent
+            categories: blogCategories {
+                slug
+                title
+            }
+            groups: workingGroups {
+                slug
+                title
+            }
+            specifications {
+                slug
+                title
+            }
+            ecosystems {
+                title
+                slug
+            }
+            tags: blogTags {
+                title
+                slug
+            }
         }
         ... on newsArticles_default_Entry {
             date: postDate
@@ -29,6 +74,12 @@ query taxonomy($site: [String], $category: [QueryArgument], $ecosystem: [QueryAr
                 ...defaultFlexibleComponents
             }
         }
+        ... on newsArticles_importedEntries_Entry {
+            date: postDate
+            year: postDate@formatDateTime(format: "Y")
+            excerpt
+            pageContent
+        }
         ... on pressReleases_default_Entry {
             date: postDate
             year: postDate@formatDateTime(format: "Y")
@@ -36,6 +87,12 @@ query taxonomy($site: [String], $category: [QueryArgument], $ecosystem: [QueryAr
             defaultFlexibleComponents(orderBy: "sortOrder") {
                 ...defaultFlexibleComponents
             }
+        }
+        ... on pressReleases_importedEntries_Entry {
+            date: postDate
+            year: postDate@formatDateTime(format: "Y")
+            excerpt
+            pageContent
         }
         ... on events_default_Entry {
             date: startDatetime

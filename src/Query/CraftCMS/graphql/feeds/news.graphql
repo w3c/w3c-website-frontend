@@ -13,6 +13,10 @@ query news($site: [String], $limit: Int) {
                 ...defaultFlexibleComponents
             }
         }
+        ... on newsArticles_importedEntries_Entry {
+            excerpt
+            pageContent
+        }
     }
 }
 

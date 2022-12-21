@@ -86,7 +86,7 @@ class Filters extends GraphQLQuery
             ]
         ];
         foreach ($categories as $category) {
-            $result[] = [
+            $result[$category['slug']] = [
                 'title' => $category['title'],
                 'slug'  => $category['slug']
             ];

@@ -12,6 +12,7 @@ use App\Query\CraftCMS\Blog\Listing;
 use App\Query\CraftCMS\Taxonomies\Categories;
 use App\Query\CraftCMS\Taxonomies\Tags;
 use App\Query\CraftCMS\YouMayAlsoLikeRelatedEntries;
+use App\Service\FeedHelper;
 use DateInterval;
 use DateTimeImmutable;
 use Exception;
@@ -94,6 +95,7 @@ class BlogController extends AbstractController
             'url'    => $singlesBreadcrumbs['blog']['url'],
             'parent' => $singlesBreadcrumbs['homepage']
         ];
+        $page['feeds'] = [['title' => 'W3C Blog', 'href' => $this->generateUrl('app_feed_blog')]];
 
         return $this->render('blog/index.html.twig', [
             'site'       => $site,
@@ -103,7 +105,7 @@ class BlogController extends AbstractController
             'pagination' => $collection->getPagination(),
             'categories' => $categories,
             'archives'   => $archives,
-            'search'     => $search
+            'search'     => $search,
         ]);
     }
 
@@ -170,6 +172,8 @@ class BlogController extends AbstractController
             ]
         ];
         $page['title'] = $page['title'] . ' - ' . $year;
+
+        $page['feeds'] = [['title' => 'W3C Blog', 'href' => $this->generateUrl('app_feed_blog')]];
 
         return $this->render('blog/index.html.twig', [
             'site'       => $site,
@@ -261,6 +265,13 @@ class BlogController extends AbstractController
             ]
         ];
         $page['title']       = $page['title'] . ' - ' . $category['title'];
+        $page['feeds'] = [
+            ['title' => 'W3C Blog', 'href' => $this->generateUrl('app_feed_blog')],
+            [
+                'title' => 'W3C - ' . $categories[$slug]['title'],
+                'href'  => $this->generateUrl('app_feed_category', ['slug' => $slug])
+            ]
+        ];
 
         return $this->render('blog/index.html.twig', [
             'site'       => $site,
@@ -351,6 +362,7 @@ class BlogController extends AbstractController
             ]
         ];
         $page['title']       = $page['title'] . ' - ' . $tag['title'];
+        $page['feeds'] = [['title' => 'W3C Blog', 'href' => $this->generateUrl('app_feed_blog')]];
 
         return $this->render('blog/index.html.twig', [
             'site'       => $site,
@@ -367,15 +379,6 @@ class BlogController extends AbstractController
     /**
      * @Route("/{year}/{slug}/", requirements={"year": "\d\d\d\d"})
      *
-     * @param int                 $year
-     * @param string              $slug
-     * @param QueryManager        $manager
-     * @param RouterInterface     $router
-     * @param Site                $site
-     * @param Request             $request
-     * @param TranslatorInterface $translator
-     *
-     * @return Response
      * @throws GraphQLQueryException
      * @throws QueryManagerException
      * @throws Exception
@@ -387,7 +390,8 @@ class BlogController extends AbstractController
         RouterInterface $router,
         Site $site,
         Request $request,
-        TranslatorInterface $translator
+        TranslatorInterface $translator,
+        FeedHelper $feedHelper
     ): Response {
         $manager->add('page', new Entry($site->siteHandle, $year, $slug, $router));
 
@@ -433,7 +437,7 @@ class BlogController extends AbstractController
 
                 $this->addFlash(
                     'success',
-                    $translator->trans('blog.comments.form.success', [])
+                    $translator->trans('blog.comments.form.success')
                 );
                 $this->addFlash(
                     'title-success',
@@ -480,6 +484,10 @@ class BlogController extends AbstractController
                 ]
             ]
         ];
+        $page['feeds'] = array_merge(
+            [['title' => 'W3C Blog', 'href' => $this->generateUrl('app_feed_blog')]],
+            $feedHelper->buildTaxonomyFeeds($page)
+        );
 
         if ($this->getParameter('kernel.environment') == 'dev') {
             dump($page);

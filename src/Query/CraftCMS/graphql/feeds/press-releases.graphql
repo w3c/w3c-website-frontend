@@ -13,6 +13,10 @@ query pressReleases($site: [String], $limit: Int) {
                 ...defaultFlexibleComponents
             }
         }
+        ... on pressReleases_importedEntries_Entry {
+            excerpt
+            pageContent
+        }
     }
     comments(site: $site) {
         ownerId
