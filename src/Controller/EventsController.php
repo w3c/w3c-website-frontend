@@ -273,7 +273,7 @@ class EventsController extends AbstractController
         $categorySlug = $request->query->get('category');
         $tagSlug      = $request->query->get('tag');
 
-        $manager->add('filters', new Filters($router, $translator, $site->siteHandle));
+        $manager->add('filters', new Filters($router, $translator, $site->siteHandle, $type));
         $filters     = $manager->get('filters');
         $types       = $filters['types'];
         $eventType   = [];
