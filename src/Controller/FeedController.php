@@ -228,7 +228,8 @@ class FeedController extends AbstractController
      * @throws SyntaxError
      */
     public function group(string $type, string $shortname, QueryManager $manager, Site $site, Environment $twig):
-    Response {
+    Response
+    {
         $slug = $type . '-' . $shortname;
         $manager->add('group-info', new GroupInfo($site->siteHandle, $slug));
         $group = $manager->get('group-info');

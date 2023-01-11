@@ -114,7 +114,11 @@ class Filters extends GraphQLQuery
 
         $archives = [
             [
-                'title' => $this->translator->trans('listing.events.filters.upcoming', [], 'w3c_website_templates_bundle'),
+                'title' => $this->translator->trans(
+                    'listing.events.filters.upcoming',
+                    [],
+                    'w3c_website_templates_bundle'
+                ),
                 'url'   => $this->router->generate($routeIndex, $params)
             ]
         ];
