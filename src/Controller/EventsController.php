@@ -9,6 +9,7 @@ use App\Query\CraftCMS\Events\Page;
 use App\Query\CraftCMS\Taxonomies\Categories;
 use App\Query\CraftCMS\Taxonomies\CategoryInfo;
 use App\Query\CraftCMS\Taxonomies\Tags;
+use App\Service\FeedHelper;
 use App\Service\IcalExporter;
 use Exception;
 use Strata\Data\Exception\GraphQLQueryException;
@@ -131,6 +132,7 @@ class EventsController extends AbstractController
      * @return Response
      * @throws GraphQLQueryException
      * @throws QueryManagerException
+     * @throws Exception
      */
     public function ical(
         string $type,
@@ -170,14 +172,6 @@ class EventsController extends AbstractController
     /**
      * @Route("/{type}/{year}/{slug}/", requirements={"year": "\d\d\d\d"})
      *
-     * @param string          $type
-     * @param int             $year
-     * @param string          $slug
-     * @param QueryManager    $manager
-     * @param RouterInterface $router
-     * @param Site            $site
-     *
-     * @return Response
      * @throws GraphQLQueryException
      * @throws QueryManagerException
      * @throws Exception
@@ -188,7 +182,8 @@ class EventsController extends AbstractController
         string $slug,
         QueryManager $manager,
         RouterInterface $router,
-        Site $site
+        Site $site,
+        FeedHelper $feedHelper
     ): Response {
         $manager->add('event-type', new CategoryInfo($site->siteHandle, 'eventType', $type));
         $eventType = $manager->get('event-type');
@@ -230,6 +225,10 @@ class EventsController extends AbstractController
             'app_events_ical',
             ['slug' => $slug, 'type' => $eventType['slug'], 'year' => $year]
         );
+        $page['feeds'] = array_merge(
+            [['title' => 'W3C Events', 'href' => $this->generateUrl('app_feed_events')]],
+            $feedHelper->buildTaxonomyFeeds($page)
+        );
 
         if ($this->getParameter('kernel.environment') == 'dev') {
             dump($page);
@@ -267,11 +266,14 @@ class EventsController extends AbstractController
         RouterInterface $router,
         TranslatorInterface $translator
     ): Response {
-        $currentPage  = $request->query->get('page', 1);
+        $currentPage  = $request->query->getInt('page', 1);
+        if ($currentPage < 1) {
+            throw $this->createNotFoundException();
+        }
         $categorySlug = $request->query->get('category');
         $tagSlug      = $request->query->get('tag');
 
-        $manager->add('filters', new Filters($router, $translator, $site->siteHandle));
+        $manager->add('filters', new Filters($router, $translator, $site->siteHandle, $type));
         $filters     = $manager->get('filters');
         $types       = $filters['types'];
         $eventType   = [];
@@ -364,6 +366,14 @@ class EventsController extends AbstractController
             foreach ($page['seo']['social'] as $key => $data) {
                 $page['seo']['social'][$key]['title'] = $eventType['title'];
             }
+        }
+
+        $page['feeds'] = [['title' => 'W3C Press Releases', 'href' => $this->generateUrl('app_feed_events')]];
+        if ($categorySlug) {
+            $page['feeds'][] = [
+                'title' => 'W3C - ' . $filters['categories'][$categorySlug]['title'],
+                'href'  => $this->generateUrl('app_feed_category', ['slug' => $categorySlug])
+            ];
         }
 
         if ($this->getParameter('kernel.environment') == 'dev') {

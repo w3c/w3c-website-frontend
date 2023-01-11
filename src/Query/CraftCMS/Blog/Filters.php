@@ -60,11 +60,11 @@ class Filters extends GraphQLQuery
         $result = [
             [
                 'title' => $this->translator->trans('listing.blog.filters.all', [], 'w3c_website_templates_bundle'),
-                'url'   => $this->router->generate('app_blog_index')
+                'url'   => $this->router->generate('app_blog_index'),
             ]
         ];
         foreach ($categories as $category) {
-            $result[] = [
+            $result[$category['slug']] = [
                 'title' => $category['title'],
                 'url'   => $this->router->generate('app_blog_category', ['slug' => $category['slug']])
             ];

@@ -2,6 +2,7 @@ query Ecosystem($slug: [String], $site: [String]) {
     entry(slug: $slug, section: "ecosystems", site: $site) {
         id
         status
+        slug
         uri
         language
         title

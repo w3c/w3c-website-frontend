@@ -1,5 +1,5 @@
-query GroupInfo($site: [String], $type: [QueryArgument], $slug: [String]) {
-    category(site: $site, group: "groups", slug: $slug, groupType: $type) {
+query GroupInfo($site: [String], $slug: [String]) {
+    category(site: $site, group: "groups", slug: $slug) {
         id
         title
         uri

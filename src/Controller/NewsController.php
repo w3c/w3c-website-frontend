@@ -7,6 +7,7 @@ use App\Query\CraftCMS\News\Entry;
 use App\Query\CraftCMS\News\Filters;
 use App\Query\CraftCMS\News\Listing;
 use App\Query\CraftCMS\YouMayAlsoLikeRelatedEntries;
+use App\Service\FeedHelper;
 use Strata\Data\Exception\GraphQLQueryException;
 use Strata\Data\Exception\QueryManagerException;
 use Strata\Data\Query\QueryManager;
@@ -48,7 +49,10 @@ class NewsController extends AbstractController
         RouterInterface $router,
         TranslatorInterface $translator
     ): Response {
-        $currentPage = $request->query->get('page', 1);
+        $currentPage = $request->query->getInt('page', 1);
+        if ($currentPage < 1) {
+            throw $this->createNotFoundException();
+        }
         $search      = $request->query->get('search');
 
         $manager->add('page', new Listing($site->siteHandle));
@@ -72,6 +76,8 @@ class NewsController extends AbstractController
             'url'    => $singlesBreadcrumbs['news']['url'],
             'parent' => $singlesBreadcrumbs['homepage']
         ];
+
+        $page['feeds'] = [['title' => 'W3C News', 'href' => $this->generateUrl('app_feed_news')]];
 
         return $this->render('news/index.html.twig', [
             'site'       => $site,
@@ -106,7 +112,10 @@ class NewsController extends AbstractController
         RouterInterface $router,
         TranslatorInterface $translator
     ): Response {
-        $currentPage = $request->query->get('page', 1);
+        $currentPage = $request->query->getInt('page', 1);
+        if ($currentPage < 1) {
+            throw $this->createNotFoundException();
+        }
         $search      = $request->query->get('search');
 
         $manager->add('page', new Listing($site->siteHandle));
@@ -136,6 +145,8 @@ class NewsController extends AbstractController
         ];
         $page['title']       = $page['title'] . ' - ' . $year;
 
+        $page['feeds'] = [['title' => 'W3C News', 'href' => $this->generateUrl('app_feed_news')]];
+
         return $this->render('news/index.html.twig', [
             'site'       => $site,
             'navigation' => $manager->getCollection('navigation'),
@@ -150,14 +161,6 @@ class NewsController extends AbstractController
     /**
      * @Route("/{year}/{slug}/", requirements={"year": "\d\d\d\d"})
      *
-     * @param QueryManager    $manager
-     * @param int             $year
-     * @param string          $slug
-     * @param Site            $site
-     * @param Request         $request
-     * @param RouterInterface $router
-     *
-     * @return Response
      * @throws GraphQLQueryException
      * @throws QueryManagerException
      */
@@ -166,8 +169,8 @@ class NewsController extends AbstractController
         int $year,
         string $slug,
         Site $site,
-        Request $request,
-        RouterInterface $router
+        RouterInterface $router,
+        FeedHelper $feedHelper
     ): Response {
         $manager->add('page', new Entry($site->siteHandle, $year, $slug, $router));
 
@@ -198,6 +201,10 @@ class NewsController extends AbstractController
                 ]
             ]
         ];
+        $page['feeds'] = array_merge(
+            [['title' => 'W3C News', 'href' => $this->generateUrl('app_feed_news')]],
+            $feedHelper->buildTaxonomyFeeds($page)
+        );
 
         if ($this->getParameter('kernel.environment') == 'dev') {
             dump($page);

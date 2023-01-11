@@ -7,7 +7,9 @@ use App\Query\CraftCMS\PressReleases\Entry;
 use App\Query\CraftCMS\PressReleases\Filters;
 use App\Query\CraftCMS\PressReleases\Listing;
 use App\Query\CraftCMS\YouMayAlsoLikeRelatedEntries;
+use App\Service\FeedHelper;
 use Strata\Data\Exception\GraphQLQueryException;
+use Strata\Data\Exception\PaginationException;
 use Strata\Data\Exception\QueryManagerException;
 use Strata\Data\Query\QueryManager;
 use Strata\Frontend\Site;
@@ -48,7 +50,10 @@ class PressReleasesController extends AbstractController
         RouterInterface $router,
         TranslatorInterface $translator
     ): Response {
-        $currentPage = $request->query->get('page', 1);
+        $currentPage = $request->query->getInt('page', 1);
+        if ($currentPage < 1) {
+            throw $this->createNotFoundException();
+        }
 
         $manager->add('page', new Listing($site->siteHandle));
         $manager->add(
@@ -70,6 +75,7 @@ class PressReleasesController extends AbstractController
             'url'    => $singlesBreadcrumbs['pressReleases']['url'],
             'parent' => $singlesBreadcrumbs['homepage']
         ];
+        $page['feeds'] = [['title' => 'W3C Press Releases', 'href' => $this->generateUrl('app_feed_pressreleases')]];
 
         return $this->render('press-releases/index.html.twig', [
             'site'       => $site,
@@ -103,7 +109,10 @@ class PressReleasesController extends AbstractController
         RouterInterface $router,
         TranslatorInterface $translator
     ): Response {
-        $currentPage = $request->query->get('page', 1);
+        $currentPage = $request->query->getInt('page', 1);
+        if ($currentPage < 1) {
+            throw $this->createNotFoundException();
+        }
 
         $manager->add('page', new Listing($site->siteHandle));
         $manager->add(
@@ -130,6 +139,7 @@ class PressReleasesController extends AbstractController
             ]
         ];
         $page['title']       = $page['title'] . ' - ' . $year;
+        $page['feeds'] = [['title' => 'W3C Press Releases', 'href' => $this->generateUrl('app_feed_pressreleases')]];
 
         return $this->render('press-releases/index.html.twig', [
             'site'       => $site,
@@ -144,14 +154,6 @@ class PressReleasesController extends AbstractController
     /**
      * @Route("/{year}/{slug}/", requirements={"year": "\d\d\d\d"})
      *
-     * @param QueryManager    $manager
-     * @param int             $year
-     * @param string          $slug
-     * @param RouterInterface $router
-     * @param Site            $site
-     * @param Request         $request
-     *
-     * @return Response
      * @throws GraphQLQueryException
      * @throws QueryManagerException
      */
@@ -161,7 +163,7 @@ class PressReleasesController extends AbstractController
         string $slug,
         RouterInterface $router,
         Site $site,
-        Request $request
+        FeedHelper $feedHelper
     ): Response {
         $manager->add('page', new Entry($site->siteHandle, $year, $slug, $router));
 
@@ -192,6 +194,10 @@ class PressReleasesController extends AbstractController
                 ]
             ]
         ];
+        $page['feeds'] = array_merge(
+            [['title' => 'W3C Press Releases', 'href' => $this->generateUrl('app_feed_pressreleases')]],
+            $feedHelper->buildTaxonomyFeeds($page)
+        );
 
         if ($this->getParameter('kernel.environment') == 'dev') {
             dump($page);
@@ -227,7 +233,12 @@ class PressReleasesController extends AbstractController
     ): array {
         $manager->add('filters', new Filters($router, $translator, $site->siteHandle));
 
-        $collection = $manager->getCollection('collection');
+        try {
+            $collection = $manager->getCollection('collection');
+        } catch (PaginationException $e) {
+            throw $this->createNotFoundException();
+        }
+
         $pagination = $collection->getPagination();
 
         if ((empty($collection) && $currentPage !== 1) ||

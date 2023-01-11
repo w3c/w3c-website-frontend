@@ -103,6 +103,12 @@ class EcosystemController extends AbstractController
                 'parent' => $singlesBreadcrumbs['homepage']
             ]
         ];
+        $page['feeds'] = [
+            [
+                'title' => 'W3C - ' . $page['title'] . ' ecosystem',
+                'href'  => $this->generateUrl('app_feed_ecosystem', ['slug' => $slug])
+            ]
+        ];
 
         if ($this->getParameter('kernel.environment') == 'dev') {
             dump($singlesBreadcrumbs);

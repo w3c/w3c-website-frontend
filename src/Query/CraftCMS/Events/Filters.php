@@ -7,8 +7,6 @@ namespace App\Query\CraftCMS\Events;
 use App\Service\CraftCMS;
 use Strata\Data\Cache\CacheLifetime;
 use Strata\Data\Exception\GraphQLQueryException;
-use Strata\Data\Mapper\MapArray;
-use Strata\Data\Mapper\WildcardMappingStrategy;
 use Strata\Data\Query\GraphQLQuery;
 use Strata\Data\Transform\Data\CallableData;
 use Symfony\Component\Routing\RouterInterface;
@@ -18,6 +16,7 @@ class Filters extends GraphQLQuery
 {
     private RouterInterface $router;
     private TranslatorInterface $translator;
+    private ?string $type = null;
 
     public function getRequiredDataProviderClass(): string
     {
@@ -38,10 +37,12 @@ class Filters extends GraphQLQuery
         RouterInterface $router,
         TranslatorInterface $translator,
         string $siteHandle,
+        ?string $type = null,
         int $cacheLifetime = CacheLifetime::HOUR
     ) {
         $this->router     = $router;
         $this->translator = $translator;
+        $this->type       = $type;
         $this->setGraphQLFromFile(__DIR__ . '/../graphql/events/filters.graphql')
             ->addVariable('site', $siteHandle)
             ->cache($cacheLifetime)
@@ -86,7 +87,7 @@ class Filters extends GraphQLQuery
             ]
         ];
         foreach ($categories as $category) {
-            $result[] = [
+            $result[$category['slug']] = [
                 'title' => $category['title'],
                 'slug'  => $category['slug']
             ];
@@ -101,16 +102,31 @@ class Filters extends GraphQLQuery
             return [];
         }
 
+        if ($this->type) {
+            $routeIndex    = 'app_events_index_type';
+            $routeArchives = 'app_events_archive_type';
+            $params        = ['type' => $this->type];
+        } else {
+            $routeIndex    = 'app_events_index';
+            $routeArchives = 'app_events_archive';
+            $params        = [];
+        }
+
         $archives = [
             [
-                'title' => $this->translator->trans('listing.events.filters.all', [], 'w3c_website_templates_bundle'),
-                'url'   => $this->router->generate('app_blog_index')
+                'title' => $this->translator->trans(
+                    'listing.events.filters.upcoming',
+                    [],
+                    'w3c_website_templates_bundle'
+                ),
+                'url'   => $this->router->generate($routeIndex, $params)
             ]
         ];
+
         for ($year = $last; $year >= $first; $year--) {
             $archives[] = [
                 'title' => $year,
-                'url'   => $this->router->generate('app_blog_archive', ['year' => $year])
+                'url'   => $this->router->generate($routeArchives, array_merge(['year' => $year], $params))
             ];
         }
 

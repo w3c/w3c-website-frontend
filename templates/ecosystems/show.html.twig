@@ -10,3 +10,9 @@
         {{ include('partials/ecosystemsFlexibleComponents.html.twig') }}
     {% endfor %}
 {% endblock %}
+{% block pre_footer %}
+            {{ include('@W3CWebsiteTemplates/components/styles/feed.html.twig', {
+                'feed_url': path('app_feed_ecosystem', {'slug': page.slug}),
+                'feed_type': page.title
+            }) }}
+{% endblock %}

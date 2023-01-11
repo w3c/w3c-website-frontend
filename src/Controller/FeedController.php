@@ -36,11 +36,6 @@ class FeedController extends AbstractController
     /**
      * @Route("/blog/feed/")
      *
-     * @param QueryManager $manager
-     * @param Site         $site
-     * @param Environment  $twig
-     *
-     * @return Response
      * @throws GraphQLQueryException
      * @throws InvalidLocaleException
      * @throws QueryManagerException
@@ -85,11 +80,6 @@ class FeedController extends AbstractController
     /**
      * @Route("/news/feed/")
      *
-     * @param QueryManager $manager
-     * @param Site         $site
-     * @param Environment  $twig
-     *
-     * @return Response
      * @throws GraphQLQueryException
      * @throws InvalidLocaleException
      * @throws LoaderError
@@ -128,11 +118,6 @@ class FeedController extends AbstractController
     /**
      * @Route("/press-releases/feed/")
      *
-     * @param QueryManager $manager
-     * @param Site         $site
-     * @param Environment  $twig
-     *
-     * @return Response
      * @throws GraphQLQueryException
      * @throws InvalidLocaleException
      * @throws LoaderError
@@ -170,12 +155,6 @@ class FeedController extends AbstractController
     /**
      * @Route("/feeds/category/{slug}/")
      *
-     * @param string       $slug
-     * @param QueryManager $manager
-     * @param Site         $site
-     * @param Environment  $twig
-     *
-     * @return Response
      * @throws GraphQLQueryException
      * @throws InvalidLocaleException
      * @throws LoaderError
@@ -208,11 +187,6 @@ class FeedController extends AbstractController
     /**
      * @Route("/feeds/ecosystem/{slug}/")
      *
-     * @param string       $slug
-     * @param QueryManager $manager
-     * @param Site         $site
-     * @param Environment  $twig
-     *
      * @return Response
      * @throws GraphQLQueryException
      * @throws InvalidLocaleException
@@ -244,13 +218,8 @@ class FeedController extends AbstractController
     }
 
     /**
-     * @Route("/feeds/groups/{type}/{slug}/")
+     * @Route("/feeds/groups/{type}/{shortname}/")
      *
-     * @param QueryManager $manager
-     * @param Site         $site
-     * @param Environment  $twig
-     *
-     * @return Response
      * @throws GraphQLQueryException
      * @throws InvalidLocaleException
      * @throws LoaderError
@@ -258,13 +227,15 @@ class FeedController extends AbstractController
      * @throws RuntimeError
      * @throws SyntaxError
      */
-    public function group(string $type, string $slug, QueryManager $manager, Site $site, Environment $twig): Response
+    public function group(string $type, string $shortname, QueryManager $manager, Site $site, Environment $twig):
+    Response
     {
-        $manager->add('group-info', new GroupInfo($site->siteHandle, $type, $slug));
+        $slug = $type . '-' . $shortname;
+        $manager->add('group-info', new GroupInfo($site->siteHandle, $slug));
         $group = $manager->get('group-info');
 
         if (!$group) {
-            throw $this->createNotFoundException('Category not found');
+            throw $this->createNotFoundException('Group not found');
         }
 
         $manager->add('rss', new Taxonomy($site->siteHandle, self::LIMIT, null, null, $group['id']));
@@ -282,13 +253,6 @@ class FeedController extends AbstractController
     /**
      * @Route("/events/feed/")
      *
-     * @param string       $type
-     * @param string       $slug
-     * @param QueryManager $manager
-     * @param Site         $site
-     * @param Environment  $twig
-     *
-     * @return Response
      * @throws GraphQLQueryException
      * @throws InvalidLocaleException
      * @throws LoaderError
@@ -324,10 +288,6 @@ class FeedController extends AbstractController
     }
 
     /**
-     * @param Collection   $entries
-     * @param QueryManager $manager
-     *
-     * @return array
      * @throws GraphQLQueryException
      * @throws QueryManagerException
      */
@@ -351,11 +311,6 @@ class FeedController extends AbstractController
     }
 
     /**
-     * @param array       $data
-     * @param Feed        $feed
-     * @param Environment $twig
-     *
-     * @return Entry
      * @throws LoaderError
      * @throws RuntimeError
      * @throws SyntaxError
@@ -381,11 +336,6 @@ class FeedController extends AbstractController
     }
 
     /**
-     * @param array       $data
-     * @param Feed        $feed
-     * @param Environment $twig
-     *
-     * @return Entry
      * @throws LoaderError
      * @throws RuntimeError
      * @throws SyntaxError
@@ -426,11 +376,6 @@ class FeedController extends AbstractController
     }
 
     /**
-     * @param array       $data
-     * @param Feed        $feed
-     * @param Environment $twig
-     *
-     * @return Entry
      * @throws LoaderError
      * @throws RuntimeError
      * @throws SyntaxError
@@ -455,11 +400,6 @@ class FeedController extends AbstractController
     }
 
     /**
-     * @param array       $data
-     * @param Feed        $feed
-     * @param Environment $twig
-     *
-     * @return Entry
      * @throws LoaderError
      * @throws RuntimeError
      * @throws SyntaxError
@@ -484,12 +424,6 @@ class FeedController extends AbstractController
     }
 
     /**
-     * @param Feed              $feed
-     * @param array             $data
-     * @param DateTimeImmutable $date
-     * @param Environment       $twig
-     *
-     * @return Entry
      * @throws LoaderError
      * @throws RuntimeError
      * @throws SyntaxError
@@ -537,14 +471,6 @@ class FeedController extends AbstractController
     }
 
     /**
-     * @param Collection $entries
-     * @param QueryManager $manager
-     * @param              $title
-     * @param Site $site
-     * @param string $feedUrl
-     * @param Environment $twig
-     *
-     * @return Response
      * @throws GraphQLQueryException
      * @throws InvalidLocaleException
      * @throws LoaderError
