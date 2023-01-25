@@ -54,6 +54,38 @@ class EcosystemController extends AbstractController
         $groups           = $manager->getCollection('groups');
         $members          = $manager->getCollection('members');
 
+        $order = ['working group'   => 0,
+                  'interest group'  => 1,
+                  'business group'  => 2,
+                  'community group' => 3,
+                  'other'           => 4
+        ];
+        $groups = $groups->getCollection();
+
+        // sort $groups by type order and then by name. If a group has no type, it will be sorted to the end of the list
+        usort($groups, function ($a, $b) use ($order) {
+            $aType = $a['type'] ?? 'other';
+            $bType = $b['type'] ?? 'other';
+
+            if (!array_key_exists($aType, $order)) {
+                $aOrder = $order['other'];
+            } else {
+                $aOrder = $order[$aType];
+            }
+
+            if (!array_key_exists($bType, $order)) {
+                $bOrder = $order['other'];
+            } else {
+                $bOrder = $order[$bType];
+            }
+
+            if ($aOrder === $bOrder) {
+                return strcmp($a['name'], $b['name']);
+            }
+
+            return $aOrder - $bOrder;
+        });
+
         // No evangelists, retrieve bizdev lead
         if (count($evangelists) == 0) {
             $manager->add('bizdev', new Bizdev());
