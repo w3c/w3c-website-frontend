@@ -78,22 +78,28 @@ vendor/bin/dep ssh <environment>
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
 
-You will need to obtain from another developer: *[to update later as sharing process put in place]*
-* A copy of a local `.env.local` file
+More on the [Git workflow for this project](docs/git_workflow.md).
 
-Clone the repository
+### Requirements
+
+* PHP 7.4
+* [Composer](https://getcomposer.org/)
+* [Symfony CLI](https://symfony.com/download#step-1-install-symfony-cli)
+
+### Clone the repository
 
 `git clone git@github.com:w3c/website-frontend.git`
 
 Run `composer install`
 
-Create a local environment file and populate the required variables (see `.env.local.dist`).
+### Configuration
+Create a local environment file and populate the required variables (see `.env.local.dist`):
 
 ```
 cp .env.local.dist .env.local
 ```
 
-More on the [Git workflow for this project](docs/git_workflow.md).
+You can talk to another developer about what these values should contain.
 
 ### Running application locally
 
