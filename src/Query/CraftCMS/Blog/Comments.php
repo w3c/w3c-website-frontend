@@ -16,12 +16,13 @@ class Comments extends GraphQLQuery
         return CraftCMS::class;
     }
 
-    public function __construct(int $id, int $cacheLifetime = CacheLifetime::HOUR)
+    public function __construct(int $id, int $siteId, int $cacheLifetime = CacheLifetime::HOUR)
     {
         $this->setGraphQLFromFile(__DIR__ . '/../graphql/blog/comments.graphql')
             ->setRootPropertyPath('[comments]')
-            ->addVariable('postId', '' . $id)
-//            ->enableCache($cacheLifetime)
+            ->addVariable('postId', $id)
+            ->addVariable('siteId', $siteId)
+            ->cache($cacheLifetime)
         ;
     }
 }

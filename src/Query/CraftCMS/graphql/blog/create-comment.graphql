@@ -1,5 +1,5 @@
-mutation NewComment($parentId: ID, $postId: ID, $name: String, $email: String, $comment: String) {
-    saveComment(newParentId: $parentId, ownerId: $postId, name: $name, email: $email, comment: $comment) {
+mutation NewComment($parentId: ID, $postId: ID, $siteId: ID, $name: String, $email: String, $comment: String) {
+    saveComment(newParentId: $parentId, ownerId: $postId, siteId: $siteId, name: $name, email: $email, comment: $comment) {
         id
         ownerId
         name

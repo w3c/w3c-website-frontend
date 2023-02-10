@@ -422,6 +422,7 @@ class BlogController extends AbstractController
                     'create-comment',
                     (new CreateComment(
                         $newComment['post'],
+                        $page['siteId'],
                         $newComment['name'],
                         $newComment['email'],
                         $newComment['comment'],
@@ -458,7 +459,7 @@ class BlogController extends AbstractController
             new YouMayAlsoLikeRelatedEntries($router, $site->siteHandle, (int)$page['id'])
         );
 
-        $manager->add('comments', new Comments($page['id']));
+        $manager->add('comments', new Comments($page['id'], $page['siteId']));
 
         $crosslinks = $manager->get('crosslinks');
         $singlesBreadcrumbs = $manager->get('singles-breadcrumbs');

@@ -17,6 +17,7 @@ class CreateComment extends GraphQLMutation
 
     public function __construct(
         int $id,
+        int $siteId,
         string $name,
         ?string $email,
         string $comment,
@@ -25,6 +26,7 @@ class CreateComment extends GraphQLMutation
         $this->setGraphQLFromFile(__DIR__ . '/../graphql/blog/create-comment.graphql')
             ->setRootPropertyPath('[saveComment]')
             ->addVariable('postId', $id)
+            ->addVariable('siteId', $siteId)
             ->addVariable('name', $name)
             ->addVariable('email', $email)
             ->addVariable('comment', $comment)
