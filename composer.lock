@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f1c6afbd09ff01ab021dcfb83395c92e",
+    "content-hash": "39958b8f7a307a6f44080e80710e646a",
     "packages": [
         {
             "name": "brick/math",
@@ -3799,16 +3799,16 @@
         },
         {
             "name": "strata/symfony-frontend",
-            "version": "dev-release/0.8.0",
+            "version": "v0.8.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/strata/symfony-frontend.git",
-                "reference": "bab7db6d7b69bfedfa534e1ad68cd335191a2526"
+                "reference": "2cb0649dafa44bbe37aeb3e38123b3cc5273f2e3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/strata/symfony-frontend/zipball/bab7db6d7b69bfedfa534e1ad68cd335191a2526",
-                "reference": "bab7db6d7b69bfedfa534e1ad68cd335191a2526",
+                "url": "https://api.github.com/repos/strata/symfony-frontend/zipball/2cb0649dafa44bbe37aeb3e38123b3cc5273f2e3",
+                "reference": "2cb0649dafa44bbe37aeb3e38123b3cc5273f2e3",
                 "shasum": ""
             },
             "require": {
@@ -3843,9 +3843,9 @@
             "description": "TODO",
             "support": {
                 "issues": "https://github.com/strata/symfony-frontend/issues",
-                "source": "https://github.com/strata/symfony-frontend/tree/release/0.8.0"
+                "source": "https://github.com/strata/symfony-frontend/tree/v0.8.1"
             },
-            "time": "2022-06-30T08:14:40+00:00"
+            "time": "2023-02-10T12:16:23+00:00"
         },
         {
             "name": "symfony/asset",
@@ -12844,17 +12844,9 @@
             "time": "2021-07-28T10:34:58+00:00"
         }
     ],
-    "aliases": [
-        {
-            "package": "strata/symfony-frontend",
-            "version": "dev-release/0.8.0",
-            "alias": "0.8.0",
-            "alias_normalized": "0.8.0.0"
-        }
-    ],
+    "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
-        "strata/symfony-frontend": 20,
         "w3c/website-templates-bundle": 20,
         "roave/security-advisories": 20
     },
