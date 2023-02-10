@@ -15,6 +15,7 @@
         "doctrine/annotations": "^1.0",
         "friendsofsymfony/http-cache-bundle": "^2.11",
         "nelmio/cors-bundle": "^2.1",
+        "nyholm/psr7": "^1.5",
         "phpdocumentor/reflection-docblock": "^5.2",
         "sabre/vobject": "^4.3",
         "sensio/framework-extra-bundle": "^5.1",
@@ -76,7 +77,8 @@
         },
         "allow-plugins": {
             "composer/package-versions-deprecated": true,
-            "symfony/flex": true
+            "symfony/flex": true,
+            "php-http/discovery": true
         }
     },
     "autoload": {
