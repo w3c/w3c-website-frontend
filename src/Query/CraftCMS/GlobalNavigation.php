@@ -82,15 +82,33 @@ class GlobalNavigation extends GraphQLQuery
         ?string $titleExternalLink
     ): ?string {
         if (!$isTitleLinkInternal && $titleExternalLink) {
-            return $titleExternalLink;
+            if (strpos($titleExternalLink, 'http') === 0) {
+                return $titleExternalLink;
+            }
+
+            if (strpos($titleExternalLink, '/') !== 0) {
+                $titleExternalLink = '/' . $titleExternalLink;
+            }
+
+            // add host to relative url
+            return $this->router->getContext()->getScheme() . '://' . $this->router->getContext()->getHost(
+                ) . $titleExternalLink;
         }
 
         if ($titleInternalLink && array_key_exists('sectionHandle', $titleInternalLink)) {
             switch ($titleInternalLink['sectionHandle']) {
                 case 'ecosystems':
-                    return $this->router->generate('app_ecosystem_show', ['slug' => $titleInternalLink['slug']]);
+                    return $this->router->generate(
+                        'app_ecosystem_show',
+                        ['slug' => $titleInternalLink['slug']],
+                        UrlGeneratorInterface::ABSOLUTE_URL
+                    );
                 default:
-                    return $this->router->generate('app_default_index', ['route' => $titleInternalLink['uri']]);
+                    return $this->router->generate(
+                        'app_default_index',
+                        ['route' => $titleInternalLink['uri']],
+                        UrlGeneratorInterface::ABSOLUTE_URL
+                    );
             }
         }
 
