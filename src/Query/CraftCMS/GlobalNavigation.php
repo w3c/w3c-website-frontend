@@ -12,6 +12,7 @@ use Strata\Data\Exception\QueryException;
 use Strata\Data\Mapper\MapArray;
 use Strata\Data\Query\GraphQLQuery;
 use Strata\Data\Transform\Data\CallableData;
+use Symfony\Component\HttpFoundation\UrlHelper;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Routing\RouterInterface;
 
@@ -21,26 +22,28 @@ use Symfony\Component\Routing\RouterInterface;
 class GlobalNavigation extends GraphQLQuery
 {
     private RouterInterface $router;
+    private UrlHelper $urlHelper;
 
     /**
      * Set up query
      *
      * @param RouterInterface $router
+     * @param UrlHelper       $urlHelper
      * @param string          $siteHandle    Site handle to generate global navigation for
      * @param int             $cacheLifetime Cache lifetime to store HTTP response for, defaults to 24 hours
      * @param int             $limit         Results per page, defaults to 6
      *
-     * @throws CacheException
      * @throws GraphQLQueryException
-     * @throws QueryException
      */
     public function __construct(
         RouterInterface $router,
+        UrlHelper $urlHelper,
         string $siteHandle,
         int $cacheLifetime = CacheLifetime::DAY,
         int $limit = 6
     ) {
         $this->router = $router;
+        $this->urlHelper = $urlHelper;
         $this->setGraphQLFromFile(__DIR__ . '/graphql/global-navigation.graphql')
             ->setRootPropertyPath('[entries]')
             ->setTotalResults('[total]')
@@ -82,17 +85,7 @@ class GlobalNavigation extends GraphQLQuery
         ?string $titleExternalLink
     ): ?string {
         if (!$isTitleLinkInternal && $titleExternalLink) {
-            if (strpos($titleExternalLink, 'http') === 0) {
-                return $titleExternalLink;
-            }
-
-            if (strpos($titleExternalLink, '/') !== 0) {
-                $titleExternalLink = '/' . $titleExternalLink;
-            }
-
-            // add host to relative url
-            return $this->router->getContext()->getScheme() . '://' . $this->router->getContext()->getHost(
-                ) . $titleExternalLink;
+            return $this->urlHelper->getAbsoluteUrl($titleExternalLink);
         }
 
         if ($titleInternalLink && array_key_exists('sectionHandle', $titleInternalLink)) {
@@ -129,16 +122,7 @@ class GlobalNavigation extends GraphQLQuery
     public function transformChildLink(?string $url, ?array $internalUri): ?string
     {
         if ($url) {
-            if (strpos($url, 'http') === 0) {
-                return $url;
-            }
-
-            if (strpos($url, '/') !== 0) {
-                $url = '/' . $url;
-            }
-
-            // add host to relative url
-            return $this->router->getContext()->getScheme() . '://' . $this->router->getContext()->getHost() . $url;
+            return $this->urlHelper->getAbsoluteUrl($url);
         }
 
         switch ($internalUri['sectionHandle']) {
@@ -157,6 +141,20 @@ class GlobalNavigation extends GraphQLQuery
         }
     }
 
+    public function transformIntroLinks(array $introLinks): array
+    {
+        $links = [];
+        foreach ($introLinks as $link) {
+            if ($link['url']) {
+                $link['url'] = $this->urlHelper->getAbsoluteUrl($link['url']);
+            }
+
+            $links[] = $link;
+        }
+
+        return $links;
+    }
+
     /**
      * Return mapping strategy to use to map a single item
      *
@@ -173,7 +171,7 @@ class GlobalNavigation extends GraphQLQuery
                 '[titleExternalLink]'
             ),
             '[introText]'  => '[introText]',
-            '[introLinks]' => '[introLinks]',
+            '[introLinks]' => new CallableData([$this, 'transformIntroLinks'], '[introLinks]'),
             '[children]'   => new MapArray('[children]', [
                 '[title]' => '[title]',
                 '[url]' => new CallableData([$this, 'transformChildLink'], '[url]', '[internalLink][0]'),
