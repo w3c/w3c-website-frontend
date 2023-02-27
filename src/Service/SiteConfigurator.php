@@ -40,21 +40,21 @@ class SiteConfigurator
             'siteHandle'   => 'default',
             'siteLink' =>  [
                 'label' => 'English homepage',
-                'url'   => $this->router->generate('app_default_home.en'),
+                'url'   => $this->router->generate('app_default_home.en', [], UrlGeneratorInterface::ABSOLUTE_URL),
             ]
         ]);
         $site->addLocale('ja', [
             'siteHandle' => 'w3c_japan',
             'siteLink' =>  [
                 'label' => '日本語ホームページ',
-                'url'   => $this->router->generate('app_default_home.ja'),
+                'url'   => $this->router->generate('app_default_home.ja', [], UrlGeneratorInterface::ABSOLUTE_URL),
             ]
         ]);
         $site->addLocale('zh-hans', [
             'siteHandle' => 'w3c_china',
             'siteLink' =>  [
                 'label' => '简体中文首页',
-                'url'   => $this->router->generate('app_default_home.zh-hans'),
+                'url'   => $this->router->generate('app_default_home.zh-hans', [], UrlGeneratorInterface::ABSOLUTE_URL),
             ]
         ]);
         $site->addLocale('af', ['siteHandle' => 'afrikaans']);

@@ -12,6 +12,7 @@ use Strata\Data\Exception\QueryException;
 use Strata\Data\Mapper\MapArray;
 use Strata\Data\Query\GraphQLQuery;
 use Strata\Data\Transform\Data\CallableData;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Routing\RouterInterface;
 
 /**
@@ -110,14 +111,31 @@ class GlobalNavigation extends GraphQLQuery
     public function transformChildLink(?string $url, ?array $internalUri): ?string
     {
         if ($url) {
-            return $url;
+            if (strpos($url, 'http') === 0) {
+                return $url;
+            }
+
+            if (strpos($url, '/') !== 0) {
+                $url = '/' . $url;
+            }
+
+            // add host to relative url
+            return $this->router->getContext()->getScheme() . '://' . $this->router->getContext()->getHost() . $url;
         }
 
         switch ($internalUri['sectionHandle']) {
             case 'ecosystems':
-                return $this->router->generate('app_ecosystem_show', ['slug' => $internalUri['slug']]);
+                return $this->router->generate(
+                    'app_ecosystem_show',
+                    ['slug' => $internalUri['slug']],
+                    UrlGeneratorInterface::ABSOLUTE_URL
+                );
             default:
-                return $this->router->generate('app_default_index', ['route' => $internalUri['uri']]);
+                return $this->router->generate(
+                    'app_default_index',
+                    ['route' => $internalUri['uri']],
+                    UrlGeneratorInterface::ABSOLUTE_URL
+                );
         }
     }
 
