@@ -218,7 +218,7 @@ class FeedController extends AbstractController
     }
 
     /**
-     * @Route("/feeds/groups/{type}/{shortname}/")
+     * @Route("/feeds/group/{type}/{shortname}/")
      *
      * @throws GraphQLQueryException
      * @throws InvalidLocaleException
