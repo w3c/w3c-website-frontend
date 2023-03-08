@@ -117,6 +117,62 @@ fragment youMayAlsoLikeRelatedEntries on youMayAlsoLikeRelatedEntries_MatrixFiel
                 }
                 thumbnailAltText
             }
+            ... on blogListing_blogListing_Entry {
+                text: excerpt
+                thumbnailImage {
+                    ...thumbnailImage
+                }
+                thumbnailAltText
+            }
+            ... on ecosystemsLandingPage_ecosystemsLandingPage_Entry {
+                text: excerpt
+                thumbnailImage {
+                    ...thumbnailImage
+                }
+                thumbnailAltText
+            }
+            ... on homepage_homepage_Entry {
+                text: excerpt
+                thumbnailImage {
+                    ...thumbnailImage
+                }
+                thumbnailAltText
+            }
+            ... on newsListing_newsListing_Entry {
+                text: excerpt
+                thumbnailImage {
+                    ...thumbnailImage
+                }
+                thumbnailAltText
+            }
+            ... on pressReleasesListing_pressReleasesListing_Entry {
+                text: excerpt
+                thumbnailImage {
+                    ...thumbnailImage
+                }
+                thumbnailAltText
+            }
+            ... on eventsListing_eventsListing_Entry {
+                text: excerpt
+                thumbnailImage {
+                    ...thumbnailImage
+                }
+                thumbnailAltText
+            }
+            ...on alumniListing_alumniListing_Entry {
+                text: excerpt
+                thumbnailImage {
+                    ...thumbnailImage
+                }
+                thumbnailAltText
+            }
+            ... on newsletterArchive_newsletterArchive_Entry {
+                text: excerpt
+                thumbnailImage {
+                    ...thumbnailImage
+                }
+                thumbnailAltText
+            }
         }
     }
     ... on youMayAlsoLikeRelatedEntries_contentFromAnotherSource_BlockType {
