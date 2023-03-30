@@ -2,14 +2,20 @@
 
 namespace App\Controller;
 
+use App\Query\CraftCMS\Blog\Listing as BlogListing;
+use App\Query\CraftCMS\Ecosystems\Ecosystem as CraftEcosystem;
+use App\Query\CraftCMS\Events\Page;
 use App\Query\CraftCMS\Feeds\Blog;
 use App\Query\CraftCMS\Feeds\Comments;
 use App\Query\CraftCMS\Feeds\Events;
 use App\Query\CraftCMS\Feeds\News;
 use App\Query\CraftCMS\Feeds\PressReleases;
 use App\Query\CraftCMS\Feeds\Taxonomy;
+use App\Query\CraftCMS\News\Listing as NewsListing;
+use App\Query\CraftCMS\PressReleases\Listing as PressReleasesListing;
 use App\Query\CraftCMS\Taxonomies\CategoryInfo;
 use App\Query\CraftCMS\Taxonomies\GroupInfo;
+use App\Query\W3C\Group;
 use DateTimeImmutable;
 use Exception;
 use Laminas\Feed\Writer\Entry;
@@ -24,6 +30,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+use Symfony\Component\Routing\RouterInterface;
 use Twig\Environment;
 use Twig\Error\LoaderError;
 use Twig\Error\RuntimeError;
@@ -32,6 +39,17 @@ use Twig\Error\SyntaxError;
 class FeedController extends AbstractController
 {
     private const LIMIT = 25;
+
+    private Site $site;
+    private Environment $twig;
+    private RouterInterface $router;
+
+    public function __construct(Site $site, Environment $twig, RouterInterface $router)
+    {
+        $this->site   = $site;
+        $this->twig   = $twig;
+        $this->router = $router;
+    }
 
     /**
      * @Route("/blog/feed/")
@@ -44,24 +62,26 @@ class FeedController extends AbstractController
      * @throws SyntaxError
      * @throws Exception
      */
-    public function blog(QueryManager $manager, Site $site, Environment $twig): Response
+    public function blog(QueryManager $manager): Response
     {
-        $manager->add('rss', new Blog($site->siteHandle, self::LIMIT));
+        $manager->add('rss', new Blog($this->site->siteHandle, self::LIMIT));
+        $manager->add('page', new BlogListing($this->site->siteHandle));
         $feedUrl = $this->generateUrl('app_feed_blog', [], UrlGeneratorInterface::ABSOLUTE_URL);
         $pageUrl = $this->generateUrl('app_blog_index', [], UrlGeneratorInterface::ABSOLUTE_URL);
 
         $entries       = $manager->getCollection('rss');
         $commentCounts = $this->getBlogCommentCounts($entries, $manager);
+        $page          = $manager->get('page');
 
         $feed = new Feed();
-        $feed->setTitle("W3C");
-        $feed->setLanguage($site->getLocale());
+        $feed->setTitle("W3C - " . $page['title']);
+        $feed->setLanguage($this->site->getLocale());
 
         $feed->setLink($pageUrl);
         $feed->setFeedLink($feedUrl, 'rss');
 
         $feed->setDateModified(time());
-        $feed->setDescription('Description');
+        $feed->setDescription($page['excerpt']);
 
         foreach ($entries as $data) {
             if (array_key_exists($data['id'], $commentCounts)) {
@@ -69,7 +89,7 @@ class FeedController extends AbstractController
             } else {
                 $data['comments'] = 0;
             }
-            $feed->addEntry($this->buildBlogEntry($data, $feed, $twig));
+            $feed->addEntry($this->buildBlogEntry($data, $feed));
         }
 
         $out = $feed->export('rss');
@@ -88,26 +108,28 @@ class FeedController extends AbstractController
      * @throws SyntaxError
      * @throws Exception
      */
-    public function news(QueryManager $manager, Site $site, Environment $twig): Response
+    public function news(QueryManager $manager): Response
     {
-        $manager->add('rss', new News($site->siteHandle, self::LIMIT));
+        $manager->add('rss', new News($this->site->siteHandle, self::LIMIT));
+        $manager->add('page', new NewsListing($this->site->siteHandle));
         $entries = $manager->getCollection('rss');
+        $page    = $manager->get('page');
 
         $feedUrl = $this->generateUrl('app_feed_news', [], UrlGeneratorInterface::ABSOLUTE_URL);
         $pageUrl = $this->generateUrl('app_news_index', [], UrlGeneratorInterface::ABSOLUTE_URL);
 
         $feed = new Feed();
-        $feed->setTitle("W3C - News");
-        $feed->setLanguage($site->getLocale());
+        $feed->setTitle("W3C - " . $page['title']);
+        $feed->setLanguage($this->site->getLocale());
 
         $feed->setLink($pageUrl);
         $feed->setFeedLink($feedUrl, 'rss');
 
         $feed->setDateModified(time());
-        $feed->setDescription('Description');
+        $feed->setDescription($page['excerpt']);
 
         foreach ($entries as $data) {
-            $feed->addEntry($this->buildNewsEntry($data, $feed, $twig));
+            $feed->addEntry($this->buildNewsEntry($data, $feed));
         }
 
         $out = $feed->export('rss');
@@ -125,26 +147,29 @@ class FeedController extends AbstractController
      * @throws RuntimeError
      * @throws SyntaxError
      */
-    public function pressReleases(QueryManager $manager, Site $site, Environment $twig): Response
+    public function pressReleases(QueryManager $manager): Response
     {
-        $manager->add('rss', new PressReleases($site->siteHandle, self::LIMIT));
+        $manager->add('rss', new PressReleases($this->site->siteHandle, self::LIMIT));
+        $manager->add('page', new PressReleasesListing($this->site->siteHandle));
+
         $entries = $manager->getCollection('rss');
+        $page    = $manager->get('page');
 
         $feedUrl = $this->generateUrl('app_feed_pressreleases', [], UrlGeneratorInterface::ABSOLUTE_URL);
         $pageUrl = $this->generateUrl('app_pressreleases_index', [], UrlGeneratorInterface::ABSOLUTE_URL);
 
         $feed = new Feed();
-        $feed->setTitle("W3C - Press Releases");
-        $feed->setLanguage($site->getLocale());
+        $feed->setTitle('W3C - ' . $page['title']);
+        $feed->setLanguage($this->site->getLocale());
 
         $feed->setLink($pageUrl);
         $feed->setFeedLink($feedUrl, 'rss');
 
         $feed->setDateModified(time());
-        $feed->setDescription('Description');
+        $feed->setDescription($page['excerpt']);
 
         foreach ($entries as $data) {
-            $feed->addEntry($this->buildPressReleaseEntry($data, $feed, $twig));
+            $feed->addEntry($this->buildPressReleaseEntry($data, $feed));
         }
 
         $out = $feed->export('rss');
@@ -163,58 +188,77 @@ class FeedController extends AbstractController
      * @throws SyntaxError
      * @throws Exception
      */
-    public function category(string $slug, QueryManager $manager, Site $site, Environment $twig): Response
+    public function category(string $slug, QueryManager $manager): Response
     {
-        $manager->add('category-info', new CategoryInfo($site->siteHandle, 'blogCategories', $slug));
+        $manager->add('category-info', new CategoryInfo($this->site->siteHandle, 'blogCategories', $slug));
         $category = $manager->get('category-info');
 
         if (!$category) {
             throw $this->createNotFoundException('Category not found');
         }
 
-        $manager->add('rss', new Taxonomy($site->siteHandle, self::LIMIT, $category['id']));
+        $manager->add('rss', new Taxonomy($this->site->siteHandle, self::LIMIT, $category['id']));
 
         $entries = $manager->getCollection('rss');
-        $feedUrl = $this->generateUrl(
-            'app_feed_category',
-            ['slug' => $site->siteHandle],
-            UrlGeneratorInterface::ABSOLUTE_URL
-        );
+        $feedUrl = $this->generateUrl('app_feed_category', ['slug' => $slug], UrlGeneratorInterface::ABSOLUTE_URL);
 
-        return $this->buildTaxonomyFeed($entries, $manager, $category['title'], $site, $feedUrl, $twig);
+        // Category feeds don't have a meaningful description, so we use the title. They also don't have a
+        // dedicated page as they contain posts, news and other content types, so we link to the default URL.
+        return $this->buildTaxonomyFeed(
+            $entries,
+            $manager,
+            $category['title'],
+            $feedUrl,
+            $category['title']
+        );
     }
 
     /**
      * @Route("/feeds/ecosystem/{slug}/")
      *
-     * @return Response
      * @throws GraphQLQueryException
      * @throws InvalidLocaleException
      * @throws LoaderError
      * @throws QueryManagerException
      * @throws RuntimeError
      * @throws SyntaxError
-     * @throws Exception
      */
-    public function ecosystem(string $slug, QueryManager $manager, Site $site, Environment $twig): Response
-    {
-        $manager->add('ecosystem-info', new CategoryInfo($site->siteHandle, 'ecosystems', $slug));
+    public function ecosystem(
+        string $slug,
+        QueryManager $manager
+    ): Response {
+        $manager->add('ecosystem-info', new CategoryInfo($this->site->siteHandle, 'ecosystems', $slug));
         $ecosystem = $manager->get('ecosystem-info');
 
         if (!$ecosystem) {
             throw $this->createNotFoundException('Category not found');
         }
 
-        $manager->add('rss', new Taxonomy($site->siteHandle, self::LIMIT, null, $ecosystem['id']));
+        $manager->add('rss', new Taxonomy($this->site->siteHandle, self::LIMIT, null, $ecosystem['id']));
+        $manager->add('page', new CraftEcosystem($this->router, $this->site->siteHandle, $slug));
+        $page = $manager->get('page');
+        $title = $ecosystem['title'] . ' Ecosystem';
+
+        if (array_key_exists('pageLead', $page)) {
+            $description = $page['pageLead'];
+        } elseif (array_key_exists('excerpt', $page)) {
+            $description = $page['excerpt'];
+        } else {
+            $description = $title;
+        }
 
         $entries = $manager->getCollection('rss');
-        $feedUrl = $this->generateUrl(
-            'app_feed_ecosystem',
-            ['slug' => $site->siteHandle],
-            UrlGeneratorInterface::ABSOLUTE_URL
-        );
+        $feedUrl = $this->generateUrl('app_feed_ecosystem', ['slug' => $slug], UrlGeneratorInterface::ABSOLUTE_URL);
+        $pageUrl = $this->generateUrl('app_ecosystem_show', ['slug' => $slug], UrlGeneratorInterface::ABSOLUTE_URL);
 
-        return $this->buildTaxonomyFeed($entries, $manager, $ecosystem['title'], $site, $feedUrl, $twig);
+        return $this->buildTaxonomyFeed(
+            $entries,
+            $manager,
+            $title,
+            $feedUrl,
+            $description,
+            $pageUrl,
+        );
     }
 
     /**
@@ -227,27 +271,37 @@ class FeedController extends AbstractController
      * @throws RuntimeError
      * @throws SyntaxError
      */
-    public function group(string $type, string $shortname, QueryManager $manager, Site $site, Environment $twig):
+    public function group(string $type, string $shortname, QueryManager $manager):
     Response
     {
         $slug = $type . '-' . $shortname;
-        $manager->add('group-info', new GroupInfo($site->siteHandle, $slug));
-        $group = $manager->get('group-info');
+        $manager->add('group-info', new GroupInfo($this->site->siteHandle, $slug));
+        $manager->add('group', new Group($type, $shortname));
+        $cmsGroup = $manager->get('group-info');
+        $group    = $manager->get('group');
 
-        if (!$group) {
+        if (!$cmsGroup || !$group) {
             throw $this->createNotFoundException('Group not found');
         }
 
-        $manager->add('rss', new Taxonomy($site->siteHandle, self::LIMIT, null, null, $group['id']));
+        $manager->add('rss', new Taxonomy($this->site->siteHandle, self::LIMIT, null, null, $cmsGroup['id']));
 
         $entries = $manager->getCollection('rss');
         $feedUrl = $this->generateUrl(
-            'app_feed_ecosystem',
-            ['slug' => $site->siteHandle],
+            'app_feed_group',
+            ['type' => $type, 'shortname' => $shortname],
             UrlGeneratorInterface::ABSOLUTE_URL
         );
+        $pageUrl = $group['_links']['homepage']['href'];
 
-        return $this->buildTaxonomyFeed($entries, $manager, $group['title'], $site, $feedUrl, $twig);
+        return $this->buildTaxonomyFeed(
+            $entries,
+            $manager,
+            $group['name'],
+            $feedUrl,
+            $group['description'],
+            $pageUrl
+        );
     }
 
     /**
@@ -260,26 +314,28 @@ class FeedController extends AbstractController
      * @throws RuntimeError
      * @throws SyntaxError
      */
-    public function events(QueryManager $manager, Site $site, Environment $twig): Response
+    public function events(QueryManager $manager): Response
     {
-        $manager->add('rss', new Events($site->siteHandle, self::LIMIT));
+        $manager->add('rss', new Events($this->site->siteHandle, self::LIMIT));
+        $manager->add('page', new Page($this->site->siteHandle));
         $entries = $manager->getCollection('rss');
+        $page    = $manager->get('page');
 
         $feedUrl = $this->generateUrl('app_feed_events', [], UrlGeneratorInterface::ABSOLUTE_URL);
         $pageUrl = $this->generateUrl('app_events_index', [], UrlGeneratorInterface::ABSOLUTE_URL);
 
         $feed = new Feed();
-        $feed->setTitle("W3C - Events");
-        $feed->setLanguage($site->getLocale());
+        $feed->setTitle('W3C - ' . $page['title']);
+        $feed->setLanguage($this->site->getLocale());
 
         $feed->setLink($pageUrl);
         $feed->setFeedLink($feedUrl, 'rss');
 
         $feed->setDateModified(time());
-        $feed->setDescription('Description');
+        $feed->setDescription($page['excerpt']);
 
         foreach ($entries as $data) {
-            $feed->addEntry($this->buildEventEntry($data, $feed, $twig));
+            $feed->addEntry($this->buildEventEntry($data, $feed));
         }
 
         $out = $feed->export('rss');
@@ -316,11 +372,11 @@ class FeedController extends AbstractController
      * @throws SyntaxError
      * @throws Exception
      */
-    private function buildBlogEntry(array $data, Feed $feed, Environment $twig): Entry
+    private function buildBlogEntry(array $data, Feed $feed): Entry
     {
         $date  = new DateTimeImmutable($data['date']);
 
-        $entry = $this->buildBasicEntry($data, $feed, $date, $twig);
+        $entry = $this->buildBasicEntry($data, $feed, $date);
 
         $url = $this->generateUrl(
             'app_blog_show',
@@ -341,11 +397,11 @@ class FeedController extends AbstractController
      * @throws SyntaxError
      * @throws Exception
      */
-    private function buildEventEntry(array $data, Feed $feed, Environment $twig): Entry
+    private function buildEventEntry(array $data, Feed $feed): Entry
     {
         $date = new DateTimeImmutable($data['date']);
 
-        $entry = $this->buildBasicEntry($data, $feed, $date, $twig);
+        $entry = $this->buildBasicEntry($data, $feed, $date);
 
         switch ($data['typeHandle']) {
             case 'external':
@@ -381,11 +437,11 @@ class FeedController extends AbstractController
      * @throws SyntaxError
      * @throws Exception
      */
-    private function buildNewsEntry(array $data, Feed $feed, Environment $twig): Entry
+    private function buildNewsEntry(array $data, Feed $feed): Entry
     {
         $date = new DateTimeImmutable($data['date']);
 
-        $entry = $this->buildBasicEntry($data, $feed, $date, $twig);
+        $entry = $this->buildBasicEntry($data, $feed, $date);
 
         $entry->setLink(
             $this->generateUrl(
@@ -405,11 +461,11 @@ class FeedController extends AbstractController
      * @throws SyntaxError
      * @throws Exception
      */
-    private function buildPressReleaseEntry(array $data, Feed $feed, Environment $twig): Entry
+    private function buildPressReleaseEntry(array $data, Feed $feed): Entry
     {
         $date = new DateTimeImmutable($data['date']);
 
-        $entry = $this->buildBasicEntry($data, $feed, $date, $twig);
+        $entry = $this->buildBasicEntry($data, $feed, $date);
 
         $entry->setLink(
             $this->generateUrl(
@@ -428,7 +484,7 @@ class FeedController extends AbstractController
      * @throws RuntimeError
      * @throws SyntaxError
      */
-    private function buildBasicEntry(array $data, Feed $feed, DateTimeImmutable $date, Environment $twig): Entry
+    private function buildBasicEntry(array $data, Feed $feed, DateTimeImmutable $date): Entry
     {
         $entry = $feed->createEntry();
         $entry->setTitle($data['title']);
@@ -461,7 +517,7 @@ class FeedController extends AbstractController
             count($data['defaultFlexibleComponents']) > 0
         ) {
             $entry->setContent(
-                $twig->render('rss_entry.html.twig', ['components' => $data['defaultFlexibleComponents']])
+                $this->twig->render('rss_entry.html.twig', ['components' => $data['defaultFlexibleComponents']])
             );
         } elseif (array_key_exists('pageContent', $data) && $data['pageContent']) {
             $entry->setContent($data['pageContent']);
@@ -482,18 +538,22 @@ class FeedController extends AbstractController
         Collection $entries,
         QueryManager $manager,
         $title,
-        Site $site,
         string $feedUrl,
-        Environment $twig
+        string $description,
+        string $pageUrl = null
     ): Response {
         $commentCounts = $this->getBlogCommentCounts($entries, $manager);
 
         $feed = new Feed();
         $feed->setTitle("W3C - " . $title);
-        $feed->setDescription('Description');
-        $feed->setLanguage($site->getLocale());
+        $feed->setDescription($description);
+        $feed->setLanguage($this->site->getLocale());
 
-        $feed->setLink('https://www.w3.org/');
+        if ($pageUrl) {
+            $feed->setLink($pageUrl);
+        } else {
+            $feed->setLink($this->router->generate('app_default_home', [], UrlGeneratorInterface::ABSOLUTE_URL));
+        }
         $feed->setFeedLink($feedUrl, 'rss');
 
         $feed->setDateModified(time());
@@ -506,16 +566,16 @@ class FeedController extends AbstractController
                     } else {
                         $data['comments'] = 0;
                     }
-                    $feed->addEntry($this->buildBlogEntry($data, $feed, $twig));
+                    $feed->addEntry($this->buildBlogEntry($data, $feed));
                     break;
                 case 'events':
-                    $feed->addEntry($this->buildEventEntry($data, $feed, $twig));
+                    $feed->addEntry($this->buildEventEntry($data, $feed));
                     break;
                 case 'newsArticles':
-                    $feed->addEntry($this->buildNewsEntry($data, $feed, $twig));
+                    $feed->addEntry($this->buildNewsEntry($data, $feed));
                     break;
                 case 'pressReleases':
-                    $feed->addEntry($this->buildPressReleaseEntry($data, $feed, $twig));
+                    $feed->addEntry($this->buildPressReleaseEntry($data, $feed));
                     break;
             }
         }
