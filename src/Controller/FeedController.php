@@ -28,6 +28,7 @@ use Strata\Frontend\Exception\InvalidLocaleException;
 use Strata\Frontend\Site;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Routing\RouterInterface;
@@ -222,11 +223,10 @@ class FeedController extends AbstractController
      * @throws QueryManagerException
      * @throws RuntimeError
      * @throws SyntaxError
+     * @throws NotFoundHttpException
      */
-    public function ecosystem(
-        string $slug,
-        QueryManager $manager
-    ): Response {
+    public function ecosystem(string $slug, QueryManager $manager): Response
+    {
         $manager->add('ecosystem-info', new CategoryInfo($this->site->siteHandle, 'ecosystems', $slug));
         $ecosystem = $manager->get('ecosystem-info');
 
@@ -271,8 +271,7 @@ class FeedController extends AbstractController
      * @throws RuntimeError
      * @throws SyntaxError
      */
-    public function group(string $type, string $shortname, QueryManager $manager):
-    Response
+    public function group(string $type, string $shortname, QueryManager $manager): Response
     {
         $slug = $type . '-' . $shortname;
         $manager->add('group-info', new GroupInfo($this->site->siteHandle, $slug));
