@@ -179,7 +179,7 @@ class FeedController extends AbstractController
     }
 
     /**
-     * @Route("/feeds/category/{slug}/")
+     * @Route("/category/{slug}/feed/")
      *
      * @throws GraphQLQueryException
      * @throws InvalidLocaleException
@@ -215,7 +215,7 @@ class FeedController extends AbstractController
     }
 
     /**
-     * @Route("/feeds/ecosystem/{slug}/")
+     * @Route("/ecosystem/{slug}/feed/")
      *
      * @throws GraphQLQueryException
      * @throws InvalidLocaleException
@@ -262,7 +262,7 @@ class FeedController extends AbstractController
     }
 
     /**
-     * @Route("/feeds/group/{type}/{shortname}/")
+     * @Route("/groups/{type}/{shortname}/feed/")
      *
      * @throws GraphQLQueryException
      * @throws InvalidLocaleException
