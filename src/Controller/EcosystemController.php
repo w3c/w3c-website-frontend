@@ -137,7 +137,7 @@ class EcosystemController extends AbstractController
         ];
         $page['feeds'] = [
             [
-                'title' => 'W3C - ' . $page['title'] . ' ecosystem',
+                'title' => 'W3C - ' . $page['title'] . ' Ecosystem',
                 'href'  => $this->generateUrl('app_feed_ecosystem', ['slug' => $slug])
             ]
         ];
