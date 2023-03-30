@@ -82,7 +82,7 @@ class FeedController extends AbstractController
         $feed->setFeedLink($feedUrl, 'rss');
 
         $feed->setDateModified(time());
-        $feed->setDescription($page['excerpt']);
+        $feed->setDescription($page['excerpt'] ?? $page['title']);
 
         foreach ($entries as $data) {
             if (array_key_exists($data['id'], $commentCounts)) {
@@ -127,7 +127,7 @@ class FeedController extends AbstractController
         $feed->setFeedLink($feedUrl, 'rss');
 
         $feed->setDateModified(time());
-        $feed->setDescription($page['excerpt']);
+        $feed->setDescription($page['excerpt'] ?? $page['title']);
 
         foreach ($entries as $data) {
             $feed->addEntry($this->buildNewsEntry($data, $feed));
@@ -167,7 +167,7 @@ class FeedController extends AbstractController
         $feed->setFeedLink($feedUrl, 'rss');
 
         $feed->setDateModified(time());
-        $feed->setDescription($page['excerpt']);
+        $feed->setDescription($page['excerpt'] ?? $page['title']);
 
         foreach ($entries as $data) {
             $feed->addEntry($this->buildPressReleaseEntry($data, $feed));
@@ -239,9 +239,9 @@ class FeedController extends AbstractController
         $page = $manager->get('page');
         $title = $ecosystem['title'] . ' Ecosystem';
 
-        if (array_key_exists('pageLead', $page)) {
+        if (array_key_exists('pageLead', $page) && $page['pageLead']) {
             $description = $page['pageLead'];
-        } elseif (array_key_exists('excerpt', $page)) {
+        } elseif (array_key_exists('excerpt', $page) && $page['excerpt']) {
             $description = $page['excerpt'];
         } else {
             $description = $title;
@@ -331,7 +331,7 @@ class FeedController extends AbstractController
         $feed->setFeedLink($feedUrl, 'rss');
 
         $feed->setDateModified(time());
-        $feed->setDescription($page['excerpt']);
+        $feed->setDescription($page['excerpt'] ?? $page['title']);
 
         foreach ($entries as $data) {
             $feed->addEntry($this->buildEventEntry($data, $feed));
