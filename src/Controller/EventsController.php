@@ -226,7 +226,7 @@ class EventsController extends AbstractController
             ['slug' => $slug, 'type' => $eventType['slug'], 'year' => $year]
         );
         $page['feeds'] = array_merge(
-            [['title' => 'W3C Events', 'href' => $this->generateUrl('app_feed_events')]],
+            [['title' => 'W3C - Events', 'href' => $this->generateUrl('app_feed_events')]],
             $feedHelper->buildTaxonomyFeeds($page)
         );
 
@@ -368,7 +368,7 @@ class EventsController extends AbstractController
             }
         }
 
-        $page['feeds'] = [['title' => 'W3C Press Releases', 'href' => $this->generateUrl('app_feed_events')]];
+        $page['feeds'] = [['title' => 'W3C - Events', 'href' => $this->generateUrl('app_feed_events')]];
         if ($categorySlug) {
             $page['feeds'][] = [
                 'title' => 'W3C - ' . $filters['categories'][$categorySlug]['title'],

@@ -95,7 +95,7 @@ class BlogController extends AbstractController
             'url'    => $singlesBreadcrumbs['blog']['url'],
             'parent' => $singlesBreadcrumbs['homepage']
         ];
-        $page['feeds'] = [['title' => 'W3C Blog', 'href' => $this->generateUrl('app_feed_blog')]];
+        $page['feeds'] = [['title' => 'W3C - Blog', 'href' => $this->generateUrl('app_feed_blog')]];
 
         return $this->render('blog/index.html.twig', [
             'site'       => $site,
@@ -173,7 +173,7 @@ class BlogController extends AbstractController
         ];
         $page['title'] = $page['title'] . ' - ' . $year;
 
-        $page['feeds'] = [['title' => 'W3C Blog', 'href' => $this->generateUrl('app_feed_blog')]];
+        $page['feeds'] = [['title' => 'W3C - Blog', 'href' => $this->generateUrl('app_feed_blog')]];
 
         return $this->render('blog/index.html.twig', [
             'site'       => $site,
@@ -266,7 +266,7 @@ class BlogController extends AbstractController
         ];
         $page['title']       = $page['title'] . ' - ' . $category['title'];
         $page['feeds'] = [
-            ['title' => 'W3C Blog', 'href' => $this->generateUrl('app_feed_blog')],
+            ['title' => 'W3C - Blog', 'href' => $this->generateUrl('app_feed_blog')],
             [
                 'title' => 'W3C - ' . $categories[$slug]['title'],
                 'href'  => $this->generateUrl('app_feed_category', ['slug' => $slug])
@@ -362,7 +362,7 @@ class BlogController extends AbstractController
             ]
         ];
         $page['title']       = $page['title'] . ' - ' . $tag['title'];
-        $page['feeds'] = [['title' => 'W3C Blog', 'href' => $this->generateUrl('app_feed_blog')]];
+        $page['feeds'] = [['title' => 'W3C - Blog', 'href' => $this->generateUrl('app_feed_blog')]];
 
         return $this->render('blog/index.html.twig', [
             'site'       => $site,
@@ -486,7 +486,7 @@ class BlogController extends AbstractController
             ]
         ];
         $page['feeds'] = array_merge(
-            [['title' => 'W3C Blog', 'href' => $this->generateUrl('app_feed_blog')]],
+            [['title' => 'W3C - Blog', 'href' => $this->generateUrl('app_feed_blog')]],
             $feedHelper->buildTaxonomyFeeds($page)
         );
 

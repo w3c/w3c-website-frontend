@@ -77,7 +77,7 @@ class NewsController extends AbstractController
             'parent' => $singlesBreadcrumbs['homepage']
         ];
 
-        $page['feeds'] = [['title' => 'W3C News', 'href' => $this->generateUrl('app_feed_news')]];
+        $page['feeds'] = [['title' => 'W3C - News', 'href' => $this->generateUrl('app_feed_news')]];
 
         return $this->render('news/index.html.twig', [
             'site'       => $site,
@@ -145,7 +145,7 @@ class NewsController extends AbstractController
         ];
         $page['title']       = $page['title'] . ' - ' . $year;
 
-        $page['feeds'] = [['title' => 'W3C News', 'href' => $this->generateUrl('app_feed_news')]];
+        $page['feeds'] = [['title' => 'W3C - News', 'href' => $this->generateUrl('app_feed_news')]];
 
         return $this->render('news/index.html.twig', [
             'site'       => $site,
@@ -202,7 +202,7 @@ class NewsController extends AbstractController
             ]
         ];
         $page['feeds'] = array_merge(
-            [['title' => 'W3C News', 'href' => $this->generateUrl('app_feed_news')]],
+            [['title' => 'W3C - News', 'href' => $this->generateUrl('app_feed_news')]],
             $feedHelper->buildTaxonomyFeeds($page)
         );
 
