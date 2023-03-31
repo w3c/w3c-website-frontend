@@ -215,7 +215,7 @@ class FeedController extends AbstractController
     }
 
     /**
-     * @Route("/ecosystem/{slug}/feed/")
+     * @Route("/ecosystems/{slug}/feed/")
      *
      * @throws GraphQLQueryException
      * @throws InvalidLocaleException
