@@ -75,7 +75,7 @@ class PressReleasesController extends AbstractController
             'url'    => $singlesBreadcrumbs['pressReleases']['url'],
             'parent' => $singlesBreadcrumbs['homepage']
         ];
-        $page['feeds'] = [['title' => 'W3C Press Releases', 'href' => $this->generateUrl('app_feed_pressreleases')]];
+        $page['feeds'] = [['title' => 'W3C - Press Releases', 'href' => $this->generateUrl('app_feed_pressreleases')]];
 
         return $this->render('press-releases/index.html.twig', [
             'site'       => $site,
@@ -139,7 +139,7 @@ class PressReleasesController extends AbstractController
             ]
         ];
         $page['title']       = $page['title'] . ' - ' . $year;
-        $page['feeds'] = [['title' => 'W3C Press Releases', 'href' => $this->generateUrl('app_feed_pressreleases')]];
+        $page['feeds'] = [['title' => 'W3C - Press Releases', 'href' => $this->generateUrl('app_feed_pressreleases')]];
 
         return $this->render('press-releases/index.html.twig', [
             'site'       => $site,
@@ -195,7 +195,7 @@ class PressReleasesController extends AbstractController
             ]
         ];
         $page['feeds'] = array_merge(
-            [['title' => 'W3C Press Releases', 'href' => $this->generateUrl('app_feed_pressreleases')]],
+            [['title' => 'W3C - Press Releases', 'href' => $this->generateUrl('app_feed_pressreleases')]],
             $feedHelper->buildTaxonomyFeeds($page)
         );
 

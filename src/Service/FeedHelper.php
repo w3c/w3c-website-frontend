@@ -27,7 +27,7 @@ class FeedHelper
         if (array_key_exists('ecosystems', $page)) {
             foreach ($page['ecosystems'] as $ecosystem) {
                 $feeds[] = [
-                    'title' => 'W3C - ' . $ecosystem['title'] . ' ecosystem',
+                    'title' => 'W3C - ' . $ecosystem['title'] . ' Ecosystem',
                     'href'  => $this->router->generate('app_feed_ecosystem', ['slug' => $ecosystem['slug']])
                 ];
             }
