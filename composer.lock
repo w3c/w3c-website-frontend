@@ -2652,16 +2652,16 @@
         },
         {
             "name": "phpstan/phpdoc-parser",
-            "version": "1.17.1",
+            "version": "1.18.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpdoc-parser.git",
-                "reference": "d3753fcb3abc6f78f5de6f72153d4b9c99c72dee"
+                "reference": "882eabc9b6a12e25c27091a261397f9c8792e722"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpdoc-parser/zipball/d3753fcb3abc6f78f5de6f72153d4b9c99c72dee",
-                "reference": "d3753fcb3abc6f78f5de6f72153d4b9c99c72dee",
+                "url": "https://api.github.com/repos/phpstan/phpdoc-parser/zipball/882eabc9b6a12e25c27091a261397f9c8792e722",
+                "reference": "882eabc9b6a12e25c27091a261397f9c8792e722",
                 "shasum": ""
             },
             "require": {
@@ -2691,9 +2691,9 @@
             "description": "PHPDoc parser with support for nullable, intersection and generic types",
             "support": {
                 "issues": "https://github.com/phpstan/phpdoc-parser/issues",
-                "source": "https://github.com/phpstan/phpdoc-parser/tree/1.17.1"
+                "source": "https://github.com/phpstan/phpdoc-parser/tree/1.18.0"
             },
-            "time": "2023-04-04T11:11:22+00:00"
+            "time": "2023-04-06T07:26:43+00:00"
         },
         {
             "name": "psr/cache",
@@ -9287,12 +9287,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/w3c/w3c-website-templates-bundle.git",
-                "reference": "99f08761f83cf2e29b6afdd90cc1066423977d55"
+                "reference": "332ad479524a4d6151e9cff0bcdec05ef54c9876"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/w3c/w3c-website-templates-bundle/zipball/99f08761f83cf2e29b6afdd90cc1066423977d55",
-                "reference": "99f08761f83cf2e29b6afdd90cc1066423977d55",
+                "url": "https://api.github.com/repos/w3c/w3c-website-templates-bundle/zipball/332ad479524a4d6151e9cff0bcdec05ef54c9876",
+                "reference": "332ad479524a4d6151e9cff0bcdec05ef54c9876",
                 "shasum": ""
             },
             "require": {
@@ -9330,7 +9330,7 @@
             "support": {
                 "source": "https://github.com/w3c/w3c-website-templates-bundle/tree/main"
             },
-            "time": "2023-04-03T14:54:37+00:00"
+            "time": "2023-04-06T07:50:20+00:00"
         },
         {
             "name": "webmozart/assert",
@@ -10566,12 +10566,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Roave/SecurityAdvisories.git",
-                "reference": "49bcdfcfebe63a59d1b19b1eb12737868011e2c7"
+                "reference": "4bc7e4217fbc96c8f18283eb6425b6068fa5f8a0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Roave/SecurityAdvisories/zipball/49bcdfcfebe63a59d1b19b1eb12737868011e2c7",
-                "reference": "49bcdfcfebe63a59d1b19b1eb12737868011e2c7",
+                "url": "https://api.github.com/repos/Roave/SecurityAdvisories/zipball/4bc7e4217fbc96c8f18283eb6425b6068fa5f8a0",
+                "reference": "4bc7e4217fbc96c8f18283eb6425b6068fa5f8a0",
                 "shasum": ""
             },
             "conflict": {
@@ -10785,7 +10785,7 @@
                 "kimai/kimai": "<1.1",
                 "kitodo/presentation": "<3.1.2",
                 "klaviyo/magento2-extension": ">=1,<3",
-                "knplabs/knp-snappy": "<=1.4.1",
+                "knplabs/knp-snappy": "<1.4.2",
                 "krayin/laravel-crm": "<1.2.2",
                 "kreait/firebase-php": ">=3.2,<3.8.1",
                 "la-haute-societe/tcpdf": "<6.2.22",
@@ -11158,7 +11158,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2023-04-03T22:04:05+00:00"
+            "time": "2023-04-05T21:04:16+00:00"
         },
         {
             "name": "sebastian/cli-parser",
