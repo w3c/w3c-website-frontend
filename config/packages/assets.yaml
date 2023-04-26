@@ -2,6 +2,6 @@ framework:
     assets:
         packages:
             website-2021:
-                base_path: '%env(ASSETS_WEBSITE_2021)%'
+                base_urls: '%env(ASSETS_WEBSITE_2021)%'
             logos:
-                base_path: '%env(ASSETS_LOGOS)%'
+                base_urls: '%env(ASSETS_LOGOS)%'

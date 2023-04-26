@@ -1,9 +1,0 @@
-framework:
-    assets:
-        packages:
-            website-2021:
-                base_urls: '%env(ASSETS_WEBSITE_2021)%'
-                base_path: ~
-            logos:
-                base_urls: '%env(ASSETS_LOGOS)%'
-                base_path: ~
