@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "48526a61e1e386e18d9b0faa66768926",
+    "content-hash": "39939d238b09c8ffcdb5cc9c40fa1474",
     "packages": [
         {
             "name": "brick/math",
@@ -12019,27 +12019,25 @@
         },
         {
             "name": "studio24/deployer-recipes",
-            "version": "v1.0.1",
+            "version": "dev-update-to-deployer-7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/studio24/deployer-recipes.git",
-                "reference": "7fd15f6ced0bd4203e4a4d1e5af4a5d473982386"
+                "reference": "42ec248afbfaa9601fec1b17cb3ab9d1d383f0e4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/studio24/deployer-recipes/zipball/7fd15f6ced0bd4203e4a4d1e5af4a5d473982386",
-                "reference": "7fd15f6ced0bd4203e4a4d1e5af4a5d473982386",
+                "url": "https://api.github.com/repos/studio24/deployer-recipes/zipball/42ec248afbfaa9601fec1b17cb3ab9d1d383f0e4",
+                "reference": "42ec248afbfaa9601fec1b17cb3ab9d1d383f0e4",
                 "shasum": ""
             },
             "require": {
-                "ext-json": "*",
-                "php": ">=7.2",
-                "symfony/http-client": "^5.2"
+                "deployer/deployer": "^7.3",
+                "php": ">=8.0"
             },
             "require-dev": {
-                "deployer/deployer": "^6.8",
                 "overtrue/phplint": "^2.3",
-                "squizlabs/php_codesniffer": "^3.5"
+                "squizlabs/php_codesniffer": "^3.7"
             },
             "type": "library",
             "notification-url": "https://packagist.org/downloads/",
@@ -12060,9 +12058,9 @@
             "homepage": "https://github.com/studio24/deployer-recipes",
             "support": {
                 "issues": "https://github.com/studio24/deployer-recipes/issues",
-                "source": "https://github.com/studio24/deployer-recipes/tree/v1.0.1"
+                "source": "https://github.com/studio24/deployer-recipes/tree/update-to-deployer-7"
             },
-            "time": "2021-03-19T10:22:10+00:00"
+            "time": "2023-06-06T09:30:36+00:00"
         },
         {
             "name": "symfony/browser-kit",
@@ -12757,7 +12755,8 @@
     "minimum-stability": "dev",
     "stability-flags": {
         "w3c/website-templates-bundle": 20,
-        "roave/security-advisories": 20
+        "roave/security-advisories": 20,
+        "studio24/deployer-recipes": 20
     },
     "prefer-stable": true,
     "prefer-lowest": false,

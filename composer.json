@@ -56,7 +56,7 @@
         "overtrue/phplint": "^3.0",
         "phpunit/phpunit": "^9.5",
         "squizlabs/php_codesniffer": "^3.5",
-        "studio24/deployer-recipes": "^1.0",
+        "studio24/deployer-recipes": "dev-update-to-deployer-7",
         "symfony/browser-kit": "^5.4",
         "symfony/css-selector": "^5.4",
         "symfony/debug-bundle": "^5.4",
@@ -102,12 +102,6 @@
             "assets:install %PUBLIC_DIR%": "symfony-cmd",
             "cache:clear": "symfony-cmd"
         },
-        "post-install-cmd": [
-            "@auto-scripts"
-        ],
-        "post-update-cmd": [
-            "@auto-scripts"
-        ],
         "test": [
             "./vendor/bin/phplint",
             "./vendor/bin/phpcs",
