@@ -120,11 +120,17 @@ You should be able to find your API Read and Publish tokens by going to the Craf
 
 ### Running application locally
 
-You can run the frontend application locally at http://localhost:8000/ by running the command:
+Before running the below command, please ensure you have the [Symfony CLI installed](https://symfony.com/download#step-1-install-symfony-cli)
+
+Once you have the Symfony CLI installed (or you have ensured you already have it installed), you can run the frontend application locally at http://localhost:8000/ by running
 
 ```
 symfony server:start
 ```
+In your terminal
+
+***Note:*** A good way to test if something will break if you deploy it to live is to switch your local env’s CraftCMS API URL and Read and Publish tokens to the production CMS
+**(Please be careful about any changes you make in the Production CMS as they will be visible on the live site)**
 
 ## Built with
 
