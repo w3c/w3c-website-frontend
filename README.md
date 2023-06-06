@@ -29,7 +29,7 @@ Beta:
 * https://beta.w3.org
 * https://beta.w3.org/_build_summary.json
 
-### Staging
+### Staging ***Not currently in use***
 * https://www-staging.w3.org
 * https://www-staging.w3.org/_build_summary.json
 
@@ -38,6 +38,7 @@ Beta:
 * https://www-dev.w3.org/_build_summary.json
 
 Access to https://www-dev.w3.org is restricted by IP.
+**S24 Note: Connect to office VPN**
 
 ### Local
 * http://localhost:8000/ (see [running application locally](#running-application-locally)) 
@@ -82,7 +83,7 @@ More on the [Git workflow for this project](docs/git_workflow.md).
 
 ### Requirements
 
-* PHP 7.4
+* PHP 7.4 (Upgrading to 8.2)
 * [Composer](https://getcomposer.org/)
 * [Symfony CLI](https://symfony.com/download#step-1-install-symfony-cli)
 
@@ -90,7 +91,15 @@ More on the [Git workflow for this project](docs/git_workflow.md).
 
 `git clone git@github.com:w3c/website-frontend.git`
 
-Run `composer install`
+### Install and update composer dependencies
+
+```bash
+composer install
+
+#Once the install is done
+
+composer update
+```
 
 ### Configuration
 Create a local environment file and populate the required variables (see `.env.local.dist`):
@@ -98,8 +107,14 @@ Create a local environment file and populate the required variables (see `.env.l
 ```
 cp .env.local.dist .env.local
 ```
+**Configure your local env file**
+The W3C API URL and the Craft API URL are available in 1pass.
+Ensure that your app environment is set to `dev`
+You should be able to access your W3C API Key from your [W3C account](https://auth.w3.org/login)
 
-You can talk to another developer about what these values should contain.
+### Craft CMS Tokens
+
+You should be able to find your API Read and Publish tokens by going to the CraftCMS dashboard (see the [Craft repo](https://github.com/w3c/w3c-website-craft))
 
 ### Running application locally
 
