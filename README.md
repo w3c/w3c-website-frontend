@@ -101,6 +101,8 @@ composer install
 composer update
 ```
 
+***Note:*** If you already have this project installed locally and you're having trouble seeing any changes, make sure you have cleared your Symfony cache using the `bin/console cache:clear` command.
+
 ### Configuration
 Create a local environment file and populate the required variables (see `.env.local.dist`):
 
