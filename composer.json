@@ -51,6 +51,7 @@
         "w3c/website-templates-bundle": "dev-main"
     },
     "require-dev": {
+        "deployer/deployer": "^7.3.1",
         "roave/security-advisories": "dev-latest",
         "overtrue/phplint": "^3.0",
         "phpunit/phpunit": "^9.5",
