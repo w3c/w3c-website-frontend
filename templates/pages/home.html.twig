@@ -56,5 +56,6 @@
             membersScript.src = "{{ asset('js/members.js', 'website-2021') }}";
             document.querySelector('body').appendChild(membersScript);
         </script>
+        <script>console.log("This site uses the {{ app.request.server.get('APP_ENV') }} environment.")</script>
     {% endif %}
 {% endblock %}
