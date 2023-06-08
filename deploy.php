@@ -8,33 +8,6 @@ require 'vendor/studio24/deployer-recipes/recipe/common.php';
  * Deployment configuration variables - set on a per-project basis
  */
 
-// Friendly project name
-// $project_name = 'W3C Frontend';
-
-// The repo for the project
-// $repository = 'git@github.com:w3c/w3c-website-frontend.git';
-
-// Array of remote => local file locations to sync to your local development computer
-$sync = [
-
-];
-
-// Shared files that are not in git and need to persist between deployments (e.g. local config)
-// $shared_files = [
-//     '.env.local'
-// ];
-
-// Shared directories that are not in git and need to persist between deployments (e.g. uploaded images)
-// $shared_directories = [
-//     'var/log',
-//     'var/sessions'
-// ];
-
-// Sets directories as writable (e.g. uploaded images)
-$writable_directories = [
-    'var/cache'
-];
-
 /**
  * Apply configuration to Deployer
  *
@@ -52,12 +25,15 @@ set('shared_dirs', [
         'var/sessions'
 ]);
 set('writable_dirs', ['var/cache']);
-set('sync', $sync);
+
 set('http_user', 'www-data');
+
 set('webroot', 'public');
 set('git_tty', true);
 set('allow_anonymous_stats', false);
 
+set('git_ssh_command', 'ssh');
+set( 'writable_mode', 'acl');
 /*
  * Host information
  * These settings should not need amending
@@ -71,8 +47,7 @@ host('production')
     ->set('remote_user', 'studio24')
     ->set('hostname', '128.30.52.34')
     ->set('deploy_path', '/var/www/frontend')
-    ->set('url', 'https://www.w3.org')
-    ->set('composer_options', '{{composer_action}} --no-dev --verbose --no-progress --no-interaction --optimize-autoloader');
+    ->set('url', 'https://www.w3.org');
 
 // Currently not in use
 // host('staging')
@@ -89,7 +64,6 @@ host('development')
     ->set('hostname', '128.30.54.149')
     ->set('deploy_path', '/var/www/frontend-dev')
     ->set('url', 'https://www-dev.w3.org')
-    ->set('composer_options', '{{composer_action}} --verbose --no-progress --no-interaction --optimize-autoloader')
     ->set('branch', 'update/deployer-7');
 
 /**
@@ -104,12 +78,13 @@ task('deploy', [
 
     // Remind user to check that the remote .env is up to date (development and staging (default N)
     'env-reminder',
+    
+    'deploy:vendors',
 
     // Dump environment file
-    'dump-env',
+    // 'dump-env',
 
     // Run deployment 
-    'deploy:vendors',
     'deploy:clear_paths',
     'deploy:publish'
 ]);
@@ -145,4 +120,3 @@ task('cache-clear', function () {
 
 // [Optional] If deploy fails automatically unlock.
 after('deploy:failed', 'deploy:unlock');
-after('deploy:failed', 'rollback');
