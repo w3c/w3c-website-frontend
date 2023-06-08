@@ -45,4 +45,5 @@ npm-debug.log
 test-cache-clear.php
 
 # YAML file that ignores peer and host
+# Gets ignored so it doesn't go on the dev server on deployment
 config/packages/dev/http_client.yaml

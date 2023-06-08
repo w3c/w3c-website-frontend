@@ -64,7 +64,8 @@ host('development')
     ->set('hostname', '128.30.54.149')
     ->set('deploy_path', '/var/www/frontend-dev')
     ->set('url', 'https://www-dev.w3.org')
-    ->set('branch', 'update/deployer-7');
+    ->set('branch', 'update/deployer-7')
+    ->set('composer_options', '--optimize-autoloader');
 
 /**
  * Deployment task
