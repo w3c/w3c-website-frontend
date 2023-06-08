@@ -67,9 +67,9 @@ set('allow_anonymous_stats', false);
  */
 
 host('production')
-    ->stage('production')
-    ->user('studio24')
-    ->hostname('128.30.52.34')
+    ->set('labels', ['stage' => 'production'])
+    ->set('remote_user', 'studio24')
+    ->set('hostname', '128.30.52.34')
     ->set('deploy_path', '/var/www/frontend')
     ->set('url', 'https://www.w3.org')
     ->set('composer_options', '{{composer_action}} --no-dev --verbose --no-progress --no-interaction --optimize-autoloader');
@@ -84,12 +84,13 @@ host('production')
 //     ->set('composer_options', '{{composer_action}} --no-dev --verbose --no-progress --no-interaction --optimize-autoloader');
 
 host('development')
-    ->stage('development')
-    ->user('studio24')
-    ->hostname('128.30.54.149')
+    ->set('labels', ['stage' => 'development'])
+    ->set('remote_user', 'studio24')
+    ->set('hostname', '128.30.54.149')
     ->set('deploy_path', '/var/www/frontend-dev')
     ->set('url', 'https://www-dev.w3.org')
-    ->set('composer_options', '{{composer_action}} --verbose --no-progress --no-interaction --optimize-autoloader');
+    ->set('composer_options', '{{composer_action}} --verbose --no-progress --no-interaction --optimize-autoloader')
+    ->set('branch', 'update/deployer-7');
 
 /**
  * Deployment task
