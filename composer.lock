@@ -10393,12 +10393,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Roave/SecurityAdvisories.git",
-                "reference": "3ee134dbd68d15df3dd8f1e43399bc71cccd2c03"
+                "reference": "9c9ca2f0d98a07cd23c775deba37639036cfd00a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Roave/SecurityAdvisories/zipball/3ee134dbd68d15df3dd8f1e43399bc71cccd2c03",
-                "reference": "3ee134dbd68d15df3dd8f1e43399bc71cccd2c03",
+                "url": "https://api.github.com/repos/Roave/SecurityAdvisories/zipball/9c9ca2f0d98a07cd23c775deba37639036cfd00a",
+                "reference": "9c9ca2f0d98a07cd23c775deba37639036cfd00a",
                 "shasum": ""
             },
             "conflict": {
@@ -10474,7 +10474,7 @@
                 "contao/core-bundle": "<4.9.40|>=4.10,<4.11.7|>=4.13,<4.13.21|>=5.1,<5.1.4|= 4.10.0",
                 "contao/listing-bundle": ">=4,<4.4.8",
                 "contao/managed-edition": "<=1.5",
-                "craftcms/cms": "<4.4.12|>= 4.0.0-RC1, <= 4.4.5|>= 4.0.0-RC1, <= 4.4.6|>= 4.0.0-RC1, < 4.4.6|>= 4.0.0-RC1, < 4.3.7|>= 4.0.0-RC1, < 4.2.1",
+                "craftcms/cms": ">= 4.0.0-RC1, < 4.4.12|>= 4.0.0-RC1, <= 4.4.5|>= 4.0.0-RC1, <= 4.4.6|<=3.8.5|>=4,<4.4.6|>= 4.0.0-RC1, < 4.4.6|>= 4.0.0-RC1, < 4.3.7|>= 4.0.0-RC1, < 4.2.1",
                 "croogo/croogo": "<3.0.7",
                 "cuyz/valinor": "<0.12",
                 "czproject/git-php": "<4.0.3",
@@ -10994,7 +10994,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2023-06-06T02:31:03+00:00"
+            "time": "2023-06-06T21:04:56+00:00"
         },
         {
             "name": "sebastian/cli-parser",
@@ -12023,12 +12023,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/studio24/deployer-recipes.git",
-                "reference": "42ec248afbfaa9601fec1b17cb3ab9d1d383f0e4"
+                "reference": "a2f699686f4a46ec1557c98fdc5d13bf71744f85"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/studio24/deployer-recipes/zipball/42ec248afbfaa9601fec1b17cb3ab9d1d383f0e4",
-                "reference": "42ec248afbfaa9601fec1b17cb3ab9d1d383f0e4",
+                "url": "https://api.github.com/repos/studio24/deployer-recipes/zipball/a2f699686f4a46ec1557c98fdc5d13bf71744f85",
+                "reference": "a2f699686f4a46ec1557c98fdc5d13bf71744f85",
                 "shasum": ""
             },
             "require": {
@@ -12060,7 +12060,7 @@
                 "issues": "https://github.com/studio24/deployer-recipes/issues",
                 "source": "https://github.com/studio24/deployer-recipes/tree/update-to-deployer-7"
             },
-            "time": "2023-06-06T09:30:36+00:00"
+            "time": "2023-06-08T07:18:17+00:00"
         },
         {
             "name": "symfony/browser-kit",
@@ -12356,16 +12356,16 @@
         },
         {
             "name": "symfony/maker-bundle",
-            "version": "v1.48.0",
+            "version": "v1.49.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/maker-bundle.git",
-                "reference": "2e428e8432e9879187672fe08f1cc335e2a31dd6"
+                "reference": "ce1d424f76bbb377f1956cc7641e8e2eafe81cde"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/maker-bundle/zipball/2e428e8432e9879187672fe08f1cc335e2a31dd6",
-                "reference": "2e428e8432e9879187672fe08f1cc335e2a31dd6",
+                "url": "https://api.github.com/repos/symfony/maker-bundle/zipball/ce1d424f76bbb377f1956cc7641e8e2eafe81cde",
+                "reference": "ce1d424f76bbb377f1956cc7641e8e2eafe81cde",
                 "shasum": ""
             },
             "require": {
@@ -12379,7 +12379,8 @@
                 "symfony/filesystem": "^5.4.7|^6.0",
                 "symfony/finder": "^5.4.3|^6.0",
                 "symfony/framework-bundle": "^5.4.7|^6.0",
-                "symfony/http-kernel": "^5.4.7|^6.0"
+                "symfony/http-kernel": "^5.4.7|^6.0",
+                "symfony/process": "^5.4.7|^6.0"
             },
             "conflict": {
                 "doctrine/doctrine-bundle": "<2.4",
@@ -12391,9 +12392,8 @@
                 "doctrine/doctrine-bundle": "^2.4",
                 "doctrine/orm": "^2.10.0",
                 "symfony/http-client": "^5.4.7|^6.0",
-                "symfony/phpunit-bridge": "^5.4.7|^6.0",
+                "symfony/phpunit-bridge": "^5.4.17|^6.0",
                 "symfony/polyfill-php80": "^1.16.0",
-                "symfony/process": "^5.4.7|^6.0",
                 "symfony/security-core": "^5.4.7|^6.0",
                 "symfony/yaml": "^5.4.3|^6.0",
                 "twig/twig": "^2.0|^3.0"
@@ -12429,7 +12429,7 @@
             ],
             "support": {
                 "issues": "https://github.com/symfony/maker-bundle/issues",
-                "source": "https://github.com/symfony/maker-bundle/tree/v1.48.0"
+                "source": "https://github.com/symfony/maker-bundle/tree/v1.49.0"
             },
             "funding": [
                 {
@@ -12445,7 +12445,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2022-11-14T10:48:46+00:00"
+            "time": "2023-06-07T13:10:14+00:00"
         },
         {
             "name": "symfony/panther",
