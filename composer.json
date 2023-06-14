@@ -6,7 +6,7 @@
     "minimum-stability": "dev",
     "prefer-stable": true,
     "require": {
-        "php": ">=8.2.0",
+        "php": ">=8.1",
         "ext-ctype": "*",
         "ext-iconv": "*",
         "ext-json": "*",
@@ -72,9 +72,6 @@
             "*": "dist"
         },
         "sort-packages": true,
-        "platform": {
-            "php": "8.2.0"
-        },
         "allow-plugins": {
             "composer/package-versions-deprecated": true,
             "symfony/flex": true,
