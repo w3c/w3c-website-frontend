@@ -14,9 +14,6 @@
     "deployer/deployer": {
         "version": "v6.8.0"
     },
-    "deployer/phar-update": {
-        "version": "v2.2.0"
-    },
     "dflydev/dot-access-data": {
         "version": "v3.0.1"
     },
@@ -207,9 +204,6 @@
             "phpunit.xml.dist",
             "tests/bootstrap.php"
         ]
-    },
-    "pimple/pimple": {
-        "version": "v3.4.0"
     },
     "psr/cache": {
         "version": "1.0.1"

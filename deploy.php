@@ -2,38 +2,11 @@
 namespace Deployer;
 
 require 'recipe/common.php';
-require 'vendor/studio24/deployer-recipes/all.php';
+require 'vendor/studio24/deployer-recipes/recipe/common.php';
 
 /**
  * Deployment configuration variables - set on a per-project basis
  */
-
-// Friendly project name
-$project_name = 'W3C Frontend';
-
-// The repo for the project
-$repository = 'git@github.com:w3c/w3c-website-frontend.git';
-
-// Array of remote => local file locations to sync to your local development computer
-$sync = [
-
-];
-
-// Shared files that are not in git and need to persist between deployments (e.g. local config)
-$shared_files = [
-    '.env.local'
-];
-
-// Shared directories that are not in git and need to persist between deployments (e.g. uploaded images)
-$shared_directories = [
-    'var/log',
-    'var/sessions'
-];
-
-// Sets directories as writable (e.g. uploaded images)
-$writable_directories = [
-    'var/cache'
-];
 
 /**
  * Apply configuration to Deployer
@@ -44,21 +17,23 @@ $writable_directories = [
  */
 
 
-set('application', $project_name);
-set('repository', $repository);
-set('shared_files', $shared_files);
-set('shared_dirs', $shared_directories);
-set('writable_dirs', $writable_directories);
-set('sync', $sync);
+set('application', 'W3C Frontend');
+set('repository', 'git@github.com:w3c/w3c-website-frontend.git');
+set('shared_files', ['.env.local']);
+set('shared_dirs', [
+        'var/log',
+        'var/sessions'
+]);
+set('writable_dirs', ['var/cache']);
+
 set('http_user', 'www-data');
+
 set('webroot', 'public');
-set('keep_releases', 5);
 set('git_tty', true);
 set('allow_anonymous_stats', false);
 
-// Default stage - prevents accidental deploying to production with dep deploy
-set('default_stage', 'staging');
-
+set('git_ssh_command', 'ssh');
+set( 'writable_mode', 'acl');
 /*
  * Host information
  * These settings should not need amending
@@ -68,28 +43,29 @@ set('default_stage', 'staging');
  */
 
 host('production')
-    ->stage('production')
-    ->user('studio24')
-    ->hostname('128.30.52.34')
+    ->set('labels', ['stage' => 'production'])
+    ->set('remote_user', 'studio24')
+    ->set('hostname', '128.30.52.34')
     ->set('deploy_path', '/var/www/frontend')
-    ->set('url', 'https://www.w3.org')
-    ->set('composer_options', '{{composer_action}} --no-dev --verbose --no-progress --no-interaction --optimize-autoloader');
+    ->set('url', 'https://www.w3.org');
 
-host('staging')
-    ->stage('staging')
-    ->user('studio24')
-    ->hostname('128.30.54.149')
-    ->set('deploy_path', '/var/www/frontend-staging')
-    ->set('url', 'https://www-staging.w3.org')
-    ->set('composer_options', '{{composer_action}} --no-dev --verbose --no-progress --no-interaction --optimize-autoloader');
+// Currently not in use
+// host('staging')
+//     ->stage('staging')
+//     ->user('studio24')
+//     ->hostname('128.30.54.149')
+//     ->set('deploy_path', '/var/www/frontend-staging')
+//     ->set('url', 'https://www-staging.w3.org')
+//     ->set('composer_options', '{{composer_action}} --no-dev --verbose --no-progress --no-interaction --optimize-autoloader');
 
 host('development')
-    ->stage('development')
-    ->user('studio24')
-    ->hostname('128.30.54.149')
+    ->set('labels', ['stage' => 'development'])
+    ->set('remote_user', 'studio24')
+    ->set('hostname', '128.30.54.149')
     ->set('deploy_path', '/var/www/frontend-dev')
     ->set('url', 'https://www-dev.w3.org')
-    ->set('composer_options', '{{composer_action}} --verbose --no-progress --no-interaction --optimize-autoloader');
+    ->set('branch', 'update/deployer-7')
+    ->set('composer_options', '--optimize-autoloader');
 
 /**
  * Deployment task
@@ -99,43 +75,19 @@ desc('Deploy ' . get('application'));
 task('deploy', [
 
     // Run initial checks
-    'deploy:info',
+    'deploy:prepare',
 
     // Remind user to check that the remote .env is up to date (development and staging (default N)
     'env-reminder',
-
-    's24:check-branch',
-    's24:show-summary',
-    's24:display-disk-space',
-
-    // Request confirmation to continue (default N)
-    's24:confirm-continue',
-
-    // Deploy site
-    'deploy:prepare',
-    'deploy:lock',
-    'deploy:release',
-    'deploy:update_code',
-
-    // Deploy shared, writeable and clear paths
-    'deploy:shared',
-    'deploy:writable',
-    'deploy:clear_paths',
-
-    // Composer install
-    'dump-env',
+    
     'deploy:vendors',
 
-    // Create build summary
-    's24:build-summary',
+    // Dump environment file
+    // 'dump-env',
 
-    // Build complete, deploy is live once deploy:symlink runs
-    'deploy:symlink',
-
-    // Cleanup
-    'deploy:unlock',
-    'cleanup',
-    'success'
+    // Run deployment 
+    'deploy:clear_paths',
+    'deploy:publish'
 ]);
 
 /**
