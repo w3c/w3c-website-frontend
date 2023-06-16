@@ -9252,12 +9252,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/w3c/w3c-website-templates-bundle.git",
-                "reference": "d75d832f4017a60d8fb6d5e77adbd5fa84b4f94b"
+                "reference": "04b4fdaea1073fcdf5afdb2634146498cd030b4d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/w3c/w3c-website-templates-bundle/zipball/d75d832f4017a60d8fb6d5e77adbd5fa84b4f94b",
-                "reference": "d75d832f4017a60d8fb6d5e77adbd5fa84b4f94b",
+                "url": "https://api.github.com/repos/w3c/w3c-website-templates-bundle/zipball/04b4fdaea1073fcdf5afdb2634146498cd030b4d",
+                "reference": "04b4fdaea1073fcdf5afdb2634146498cd030b4d",
                 "shasum": ""
             },
             "require": {
@@ -9295,7 +9295,7 @@
             "support": {
                 "source": "https://github.com/w3c/w3c-website-templates-bundle/tree/main"
             },
-            "time": "2023-06-05T14:11:00+00:00"
+            "time": "2023-06-16T10:26:49+00:00"
         },
         {
             "name": "webmozart/assert",
@@ -9402,28 +9402,28 @@
         },
         {
             "name": "doctrine/inflector",
-            "version": "2.0.6",
+            "version": "2.0.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/inflector.git",
-                "reference": "d9d313a36c872fd6ee06d9a6cbcf713eaa40f024"
+                "reference": "27c555ebd2ae8fde9e6e8cb84e6fbea57d067634"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/inflector/zipball/d9d313a36c872fd6ee06d9a6cbcf713eaa40f024",
-                "reference": "d9d313a36c872fd6ee06d9a6cbcf713eaa40f024",
+                "url": "https://api.github.com/repos/doctrine/inflector/zipball/27c555ebd2ae8fde9e6e8cb84e6fbea57d067634",
+                "reference": "27c555ebd2ae8fde9e6e8cb84e6fbea57d067634",
                 "shasum": ""
             },
             "require": {
                 "php": "^7.2 || ^8.0"
             },
             "require-dev": {
-                "doctrine/coding-standard": "^10",
+                "doctrine/coding-standard": "^11.0",
                 "phpstan/phpstan": "^1.8",
                 "phpstan/phpstan-phpunit": "^1.1",
                 "phpstan/phpstan-strict-rules": "^1.3",
                 "phpunit/phpunit": "^8.5 || ^9.5",
-                "vimeo/psalm": "^4.25"
+                "vimeo/psalm": "^4.25 || ^5.4"
             },
             "type": "library",
             "autoload": {
@@ -9473,7 +9473,7 @@
             ],
             "support": {
                 "issues": "https://github.com/doctrine/inflector/issues",
-                "source": "https://github.com/doctrine/inflector/tree/2.0.6"
+                "source": "https://github.com/doctrine/inflector/tree/2.0.7"
             },
             "funding": [
                 {
@@ -9489,7 +9489,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2022-10-20T09:10:12+00:00"
+            "time": "2023-06-16T10:07:19+00:00"
         },
         {
             "name": "doctrine/instantiator",
