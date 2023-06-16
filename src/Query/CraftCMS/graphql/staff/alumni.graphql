@@ -19,7 +19,7 @@ query AlumniListing($site: [String]) {
     total: entryCount(section: "alumni", site: $site)
     entries(section: "alumni", site: $site, orderBy: "familyName asc, title asc") {
         ... on alumni_default_Entry {
-            given: title
+            given: givenName
             last: familyName
             start: startDate
             end: endDate
