@@ -46,13 +46,6 @@
     {% endembed %}
 {% endblock %}
 
-{% block notes %}
-    {{ parent() }}
-    {% if comments_open %}
-        {{ note_macros.form_errors(comment_form) }}
-    {% endif %}
-{% endblock %}
-
 {% block closing_body_scripts %}
     <script>
         var commentsScript = document.createElement('script');
