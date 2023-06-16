@@ -46,6 +46,7 @@ class Entry extends GraphQLQuery
         $this->setGraphQLFromFile(__DIR__ . '/../graphql/blog/entry.graphql')
             ->addFragmentFromFile(__DIR__ . '/../graphql/fragments/defaultFlexibleComponents.graphql')
             ->addFragmentFromFile(__DIR__ . '/../graphql/fragments/contentImage.graphql')
+            ->addFragmentFromFile(__DIR__ . '/../graphql/fragments/thumbnailImage.graphql')
             ->setRootPropertyPath('[entry]')
             ->addVariable('site', $siteHandle)
             ->addVariable('year', ['and', '>=' . $year, '<' . ($year + 1)])

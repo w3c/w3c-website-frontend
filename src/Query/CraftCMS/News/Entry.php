@@ -34,6 +34,7 @@ class Entry extends GraphQLQuery
         $this->setGraphQLFromFile(__DIR__ . '/../graphql/news/entry.graphql')
             ->addFragmentFromFile(__DIR__ . '/../graphql/fragments/defaultFlexibleComponents.graphql')
             ->addFragmentFromFile(__DIR__ . '/../graphql/fragments/contentImage.graphql')
+            ->addFragmentFromFile(__DIR__ . '/../graphql/fragments/thumbnailImage.graphql')
             ->setRootPropertyPath('[entry]')
 
             ->addVariable('site', $siteHandle)

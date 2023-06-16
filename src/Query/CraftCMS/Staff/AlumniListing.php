@@ -31,6 +31,7 @@ class AlumniListing extends GraphQLQuery
     ) {
         $this->setGraphQLFromFile(__DIR__ . '/../graphql/staff/alumni.graphql')
             ->addFragmentFromFile(__DIR__ . '/../graphql/fragments/breadcrumbs.graphql')
+            ->addFragmentFromFile(__DIR__ . '/../graphql/fragments/thumbnailImage.graphql')
             ->setRootPropertyPath('[entries]')
             ->setTotalResults('[total]')
 

@@ -29,6 +29,7 @@ class Listing extends GraphQLQuery
     {
         $this->setGraphQLFromFile(__DIR__ . '/../graphql/press-releases/listing.graphql')
             ->addFragmentFromFile(__DIR__ . '/../graphql/fragments/breadcrumbs.graphql')
+            ->addFragmentFromFile(__DIR__ . '/../graphql/fragments/thumbnailImage.graphql')
             ->setRootPropertyPath('[entry]')
             ->addVariable('site', $siteHandle)
             ->cache($cacheLifetime)
