@@ -46,7 +46,6 @@ class Ecosystem extends GraphQLQuery
             ->addFragmentFromFile(__DIR__ . '/../graphql/fragments/ecosystemsFlexibleComponents.graphql')
             ->addFragmentFromFile(__DIR__ . '/../graphql/fragments/ecosystemsBottomFlexibleComponents.graphql')
             ->addFragmentFromFile(__DIR__ . '/../graphql/fragments/contentImage.graphql')
-            ->addFragmentFromFile(__DIR__ . '/../graphql/fragments/seoData.graphql')
             ->addFragmentFromFile(__DIR__ . '/../graphql/fragments/breadcrumbs.graphql')
             ->setRootPropertyPath('[entry]')
             ->addVariable('slug', $slug)

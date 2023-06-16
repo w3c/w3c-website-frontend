@@ -75,9 +75,10 @@ query Home($site: [String]) {
                 }
             }
             excerpt
-            seo: seoOptions {
-                ...seoData
+            thumbnailImage {
+                ...thumbnailImage
             }
+            thumbnailAltText
         }
     }
 }

@@ -32,7 +32,6 @@ class Entry extends GraphQLQuery
         $this->router = $router;
         $this->setGraphQLFromFile(__DIR__ . '/../graphql/press-releases/entry.graphql')
             ->addFragmentFromFile(__DIR__ . '/../graphql/fragments/defaultFlexibleComponents.graphql')
-            ->addFragmentFromFile(__DIR__ . '/../graphql/fragments/seoData.graphql')
             ->addFragmentFromFile(__DIR__ . '/../graphql/fragments/contentImage.graphql')
             ->setRootPropertyPath('[entry]')
 

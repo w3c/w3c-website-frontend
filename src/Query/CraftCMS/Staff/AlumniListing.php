@@ -30,7 +30,6 @@ class AlumniListing extends GraphQLQuery
         int $cacheLifetime = CacheLifetime::HOUR
     ) {
         $this->setGraphQLFromFile(__DIR__ . '/../graphql/staff/alumni.graphql')
-            ->addFragmentFromFile(__DIR__ . '/../graphql/fragments/seoData.graphql')
             ->addFragmentFromFile(__DIR__ . '/../graphql/fragments/breadcrumbs.graphql')
             ->setRootPropertyPath('[entries]')
             ->setTotalResults('[total]')

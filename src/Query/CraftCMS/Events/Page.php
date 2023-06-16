@@ -29,7 +29,6 @@ class Page extends GraphQLQuery
         int $cacheLifetime = CacheLifetime::HOUR
     ) {
         $this->setGraphQLFromFile(__DIR__ . '/../graphql/events/page.graphql')
-            ->addFragmentFromFile(__DIR__ . '/../graphql/fragments/seoData.graphql')
             ->addFragmentFromFile(__DIR__ . '/../graphql/fragments/breadcrumbs.graphql')
             ->setRootPropertyPath('[entry]')
 

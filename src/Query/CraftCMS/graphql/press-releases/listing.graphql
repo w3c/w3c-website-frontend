@@ -10,10 +10,11 @@ query PressReleasesListing($site: [String]) {
         }
         ... on pressReleasesListing_pressReleasesListing_Entry {
             excerpt
-            lead: pageLead
-            seo: seoOptions {
-                ...seoData
+            thumbnailImage {
+                ...thumbnailImage
             }
+            thumbnailAltText
+            lead: pageLead
         }
     }
 }

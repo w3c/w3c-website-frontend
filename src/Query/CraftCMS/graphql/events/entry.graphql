@@ -17,6 +17,10 @@ query Event($type: [QueryArgument], $start: [QueryArgument], $slug: [String], $s
         expiryDate
         ... on events_default_Entry {
             excerpt: eventExcerpt
+            thumbnailImage {
+                ...thumbnailImage
+            }
+            thumbnailAltText
             start: startDatetime
             end: endDatetime
             tz: startDatetime@formatDateTime(format: "e")
@@ -51,9 +55,6 @@ query Event($type: [QueryArgument], $start: [QueryArgument], $slug: [String], $s
             }
             defaultFlexibleComponents(orderBy: "sortOrder") {
                 ...defaultFlexibleComponents
-            }
-            seo: seoOptions {
-                ...seoData
             }
         }
     }

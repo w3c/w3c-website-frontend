@@ -35,7 +35,6 @@ class Page extends GraphQLQuery
         $this->setGraphQLFromFile(__DIR__ . '/../graphql/home/page.graphql')
              ->addFragmentFromFile(__DIR__ . '/../graphql/fragments/thumbnailImage.graphql')
              ->addFragmentFromFile(__DIR__ . '/../graphql/fragments/contentImage.graphql')
-             ->addFragmentFromFile(__DIR__ . '/../graphql/fragments/seoData.graphql')
              ->setRootPropertyPath('[entry]')
 
             // Set site ID to retrieve navigation for
