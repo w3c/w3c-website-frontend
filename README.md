@@ -16,9 +16,8 @@ This document is a summary of what you need to know when working on this project
 * [Deployment](#deployment)
 * [Installation](#installation)
 * [Built with](#built-with)
-* [Credits](#credits)
 
-## Site URLs (TBC)
+## Site URLs
 
 ### Production
 Live:
@@ -29,26 +28,20 @@ Beta:
 * https://beta.w3.org
 * https://beta.w3.org/_build_summary.json
 
-### Staging ***Not currently in use***
-* https://www-staging.w3.org
-* https://www-staging.w3.org/_build_summary.json
-
 ### Development
 * https://www-dev.w3.org
 * https://www-dev.w3.org/_build_summary.json
 
-Access to https://www-dev.w3.org is restricted by IP.
-**S24 Note: Connect to office VPN**
+Used to test new functionality / changes. Access to development is restricted by IP address.
 
 ### Local
 * http://localhost:8000/ (see [running application locally](#running-application-locally)) 
 
-## Deployment (TBC)
+## Deployment
 
-The project uses [Deployer](https://deployer.org/) to perform deployment. For full deployment details/options view [docs/deployment](docs/deployment.md)
+The project uses [Deployer](https://deployer.org/) to perform deployment.
 
-Please note this project uses a local instance of Deployer (installed via Composer), as opposed to a global version of Deployer. This is so we
-can make use of other Composer packages in deployment tasks reliably (otherwise there can be clashes between global and local version of the same packages).
+Please note this project uses a local instance of Deployer (installed via Composer), as opposed to a global version of Deployer.
 
 To run deployments please use:
 
@@ -65,7 +58,7 @@ vendor/bin/dep deploy <environment> --branch=<branch_name>
 E.g.
 
 ```
-vendor/bin/dep deploy development --branch=develop
+vendor/bin/dep deploy development --branch=feature/my-branch-name
 ```
 
 ### SSH access
@@ -75,15 +68,24 @@ To connect to the server directly at the correct path for an environments curren
 vendor/bin/dep ssh <environment>
 ````
 
-## Installation
+## Updating HTML templates
 
+The HTML templates are stored in [w3c-website-templates-bundle](https://github.com/w3c/w3c-website-templates-bundle)
+
+These can be updated by deploying changes to the [design system](https://github.com/w3c/w3c-website-templates-bundle/blob/main/design-system.md) 
+and running `composer update` in this project.
+
+You can also test changes either by deploying a branch to the staging environment for the design system, or by [testing a development branch on the frontend website](https://github.com/w3c/w3c-website-templates-bundle/blob/main/design-system.md#testing-a-development-branch-on-your-front-end-website). 
+
+## Installation
+w
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
 
 More on the [Git workflow for this project](docs/git_workflow.md).
 
 ### Requirements
 
-* PHP 7.4 (Upgrading to 8.2)
+* PHP 8.1+
 * [Composer](https://getcomposer.org/)
 * [Symfony CLI](https://symfony.com/download#step-1-install-symfony-cli)
 
@@ -91,32 +93,37 @@ More on the [Git workflow for this project](docs/git_workflow.md).
 
 `git clone git@github.com:w3c/website-frontend.git`
 
-### Install and update composer dependencies
+### Install Composer dependencies
 
 ```bash
 composer install
-
-#Once the install is done
-
-composer update
 ```
 
 ***Note:*** If you already have this project installed locally and you're having trouble seeing any changes, make sure you have cleared your Symfony cache using the `bin/console cache:clear` command.
 
 ### Configuration
-Create a local environment file and populate the required variables (see `.env.local.dist`):
+
+Create a local env file:
 
 ```
-cp .env.local.dist .env.local
+touch .env.local
 ```
-**Configure your local env file**
-The W3C API URL and the Craft API URL are available in 1pass.
-Ensure that your app environment is set to `dev`
-You should be able to access your W3C API Key from your [W3C account](https://auth.w3.org/login)
 
-### Craft CMS Tokens
+And set:
+* APP_ENV (dev, staging, prod)
+* APP_URL
+* W3C_API_KEY
+* CRAFTCMS_API_URL
+* CRAFTCMS_API_READ_TOKEN
+* CRAFTCMS_API_PUBLISH_TOKEN 
 
-You should be able to find your API Read and Publish tokens by going to the CraftCMS dashboard (see the [Craft repo](https://github.com/w3c/w3c-website-craft))
+You can access your W3C API Key from your [W3C account](https://auth.w3.org/login).
+
+You can find your API Read and Publish tokens by going to the Craft CMS dashboard (see the [Craft repo](https://github.com/w3c/w3c-website-craft)).
+
+You can regenerate `APP_SECRET` by running `php bin/console secrets:generate-keys`
+
+You can check what env files are being loaded in your environment by running `php bin/console debug:dotenv`
 
 ### Running application locally
 
@@ -135,5 +142,6 @@ In your terminal
 ## Built with
 
 - [Symfony](https://symfony.com/)
+- [Craft CMS API](https://craftcms.com/docs/4.x/graphql.html)
 - [Strata Frontend](https://github.com/strata/frontend)
 - [W3C Design System](https://github.com/w3c/w3c-website-templates-bundle/) (used as a Symfony template bundle)
