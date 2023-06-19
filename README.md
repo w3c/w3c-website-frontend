@@ -25,10 +25,6 @@ Live:
 * https://www.w3.org
 * https://www.w3.org/_build_summary.json (very brief summary of latest deployment)
 
-Beta:
-* https://beta.w3.org
-* https://beta.w3.org/_build_summary.json
-
 ### Staging
 * https://www-staging.w3.org
 * https://www-staging.w3.org/_build_summary.json
