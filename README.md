@@ -121,8 +121,6 @@ You can access your W3C API Key from your [W3C account](https://auth.w3.org/logi
 
 You can find your API Read and Publish tokens by going to the Craft CMS dashboard (see the [Craft repo](https://github.com/w3c/w3c-website-craft)).
 
-You can regenerate `APP_SECRET` by running `php bin/console secrets:generate-keys`
-
 You can check what env files are being loaded in your environment by running `php bin/console debug:dotenv`
 
 ### Running application locally
