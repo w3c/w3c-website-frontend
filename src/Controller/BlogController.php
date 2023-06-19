@@ -22,6 +22,7 @@ use Strata\Data\Exception\QueryManagerException;
 use Strata\Data\Query\QueryManager;
 use Strata\Frontend\Site;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -415,37 +416,46 @@ class BlogController extends AbstractController
             ]);
 
             $form->handleRequest($request);
-            if ($form->isSubmitted() && $form->isValid()) {
-                $newComment = $form->getData();
-
-                $manager->add(
-                    'create-comment',
-                    (new CreateComment(
-                        $newComment['post'],
-                        $page['siteId'],
-                        $newComment['name'],
-                        $newComment['email'],
-                        $newComment['comment'],
-                        $newComment['parent']
-                    ))->setOptions(['auth_bearer' => $this->getParameter('app.craftcms_api_publish_token')])
-                );
-
-                $response = $manager->get('create-comment');
-
-                if ($this->getParameter('kernel.environment') == 'dev') {
-                    dump($response);
+            if ($form->isSubmitted()) {
+                foreach ($form->getErrors(true) as $error) {
+                    $page['messages']['error'][] = [
+                        'message' => $error->getMessage(),
+                        'options' => ['href' => '#' . $error->getOrigin()->getName()]
+                    ];
                 }
 
-                $this->addFlash(
-                    'success',
-                    $translator->trans('blog.comments.form.success')
-                );
-                $this->addFlash(
-                    'title-success',
-                    $translator->trans('notes.successes.default_title', [], 'w3c_website_templates_bundle')
-                );
+                if ($form->isValid()) {
+                    $newComment = $form->getData();
 
-                return $this->redirectToRoute('app_blog_show', ['year' => $year, 'slug' => $slug]);
+                    $manager->add(
+                        'create-comment',
+                        (new CreateComment(
+                            $newComment['post'],
+                            $page['siteId'],
+                            $newComment['name'],
+                            $newComment['email'],
+                            $newComment['comment'],
+                            $newComment['parent']
+                        ))->setOptions(['auth_bearer' => $this->getParameter('app.craftcms_api_publish_token')])
+                    );
+
+                    $response = $manager->get('create-comment');
+
+                    if ($this->getParameter('kernel.environment') == 'dev') {
+                        dump($response);
+                    }
+
+                    $this->addFlash(
+                        'success',
+                        $translator->trans('blog.comments.form.success')
+                    );
+                    $this->addFlash(
+                        'title-success',
+                        $translator->trans('notes.successes.default_title', [], 'w3c_website_templates_bundle')
+                    );
+
+                    return $this->redirectToRoute('app_blog_show', ['year' => $year, 'slug' => $slug]);
+                }
             }
         }
 

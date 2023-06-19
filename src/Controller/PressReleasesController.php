@@ -179,21 +179,23 @@ class PressReleasesController extends AbstractController
 
         $crosslinks         = $manager->get('crosslinks');
         $singlesBreadcrumbs = $manager->get('singles-breadcrumbs');
+        if ($site->siteLink) {
+            $page['breadcrumbs'] = [
+                'title' => $page['title'],
+                'url' => $this->generateUrl('app_pressreleases_show', ['year' => $year, 'slug' => $slug]),
+                'parent' => [
+                    'title' => $year,
+                    'url' => $this->generateUrl('app_pressreleases_archive', ['year' => $year]),
+                    'parent' => [
+                        'title' => $singlesBreadcrumbs['pressReleases']['title'],
+                        'url' => $singlesBreadcrumbs['pressReleases']['url'],
+                        'parent' => $singlesBreadcrumbs['homepage']
+                    ]
+                ]
+            ];
+        }
 
         $page['seo']['expiry'] = $page['expiryDate'];
-        $page['breadcrumbs'] = [
-            'title'  => $page['title'],
-            'url'    => $this->generateUrl('app_pressreleases_show', ['year' => $year, 'slug' => $slug]),
-            'parent' => [
-                'title'  => $year,
-                'url'    => $this->generateUrl('app_pressreleases_archive', ['year' => $year]),
-                'parent' => [
-                    'title'  => $singlesBreadcrumbs['pressReleases']['title'],
-                    'url'    => $singlesBreadcrumbs['pressReleases']['url'],
-                    'parent' => $singlesBreadcrumbs['homepage']
-                ]
-            ]
-        ];
         $page['feeds'] = array_merge(
             [['title' => 'W3C - Press Releases', 'href' => $this->generateUrl('app_feed_pressreleases')]],
             $feedHelper->buildTaxonomyFeeds($page)

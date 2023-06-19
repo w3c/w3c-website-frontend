@@ -10,10 +10,11 @@ query EventsPage($site: [String]) {
         }
         ... on eventsListing_eventsListing_Entry {
             excerpt
-            lead: pageLead
-            seo: seoOptions {
-                ...seoData
+            thumbnailImage {
+                ...thumbnailImage
             }
+            thumbnailAltText
+            lead: pageLead
         }
     }
 }

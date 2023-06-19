@@ -19,6 +19,10 @@ query BlogPost($year: [String], $slug: [String], $site: [String]) {
         expiryDate
         ... on blogPosts_default_Entry {
             excerpt
+            thumbnailImage {
+                ...thumbnailImage
+            }
+            thumbnailAltText
             displayYouMayAlsoLikeListing
             authors {
                 ... on authors_author_BlockType {
@@ -55,13 +59,14 @@ query BlogPost($year: [String], $slug: [String], $site: [String]) {
             defaultFlexibleComponents(orderBy: "sortOrder") {
                 ...defaultFlexibleComponents
             }
-            seo: seoOptions {
-                ...seoData
-            }
             notes: postPageNotes
         }
         ... on blogPosts_importedEntries_Entry {
             excerpt
+            thumbnailImage {
+                ...thumbnailImage
+            }
+            thumbnailAltText
             authors {
                 ... on authors_author_BlockType {
                     name: authorName
@@ -90,9 +95,6 @@ query BlogPost($year: [String], $slug: [String], $site: [String]) {
             ecosystems {
                 title
                 slug
-            }
-            seo: seoOptions {
-                ...seoData
             }
             pageContent
         }

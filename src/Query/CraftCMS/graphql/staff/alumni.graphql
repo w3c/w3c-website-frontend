@@ -10,16 +10,18 @@ query AlumniListing($site: [String]) {
         }
         ... on alumniListing_alumniListing_Entry {
             excerpt
-            lead: pageLead
-            seo: seoOptions {
-                ...seoData
+            thumbnailImage {
+                ...thumbnailImage
             }
+            thumbnailAltText
+            lead: pageLead
         }
     }
     total: entryCount(section: "alumni", site: $site)
     entries(section: "alumni", site: $site, orderBy: "familyName asc, title asc") {
         ... on alumni_default_Entry {
-            given: title
+            slug
+            given: givenName
             last: familyName
             start: startDate
             end: endDate

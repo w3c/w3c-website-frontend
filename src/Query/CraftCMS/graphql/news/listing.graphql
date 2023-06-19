@@ -10,10 +10,11 @@ query NewsListing($site: [String]) {
         }
         ... on newsListing_newsListing_Entry {
             excerpt
-            lead: pageLead
-            seo: seoOptions {
-                ...seoData
+            thumbnailImage {
+                ...thumbnailImage
             }
+            thumbnailAltText
+            lead: pageLead
         }
     }
 }

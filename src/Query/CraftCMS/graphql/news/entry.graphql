@@ -17,6 +17,10 @@ query NewsArticle($year: [String], $slug: [String], $site: [String]) {
         expiryDate
         ... on newsArticles_default_Entry {
             excerpt
+            thumbnailImage {
+                ...thumbnailImage
+            }
+            thumbnailAltText
             displayYouMayAlsoLikeListing
             groups: workingGroups {
                 title
@@ -39,13 +43,14 @@ query NewsArticle($year: [String], $slug: [String], $site: [String]) {
             defaultFlexibleComponents(orderBy: "sortOrder") {
                 ...defaultFlexibleComponents
             }
-            seo: seoOptions {
-                ...seoData
-            }
             notes: postPageNotes
         }
         ... on newsArticles_importedEntries_Entry {
             excerpt
+            thumbnailImage {
+                ...thumbnailImage
+            }
+            thumbnailAltText
             groups: workingGroups {
                 title
                 slug
@@ -63,9 +68,6 @@ query NewsArticle($year: [String], $slug: [String], $site: [String]) {
             ecosystems {
                 title
                 slug
-            }
-            seo: seoOptions {
-                ...seoData
             }
             pageContent
         }

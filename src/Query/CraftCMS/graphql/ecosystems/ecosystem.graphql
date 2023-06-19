@@ -31,9 +31,10 @@ query Ecosystem($slug: [String], $site: [String]) {
                 size
             }
             excerpt
-            seo: seoOptions {
-                ...seoData
+            thumbnailImage {
+                ...thumbnailImage
             }
+            thumbnailAltText
             ecosystemsFlexibleComponents {
                 ...ecosystemsFlexibleComponents
             }
