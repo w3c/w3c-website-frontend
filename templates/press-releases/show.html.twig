@@ -1,7 +1,9 @@
-{% extends '@W3CWebsiteTemplates/pages/post.html.twig' %}
+{% extends site.localeData('siteLink') ? '@W3CWebsiteTemplates/pages/post.html.twig' : '@W3CWebsiteTemplates/pages/basic.html.twig' %}
 
 {% set body_classes = 'post' %}
 
 {% block feed %}
-	{% include '@W3CWebsiteTemplates/components/styles/feed.html.twig' with { 'feed_url': '/press-releases/feed', 'feed_type': 'press release' } %}
+	{% if site.localeData('siteLink') %}
+		{% include '@W3CWebsiteTemplates/components/styles/feed.html.twig' with { 'feed_url': '/press-releases/feed', 'feed_type': 'press release' } %}
+	{% endif %}
 {% endblock %}
