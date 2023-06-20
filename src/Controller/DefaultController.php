@@ -107,6 +107,9 @@ class DefaultController extends AbstractController
             dump($members);
         }
 
+        // @todo this should not be hard-coded
+        $page['title'] = 'W3C';
+
         $response = $this->render(
             'pages/home.html.twig',
             ['page' => $page, 'members' => $members, 'navigation' => $navigation]
