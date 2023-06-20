@@ -38,7 +38,7 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 class BlogController extends AbstractController
 {
     private const LIMIT = 10;
-    private const COMMENTS_OPEN_DAYS = '0';
+    private const COMMENTS_OPEN_DAYS = '90';
 
     /**
      * @Route("/")
