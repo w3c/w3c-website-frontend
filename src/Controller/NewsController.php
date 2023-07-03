@@ -187,7 +187,6 @@ class NewsController extends AbstractController
         $crosslinks         = $manager->get('crosslinks');
         $singlesBreadcrumbs = $manager->get('singles-breadcrumbs');
 
-        $page['seo']['expiry'] = $page['expiryDate'];
         $page['breadcrumbs'] = [
             'title'  => $page['title'],
             'url'    => $this->generateUrl('app_news_show', ['year' => $year, 'slug' => $slug]),
@@ -253,7 +252,6 @@ class NewsController extends AbstractController
         $page = $manager->get('page');
         $filters = $manager->get('filters');
         $archives = $filters['archives'];
-        $page['seo']['expiry'] = $page['expiryDate'];
 
         if ($this->getParameter('kernel.environment') == 'dev') {
             dump($archives);

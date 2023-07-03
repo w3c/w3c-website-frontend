@@ -97,7 +97,6 @@ class EcosystemController extends AbstractController
             $evangelists[] = $manager->get('lead');
         }
 
-        $page['seo']['expiry']    = $page['expiryDate'];
         $page['groups']           = $groups;
         $page['recentActivities'] = $recentActivities;
         if (sizeof($recentActivities['recentEntries']) < 2) {

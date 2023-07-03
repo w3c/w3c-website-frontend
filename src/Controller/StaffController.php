@@ -37,8 +37,6 @@ class StaffController extends AbstractController
         $collection = $manager->getCollection('alumni-listing');
         $page       = $manager->get('alumni-listing', '[entry]');
 
-        $page['seo']['expiry'] = $page['expiryDate'];
-
         if ($this->getParameter('kernel.environment') == 'dev') {
             dump($page);
             dump($collection);

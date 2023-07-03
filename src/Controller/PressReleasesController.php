@@ -195,7 +195,6 @@ class PressReleasesController extends AbstractController
             ];
         }
 
-        $page['seo']['expiry'] = $page['expiryDate'];
         $page['feeds'] = array_merge(
             [['title' => 'W3C - Press Releases', 'href' => $this->generateUrl('app_feed_pressreleases')]],
             $feedHelper->buildTaxonomyFeeds($page)
@@ -252,7 +251,6 @@ class PressReleasesController extends AbstractController
         $page    = $manager->get('page');
         $filters = $manager->get('filters');
         $archives = $filters['archives'];
-        $page['seo']['expiry'] = $page['expiryDate'];
 
         if ($this->getParameter('kernel.environment') == 'dev') {
             dump($archives);

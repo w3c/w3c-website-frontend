@@ -145,7 +145,6 @@ class DefaultController extends AbstractController
         if (empty($page)) {
             throw $this->createNotFoundException('Page not found');
         }
-        $page['seo']['expiry'] = $page['expiryDate'];
 
         $navigation = $manager->getCollection('navigation');
 

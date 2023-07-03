@@ -148,7 +148,6 @@ class NewsletterController extends AbstractController
         $page = $manager->get('page');
         $filters = $manager->get('filters');
         $archives = $filters['archives'];
-        $page['seo']['expiry'] = $page['expiryDate'];
 
         if ($this->getParameter('kernel.environment') == 'dev') {
             dump($archives);

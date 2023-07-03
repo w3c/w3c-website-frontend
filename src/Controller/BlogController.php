@@ -481,7 +481,6 @@ class BlogController extends AbstractController
             dump($topLevelComms);
         }
 
-        $page['seo']['expiry'] = $page['expiryDate'];
         $page['breadcrumbs'] = [
             'title'  => $page['title'],
             'url'    => $this->generateUrl('app_blog_show', ['year' => $year, 'slug' => $slug]),
@@ -558,7 +557,6 @@ class BlogController extends AbstractController
         $filters               = $manager->get('filters');
         $categories            = $filters['categories'];
         $archives              = $filters['archives'];
-        $page['seo']['expiry'] = $page['expiryDate'];
 
         if ($this->getParameter('kernel.environment') == 'dev') {
             dump($page);

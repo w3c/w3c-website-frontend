@@ -203,7 +203,6 @@ class EventsController extends AbstractController
 
         $page['category'] = (!empty($page['categories'])) ? $page['categories'][0] : [];
         unset($page['categories']);
-        $page['seo']['expiry'] = $page['expiryDate'];
         $page['breadcrumbs'] = [
             'title'  => $page['title'],
             'url'    => $this->generateUrl('app_events_show', ['type' => $type, 'year' => $year, 'slug' => $slug]),
@@ -356,16 +355,11 @@ class EventsController extends AbstractController
 
         $page = $manager->get('page');
 
-        $page['seo']['expiry'] = $page['expiryDate'];
         $page['breadcrumbs'] = $this->breadcrumbs($manager, $page, $eventType, $year);
 
         if ($eventType) {
             $page['lead'] = $eventType['pageLead'];
             $page['title'] = $eventType['title'];
-            $page['seo']['title'] = $eventType['title'];
-            foreach ($page['seo']['social'] as $key => $data) {
-                $page['seo']['social'][$key]['title'] = $eventType['title'];
-            }
         }
 
         $page['feeds'] = [['title' => 'W3C - Events', 'href' => $this->generateUrl('app_feed_events')]];
