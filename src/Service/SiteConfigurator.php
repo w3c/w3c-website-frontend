@@ -48,14 +48,16 @@ class SiteConfigurator
             'siteLink' =>  [
                 'label' => '日本語ホームページ',
                 'url'   => $this->router->generate('app_default_home.ja', [], UrlGeneratorInterface::ABSOLUTE_URL),
-            ]
+            ],
+            'searchPattern' => '*%s*'
         ]);
         $site->addLocale('zh-hans', [
             'siteHandle' => 'w3c_china',
             'siteLink' =>  [
                 'label' => '简体中文首页',
                 'url'   => $this->router->generate('app_default_home.zh-hans', [], UrlGeneratorInterface::ABSOLUTE_URL),
-            ]
+            ],
+            'searchPattern' => '*%s*',
         ]);
         $site->addLocale('af', ['siteHandle' => 'afrikaans']);
         $site->addLocaleRtl('ar', ['siteHandle' => 'arabic']);

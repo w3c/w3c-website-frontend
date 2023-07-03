@@ -76,7 +76,7 @@ class BlogController extends AbstractController
                 null,
                 null,
                 null,
-                $search,
+                $site->searchPattern ? sprintf($site->searchPattern, $search) : $search,
                 self::LIMIT,
                 $currentPage
             )
@@ -148,7 +148,7 @@ class BlogController extends AbstractController
                 null,
                 $year + 1,
                 $year,
-                $search,
+                $site->searchPattern ? sprintf($site->searchPattern, $search) : $search,
                 self::LIMIT,
                 $currentPage
             )
@@ -241,7 +241,7 @@ class BlogController extends AbstractController
                 null,
                 null,
                 null,
-                $search,
+                $site->searchPattern ? sprintf($site->searchPattern, $search) : $search,
                 self::LIMIT,
                 $currentPage
             )
@@ -338,7 +338,7 @@ class BlogController extends AbstractController
                 $tag['id'],
                 null,
                 null,
-                $search,
+                $site->searchPattern ? sprintf($site->searchPattern, $search) : $search,
                 self::LIMIT,
                 $currentPage
             )

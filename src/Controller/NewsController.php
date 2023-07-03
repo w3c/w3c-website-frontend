@@ -63,7 +63,7 @@ class NewsController extends AbstractController
                 $site->siteHandle,
                 null,
                 null,
-                $search,
+                $site->searchPattern ? sprintf($site->searchPattern, $search) : $search,
                 self::LIMIT,
                 $currentPage
             )
@@ -126,7 +126,7 @@ class NewsController extends AbstractController
                 $site->siteHandle,
                 $year + 1,
                 $year,
-                $search,
+                $site->searchPattern ? sprintf($site->searchPattern, $search) : $search,
                 self::LIMIT,
                 $currentPage
             )
