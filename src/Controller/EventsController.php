@@ -59,14 +59,14 @@ class EventsController extends AbstractController
         TranslatorInterface $translator,
         string $type = null
     ): Response {
-        if ($request->query->get('type')) {
-            return $this->redirectToRoute('app_events_index_type', $request->query->all());
-        } elseif ($request->query->has('type')) {
-            // type is in the QS but has no value, redirect to app_events_index after removing this parameter
-            $params = array_filter($request->query->all(), function ($key) {
-                return $key != 'type';
-            }, ARRAY_FILTER_USE_KEY);
+        // remove empty parameters
+        $params = array_filter($request->query->all(), function ($value) {
+            return $value != '';
+        });
 
+        if ($request->query->get('type')) {
+            return $this->redirectToRoute('app_events_index_type', $params);
+        } elseif ($request->query->has('type')) { // key but no value
             return $this->redirectToRoute('app_events_index', $params);
         }
 
@@ -105,14 +105,18 @@ class EventsController extends AbstractController
         TranslatorInterface $translator,
         string $type = null
     ): Response {
+        // remove empty parameters
+        $params = array_merge(
+            ['year' => $year],
+            array_filter($request->query->all(), function ($value) {
+                return $value != '';
+            })
+        );
+
         if ($request->query->get('type')) {
-            return $this->redirectToRoute(
-                'app_events_archive_type',
-                array_merge(
-                    ['year' => $year],
-                    $request->query->all()
-                )
-            );
+            return $this->redirectToRoute('app_events_archive_type', $params);
+        } elseif ($request->query->has('type')) { // key but no value
+            return $this->redirectToRoute('app_events_archive', $params);
         }
 
         return $this->buildListing($request, $type, $year, $manager, $site, $router, $translator);
