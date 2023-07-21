@@ -9252,12 +9252,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/w3c/w3c-website-templates-bundle.git",
-                "reference": "02f6e2cd7148144125b7195833966ed9391736ae"
+                "reference": "bd73839a197ad1029e46360ce3b3d3bb2c875b88"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/w3c/w3c-website-templates-bundle/zipball/02f6e2cd7148144125b7195833966ed9391736ae",
-                "reference": "02f6e2cd7148144125b7195833966ed9391736ae",
+                "url": "https://api.github.com/repos/w3c/w3c-website-templates-bundle/zipball/bd73839a197ad1029e46360ce3b3d3bb2c875b88",
+                "reference": "bd73839a197ad1029e46360ce3b3d3bb2c875b88",
                 "shasum": ""
             },
             "require": {
@@ -9295,7 +9295,7 @@
             "support": {
                 "source": "https://github.com/w3c/w3c-website-templates-bundle/tree/main"
             },
-            "time": "2023-07-20T14:31:49+00:00"
+            "time": "2023-07-21T09:20:23+00:00"
         },
         {
             "name": "webmozart/assert",
@@ -10396,12 +10396,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Roave/SecurityAdvisories.git",
-                "reference": "82042e706a709bda7cc860273cb68987c347a6b8"
+                "reference": "277fc8e9cbde5745b1bfa46ada4b42b1718ac508"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Roave/SecurityAdvisories/zipball/82042e706a709bda7cc860273cb68987c347a6b8",
-                "reference": "82042e706a709bda7cc860273cb68987c347a6b8",
+                "url": "https://api.github.com/repos/Roave/SecurityAdvisories/zipball/277fc8e9cbde5745b1bfa46ada4b42b1718ac508",
+                "reference": "277fc8e9cbde5745b1bfa46ada4b42b1718ac508",
                 "shasum": ""
             },
             "conflict": {
@@ -10435,6 +10435,7 @@
                 "aws/aws-sdk-php": ">=3,<3.2.1",
                 "azuracast/azuracast": "<0.18.3",
                 "backdrop/backdrop": "<1.24.2",
+                "backpack/crud": "<3.4.9",
                 "badaso/core": "<2.7",
                 "bagisto/bagisto": "<0.1.5",
                 "barrelstrength/sprout-base-email": "<1.2.7",
@@ -10657,7 +10658,7 @@
                 "lms/routes": "<2.1.1",
                 "localizationteam/l10nmgr": "<7.4|>=8,<8.7|>=9,<9.2",
                 "luyadev/yii-helpers": "<1.2.1",
-                "magento/community-edition": "<=2.4",
+                "magento/community-edition": "= 2.4.0|<=2.4",
                 "magento/magento1ce": "<1.9.4.3",
                 "magento/magento1ee": ">=1,<1.14.4.3",
                 "magento/product-community-edition": ">=2,<2.2.10|>=2.3,<2.3.2-p.2",
@@ -10680,7 +10681,7 @@
                 "modx/revolution": "<= 2.8.3-pl|<2.8",
                 "mojo42/jirafeau": "<4.4",
                 "monolog/monolog": ">=1.8,<1.12",
-                "moodle/moodle": "<4.2-rc.2|= 3.7|= 3.9|= 3.8|= 4.2.0|= 3.11",
+                "moodle/moodle": "<4.2-rc.2|= 3.5|= 3.7|= 3.9|= 3.8|= 4.2.0|= 3.11",
                 "movim/moxl": ">=0.8,<=0.10",
                 "mpdf/mpdf": "<=7.1.7",
                 "mustache/mustache": ">=2,<2.14.1",
@@ -11031,7 +11032,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2023-07-20T12:05:30+00:00"
+            "time": "2023-07-21T00:15:25+00:00"
         },
         {
             "name": "sebastian/cli-parser",
