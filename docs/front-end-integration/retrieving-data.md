@@ -128,7 +128,6 @@ W3C $w3cApi
 ```
 
 * Data provider for W3C Rest API
-* Connects with the W3C API key (`W3C_API_KEY` in your `.env.local` file)
 
 ## Retrieving CraftCMS content via GraphQL API
 
