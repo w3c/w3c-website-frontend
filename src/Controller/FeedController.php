@@ -291,7 +291,7 @@ class FeedController extends AbstractController
             ['type' => $type, 'shortname' => $shortname],
             UrlGeneratorInterface::ABSOLUTE_URL
         );
-        $pageUrl = $group['_links']['homepage']['href'];
+        $pageUrl = '/groups/' . $type . '/' . $shortname . '/';
 
         return $this->buildTaxonomyFeed(
             $entries,
