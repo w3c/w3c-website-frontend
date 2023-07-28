@@ -47,7 +47,6 @@ jobs:
         env:
           CRAFTCMS_API_READ_TOKEN: ${{ secrets.CRAFTCMS_API_READ_TOKEN }}
           CRAFTCMS_API_PUBLISH_TOKEN: ${{ secrets.CRAFTCMS_API_PUBLISH_TOKEN }}
-          W3C_API_KEY: ${{ secrets.W3C_API_KEY }}
           CACHE_ENABLE: 0
 
       - name: Redirects

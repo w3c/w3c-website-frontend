@@ -112,12 +112,9 @@ touch .env.local
 And set:
 * APP_ENV (dev, staging, prod)
 * APP_URL
-* W3C_API_KEY
 * CRAFTCMS_API_URL
 * CRAFTCMS_API_READ_TOKEN
 * CRAFTCMS_API_PUBLISH_TOKEN 
-
-You can access your W3C API Key from your [W3C account](https://auth.w3.org/login).
 
 You can find your API Read and Publish tokens by going to the Craft CMS dashboard (see the [Craft repo](https://github.com/w3c/w3c-website-craft)).
 

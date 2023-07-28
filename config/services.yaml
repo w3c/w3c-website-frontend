@@ -38,8 +38,7 @@ services:
     # W3C API connection
     App\Service\W3C:
         arguments:
-            $apiUrl: '%env(resolve:W3C_API_URL)%'
-            $apiKey: '%env(resolve:W3C_API_KEY)%'
+            $baseUri: '%env(resolve:W3C_API_URL)%'
 
     # Craft CMS API connection
     App\Service\CraftCMS:
