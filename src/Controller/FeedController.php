@@ -28,6 +28,7 @@ use Strata\Frontend\Exception\InvalidLocaleException;
 use Strata\Frontend\Site;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\UrlHelper;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
@@ -271,7 +272,7 @@ class FeedController extends AbstractController
      * @throws RuntimeError
      * @throws SyntaxError
      */
-    public function group(string $type, string $shortname, QueryManager $manager): Response
+    public function group(string $type, string $shortname, QueryManager $manager, UrlHelper $urlHelper): Response
     {
         $slug = $type . '-' . $shortname;
         $manager->add('group-info', new GroupInfo($this->site->siteHandle, $slug));
@@ -291,7 +292,7 @@ class FeedController extends AbstractController
             ['type' => $type, 'shortname' => $shortname],
             UrlGeneratorInterface::ABSOLUTE_URL
         );
-        $pageUrl = '/groups/' . $type . '/' . $shortname . '/';
+        $pageUrl = $urlHelper->getAbsoluteUrl('/groups/' . $type . '/' . $shortname . '/');
 
         return $this->buildTaxonomyFeed(
             $entries,
