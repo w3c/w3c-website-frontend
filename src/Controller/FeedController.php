@@ -298,7 +298,7 @@ class FeedController extends AbstractController
             $manager,
             $group['name'],
             $feedUrl,
-            $group['description'],
+            $group['description'] ?? $group['name'],
             $pageUrl
         );
     }
