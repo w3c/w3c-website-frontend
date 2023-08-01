@@ -20,7 +20,7 @@
     {% endembed %}
 {% elseif component.typeHandle == 'videoMediaComponent' %}
     {% if component.videoUrl.code is defined and component.videoUrl.code %}
-        {% set params = {'iframe': component.videoUrl.code|preg_replace('/^<iframe/', '<iframe title="' ~ component.videoTitle|e('html_attr') ~ '"')} %}
+        {% set params = {'iframe': component.videoUrl.code} %}
     {% else %}
         {% set params = {'url': component.videoUrl.url} %}
     {% endif %}
