@@ -4869,16 +4869,16 @@
         },
         {
             "name": "symfony/flex",
-            "version": "v1.20.0",
+            "version": "v1.20.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/flex.git",
-                "reference": "49059a10127ac8270957e116a2251ae535d202ac"
+                "reference": "039bb47ec15d80b21db41a480e0d6fdaf65528be"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/flex/zipball/49059a10127ac8270957e116a2251ae535d202ac",
-                "reference": "49059a10127ac8270957e116a2251ae535d202ac",
+                "url": "https://api.github.com/repos/symfony/flex/zipball/039bb47ec15d80b21db41a480e0d6fdaf65528be",
+                "reference": "039bb47ec15d80b21db41a480e0d6fdaf65528be",
                 "shasum": ""
             },
             "require": {
@@ -4914,7 +4914,7 @@
             "description": "Composer plugin for Symfony",
             "support": {
                 "issues": "https://github.com/symfony/flex/issues",
-                "source": "https://github.com/symfony/flex/tree/v1.20.0"
+                "source": "https://github.com/symfony/flex/tree/v1.20.1"
             },
             "funding": [
                 {
@@ -4930,7 +4930,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2023-05-26T16:25:26+00:00"
+            "time": "2023-08-02T08:51:10+00:00"
         },
         {
             "name": "symfony/form",
@@ -9167,12 +9167,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/w3c/w3c-website-templates-bundle.git",
-                "reference": "5fe0e3e23464dd1ddb881ce1e3395208667cdd90"
+                "reference": "0745272aae30f7d0e2155552801710c846352177"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/w3c/w3c-website-templates-bundle/zipball/5fe0e3e23464dd1ddb881ce1e3395208667cdd90",
-                "reference": "5fe0e3e23464dd1ddb881ce1e3395208667cdd90",
+                "url": "https://api.github.com/repos/w3c/w3c-website-templates-bundle/zipball/0745272aae30f7d0e2155552801710c846352177",
+                "reference": "0745272aae30f7d0e2155552801710c846352177",
                 "shasum": ""
             },
             "require": {
@@ -9210,7 +9210,7 @@
             "support": {
                 "source": "https://github.com/w3c/w3c-website-templates-bundle/tree/main"
             },
-            "time": "2023-08-01T13:59:08+00:00"
+            "time": "2023-08-03T05:59:41+00:00"
         },
         {
             "name": "webmozart/assert",
@@ -11459,16 +11459,16 @@
         },
         {
             "name": "sebastian/global-state",
-            "version": "5.0.5",
+            "version": "5.0.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/global-state.git",
-                "reference": "0ca8db5a5fc9c8646244e629625ac486fa286bf2"
+                "reference": "bde739e7565280bda77be70044ac1047bc007e34"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/global-state/zipball/0ca8db5a5fc9c8646244e629625ac486fa286bf2",
-                "reference": "0ca8db5a5fc9c8646244e629625ac486fa286bf2",
+                "url": "https://api.github.com/repos/sebastianbergmann/global-state/zipball/bde739e7565280bda77be70044ac1047bc007e34",
+                "reference": "bde739e7565280bda77be70044ac1047bc007e34",
                 "shasum": ""
             },
             "require": {
@@ -11511,7 +11511,7 @@
             ],
             "support": {
                 "issues": "https://github.com/sebastianbergmann/global-state/issues",
-                "source": "https://github.com/sebastianbergmann/global-state/tree/5.0.5"
+                "source": "https://github.com/sebastianbergmann/global-state/tree/5.0.6"
             },
             "funding": [
                 {
@@ -11519,7 +11519,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2022-02-14T08:28:10+00:00"
+            "time": "2023-08-02T09:26:13+00:00"
         },
         {
             "name": "sebastian/lines-of-code",
