@@ -45,7 +45,7 @@ set( 'writable_mode', 'acl');
 host('production')
     ->set('labels', ['stage' => 'production'])
     ->set('remote_user', 'studio24')
-    ->set('hostname', '128.30.52.34')
+    ->set('hostname', '3.94.156.111')
     ->set('deploy_path', '/var/www/frontend')
     ->set('url', 'https://www.w3.org');
 
