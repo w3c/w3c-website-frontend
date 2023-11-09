@@ -54,6 +54,14 @@ fragment youMayAlsoLikeRelatedEntries on youMayAlsoLikeRelatedEntries_MatrixFiel
                 }
                 thumbnailAltText
             }
+            ... on blogPosts_importedEntries_Entry {
+                year: postDate@formatDateTime(format: "Y")
+                text: excerpt
+                thumbnailImage {
+                    ...thumbnailImage
+                }
+                thumbnailAltText
+            }
             ... on pressReleases_default_Entry {
                 year: postDate@formatDateTime(format: "Y")
                 text: excerpt
@@ -62,7 +70,23 @@ fragment youMayAlsoLikeRelatedEntries on youMayAlsoLikeRelatedEntries_MatrixFiel
                 }
                 thumbnailAltText
             }
+            ... on pressReleases_importedEntries_Entry {
+                year: postDate@formatDateTime(format: "Y")
+                text: excerpt
+                thumbnailImage {
+                    ...thumbnailImage
+                }
+                thumbnailAltText
+            }
             ... on newsArticles_default_Entry {
+                year: postDate@formatDateTime(format: "Y")
+                text: excerpt
+                thumbnailImage {
+                    ...thumbnailImage
+                }
+                thumbnailAltText
+            }
+            ... on newsArticles_importedEntries_Entry {
                 year: postDate@formatDateTime(format: "Y")
                 text: excerpt
                 thumbnailImage {
