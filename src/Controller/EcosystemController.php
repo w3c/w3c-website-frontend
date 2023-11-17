@@ -90,11 +90,13 @@ class EcosystemController extends AbstractController
         if (count($evangelists) == 0) {
             $manager->add('bizdev', new Bizdev());
             $bizdev = $manager->get('bizdev');
-            $leadUrl = $bizdev['_links']['lead']['href'];
-            $leadHash = explode('/', $leadUrl);
-            $leadHash = $leadHash[count($leadHash) - 1];
-            $manager->add('lead', new BizdevLead($leadHash));
-            $evangelists[] = $manager->get('lead');
+            if (isset($bizdev['_links']['lead'])) {
+                $leadUrl = $bizdev['_links']['lead']['href'];
+                $leadHash = explode('/', $leadUrl);
+                $leadHash = $leadHash[count($leadHash) - 1];
+                $manager->add('lead', new BizdevLead($leadHash));
+                $evangelists[] = $manager->get('lead');
+            }
         }
 
         $page['groups']           = $groups;
