@@ -1,39 +1,39 @@
 api_available:
     w3c: >-
-        __api_available.w3c: {available, select,
-                1 {yes}
-            other {no}
+        利用可能なW3C API: {available, select,
+                1 {はい}
+            other {いいえ}
         }
     craft: >-
-        __api_available.craft: {available, select,
-                1 {yes}
-            other {no}
+        利用可能なCraft CMS API: {available, select, 
+                1 {はい}
+            other {いいえ}
         }
 specifications_found: >-
-    __specifications_found Found {total, plural,
-           =0 {no specifications}
-          one {# specification}
-        other {# specifications}
-    } in W3C API ({cache, select,
-            1 {cache hit}
-        other {live request}
+    W3C API（{cache, select,
+        1 {キャッシュ}
+        other {ライブリクエスト}
+    } 内で {total, plural, 
+        =0 {仕様は見つかりませんでした}
+        one {仕様 # 件が見つかりました} 
+        other {仕様 # 件が見つかりました}
     })
 blog:
     comments:
         form:
             comment:
-                label: __blog.comments.form.comment.lable
-                help: __blog.comments.form.comment.help
+                label: コメント
+                help: あなたのメールアドレスは公開されません。
             name:
-                label: __blog.comments.form.name.label
+                label: 名前
             email:
-                label: __blog.comments.form.email.label
-            submit: __blog.comments.form.submit
-            cancel: __blog.comments.form.cancel
-            success: __blog.comments.form.success
+                label: メールアドレス
+            submit: コメントを投稿
+            cancel: キャンセル
+            success: あなたのコメントは正常に保存され、表示される前にモデレーションされます。 <a href="#comments">コメントに戻る</a>
 components:
     groups_list:
-        title: __components.groups_list.title
+        title: アクティブなグループ
 error404:
-    title: __error404.title
-    message: __error404.message
+    title: ページが見つかりません
+    message: <p>申し訳ありませんが、アクセスしようとしていたページは存在しません。以下は、お探しのページを見つけるために試すことができるいくつかの手順です:</p><ul><li>URLを手動で入力した場合は、正確であることを確認してください。</li><li>特定のトピックの情報を探している場合は、<a href="/">W3Cホームページ</a>から始めてください。</li><li>このページの上部にある検索アイコンを使用してサイトを検索してみてください。</li></ul>
