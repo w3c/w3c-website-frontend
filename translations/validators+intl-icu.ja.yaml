@@ -2,11 +2,11 @@ blog:
     comments:
         form:
             name:
-                blank: __blog.comments.form.name.blank
+                blank: 名前を入力してください
             email:
-                blank: __blog.comments.form.email.blank
-                format: __blog.comments.form.email.format
+                blank: メールアドレスを入力してください
+                format: 有効なメールアドレスを入力してください
             comment:
-                blank: __blog.comments.form.comment.blank
+                blank: コメントを入力してください
             post:
-                blank: __blog.comments.form.post.blank
+                blank: コメントはブログ投稿に関連付ける必要があります
