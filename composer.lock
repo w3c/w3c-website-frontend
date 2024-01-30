@@ -9165,12 +9165,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/w3c/w3c-website-templates-bundle.git",
-                "reference": "4d016a5543df1be61b7084c395ef8e82bc6658d4"
+                "reference": "184bfb034597558e16fb01cfb797b20a3adfd868"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/w3c/w3c-website-templates-bundle/zipball/4d016a5543df1be61b7084c395ef8e82bc6658d4",
-                "reference": "4d016a5543df1be61b7084c395ef8e82bc6658d4",
+                "url": "https://api.github.com/repos/w3c/w3c-website-templates-bundle/zipball/184bfb034597558e16fb01cfb797b20a3adfd868",
+                "reference": "184bfb034597558e16fb01cfb797b20a3adfd868",
                 "shasum": ""
             },
             "require": {
@@ -9208,7 +9208,7 @@
             "support": {
                 "source": "https://github.com/w3c/w3c-website-templates-bundle/tree/main"
             },
-            "time": "2024-01-29T11:45:59+00:00"
+            "time": "2024-01-30T06:40:54+00:00"
         },
         {
             "name": "webmozart/assert",
@@ -10310,12 +10310,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Roave/SecurityAdvisories.git",
-                "reference": "cea5a32b418b44dc5a480049f531f53563c26210"
+                "reference": "44651302ebda9675677b114e39d7b9c94028a4ea"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Roave/SecurityAdvisories/zipball/cea5a32b418b44dc5a480049f531f53563c26210",
-                "reference": "cea5a32b418b44dc5a480049f531f53563c26210",
+                "url": "https://api.github.com/repos/Roave/SecurityAdvisories/zipball/44651302ebda9675677b114e39d7b9c94028a4ea",
+                "reference": "44651302ebda9675677b114e39d7b9c94028a4ea",
                 "shasum": ""
             },
             "conflict": {
@@ -11033,7 +11033,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-01-24T22:04:16+00:00"
+            "time": "2024-01-30T01:24:32+00:00"
         },
         {
             "name": "sebastian/cli-parser",
