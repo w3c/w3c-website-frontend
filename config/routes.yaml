@@ -1,0 +1,5 @@
+ekreative_health_check:
+    resource: Ekreative\HealthCheckBundle\Controller\HealthCheckController
+    type:     annotation
+    prefix:   /
+
