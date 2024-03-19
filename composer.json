@@ -13,7 +13,7 @@
         "chrisguitarguy/request-id-bundle": "^4.2",
         "composer/package-versions-deprecated": "1.11.99.1",
         "doctrine/annotations": "^1.0",
-        "ekreative/health-check-bundle": "^1.4",
+        "ekreative/health-check-bundle": "^1.11",
         "friendsofsymfony/http-cache-bundle": "^2.11",
         "nelmio/cors-bundle": "^2.1",
         "nyholm/psr7": "^1.5",
