@@ -45,7 +45,7 @@ set( 'writable_mode', 'acl');
 host('production')
     ->set('labels', ['stage' => 'production'])
     ->set('remote_user', 'studio24')
-    ->set('hostname', '3.94.156.111')
+    ->set('hostname', 'leda.w3.internal')
     ->set('deploy_path', '/var/www/frontend')
     ->set('url', 'https://www.w3.org');
 
@@ -61,7 +61,7 @@ host('production')
 host('development')
     ->set('labels', ['stage' => 'development'])
     ->set('remote_user', 'studio24')
-    ->set('hostname', '52.21.173.217')
+    ->set('hostname', 'thebe.w3.internal')
     ->set('deploy_path', '/var/www/frontend-dev')
     ->set('url', 'https://www-dev.w3.org')
     ->set('branch', 'update/deployer-7')
