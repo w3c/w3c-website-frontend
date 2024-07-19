@@ -10,6 +10,7 @@ use Strata\Data\Exception\CacheException;
 use Strata\Data\Exception\GraphQLQueryException;
 use Strata\Data\Exception\QueryException;
 use Strata\Data\Mapper\MapArray;
+use Strata\Data\Mapper\MappingStrategyInterface;
 use Strata\Data\Query\GraphQLQuery;
 use Strata\Data\Transform\Data\CallableData;
 use Symfony\Component\HttpFoundation\UrlHelper;
@@ -160,7 +161,7 @@ class GlobalNavigation extends GraphQLQuery
      *
      * @return array
      */
-    public function getMapping(): array
+    public function getMapping(): MappingStrategyInterface|array
     {
         return [
             '[title]'      => '[title]',

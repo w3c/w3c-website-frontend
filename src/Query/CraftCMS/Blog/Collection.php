@@ -8,6 +8,7 @@ use App\Service\CraftCMS;
 use Strata\Data\Cache\CacheLifetime;
 use Strata\Data\Exception\GraphQLQueryException;
 use Strata\Data\Mapper\MapArray;
+use Strata\Data\Mapper\MappingStrategyInterface;
 use Strata\Data\Mapper\WildcardMappingStrategy;
 use Strata\Data\Query\GraphQLQuery;
 use Strata\Data\Transform\Data\CallableData;
@@ -72,7 +73,7 @@ class Collection extends GraphQLQuery
         ;
     }
 
-    public function getMapping()
+    public function getMapping(): MappingStrategyInterface|array
     {
         return [
             '[id]' => '[id]',
