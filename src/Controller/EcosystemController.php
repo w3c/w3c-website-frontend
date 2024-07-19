@@ -22,7 +22,6 @@ use Symfony\Component\Routing\RouterInterface;
 class EcosystemController extends AbstractController
 {
     /**
-     * @Route("/ecosystems/{slug}/", requirements={"slug"="[^/]+"})
      *
      * @param string          $slug
      * @param Site            $site
@@ -33,6 +32,7 @@ class EcosystemController extends AbstractController
      * @throws GraphQLQueryException
      * @throws QueryManagerException
      */
+    #[Route(path: '/ecosystems/{slug}/', requirements: ['slug' => '[^/]+'])]
     public function show(string $slug, Site $site, QueryManager $manager, RouterInterface $router): Response
     {
         $manager->add('page', new CraftEcosystem($router, $site->siteHandle, $slug));

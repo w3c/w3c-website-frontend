@@ -6,6 +6,7 @@ namespace App\Query\CraftCMS\Feeds;
 
 use App\Service\CraftCMS;
 use Strata\Data\Exception\GraphQLQueryException;
+use Strata\Data\Mapper\MappingStrategyInterface;
 use Strata\Data\Mapper\WildcardMappingStrategy;
 use Strata\Data\Query\GraphQLQuery;
 
@@ -37,7 +38,7 @@ class Taxonomy extends GraphQLQuery
         ;
     }
 
-    public function getMapping()
+    public function getMapping(): MappingStrategyInterface|array
     {
         $mapping = new WildcardMappingStrategy();
         $mapping->addMapping('page', ['[page]' => '[page][0]']);

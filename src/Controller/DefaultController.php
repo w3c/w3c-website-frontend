@@ -25,7 +25,6 @@ class DefaultController extends AbstractController
 {
 
     /**
-     * @Route("/debug")
      * @param QueryManager        $manager
      * @param RouterInterface     $router
      *
@@ -33,6 +32,7 @@ class DefaultController extends AbstractController
      * @throws GraphQLQueryException
      * @throws QueryManagerException
      */
+    #[Route(path: '/debug')]
     public function debug(QueryManager $manager, RouterInterface $router): Response
     {
         // Add test page
@@ -55,7 +55,6 @@ class DefaultController extends AbstractController
     }
 
     /**
-     * @Route("/", name="app_default_home")
      *
      * @param Site            $site
      * @param QueryManager    $manager
@@ -65,6 +64,7 @@ class DefaultController extends AbstractController
      * @throws GraphQLQueryException
      * @throws QueryManagerException
      */
+    #[Route(path: '/', name: 'app_default_home')]
     public function home(
         Site $site,
         QueryManager $manager,
@@ -119,7 +119,6 @@ class DefaultController extends AbstractController
     }
 
     /**
-     * @Route("/{route}/", requirements={"route"=".+"}, priority=-1)
      *
      * @param Site                $site
      * @param QueryManager        $manager
@@ -130,6 +129,7 @@ class DefaultController extends AbstractController
      * @throws GraphQLQueryException
      * @throws QueryManagerException
      */
+    #[Route(path: '/{route}/', requirements: ['route' => '.+'], priority: -1)]
     public function index(
         Site $site,
         QueryManager $manager,
@@ -177,15 +177,15 @@ class DefaultController extends AbstractController
     }
 
     /**
-     * @Route("/global-nav/")
-     * @Cache(expires="tomorrow", public=true)
      *
      * @param QueryManager $manager
      *
      * @return Response
      * @throws QueryManagerException
      */
-    public function globalNav(QueryManager $manager)
+    #[\Symfony\Component\HttpKernel\Attribute\Cache(expires: 'tomorrow', public: true)]
+    #[Route(path: '/global-nav/')]
+    public function globalNav(QueryManager $manager): \Symfony\Component\HttpFoundation\Response
     {
         $navigation = $manager->getCollection('navigation');
 
@@ -196,14 +196,13 @@ class DefaultController extends AbstractController
     }
 
     /**
-     * @Route("/lang-nav/")
-     * @Cache(expires="tomorrow", public=true)
      *
      * @param Site         $site
-     *
      * @return Response
      */
-    public function langNav(Site $site)
+    #[\Symfony\Component\HttpKernel\Attribute\Cache(expires: 'tomorrow', public: true)]
+    #[Route(path: '/lang-nav/')]
+    public function langNav(Site $site): \Symfony\Component\HttpFoundation\Response
     {
         return $this->render(
             '@W3CWebsiteTemplates/components/styles/lang_nav.html.twig',

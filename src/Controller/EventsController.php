@@ -25,20 +25,13 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
  * @author Jean-Guilhem Rouel <jean-gui@w3.org>
- *
- * @Route("/events")
  */
+#[Route(path: '/events')]
 class EventsController extends AbstractController
 {
     private const LIMIT = 10;
 
     /**
-     * @Route("/")
-     * @Route(
-     *     "/{type}/",
-     *     name="app_events_index_type",
-     *     requirements={"type": "ac|conferences|happenings|talks|tpac|workshops"}
-     * )
      *
      * @param QueryManager        $manager
      * @param Site                $site
@@ -51,6 +44,8 @@ class EventsController extends AbstractController
      * @throws GraphQLQueryException
      * @throws QueryManagerException
      */
+    #[Route(path: '/')]
+    #[Route(path: '/{type}/', name: 'app_events_index_type', requirements: ['type' => 'ac|conferences|happenings|talks|tpac|workshops'])]
     public function index(
         QueryManager $manager,
         Site $site,
@@ -74,15 +69,6 @@ class EventsController extends AbstractController
     }
 
     /**
-     * @Route("/{year}/", requirements={"year": "\d\d\d\d"})
-     * @Route(
-     *     "/{type}/{year}/",
-     *     name="app_events_archive_type",
-     *     requirements={
-     *         "type": "ac|conferences|happenings|talks|tpac|workshops",
-     *         "year": "\d\d\d\d"
-     *     }
-     * )
      *
      * @param int                 $year
      * @param QueryManager        $manager
@@ -96,6 +82,8 @@ class EventsController extends AbstractController
      * @throws GraphQLQueryException
      * @throws QueryManagerException
      */
+    #[Route(path: '/{year}/', requirements: ['year' => '\d\d\d\d'])]
+    #[Route(path: '/{type}/{year}/', name: 'app_events_archive_type', requirements: ['type' => 'ac|conferences|happenings|talks|tpac|workshops', 'year' => '\d\d\d\d'])]
     public function archive(
         int $year,
         QueryManager $manager,
@@ -123,7 +111,6 @@ class EventsController extends AbstractController
     }
 
     /**
-     * @Route("/{type}/{year}/{slug}.ics", requirements={"year": "\d\d\d\d"})
      *
      * @param string          $type
      * @param int             $year
@@ -138,6 +125,7 @@ class EventsController extends AbstractController
      * @throws QueryManagerException
      * @throws Exception
      */
+    #[Route(path: '/{type}/{year}/{slug}.ics', requirements: ['year' => '\d\d\d\d'])]
     public function ical(
         string $type,
         int $year,
@@ -174,12 +162,12 @@ class EventsController extends AbstractController
     }
 
     /**
-     * @Route("/{type}/{year}/{slug}/", requirements={"year": "\d\d\d\d"})
      *
      * @throws GraphQLQueryException
      * @throws QueryManagerException
      * @throws Exception
      */
+    #[Route(path: '/{type}/{year}/{slug}/', requirements: ['year' => '\d\d\d\d'])]
     public function show(
         string $type,
         int $year,

@@ -54,7 +54,6 @@ class FeedController extends AbstractController
     }
 
     /**
-     * @Route("/blog/feed/")
      *
      * @throws GraphQLQueryException
      * @throws InvalidLocaleException
@@ -64,6 +63,7 @@ class FeedController extends AbstractController
      * @throws SyntaxError
      * @throws Exception
      */
+    #[Route(path: '/blog/feed/')]
     public function blog(QueryManager $manager): Response
     {
         $manager->add('rss', new Blog($this->site->siteHandle, self::LIMIT));
@@ -100,7 +100,6 @@ class FeedController extends AbstractController
     }
 
     /**
-     * @Route("/news/feed/")
      *
      * @throws GraphQLQueryException
      * @throws InvalidLocaleException
@@ -110,6 +109,7 @@ class FeedController extends AbstractController
      * @throws SyntaxError
      * @throws Exception
      */
+    #[Route(path: '/news/feed/')]
     public function news(QueryManager $manager): Response
     {
         $manager->add('rss', new News($this->site->siteHandle, self::LIMIT));
@@ -140,7 +140,6 @@ class FeedController extends AbstractController
     }
 
     /**
-     * @Route("/press-releases/feed/")
      *
      * @throws GraphQLQueryException
      * @throws InvalidLocaleException
@@ -149,6 +148,7 @@ class FeedController extends AbstractController
      * @throws RuntimeError
      * @throws SyntaxError
      */
+    #[Route(path: '/press-releases/feed/')]
     public function pressReleases(QueryManager $manager): Response
     {
         $manager->add('rss', new PressReleases($this->site->siteHandle, self::LIMIT));
@@ -180,7 +180,6 @@ class FeedController extends AbstractController
     }
 
     /**
-     * @Route("/categories/{slug}/feed/")
      *
      * @throws GraphQLQueryException
      * @throws InvalidLocaleException
@@ -190,6 +189,7 @@ class FeedController extends AbstractController
      * @throws SyntaxError
      * @throws Exception
      */
+    #[Route(path: '/categories/{slug}/feed/')]
     public function category(string $slug, QueryManager $manager): Response
     {
         $manager->add('category-info', new CategoryInfo($this->site->siteHandle, 'blogCategories', $slug));
@@ -216,7 +216,6 @@ class FeedController extends AbstractController
     }
 
     /**
-     * @Route("/ecosystems/{slug}/feed/")
      *
      * @throws GraphQLQueryException
      * @throws InvalidLocaleException
@@ -226,6 +225,7 @@ class FeedController extends AbstractController
      * @throws SyntaxError
      * @throws NotFoundHttpException
      */
+    #[Route(path: '/ecosystems/{slug}/feed/')]
     public function ecosystem(string $slug, QueryManager $manager): Response
     {
         $manager->add('ecosystem-info', new CategoryInfo($this->site->siteHandle, 'ecosystems', $slug));
@@ -263,7 +263,6 @@ class FeedController extends AbstractController
     }
 
     /**
-     * @Route("/groups/{type}/{shortname}/feed/")
      *
      * @throws GraphQLQueryException
      * @throws InvalidLocaleException
@@ -272,6 +271,7 @@ class FeedController extends AbstractController
      * @throws RuntimeError
      * @throws SyntaxError
      */
+    #[Route(path: '/groups/{type}/{shortname}/feed/')]
     public function group(string $type, string $shortname, QueryManager $manager, UrlHelper $urlHelper): Response
     {
         $slug = $type . '-' . $shortname;
@@ -305,7 +305,6 @@ class FeedController extends AbstractController
     }
 
     /**
-     * @Route("/events/feed/")
      *
      * @throws GraphQLQueryException
      * @throws InvalidLocaleException
@@ -314,6 +313,7 @@ class FeedController extends AbstractController
      * @throws RuntimeError
      * @throws SyntaxError
      */
+    #[Route(path: '/events/feed/')]
     public function events(QueryManager $manager): Response
     {
         $manager->add('rss', new Events($this->site->siteHandle, self::LIMIT));
