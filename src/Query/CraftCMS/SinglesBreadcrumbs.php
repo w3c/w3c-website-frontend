@@ -8,6 +8,7 @@ use App\Service\CraftCMS;
 use Strata\Data\Cache\CacheLifetime;
 use Strata\Data\Exception\GraphQLQueryException;
 use Strata\Data\Mapper\MapItem;
+use Strata\Data\Mapper\MappingStrategyInterface;
 use Strata\Data\Query\GraphQLQuery;
 use Strata\Data\Transform\Data\CallableData;
 use Strata\Data\Transform\Value\CallableValue;
@@ -49,7 +50,7 @@ class SinglesBreadcrumbs extends GraphQLQuery
             );
     }
 
-    public function getMapping()
+    public function getMapping(): MappingStrategyInterface|array
     {
         return [
             '[homepage]' => new CallableData([$this, 'transformHomepage'], '[homepage]'),

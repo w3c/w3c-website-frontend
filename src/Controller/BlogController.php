@@ -32,16 +32,14 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
  * @author Jean-Guilhem Rouel <jean-gui@w3.org>
- *
- * @Route("/blog")
  */
+#[Route(path: '/blog')]
 class BlogController extends AbstractController
 {
     private const LIMIT = 10;
     private const COMMENTS_OPEN_DAYS = '0';
 
     /**
-     * @Route("/")
      *
      * @param QueryManager        $manager
      * @param Site                $site
@@ -53,6 +51,7 @@ class BlogController extends AbstractController
      * @throws GraphQLQueryException
      * @throws QueryManagerException
      */
+    #[Route(path: '/')]
     public function index(
         QueryManager $manager,
         Site $site,
@@ -111,7 +110,6 @@ class BlogController extends AbstractController
     }
 
     /**
-     * @Route("/{year}/", requirements={"year": "\d\d\d\d"})
      *
      * @param QueryManager        $manager
      * @param int                 $year
@@ -124,6 +122,7 @@ class BlogController extends AbstractController
      * @throws GraphQLQueryException
      * @throws QueryManagerException
      */
+    #[Route(path: '/{year}/', requirements: ['year' => '\d\d\d\d'])]
     public function archive(
         QueryManager $manager,
         int $year,
@@ -189,7 +188,6 @@ class BlogController extends AbstractController
     }
 
     /**
-     * @Route("/category/{slug}/", requirements={"slug": "[^/]+"})
      *
      * @param QueryManager        $manager
      * @param string              $slug
@@ -202,6 +200,7 @@ class BlogController extends AbstractController
      * @throws GraphQLQueryException
      * @throws QueryManagerException
      */
+    #[Route(path: '/category/{slug}/', requirements: ['slug' => '[^/]+'])]
     public function category(
         QueryManager $manager,
         string $slug,
@@ -287,7 +286,6 @@ class BlogController extends AbstractController
     }
 
     /**
-     * @Route("/tags/{slug}/", requirements={"tag": "[^/]+"})
      *
      * @param QueryManager        $manager
      * @param string              $slug
@@ -300,6 +298,7 @@ class BlogController extends AbstractController
      * @throws GraphQLQueryException
      * @throws QueryManagerException
      */
+    #[Route(path: '/tags/{slug}/', requirements: ['tag' => '[^/]+'])]
     public function tag(
         QueryManager $manager,
         string $slug,
@@ -378,12 +377,12 @@ class BlogController extends AbstractController
     }
 
     /**
-     * @Route("/{year}/{slug}/", requirements={"year": "\d\d\d\d"})
      *
      * @throws GraphQLQueryException
      * @throws QueryManagerException
      * @throws Exception
      */
+    #[Route(path: '/{year}/{slug}/', requirements: ['year' => '\d\d\d\d'])]
     public function show(
         int $year,
         string $slug,

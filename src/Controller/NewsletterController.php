@@ -18,15 +18,12 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
-/**
- * @Route("/newsletter")
- */
+#[Route(path: '/newsletter')]
 class NewsletterController extends AbstractController
 {
     private const LIMIT = 10;
 
     /**
-     * @Route("/{year}/", requirements={"year": "\d\d\d\d"})
      *
      * @param QueryManager        $manager
      * @param int                 $year
@@ -39,6 +36,7 @@ class NewsletterController extends AbstractController
      * @throws GraphQLQueryException
      * @throws QueryManagerException
      */
+    #[Route(path: '/{year}/', requirements: ['year' => '\d\d\d\d'])]
     public function archive(
         QueryManager $manager,
         int $year,
@@ -88,7 +86,6 @@ class NewsletterController extends AbstractController
     }
 
     /**
-     * @Route("/{year}-{month}-{day}/", requirements={"year": "\d\d\d\d", "month": "\d\d", "day": "\d\d"})
      *
      * @param QueryManager    $manager
      * @param int             $year
@@ -100,6 +97,7 @@ class NewsletterController extends AbstractController
      * @throws GraphQLQueryException
      * @throws QueryManagerException
      */
+    #[Route(path: '/{year}-{month}-{day}/', requirements: ['year' => '\d\d\d\d', 'month' => '\d\d', 'day' => '\d\d'])]
     public function show(QueryManager $manager, int $year, int $month, int $day, Site $site): Response
     {
         $manager->add('page', new Entry($site->siteHandle, $year, $month, $day));
