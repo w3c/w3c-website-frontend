@@ -605,31 +605,33 @@
         },
         {
             "name": "ekreative/health-check-bundle",
-            "version": "1.12.0",
+            "version": "1.13.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ekreative/health-check-bundle.git",
-                "reference": "39fd0bfe9d170ae7800b78bbd93c0b28432c9996"
+                "reference": "ab6632064312539eb368b02515a4fc0932bc91fb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ekreative/health-check-bundle/zipball/39fd0bfe9d170ae7800b78bbd93c0b28432c9996",
-                "reference": "39fd0bfe9d170ae7800b78bbd93c0b28432c9996",
+                "url": "https://api.github.com/repos/ekreative/health-check-bundle/zipball/ab6632064312539eb368b02515a4fc0932bc91fb",
+                "reference": "ab6632064312539eb368b02515a4fc0932bc91fb",
                 "shasum": ""
             },
             "require": {
-                "ext-redis": "*",
                 "php": ">=8.0",
                 "symfony/framework-bundle": "^5.0|^6.0|^7.0"
             },
             "require-dev": {
                 "doctrine/doctrine-bundle": "^2",
                 "friendsofphp/php-cs-fixer": "^3.0",
-                "phpunit/phpunit": "^9",
+                "phpunit/phpunit": "^11",
                 "symfony/browser-kit": "^5.0|^6.0|^7.0",
                 "symfony/monolog-bundle": "^3.0|^4.0",
                 "symfony/phpunit-bridge": "^5.0|^6.0|^7.0",
                 "symfony/yaml": "^5.0|^6.0|^7.0"
+            },
+            "suggest": {
+                "ext-redis": "To use the Redis health check"
             },
             "type": "symfony-bundle",
             "autoload": {
@@ -655,9 +657,9 @@
             ],
             "support": {
                 "issues": "https://github.com/ekreative/health-check-bundle/issues",
-                "source": "https://github.com/ekreative/health-check-bundle/tree/1.12.0"
+                "source": "https://github.com/ekreative/health-check-bundle/tree/1.13.0"
             },
-            "time": "2024-04-07T13:16:45+00:00"
+            "time": "2024-08-06T10:41:24+00:00"
         },
         {
             "name": "erusev/parsedown",
@@ -967,16 +969,16 @@
         },
         {
             "name": "friendsofsymfony/http-cache",
-            "version": "2.16.0",
+            "version": "2.16.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/FriendsOfSymfony/FOSHttpCache.git",
-                "reference": "383092af1dd889e965238ac2d5575c8f9a7d02bc"
+                "reference": "4df8da89721022f04f792511357a35550fe2e4ac"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSHttpCache/zipball/383092af1dd889e965238ac2d5575c8f9a7d02bc",
-                "reference": "383092af1dd889e965238ac2d5575c8f9a7d02bc",
+                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSHttpCache/zipball/4df8da89721022f04f792511357a35550fe2e4ac",
+                "reference": "4df8da89721022f04f792511357a35550fe2e4ac",
                 "shasum": ""
             },
             "require": {
@@ -1042,9 +1044,9 @@
             ],
             "support": {
                 "issues": "https://github.com/FriendsOfSymfony/FOSHttpCache/issues",
-                "source": "https://github.com/FriendsOfSymfony/FOSHttpCache/tree/2.16.0"
+                "source": "https://github.com/FriendsOfSymfony/FOSHttpCache/tree/2.16.2"
             },
-            "time": "2024-07-24T07:31:04+00:00"
+            "time": "2024-08-02T12:08:11+00:00"
         },
         {
             "name": "friendsofsymfony/http-cache-bundle",
@@ -1890,20 +1892,20 @@
         },
         {
             "name": "nette/utils",
-            "version": "v4.0.4",
+            "version": "v4.0.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nette/utils.git",
-                "reference": "d3ad0aa3b9f934602cb3e3902ebccf10be34d218"
+                "reference": "6d70929398e4414cc52055242990cd609f54a29b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nette/utils/zipball/d3ad0aa3b9f934602cb3e3902ebccf10be34d218",
-                "reference": "d3ad0aa3b9f934602cb3e3902ebccf10be34d218",
+                "url": "https://api.github.com/repos/nette/utils/zipball/6d70929398e4414cc52055242990cd609f54a29b",
+                "reference": "6d70929398e4414cc52055242990cd609f54a29b",
                 "shasum": ""
             },
             "require": {
-                "php": ">=8.0 <8.4"
+                "php": "8.0 - 8.4"
             },
             "conflict": {
                 "nette/finder": "<3",
@@ -1970,9 +1972,9 @@
             ],
             "support": {
                 "issues": "https://github.com/nette/utils/issues",
-                "source": "https://github.com/nette/utils/tree/v4.0.4"
+                "source": "https://github.com/nette/utils/tree/v4.0.5"
             },
-            "time": "2024-01-17T16:50:36+00:00"
+            "time": "2024-08-07T12:47:39+00:00"
         },
         {
             "name": "nyholm/psr7",
@@ -4935,16 +4937,16 @@
         },
         {
             "name": "symfony/flex",
-            "version": "v1.21.6",
+            "version": "v1.21.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/flex.git",
-                "reference": "06b58a5e5b4c6528fb12e0fac5fea0db3f1e7ae8"
+                "reference": "33ce7c1c0fe78f8c3a106f193b6c0a7d82384462"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/flex/zipball/06b58a5e5b4c6528fb12e0fac5fea0db3f1e7ae8",
-                "reference": "06b58a5e5b4c6528fb12e0fac5fea0db3f1e7ae8",
+                "url": "https://api.github.com/repos/symfony/flex/zipball/33ce7c1c0fe78f8c3a106f193b6c0a7d82384462",
+                "reference": "33ce7c1c0fe78f8c3a106f193b6c0a7d82384462",
                 "shasum": ""
             },
             "require": {
@@ -4980,7 +4982,7 @@
             "description": "Composer plugin for Symfony",
             "support": {
                 "issues": "https://github.com/symfony/flex/issues",
-                "source": "https://github.com/symfony/flex/tree/v1.21.6"
+                "source": "https://github.com/symfony/flex/tree/v1.21.7"
             },
             "funding": [
                 {
@@ -4996,7 +4998,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-03-02T08:16:37+00:00"
+            "time": "2024-04-27T10:20:37+00:00"
         },
         {
             "name": "symfony/form",
@@ -9227,12 +9229,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/w3c/w3c-website-templates-bundle.git",
-                "reference": "51cbfe0b48e1ab47bf9a486ba7e4fb519627ecfd"
+                "reference": "8c38d550bb9ce5829adb7edfc5eea59e2a3c52fa"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/w3c/w3c-website-templates-bundle/zipball/51cbfe0b48e1ab47bf9a486ba7e4fb519627ecfd",
-                "reference": "51cbfe0b48e1ab47bf9a486ba7e4fb519627ecfd",
+                "url": "https://api.github.com/repos/w3c/w3c-website-templates-bundle/zipball/8c38d550bb9ce5829adb7edfc5eea59e2a3c52fa",
+                "reference": "8c38d550bb9ce5829adb7edfc5eea59e2a3c52fa",
                 "shasum": ""
             },
             "require": {
@@ -9270,7 +9272,7 @@
             "support": {
                 "source": "https://github.com/w3c/w3c-website-templates-bundle/tree/main"
             },
-            "time": "2024-07-31T14:44:53+00:00"
+            "time": "2024-08-07T13:20:36+00:00"
         },
         {
             "name": "webmozart/assert",
@@ -10380,12 +10382,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Roave/SecurityAdvisories.git",
-                "reference": "a7df4da9cd5ab8ad109e6ce0f18327790efbe8a3"
+                "reference": "176422aa2c339a0f4e56b92862c67a94e2b584fb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Roave/SecurityAdvisories/zipball/a7df4da9cd5ab8ad109e6ce0f18327790efbe8a3",
-                "reference": "a7df4da9cd5ab8ad109e6ce0f18327790efbe8a3",
+                "url": "https://api.github.com/repos/Roave/SecurityAdvisories/zipball/176422aa2c339a0f4e56b92862c67a94e2b584fb",
+                "reference": "176422aa2c339a0f4e56b92862c67a94e2b584fb",
                 "shasum": ""
             },
             "conflict": {
@@ -10482,7 +10484,7 @@
                 "codeigniter4/shield": "<1.0.0.0-beta8",
                 "codiad/codiad": "<=2.8.4",
                 "composer/composer": "<1.10.27|>=2,<2.2.24|>=2.3,<2.7.7",
-                "concrete5/concrete5": "<9.2.8",
+                "concrete5/concrete5": "<=9.3.2",
                 "concrete5/core": "<8.5.8|>=9,<9.1",
                 "contao-components/mediaelement": ">=2.14.2,<2.21.1",
                 "contao/comments-bundle": ">=2,<4.13.40|>=5.0.0.0-RC1-dev,<5.3.4",
@@ -10503,7 +10505,7 @@
                 "datatables/datatables": "<1.10.10",
                 "david-garcia/phpwhois": "<=4.3.1",
                 "dbrisinajumi/d2files": "<1",
-                "dcat/laravel-admin": "<=2.1.3.0-beta",
+                "dcat/laravel-admin": "<=2.1.3",
                 "derhansen/fe_change_pwd": "<2.0.5|>=3,<3.0.3",
                 "derhansen/sf_event_mgt": "<4.3.1|>=5,<5.1.1|>=7,<7.4",
                 "desperado/xml-bundle": "<=0.1.7",
@@ -10546,7 +10548,7 @@
                 "ezsystems/ezdemo-ls-extension": ">=5.4,<5.4.2.1-dev",
                 "ezsystems/ezfind-ls": ">=5.3,<5.3.6.1-dev|>=5.4,<5.4.11.1-dev|>=2017.12,<2017.12.0.1-dev",
                 "ezsystems/ezplatform": "<=1.13.6|>=2,<=2.5.24",
-                "ezsystems/ezplatform-admin-ui": ">=1.3,<1.3.5|>=1.4,<1.4.6|>=1.5,<1.5.29|>=2.3,<2.3.26",
+                "ezsystems/ezplatform-admin-ui": ">=1.3,<1.3.5|>=1.4,<1.4.6|>=1.5,<1.5.29|>=2.3,<2.3.26|>=3.3,<3.3.39",
                 "ezsystems/ezplatform-admin-ui-assets": ">=4,<4.2.1|>=5,<5.0.1|>=5.1,<5.1.1",
                 "ezsystems/ezplatform-graphql": ">=1.0.0.0-RC1-dev,<1.0.13|>=2.0.0.0-beta1,<2.3.12",
                 "ezsystems/ezplatform-kernel": "<1.2.5.1-dev|>=1.3,<1.3.35",
@@ -10569,6 +10571,7 @@
                 "filp/whoops": "<2.1.13",
                 "fineuploader/php-traditional-server": "<=1.2.2",
                 "firebase/php-jwt": "<6",
+                "fisharebest/webtrees": "<=2.1.18",
                 "fixpunkt/fp-masterquiz": "<2.2.1|>=3,<3.5.2",
                 "fixpunkt/fp-newsletter": "<1.1.1|>=2,<2.1.2|>=2.2,<3.2.6",
                 "flarum/core": "<1.8.5",
@@ -10629,7 +10632,7 @@
                 "hov/jobfair": "<1.0.13|>=2,<2.0.2",
                 "httpsoft/http-message": "<1.0.12",
                 "hyn/multi-tenant": ">=5.6,<5.7.2",
-                "ibexa/admin-ui": ">=4.2,<4.2.3",
+                "ibexa/admin-ui": ">=4.2,<4.2.3|>=4.6.0.0-beta1,<4.6.9",
                 "ibexa/core": ">=4,<4.0.7|>=4.1,<4.1.4|>=4.2,<4.2.3|>=4.5,<4.5.6|>=4.6,<4.6.2",
                 "ibexa/graphql": ">=2.5,<2.5.31|>=3.3,<3.3.28|>=4.2,<4.2.3",
                 "ibexa/post-install": "<=1.0.4",
@@ -10652,6 +10655,7 @@
                 "innologi/typo3-appointments": "<2.0.6",
                 "intelliants/subrion": "<4.2.2",
                 "inter-mediator/inter-mediator": "==5.5",
+                "ipl/web": "<0.10.1",
                 "islandora/islandora": ">=2,<2.4.1",
                 "ivankristianto/phpwhois": "<=4.3",
                 "jackalope/jackalope-doctrine-dbal": "<1.7.4",
@@ -10734,7 +10738,7 @@
                 "microsoft/microsoft-graph": ">=1.16,<1.109.1|>=2,<2.0.1",
                 "microsoft/microsoft-graph-beta": "<2.0.1",
                 "microsoft/microsoft-graph-core": "<2.0.2",
-                "microweber/microweber": "<=2.0.4",
+                "microweber/microweber": "<=2.0.16",
                 "mikehaertl/php-shellcommand": "<1.6.1",
                 "miniorange/miniorange-saml": "<1.4.3",
                 "mittwald/typo3_forum": "<1.2.1",
@@ -11030,6 +11034,7 @@
                 "tribalsystems/zenario": "<9.5.60602",
                 "truckersmp/phpwhois": "<=4.3.1",
                 "ttskch/pagination-service-provider": "<1",
+                "twbs/bootstrap": "<=3.4.1|>=4,<=4.6.2",
                 "twig/twig": "<1.44.7|>=2,<2.15.3|>=3,<3.4.3",
                 "typo3/cms": "<9.5.29|>=10,<10.4.35|>=11,<11.5.23|>=12,<12.2",
                 "typo3/cms-backend": "<4.1.14|>=4.2,<4.2.15|>=4.3,<4.3.7|>=4.4,<4.4.4|>=7,<=7.6.50|>=8,<=8.7.39|>=9,<=9.5.24|>=10,<=10.4.13|>=11,<=11.1",
@@ -11184,7 +11189,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-07-30T18:05:16+00:00"
+            "time": "2024-08-05T22:04:39+00:00"
         },
         {
             "name": "sebastian/cli-parser",
