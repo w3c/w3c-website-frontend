@@ -2,6 +2,7 @@
 
 namespace App\Tests\Controller;
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use Symfony\Component\Panther\PantherTestCase;
 
 class DefaultControllerTest extends PantherTestCase
@@ -14,9 +15,7 @@ class DefaultControllerTest extends PantherTestCase
         $this->client  = static::createPantherClient(['browser' => $browser]);
     }
 
-    /**
-     * @dataProvider provider
-     */
+    #[DataProvider('provider')]
     public function testIndex(string $lang, string $title, string $langPrefix, string $path): void
     {
         $crawler = $this->client->request('GET', $langPrefix . $path);
@@ -25,15 +24,15 @@ class DefaultControllerTest extends PantherTestCase
         $this->assertSelectorTextSame('h1', $title);
     }
 
-    public function provider()
+    public static function provider()
     {
         return [
-            ['lang' => 'en', 'title' => 'We believe in one web for all', 'lang_prefix' => '', 'path' => '/'],
-            ['lang' => 'en', 'title' => 'Ecosystems', 'lang_prefix' => '', 'path' => '/ecosystems/'],
-            ['lang' => 'en', 'title' => 'Blog listing', 'lang_prefix' => '', 'path' => '/blog/'],
-            //['lang' => 'ja', 'title' => 'W3C Home', 'lang_prefix' => '/ja', 'path' => '/'],
-            //['lang' => 'ja', 'title' => '日本語で Landing Page', 'lang_prefix' => '/ja', 'path' => '/landing-page/'],
-            ['lang' => 'ja', 'title' => 'Blog listing', 'lang_prefix' => '/ja', 'path' => '/blog/']
+            ['lang' => 'en', 'title' => 'We believe in one web for all', 'langPrefix' => '', 'path' => '/'],
+            ['lang' => 'en', 'title' => 'Ecosystems', 'langPrefix' => '', 'path' => '/ecosystems/'],
+            ['lang' => 'en', 'title' => 'Blog listing', 'langPrefix' => '', 'path' => '/blog/'],
+            //['lang' => 'ja', 'title' => 'W3C Home', 'langPrefix' => '/ja', 'path' => '/'],
+            //['lang' => 'ja', 'title' => '日本語で Landing Page', 'langPrefix' => '/ja', 'path' => '/landing-page/'],
+            ['lang' => 'ja', 'title' => 'Blog listing', 'langPrefix' => '/ja', 'path' => '/blog/']
         ];
     }
 }

@@ -23,15 +23,13 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
  * @author Jean-Guilhem Rouel <jean-gui@w3.org>
- *
- * @Route("/press-releases")
  */
+#[Route(path: '/press-releases')]
 class PressReleasesController extends AbstractController
 {
     private const LIMIT = 10;
 
     /**
-     * @Route("/")
      *
      * @param QueryManager        $manager
      * @param Site                $site
@@ -43,6 +41,7 @@ class PressReleasesController extends AbstractController
      * @throws GraphQLQueryException
      * @throws QueryManagerException
      */
+    #[Route(path: '/')]
     public function index(
         QueryManager $manager,
         Site $site,
@@ -88,7 +87,6 @@ class PressReleasesController extends AbstractController
     }
 
     /**
-     * @Route("/{year}/", requirements={"year": "\d\d\d\d"})
      *
      * @param QueryManager        $manager
      * @param int                 $year
@@ -101,6 +99,7 @@ class PressReleasesController extends AbstractController
      * @throws GraphQLQueryException
      * @throws QueryManagerException
      */
+    #[Route(path: '/{year}/', requirements: ['year' => '\d\d\d\d'])]
     public function archive(
         QueryManager $manager,
         int $year,
@@ -152,11 +151,11 @@ class PressReleasesController extends AbstractController
     }
 
     /**
-     * @Route("/{year}/{slug}/", requirements={"year": "\d\d\d\d"})
      *
      * @throws GraphQLQueryException
      * @throws QueryManagerException
      */
+    #[Route(path: '/{year}/{slug}/', requirements: ['year' => '\d\d\d\d'])]
     public function show(
         QueryManager $manager,
         int $year,

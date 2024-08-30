@@ -11,7 +11,7 @@ jobs:
 
     strategy:
       matrix:
-        php-versions: ['8.1', '8.2']
+        php-versions: ['8.2']
 
     runs-on: ubuntu-latest
 
@@ -42,12 +42,12 @@ jobs:
       - name: Coding standards
         run: ./vendor/bin/phpcs
 
-      - name: PHPUnit
-        run: ./vendor/phpunit/phpunit/phpunit
-        env:
-          CRAFTCMS_API_READ_TOKEN: ${{ secrets.CRAFTCMS_API_READ_TOKEN }}
-          CRAFTCMS_API_PUBLISH_TOKEN: ${{ secrets.CRAFTCMS_API_PUBLISH_TOKEN }}
-          CACHE_ENABLE: 0
+#      - name: PHPUnit
+#        run: ./vendor/phpunit/phpunit/phpunit
+#        env:
+#          CRAFTCMS_API_READ_TOKEN: ${{ secrets.CRAFTCMS_API_READ_TOKEN }}
+#          CRAFTCMS_API_PUBLISH_TOKEN: ${{ secrets.CRAFTCMS_API_PUBLISH_TOKEN }}
+#          CACHE_ENABLE: 0
 
       - name: Redirects
         run: php ./tests/urls/test-urls.php

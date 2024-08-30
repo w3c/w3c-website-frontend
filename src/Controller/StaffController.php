@@ -13,13 +13,10 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-/**
- * @Route("/staff")
- */
+#[Route(path: '/staff')]
 class StaffController extends AbstractController
 {
     /**
-     * @Route("/alumni/")
      * @todo get page heading content
      * @todo fix GraphQL once Craft CMS is complete
      *
@@ -30,6 +27,7 @@ class StaffController extends AbstractController
      * @throws GraphQLQueryException
      * @throws QueryManagerException
      */
+    #[Route(path: '/alumni/')]
     public function alumni(Site $site, QueryManager $manager): Response
     {
         $manager->add('alumni-listing', new AlumniListing($site->siteHandle));
