@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "de8b6b4c5e5b1ebb8ec936b8a84f8526",
+    "content-hash": "48171219e9736700c2c2cc39ffab9904",
     "packages": [
         {
             "name": "brick/math",
@@ -9162,16 +9162,16 @@
         },
         {
             "name": "w3c/website-templates-bundle",
-            "version": "dev-jg/sf7",
+            "version": "dev-main",
             "source": {
                 "type": "git",
                 "url": "https://github.com/w3c/w3c-website-templates-bundle.git",
-                "reference": "4a9312cb21746fb8c93e2c6c1513a56f5a2060cc"
+                "reference": "7284f60a56bca1617742bfe2970d3e064bd23260"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/w3c/w3c-website-templates-bundle/zipball/4a9312cb21746fb8c93e2c6c1513a56f5a2060cc",
-                "reference": "4a9312cb21746fb8c93e2c6c1513a56f5a2060cc",
+                "url": "https://api.github.com/repos/w3c/w3c-website-templates-bundle/zipball/7284f60a56bca1617742bfe2970d3e064bd23260",
+                "reference": "7284f60a56bca1617742bfe2970d3e064bd23260",
                 "shasum": ""
             },
             "require": {
@@ -9194,6 +9194,7 @@
                 "studio24/deployer-recipes": "^v2.0",
                 "studio24/design-system": "dev-main"
             },
+            "default-branch": true,
             "type": "symfony-bundle",
             "autoload": {
                 "psr-4": {
@@ -9207,9 +9208,9 @@
             "description": "W3C Website Templates",
             "homepage": "https://github.com/w3c/w3c-website-templates-bundle",
             "support": {
-                "source": "https://github.com/w3c/w3c-website-templates-bundle/tree/jg/sf7"
+                "source": "https://github.com/w3c/w3c-website-templates-bundle/tree/main"
             },
-            "time": "2024-07-19T10:21:45+00:00"
+            "time": "2024-08-30T11:03:38+00:00"
         },
         {
             "name": "webmozart/assert",
