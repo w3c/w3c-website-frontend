@@ -12897,9 +12897,9 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
+        "w3c/website-templates-bundle": 20,
         "roave/security-advisories": 20,
-        "studio24/deployer-recipes": 20,
-        "w3c/website-templates-bundle": 20
+        "studio24/deployer-recipes": 20
     },
     "prefer-stable": true,
     "prefer-lowest": false,
@@ -12909,6 +12909,6 @@
         "ext-iconv": "*",
         "ext-json": "*"
     },
-    "platform-dev": {},
+    "platform-dev": [],
     "plugin-api-version": "2.6.0"
 }
