@@ -2641,16 +2641,16 @@
         },
         {
             "name": "phpstan/phpdoc-parser",
-            "version": "1.32.0",
+            "version": "1.33.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpdoc-parser.git",
-                "reference": "6ca22b154efdd9e3c68c56f5d94670920a1c19a4"
+                "reference": "82a311fd3690fb2bf7b64d5c98f912b3dd746140"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpdoc-parser/zipball/6ca22b154efdd9e3c68c56f5d94670920a1c19a4",
-                "reference": "6ca22b154efdd9e3c68c56f5d94670920a1c19a4",
+                "url": "https://api.github.com/repos/phpstan/phpdoc-parser/zipball/82a311fd3690fb2bf7b64d5c98f912b3dd746140",
+                "reference": "82a311fd3690fb2bf7b64d5c98f912b3dd746140",
                 "shasum": ""
             },
             "require": {
@@ -2682,9 +2682,9 @@
             "description": "PHPDoc parser with support for nullable, intersection and generic types",
             "support": {
                 "issues": "https://github.com/phpstan/phpdoc-parser/issues",
-                "source": "https://github.com/phpstan/phpdoc-parser/tree/1.32.0"
+                "source": "https://github.com/phpstan/phpdoc-parser/tree/1.33.0"
             },
-            "time": "2024-09-26T07:23:32+00:00"
+            "time": "2024-10-13T11:25:22+00:00"
         },
         {
             "name": "psr/cache",
@@ -3446,16 +3446,16 @@
         },
         {
             "name": "sabre/vobject",
-            "version": "4.5.5",
+            "version": "4.5.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sabre-io/vobject.git",
-                "reference": "7148cf57d25aaba0a49f6656d37c35e8175b3087"
+                "reference": "900266bb3bd448a9f7f41f82344ad0aba237cb27"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sabre-io/vobject/zipball/7148cf57d25aaba0a49f6656d37c35e8175b3087",
-                "reference": "7148cf57d25aaba0a49f6656d37c35e8175b3087",
+                "url": "https://api.github.com/repos/sabre-io/vobject/zipball/900266bb3bd448a9f7f41f82344ad0aba237cb27",
+                "reference": "900266bb3bd448a9f7f41f82344ad0aba237cb27",
                 "shasum": ""
             },
             "require": {
@@ -3465,9 +3465,9 @@
             },
             "require-dev": {
                 "friendsofphp/php-cs-fixer": "~2.17.1",
-                "phpstan/phpstan": "^0.12",
+                "phpstan/phpstan": "^0.12 || ^1.11",
                 "phpunit/php-invoker": "^2.0 || ^3.1",
-                "phpunit/phpunit": "^7.5 || ^8.5 || ^9.0"
+                "phpunit/phpunit": "^7.5 || ^8.5 || ^9.6"
             },
             "suggest": {
                 "hoa/bench": "If you would like to run the benchmark scripts"
@@ -3546,7 +3546,7 @@
                 "issues": "https://github.com/sabre-io/vobject/issues",
                 "source": "https://github.com/fruux/sabre-vobject"
             },
-            "time": "2024-07-02T08:48:52+00:00"
+            "time": "2024-10-14T11:53:54+00:00"
         },
         {
             "name": "sabre/xml",
@@ -9170,12 +9170,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/w3c/w3c-website-templates-bundle.git",
-                "reference": "0fc7c460f1beb1be7bbdf00a8cb952d1404f763f"
+                "reference": "7341c81c08d740edda38adc611c8aa5f3a69e98f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/w3c/w3c-website-templates-bundle/zipball/0fc7c460f1beb1be7bbdf00a8cb952d1404f763f",
-                "reference": "0fc7c460f1beb1be7bbdf00a8cb952d1404f763f",
+                "url": "https://api.github.com/repos/w3c/w3c-website-templates-bundle/zipball/7341c81c08d740edda38adc611c8aa5f3a69e98f",
+                "reference": "7341c81c08d740edda38adc611c8aa5f3a69e98f",
                 "shasum": ""
             },
             "require": {
@@ -9214,7 +9214,7 @@
             "support": {
                 "source": "https://github.com/w3c/w3c-website-templates-bundle/tree/main"
             },
-            "time": "2024-10-10T13:53:15+00:00"
+            "time": "2024-10-14T14:18:32+00:00"
         },
         {
             "name": "webmozart/assert",
@@ -9278,16 +9278,16 @@
     "packages-dev": [
         {
             "name": "deployer/deployer",
-            "version": "v7.4.0",
+            "version": "v7.4.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/deployphp/deployer.git",
-                "reference": "b438dc22545ab2ecc67d79c80c7a79c156de3599"
+                "reference": "9d6397f25d8185622717e6e66d3eed737fd9d99b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/deployphp/deployer/zipball/b438dc22545ab2ecc67d79c80c7a79c156de3599",
-                "reference": "b438dc22545ab2ecc67d79c80c7a79c156de3599",
+                "url": "https://api.github.com/repos/deployphp/deployer/zipball/9d6397f25d8185622717e6e66d3eed737fd9d99b",
+                "reference": "9d6397f25d8185622717e6e66d3eed737fd9d99b",
                 "shasum": ""
             },
             "bin": [
@@ -9317,7 +9317,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-04-17T20:55:49+00:00"
+            "time": "2024-10-12T20:42:52+00:00"
         },
         {
             "name": "doctrine/inflector",
@@ -9530,16 +9530,16 @@
         },
         {
             "name": "overtrue/phplint",
-            "version": "9.5.2",
+            "version": "9.5.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/overtrue/phplint.git",
-                "reference": "51c090c1e6d22a04272f7043dee895f23678981b"
+                "reference": "584063a687abca041551e0b14c47fe9fc574b193"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/overtrue/phplint/zipball/51c090c1e6d22a04272f7043dee895f23678981b",
-                "reference": "51c090c1e6d22a04272f7043dee895f23678981b",
+                "url": "https://api.github.com/repos/overtrue/phplint/zipball/584063a687abca041551e0b14c47fe9fc574b193",
+                "reference": "584063a687abca041551e0b14c47fe9fc574b193",
                 "shasum": ""
             },
             "require": {
@@ -9611,7 +9611,7 @@
             ],
             "support": {
                 "issues": "https://github.com/overtrue/phplint/issues",
-                "source": "https://github.com/overtrue/phplint/tree/9.5.2"
+                "source": "https://github.com/overtrue/phplint/tree/9.5.3"
             },
             "funding": [
                 {
@@ -9619,7 +9619,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-10-08T04:23:23+00:00"
+            "time": "2024-10-11T07:13:25+00:00"
         },
         {
             "name": "phar-io/manifest",
@@ -10288,16 +10288,16 @@
         },
         {
             "name": "rector/rector",
-            "version": "1.2.6",
+            "version": "1.2.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/rectorphp/rector.git",
-                "reference": "6ca85da28159dbd3bb36211c5104b7bc91278e99"
+                "reference": "5b33bdd871895276e2c18e5410a4a57df9233ee0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/rectorphp/rector/zipball/6ca85da28159dbd3bb36211c5104b7bc91278e99",
-                "reference": "6ca85da28159dbd3bb36211c5104b7bc91278e99",
+                "url": "https://api.github.com/repos/rectorphp/rector/zipball/5b33bdd871895276e2c18e5410a4a57df9233ee0",
+                "reference": "5b33bdd871895276e2c18e5410a4a57df9233ee0",
                 "shasum": ""
             },
             "require": {
@@ -10335,7 +10335,7 @@
             ],
             "support": {
                 "issues": "https://github.com/rectorphp/rector/issues",
-                "source": "https://github.com/rectorphp/rector/tree/1.2.6"
+                "source": "https://github.com/rectorphp/rector/tree/1.2.7"
             },
             "funding": [
                 {
@@ -10343,7 +10343,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-10-03T08:56:44+00:00"
+            "time": "2024-10-12T11:12:46+00:00"
         },
         {
             "name": "roave/security-advisories",
@@ -10351,12 +10351,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Roave/SecurityAdvisories.git",
-                "reference": "6fc16d8c05a872bf86eb0a1684d89b9bcb93d636"
+                "reference": "c3c55a0f6643119fa8699577cc83ca6256d98ab5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Roave/SecurityAdvisories/zipball/6fc16d8c05a872bf86eb0a1684d89b9bcb93d636",
-                "reference": "6fc16d8c05a872bf86eb0a1684d89b9bcb93d636",
+                "url": "https://api.github.com/repos/Roave/SecurityAdvisories/zipball/c3c55a0f6643119fa8699577cc83ca6256d98ab5",
+                "reference": "c3c55a0f6643119fa8699577cc83ca6256d98ab5",
                 "shasum": ""
             },
             "conflict": {
@@ -10693,7 +10693,7 @@
                 "lms/routes": "<2.1.1",
                 "localizationteam/l10nmgr": "<7.4|>=8,<8.7|>=9,<9.2",
                 "luyadev/yii-helpers": "<1.2.1",
-                "magento/community-edition": "<2.4.5|==2.4.5|>=2.4.5.0-patch1,<2.4.5.0-patch9|==2.4.6|>=2.4.6.0-patch1,<2.4.6.0-patch7|==2.4.7|>=2.4.7.0-patch1,<2.4.7.0-patch2",
+                "magento/community-edition": "<2.4.5|==2.4.5|>=2.4.5.0-patch1,<2.4.5.0-patch10|==2.4.6|>=2.4.6.0-patch1,<2.4.6.0-patch8|>=2.4.7.0-beta1,<2.4.7.0-patch3",
                 "magento/core": "<=1.9.4.5",
                 "magento/magento1ce": "<1.9.4.3-dev",
                 "magento/magento1ee": ">=1,<1.14.4.3-dev",
@@ -10926,7 +10926,7 @@
                 "slim/slim": "<2.6",
                 "slub/slub-events": "<3.0.3",
                 "smarty/smarty": "<4.5.3|>=5,<5.1.1",
-                "snipe/snipe-it": "<6.4.2",
+                "snipe/snipe-it": "<7.0.10",
                 "socalnick/scn-social-auth": "<1.15.2",
                 "socialiteproviders/steam": "<1.1",
                 "spatie/browsershot": "<3.57.4",
@@ -11175,7 +11175,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-10-10T00:18:21+00:00"
+            "time": "2024-10-11T18:06:00+00:00"
         },
         {
             "name": "sebastian/cli-parser",
