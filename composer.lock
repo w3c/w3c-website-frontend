@@ -9170,12 +9170,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/w3c/w3c-website-templates-bundle.git",
-                "reference": "7341c81c08d740edda38adc611c8aa5f3a69e98f"
+                "reference": "6614a674bc0641083724a5a05d5cd652ccbd34b2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/w3c/w3c-website-templates-bundle/zipball/7341c81c08d740edda38adc611c8aa5f3a69e98f",
-                "reference": "7341c81c08d740edda38adc611c8aa5f3a69e98f",
+                "url": "https://api.github.com/repos/w3c/w3c-website-templates-bundle/zipball/6614a674bc0641083724a5a05d5cd652ccbd34b2",
+                "reference": "6614a674bc0641083724a5a05d5cd652ccbd34b2",
                 "shasum": ""
             },
             "require": {
@@ -9214,7 +9214,7 @@
             "support": {
                 "source": "https://github.com/w3c/w3c-website-templates-bundle/tree/main"
             },
-            "time": "2024-10-14T14:18:32+00:00"
+            "time": "2024-10-15T05:43:48+00:00"
         },
         {
             "name": "webmozart/assert",
@@ -12897,9 +12897,9 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
-        "w3c/website-templates-bundle": 20,
         "roave/security-advisories": 20,
-        "studio24/deployer-recipes": 20
+        "studio24/deployer-recipes": 20,
+        "w3c/website-templates-bundle": 20
     },
     "prefer-stable": true,
     "prefer-lowest": false,
@@ -12909,6 +12909,6 @@
         "ext-iconv": "*",
         "ext-json": "*"
     },
-    "platform-dev": [],
+    "platform-dev": {},
     "plugin-api-version": "2.6.0"
 }
