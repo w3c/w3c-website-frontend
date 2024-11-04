@@ -1,14 +1,14 @@
 fragment landingFlexibleComponents on landingFlexibleComponents_MatrixField {
-    ... on landingFlexibleComponents_textComponent_BlockType {
+    ... on textComponent_Entry {
         typeHandle
         contentField
     }
-    ... on landingFlexibleComponents_blockquoteComponent_BlockType {
+    ... on blockquoteComponent_Entry {
         typeHandle
         citation
         quoteText
     }
-    ... on landingFlexibleComponents_fiftyFiftyComponent_BlockType {
+    ... on fiftyFiftyComponent_Entry {
         typeHandle
         showImageBeforeText
         image  {
@@ -23,16 +23,16 @@ fragment landingFlexibleComponents on landingFlexibleComponents_MatrixField {
         secondaryLinkUrl
         secondaryLinkCopy
     }
-    ... on landingFlexibleComponents_imagesAndDescriptionsComponent_BlockType {
+    ... on imagesAndDescriptionsComponent_Entry {
         typeHandle
         heading
         description
         cards {
-            ... on cards_BlockType {
+            ... on cardsBlock_Entry {
                 image {
                     ...thumbnailImage
                 }
-                AltText
+                AltText1
                 heading
                 description
                 linkDestination
@@ -40,12 +40,12 @@ fragment landingFlexibleComponents on landingFlexibleComponents_MatrixField {
             }
         }
     }
-    ... on landingFlexibleComponents_iconsAndDescriptionsComponent_BlockType {
+    ... on iconsAndDescriptionsComponent_Entry {
         typeHandle
         heading
         description
         iconCards {
-            ... on iconCards_BlockType {
+            ... on iconCardsBlock_Entry {
                 icon {
                     ... on icon_Icon {
                         inline
@@ -58,7 +58,7 @@ fragment landingFlexibleComponents on landingFlexibleComponents_MatrixField {
             }
         }
     }
-    ... on landingFlexibleComponents_imageMediaComponent_BlockType {
+    ... on imageMediaComponent_Entry {
         typeHandle
         image {
             ...contentImage
@@ -67,7 +67,7 @@ fragment landingFlexibleComponents on landingFlexibleComponents_MatrixField {
         figureCaption
         informativeOrDecorative
     }
-    ... on landingFlexibleComponents_videoMediaComponent_BlockType {
+    ... on videoMediaComponent_Entry {
         typeHandle
         videoTitle
         videoUrl {

@@ -17,7 +17,7 @@ query Ecosystem($slug: [String], $site: [String]) {
         breadcrumbs: parent {
             ...breadcrumbs
         }
-        ... on ecosystems_default_Entry {
+        ... on default_Entry {
             ecosystem {
                 slug
                 id

@@ -45,7 +45,7 @@ query PressRelease($year: [String], $slug: [String], $site: [String]) {
             }
             notes: postPageNotes
         }
-        ... on pressReleases_importedEntries_Entry {
+        ... on importedEntries_Entry {
             excerpt
             thumbnailImage {
                 ...thumbnailImage

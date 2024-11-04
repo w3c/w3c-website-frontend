@@ -1,14 +1,14 @@
 fragment ecosystemsBottomFlexibleComponents on ecosystemsBottomFlexibleComponents_MatrixField {
-    ... on ecosystemsBottomFlexibleComponents_textComponent_BlockType {
+    ... on textComponent_Entry {
         typeHandle
         contentField
     }
-    ... on ecosystemsBottomFlexibleComponents_blockquoteComponent_BlockType {
+    ... on blockquoteComponent_Entry {
         typeHandle
         quoteText
         citation
     }
-    ... on ecosystemsBottomFlexibleComponents_fiftyFiftyComponent_BlockType {
+    ... on fiftyFiftyComponent_Entry {
         typeHandle
         showImageBeforeText
         image  {
@@ -22,7 +22,7 @@ fragment ecosystemsBottomFlexibleComponents on ecosystemsBottomFlexibleComponent
         ctaCopy
         secondaryLinkUrl
     }
-    ... on ecosystemsBottomFlexibleComponents_imageMediaComponent_BlockType {
+    ... on imageMediaComponent_Entry {
         typeHandle
         image {
             ...contentImage
@@ -31,7 +31,7 @@ fragment ecosystemsBottomFlexibleComponents on ecosystemsBottomFlexibleComponent
         figureCaption
         informativeOrDecorative
     }
-    ... on ecosystemsBottomFlexibleComponents_videoMediaComponent_BlockType {
+    ... on videoMediaComponent_Entry {
         typeHandle
         videoTitle
         videoUrl {
@@ -48,11 +48,11 @@ fragment ecosystemsBottomFlexibleComponents on ecosystemsBottomFlexibleComponent
         videoCaption
         linkToVideoTranscript
     }
-    ... on ecosystemsBottomFlexibleComponents_groupsListingComponent_BlockType {
+    ... on groupsListingComponent_Entry {
         typeHandle
         introduction
     }
-    ... on ecosystemsBottomFlexibleComponents_featuredEvangelistsComponent_BlockType {
+    ... on featuredEvangelistsComponent_Entry {
         typeHandle
         title: evangelistsTitle
         introduction
