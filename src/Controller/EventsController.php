@@ -199,6 +199,7 @@ class EventsController extends AbstractController
         $manager->add('page', new Entry($site->siteHandle, $eventType, $year, $slug, $router));
 
         $page = $manager->get('page');
+
         if (empty($page)) {
             throw $this->createNotFoundException('Event not found');
         }
