@@ -1,8 +1,8 @@
 <?php
 namespace Deployer;
 
-require 'recipe/common.php';
-require 'vendor/studio24/deployer-recipes/recipe/common.php';
+require 'vendor/studio24/deployer-recipes/recipe/default.php';
+require 'contrib/php-fpm.php';
 
 /**
  * Deployment configuration variables - set on a per-project basis
@@ -45,7 +45,7 @@ set( 'writable_mode', 'acl');
 host('production')
     ->set('labels', ['stage' => 'production'])
     ->set('remote_user', 'studio24')
-    ->set('hostname', '3.94.156.111')
+    ->set('hostname', 'leda.w3.internal')
     ->set('deploy_path', '/var/www/frontend')
     ->set('url', 'https://www.w3.org');
 
@@ -61,7 +61,7 @@ host('production')
 host('development')
     ->set('labels', ['stage' => 'development'])
     ->set('remote_user', 'studio24')
-    ->set('hostname', '52.21.173.217')
+    ->set('hostname', 'thebe.w3.internal')
     ->set('deploy_path', '/var/www/frontend-dev')
     ->set('url', 'https://www-dev.w3.org')
     ->set('branch', 'update/deployer-7')
@@ -71,24 +71,24 @@ host('development')
  * Deployment task
  * The task that will be run when using dep deploy
  */
-desc('Deploy ' . get('application'));
-task('deploy', [
+// desc('Deploy ' . get('application'));
+// task('deploy', [
 
-    // Run initial checks
-    'deploy:prepare',
+//     // Run initial checks
+//     'deploy:prepare',
 
-    // Remind user to check that the remote .env is up to date (development and staging (default N)
-    'env-reminder',
+//     // Remind user to check that the remote .env is up to date (development and staging (default N)
+//     'env-reminder',
     
-    'deploy:vendors',
+//     'deploy:vendors',
 
-    // Dump environment file
-    // 'dump-env',
+//     // Dump environment file
+//     // 'dump-env',
 
-    // Run deployment 
-    'deploy:clear_paths',
-    'deploy:publish'
-]);
+//     // Run deployment 
+//     'deploy:clear_paths',
+//     'deploy:publish'
+// ]);
 
 /**
  * Custom Tasks
@@ -121,3 +121,6 @@ task('cache-clear', function () {
 
 // [Optional] If deploy fails automatically unlock.
 after('deploy:failed', 'deploy:unlock');
+
+// PHP-FPM reload
+after('deploy', 'php-fpm:reload');
