@@ -47,4 +47,11 @@ class FragmentsController extends AbstractController
     {
         return $this->render('@W3CWebsiteTemplates/components/styles/footer.html.twig');
     }
+
+    #[Cache(expires: 'tomorrow', public: true)]
+    #[Route(path: '/common-head/')]
+    public function commonHead(): Response
+    {
+        return $this->render('@W3CWebsiteTemplates/_common-head.html.twig');
+    }
 }
