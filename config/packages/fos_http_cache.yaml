@@ -18,6 +18,5 @@ fos_http_cache:
                 headers:
                     cache_control:
                         public: true
-                        s_maxage: 600
-                        proxy_revalidate: true
+                        s_maxage: 86400
                     etag: true

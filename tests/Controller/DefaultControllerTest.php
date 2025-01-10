@@ -2,6 +2,7 @@
 
 namespace App\Tests\Controller;
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use Symfony\Component\Panther\PantherTestCase;
 
 class DefaultControllerTest extends PantherTestCase
@@ -14,26 +15,47 @@ class DefaultControllerTest extends PantherTestCase
         $this->client  = static::createPantherClient(['browser' => $browser]);
     }
 
-    /**
-     * @dataProvider provider
-     */
+    #[DataProvider('provider')]
     public function testIndex(string $lang, string $title, string $langPrefix, string $path): void
     {
-        $crawler = $this->client->request('GET', $langPrefix . $path);
+        $this->client->request('GET', $langPrefix . $path);
 
         $this->assertSelectorAttributeContains('html', 'lang', $lang);
         $this->assertSelectorTextSame('h1', $title);
     }
 
-    public function provider()
+    public static function provider()
     {
         return [
-            ['lang' => 'en', 'title' => 'We believe in one web for all', 'lang_prefix' => '', 'path' => '/'],
-            ['lang' => 'en', 'title' => 'Ecosystems', 'lang_prefix' => '', 'path' => '/ecosystems/'],
-            ['lang' => 'en', 'title' => 'Blog listing', 'lang_prefix' => '', 'path' => '/blog/'],
-            //['lang' => 'ja', 'title' => 'W3C Home', 'lang_prefix' => '/ja', 'path' => '/'],
-            //['lang' => 'ja', 'title' => '日本語で Landing Page', 'lang_prefix' => '/ja', 'path' => '/landing-page/'],
-            ['lang' => 'ja', 'title' => 'Blog listing', 'lang_prefix' => '/ja', 'path' => '/blog/']
+            ['lang' => 'en', 'title' => 'Making the Web work', 'langPrefix' => '', 'path' => '/'],
+            ['lang' => 'en', 'title' => 'Business Ecosystems', 'langPrefix' => '', 'path' => '/ecosystems/'],
+            ['lang' => 'en', 'title' => 'Blog', 'langPrefix' => '', 'path' => '/blog/'],
+            //['lang' => 'ja', 'title' => 'W3C Home', 'langPrefix' => '/ja', 'path' => '/'],
+            //['lang' => 'ja', 'title' => '日本語で Landing Page', 'langPrefix' => '/ja', 'path' => '/landing-page/'],
+            ['lang' => 'ja', 'title' => 'Blog listing', 'langPrefix' => '/ja', 'path' => '/blog/']
         ];
+    }
+
+    // See https://github.com/symfony/symfony/issues/53812
+    protected function restoreExceptionHandler(): void
+    {
+        while (true) {
+            $previousHandler = set_exception_handler(static fn() => null);
+
+            restore_exception_handler();
+
+            if ($previousHandler === null) {
+                break;
+            }
+
+            restore_exception_handler();
+        }
+    }
+
+    protected function tearDown(): void
+    {
+        parent::tearDown();
+
+        $this->restoreExceptionHandler();
     }
 }

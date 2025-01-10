@@ -8,6 +8,7 @@ use App\Service\CraftCMS;
 use Strata\Data\Cache\CacheLifetime;
 use Strata\Data\Exception\GraphQLQueryException;
 use Strata\Data\Mapper\MapArray;
+use Strata\Data\Mapper\MappingStrategyInterface;
 use Strata\Data\Query\GraphQLQuery;
 use Strata\Data\Transform\Data\CallableData;
 use Symfony\Component\Routing\RouterInterface;
@@ -47,7 +48,7 @@ class Filters extends GraphQLQuery
         ;
     }
 
-    public function getMapping()
+    public function getMapping(): MappingStrategyInterface|array
     {
         return [
             '[categories]' => new CallableData([$this, 'transformCategories'], '[categories]'),

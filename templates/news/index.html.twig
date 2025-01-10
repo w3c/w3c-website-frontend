@@ -1,5 +1,7 @@
 {% extends '@W3CWebsiteTemplates/pages/listing.html.twig' %}
 
+{% set extra_main_attributes = 'data-anchor="no"' %}
+
 {% block filters %}
     {{ include('@W3CWebsiteTemplates/components/listings/news/filters.html.twig') }}
 {% endblock %}
