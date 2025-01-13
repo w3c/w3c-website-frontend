@@ -9173,12 +9173,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/w3c/w3c-website-templates-bundle.git",
-                "reference": "6ceae0aead87aa1cb39c946a1d134f7235c401c2"
+                "reference": "a904551e3ad6226365a9582610025ce79f10a17a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/w3c/w3c-website-templates-bundle/zipball/6ceae0aead87aa1cb39c946a1d134f7235c401c2",
-                "reference": "6ceae0aead87aa1cb39c946a1d134f7235c401c2",
+                "url": "https://api.github.com/repos/w3c/w3c-website-templates-bundle/zipball/a904551e3ad6226365a9582610025ce79f10a17a",
+                "reference": "a904551e3ad6226365a9582610025ce79f10a17a",
                 "shasum": ""
             },
             "require": {
@@ -9217,7 +9217,7 @@
             "support": {
                 "source": "https://github.com/w3c/w3c-website-templates-bundle/tree/main"
             },
-            "time": "2025-01-09T07:30:27+00:00"
+            "time": "2025-01-13T08:19:44+00:00"
         },
         {
             "name": "webmozart/assert",
