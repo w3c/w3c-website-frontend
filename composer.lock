@@ -1047,16 +1047,16 @@
         },
         {
             "name": "friendsofsymfony/http-cache-bundle",
-            "version": "3.0.2",
+            "version": "3.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/FriendsOfSymfony/FOSHttpCacheBundle.git",
-                "reference": "c87889768daad3a306058f6d2fe46c158d6f693c"
+                "reference": "b9a80ac0b4bd3954326ae53180a54292acef8386"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSHttpCacheBundle/zipball/c87889768daad3a306058f6d2fe46c158d6f693c",
-                "reference": "c87889768daad3a306058f6d2fe46c158d6f693c",
+                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSHttpCacheBundle/zipball/b9a80ac0b4bd3954326ae53180a54292acef8386",
+                "reference": "b9a80ac0b4bd3954326ae53180a54292acef8386",
                 "shasum": ""
             },
             "require": {
@@ -1085,9 +1085,9 @@
                 "php-http/guzzle7-adapter": "^0.1.1",
                 "php-http/httplug": "^2.2.0",
                 "php-http/message": "^1.0 || ^2.0",
-                "phpstan/extension-installer": "^1.3",
-                "phpstan/phpstan": "^1.10",
-                "phpstan/phpstan-symfony": "^1.3",
+                "phpstan/extension-installer": "^1.4",
+                "phpstan/phpstan": "^2",
+                "phpstan/phpstan-symfony": "^2",
                 "phpunit/phpunit": "^10.5",
                 "symfony/browser-kit": "^6.4 || ^7.0",
                 "symfony/console": "^6.4 || ^7.0",
@@ -1142,9 +1142,9 @@
             ],
             "support": {
                 "issues": "https://github.com/FriendsOfSymfony/FOSHttpCacheBundle/issues",
-                "source": "https://github.com/FriendsOfSymfony/FOSHttpCacheBundle/tree/3.0.2"
+                "source": "https://github.com/FriendsOfSymfony/FOSHttpCacheBundle/tree/3.1.1"
             },
-            "time": "2024-11-06T08:05:27+00:00"
+            "time": "2025-01-09T12:08:06+00:00"
         },
         {
             "name": "guzzlehttp/promises",
@@ -9173,12 +9173,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/w3c/w3c-website-templates-bundle.git",
-                "reference": "9860d9663ebe94ca3fd3df77abf5d499ac44bdd7"
+                "reference": "6ceae0aead87aa1cb39c946a1d134f7235c401c2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/w3c/w3c-website-templates-bundle/zipball/9860d9663ebe94ca3fd3df77abf5d499ac44bdd7",
-                "reference": "9860d9663ebe94ca3fd3df77abf5d499ac44bdd7",
+                "url": "https://api.github.com/repos/w3c/w3c-website-templates-bundle/zipball/6ceae0aead87aa1cb39c946a1d134f7235c401c2",
+                "reference": "6ceae0aead87aa1cb39c946a1d134f7235c401c2",
                 "shasum": ""
             },
             "require": {
@@ -9217,7 +9217,7 @@
             "support": {
                 "source": "https://github.com/w3c/w3c-website-templates-bundle/tree/main"
             },
-            "time": "2025-01-06T15:17:32+00:00"
+            "time": "2025-01-09T07:30:27+00:00"
         },
         {
             "name": "webmozart/assert",
@@ -10366,12 +10366,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Roave/SecurityAdvisories.git",
-                "reference": "0739463889fe714daa685817789aef000c6774cc"
+                "reference": "a717959d5f0bf7c9a881efdbb7ec0da4454a14ac"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Roave/SecurityAdvisories/zipball/0739463889fe714daa685817789aef000c6774cc",
-                "reference": "0739463889fe714daa685817789aef000c6774cc",
+                "url": "https://api.github.com/repos/Roave/SecurityAdvisories/zipball/a717959d5f0bf7c9a881efdbb7ec0da4454a14ac",
+                "reference": "a717959d5f0bf7c9a881efdbb7ec0da4454a14ac",
                 "shasum": ""
             },
             "conflict": {
@@ -10615,6 +10615,7 @@
                 "grumpydictator/firefly-iii": "<6.1.17",
                 "gugoan/economizzer": "<=0.9.0.0-beta1",
                 "guzzlehttp/guzzle": "<6.5.8|>=7,<7.4.5",
+                "guzzlehttp/oauth-subscriber": "<0.8.1",
                 "guzzlehttp/psr7": "<1.9.1|>=2,<2.4.5",
                 "haffner/jh_captcha": "<=2.1.3|>=3,<=3.0.2",
                 "harvesthq/chosen": "<1.8.7",
@@ -10775,6 +10776,8 @@
                 "neos/media-browser": "<7.3.19|>=8,<8.0.16|>=8.1,<8.1.11|>=8.2,<8.2.11|>=8.3,<8.3.9",
                 "neos/neos": ">=1.1,<1.1.3|>=1.2,<1.2.13|>=2,<2.0.4|>=2.3,<3.0.20|>=3.1,<3.1.18|>=3.2,<3.2.14|>=3.3,<5.3.10|>=7,<7.0.9|>=7.1,<7.1.7|>=7.2,<7.2.6|>=7.3,<7.3.4|>=8,<8.0.2",
                 "neos/swiftmailer": "<5.4.5",
+                "nesbot/carbon": "<2.72.6|>=3,<3.8.4",
+                "netcarver/textile": "<=4.1.2",
                 "netgen/tagsbundle": ">=3.4,<3.4.11|>=4,<4.0.15",
                 "nette/application": ">=2,<2.0.19|>=2.1,<2.1.13|>=2.2,<2.2.10|>=2.3,<2.3.14|>=2.4,<2.4.16|>=3,<3.0.6",
                 "nette/nette": ">=2,<2.0.19|>=2.1,<2.1.13",
@@ -10968,6 +10971,7 @@
                 "squizlabs/php_codesniffer": ">=1,<2.8.1|>=3,<3.0.1",
                 "ssddanbrown/bookstack": "<24.05.1",
                 "starcitizentools/citizen-skin": ">=2.6.3,<2.31",
+                "starcitizentools/tabber-neue": ">=1.9.1,<2.7.2",
                 "statamic/cms": "<=5.16",
                 "stormpath/sdk": "<9.9.99",
                 "studio-42/elfinder": "<=2.1.64",
@@ -11123,7 +11127,7 @@
                 "xpressengine/xpressengine": "<3.0.15",
                 "yab/quarx": "<2.4.5",
                 "yeswiki/yeswiki": "<=4.4.4",
-                "yetiforce/yetiforce-crm": "<=6.4",
+                "yetiforce/yetiforce-crm": "<6.5",
                 "yidashi/yii2cmf": "<=2",
                 "yii2mod/yii2-cms": "<1.9.2",
                 "yiisoft/yii": "<1.1.29",
@@ -11213,7 +11217,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-01-03T17:04:48+00:00"
+            "time": "2025-01-08T21:04:52+00:00"
         },
         {
             "name": "sebastian/cli-parser",
