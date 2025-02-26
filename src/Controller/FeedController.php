@@ -21,6 +21,7 @@ use Exception;
 use Laminas\Feed\Writer\Entry;
 use Laminas\Feed\Writer\Feed;
 use Strata\Data\Collection;
+use Strata\Data\CollectionInterface;
 use Strata\Data\Exception\GraphQLQueryException;
 use Strata\Data\Exception\QueryManagerException;
 use Strata\Data\Query\QueryManager;
@@ -76,14 +77,14 @@ class FeedController extends AbstractController
         $page          = $manager->get('page');
 
         $feed = new Feed();
-        $feed->setTitle("W3C - " . $page['title']);
+        $feed->setTitle("W3C - " . ($page['title'] ?? 'Blog'));
         $feed->setLanguage($this->site->getLocale());
 
         $feed->setLink($pageUrl);
         $feed->setFeedLink($feedUrl, 'rss');
 
         $feed->setDateModified(time());
-        $feed->setDescription($page['excerpt'] ?? $page['title']);
+        $feed->setDescription($page['excerpt'] ?? $page['title'] ?? 'Blog');
 
         foreach ($entries as $data) {
             if (array_key_exists($data['id'], $commentCounts)) {
@@ -121,14 +122,14 @@ class FeedController extends AbstractController
         $pageUrl = $this->generateUrl('app_news_index', [], UrlGeneratorInterface::ABSOLUTE_URL);
 
         $feed = new Feed();
-        $feed->setTitle("W3C - " . $page['title']);
+        $feed->setTitle("W3C - " . ($page['title'] ?? 'News'));
         $feed->setLanguage($this->site->getLocale());
 
         $feed->setLink($pageUrl);
         $feed->setFeedLink($feedUrl, 'rss');
 
         $feed->setDateModified(time());
-        $feed->setDescription($page['excerpt'] ?? $page['title']);
+        $feed->setDescription($page['excerpt'] ?? $page['title'] ?? 'News');
 
         foreach ($entries as $data) {
             $feed->addEntry($this->buildNewsEntry($data, $feed));
@@ -161,14 +162,14 @@ class FeedController extends AbstractController
         $pageUrl = $this->generateUrl('app_pressreleases_index', [], UrlGeneratorInterface::ABSOLUTE_URL);
 
         $feed = new Feed();
-        $feed->setTitle('W3C - ' . $page['title']);
+        $feed->setTitle('W3C - ' . ($page['title'] ?? 'Press Releases'));
         $feed->setLanguage($this->site->getLocale());
 
         $feed->setLink($pageUrl);
         $feed->setFeedLink($feedUrl, 'rss');
 
         $feed->setDateModified(time());
-        $feed->setDescription($page['excerpt'] ?? $page['title']);
+        $feed->setDescription($page['excerpt'] ?? $page['title'] ?? 'Press Releases');
 
         foreach ($entries as $data) {
             $feed->addEntry($this->buildPressReleaseEntry($data, $feed));
@@ -325,14 +326,14 @@ class FeedController extends AbstractController
         $pageUrl = $this->generateUrl('app_events_index', [], UrlGeneratorInterface::ABSOLUTE_URL);
 
         $feed = new Feed();
-        $feed->setTitle('W3C - ' . $page['title']);
+        $feed->setTitle('W3C - ' . ($page['title'] ?? 'Events'));
         $feed->setLanguage($this->site->getLocale());
 
         $feed->setLink($pageUrl);
         $feed->setFeedLink($feedUrl, 'rss');
 
         $feed->setDateModified(time());
-        $feed->setDescription($page['excerpt'] ?? $page['title']);
+        $feed->setDescription($page['excerpt'] ?? $page['title'] ?? 'Events');
 
         foreach ($entries as $data) {
             $feed->addEntry($this->buildEventEntry($data, $feed));
@@ -347,7 +348,7 @@ class FeedController extends AbstractController
      * @throws GraphQLQueryException
      * @throws QueryManagerException
      */
-    private function getBlogCommentCounts(Collection $entries, QueryManager $manager): array
+    private function getBlogCommentCounts(CollectionInterface $entries, QueryManager $manager): array
     {
         $postIds = array_map(function (array $entry) {
             return $entry['id'];
@@ -535,7 +536,7 @@ class FeedController extends AbstractController
      * @throws SyntaxError
      */
     private function buildTaxonomyFeed(
-        Collection $entries,
+        CollectionInterface $entries,
         QueryManager $manager,
         $title,
         string $feedUrl,
