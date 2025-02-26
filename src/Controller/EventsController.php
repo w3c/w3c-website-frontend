@@ -126,7 +126,7 @@ class EventsController extends AbstractController
      * @throws QueryManagerException
      * @throws Exception
      */
-    #[Route(path: '/{type}/{year}/{slug}.ics', requirements: ['year' => '\d\d\d\d'])]
+    #[Route(path: '/{type}/{year}/{slug}.ics', requirements: ['type' => 'ac|conferences|happenings|talks|tpac|workshops', 'year' => '\d\d\d\d'])]
     public function ical(
         string $type,
         int $year,
@@ -168,7 +168,7 @@ class EventsController extends AbstractController
      * @throws QueryManagerException
      * @throws Exception
      */
-    #[Route(path: '/{type}/{year}/{slug}/', requirements: ['year' => '\d\d\d\d'])]
+    #[Route(path: '/{type}/{year}/{slug}/', requirements: ['type' => 'ac|conferences|happenings|talks|tpac|workshops', 'year' => '\d\d\d\d'])]
     public function show(
         string $type,
         int $year,

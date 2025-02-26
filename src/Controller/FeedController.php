@@ -272,7 +272,7 @@ class FeedController extends AbstractController
      * @throws RuntimeError
      * @throws SyntaxError
      */
-    #[Route(path: '/groups/{type}/{shortname}/feed/')]
+    #[Route(path: '/groups/{type}/{shortname}/feed/', requirements: ['type' => 'wg|ig|cg|bg|other'])]
     public function group(string $type, string $shortname, QueryManager $manager, UrlHelper $urlHelper): Response
     {
         $slug = $type . '-' . $shortname;
