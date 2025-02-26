@@ -334,7 +334,7 @@ class EventsController extends AbstractController
         );
 
         try {
-            $collection = $manager->getCollection('collection');
+            $collection = $manager->getCollection('eventsListing');
         } catch (Exception $e) {
             throw $this->createNotFoundException($e->getMessage());
         }
