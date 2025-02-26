@@ -19,6 +19,7 @@ use Strata\Frontend\Site;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
@@ -247,6 +248,7 @@ class EventsController extends AbstractController
      * @return Response
      * @throws GraphQLQueryException
      * @throws QueryManagerException
+     * @throws NotFoundHttpException
      */
     private function buildListing(
         Request $request,
@@ -331,22 +333,16 @@ class EventsController extends AbstractController
             )
         );
 
-        $collection = $manager->getCollection('eventsListing');
-        $pagination = $collection->getPagination();
-
-        if (empty($collection) && $currentPage !== 1) {
-            return $this->redirectToRoute('app_events_index', ['page' => 1]);
+        try {
+            $collection = $manager->getCollection('collection');
+        } catch (Exception $e) {
+            throw $this->createNotFoundException($e->getMessage());
         }
 
-        if ($currentPage > $pagination->getTotalPages() && $pagination->getTotalPages() > 0) {
-            return $this->redirectToRoute('app_events_index', ['page' => 1]);
-        }
-
-        $categories = $filters['categories'];
-        $archives = $filters['archives'];
-
-        $page = $manager->get('page');
-
+        $pagination          = $collection->getPagination();
+        $categories          = $filters['categories'];
+        $archives            = $filters['archives'];
+        $page                = $manager->get('page');
         $page['breadcrumbs'] = $this->breadcrumbs($manager, $page, $eventType, $year);
 
         if ($eventType) {

@@ -18,6 +18,7 @@ use DateTimeImmutable;
 use Exception;
 use Strata\Data\Collection;
 use Strata\Data\Exception\GraphQLQueryException;
+use Strata\Data\Exception\PaginationException;
 use Strata\Data\Exception\QueryManagerException;
 use Strata\Data\Query\QueryManager;
 use Strata\Frontend\Site;
@@ -26,6 +27,7 @@ use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
@@ -84,7 +86,6 @@ class BlogController extends AbstractController
         [$page, $collection, $categories, $archives] = $this->buildListing(
             $manager,
             $site,
-            $currentPage,
             $router,
             $translator
         );
@@ -156,7 +157,6 @@ class BlogController extends AbstractController
         [$page, $collection, $categories, $archives] = $this->buildListing(
             $manager,
             $site,
-            $currentPage,
             $router,
             $translator
         );
@@ -249,7 +249,6 @@ class BlogController extends AbstractController
         [$page, $collection, $categories, $archives] = $this->buildListing(
             $manager,
             $site,
-            $currentPage,
             $router,
             $translator
         );
@@ -346,7 +345,6 @@ class BlogController extends AbstractController
         [$page, $collection, $categories, $archives] = $this->buildListing(
             $manager,
             $site,
-            $currentPage,
             $router,
             $translator
         );
@@ -521,41 +519,35 @@ class BlogController extends AbstractController
     }
 
     /**
-     * @param QueryManager        $manager
-     * @param Site                $site
-     * @param int                 $currentPage
-     * @param RouterInterface     $router
+     * @param QueryManager $manager
+     * @param Site $site
+     * @param RouterInterface $router
      * @param TranslatorInterface $translator
      *
-     * @return RedirectResponse|array
+     * @return array
      * @throws GraphQLQueryException
      * @throws QueryManagerException
+     * @throws NotFoundHttpException
      */
     protected function buildListing(
         QueryManager $manager,
         Site $site,
-        int $currentPage,
         RouterInterface $router,
         TranslatorInterface $translator
     ): array {
         $manager->add('filters', new Filters($router, $translator, $site->siteHandle));
 
-        $collection = $manager->getCollection('collection');
+        try {
+            $collection = $manager->getCollection('collection');
+        } catch (Exception $e) {
+            throw $this->createNotFoundException($e->getMessage());
+        }
 
         $pagination = $collection->getPagination();
-
-        if (empty($collection) && $currentPage !== 1) {
-            return $this->redirectToRoute('app_blog_index', ['page' => 1]);
-        }
-
-        if ($currentPage > $pagination->getTotalPages() && $pagination->getTotalPages() > 0) {
-            return $this->redirectToRoute('app_blog_index', ['page' => 1]);
-        }
-
-        $page                  = $manager->get('page');
-        $filters               = $manager->get('filters');
-        $categories            = $filters['categories'];
-        $archives              = $filters['archives'];
+        $page       = $manager->get('page');
+        $filters    = $manager->get('filters');
+        $categories = $filters['categories'];
+        $archives   = $filters['archives'];
 
         if ($this->getParameter('kernel.environment') == 'dev') {
             dump($page);
