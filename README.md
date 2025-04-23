@@ -85,7 +85,7 @@ More on the [Git workflow for this project](docs/git_workflow.md).
 
 ### Requirements
 
-* PHP 8.1+
+* PHP 8.2+
 * [Composer](https://getcomposer.org/)
 * [Symfony CLI](https://symfony.com/download#step-1-install-symfony-cli)
 

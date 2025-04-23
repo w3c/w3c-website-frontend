@@ -11,7 +11,7 @@ query BlogCollection($site: [String], $category: [QueryArgument], $tag: [QueryAr
                 email
             }
             authors {
-                ... on authors_author_BlockType {
+                ... on author_BlockType {
                     name: authorName
                     email: authorEmailAddress
                 }
@@ -38,7 +38,7 @@ query BlogCollection($site: [String], $category: [QueryArgument], $tag: [QueryAr
                 email
             }
             authors {
-                ... on authors_author_BlockType {
+                ... on author_BlockType {
                     name: authorName
                     email: authorEmailAddress
                 }

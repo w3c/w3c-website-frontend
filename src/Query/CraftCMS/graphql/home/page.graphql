@@ -4,7 +4,7 @@ query Home($site: [String]) {
         postDate
         dateUpdated
         expiryDate
-        ... on homepage_homepage_Entry {
+        ... on homepage_Entry {
             heroIllustration {
                 url
                 mimeType

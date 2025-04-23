@@ -1,4 +1,4 @@
-fragment listingPageEvent on events_entryContentIsACraftPage_Entry {
+fragment listingPageEvent on entryContentIsACraftPage_Entry {
     id
     typeHandle
     slug

@@ -117,7 +117,7 @@ query taxonomy($site: [String], $category: [QueryArgument], $ecosystem: [QueryAr
                 title
             }
         }
-        ... on events_external_Entry {
+        ... on external_Entry {
             date: startDatetime
             start: startDatetime
             end: endDatetime
@@ -138,7 +138,7 @@ query taxonomy($site: [String], $category: [QueryArgument], $ecosystem: [QueryAr
                 title
             }
         }
-        ... on events_entryContentIsACraftPage_Entry {
+        ... on entryContentIsACraftPage_Entry {
             date: startDatetime
             start: startDatetime
             end: endDatetime

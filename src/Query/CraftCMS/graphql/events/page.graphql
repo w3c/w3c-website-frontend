@@ -8,7 +8,7 @@ query EventsPage($site: [String]) {
         breadcrumbs: parent {
             ...breadcrumbs
         }
-        ... on eventsListing_eventsListing_Entry {
+        ... on eventsListing_Entry {
             excerpt
             thumbnailImage {
                 ...thumbnailImage

@@ -17,7 +17,7 @@ query Page($uri: [String], $site: [String]) {
         breadcrumbs: parent {
             ...breadcrumbs
         }
-        ... on pages_default_Entry {
+        ... on default_Entry {
             displayOnThisPageNavigation
             siblingNavigation: parent {
                 siblings: children {
@@ -34,7 +34,7 @@ query Page($uri: [String], $site: [String]) {
             }
             thumbnailAltText
         }
-        ... on pages_landingPage_Entry {
+        ... on landingPage_Entry {
             pageLead
             heroIllustration {
                 url
@@ -52,7 +52,7 @@ query Page($uri: [String], $site: [String]) {
             }
             thumbnailAltText
         }
-        ... on ecosystemsLandingPage_ecosystemsLandingPage_Entry {
+        ... on ecosystemsLandingPage_Entry {
             pageLead
             heroIllustration {
                 url

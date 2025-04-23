@@ -1,13 +1,13 @@
 query YouMayAlsoLike($id: [QueryArgument], $site: [String]) {
     entry(id: $id, site: $site, displayYouMayAlsoLikeListing: true) {
-        ... on pages_default_Entry {
+        ... on default_Entry {
             youMayAlsoLikeTitle
             youMayAlsoLikeSectionIntroduction
             youMayAlsoLikeRelatedEntries {
                 ...youMayAlsoLikeRelatedEntries
             }
         }
-        ... on pages_landingPage_Entry {
+        ... on landingPage_Entry {
             youMayAlsoLikeTitle
             youMayAlsoLikeSectionIntroduction
             youMayAlsoLikeRelatedEntries {
@@ -32,14 +32,14 @@ fragment youMayAlsoLikeRelatedEntries on youMayAlsoLikeRelatedEntries_MatrixFiel
             title
             uri
             slug
-            ... on pages_default_Entry {
+            ... on default_Entry {
                 text: excerpt
                 thumbnailImage {
                     ...thumbnailImage
                 }
                 thumbnailAltText
             }
-            ... on pages_landingPage_Entry {
+            ... on landingPage_Entry {
                 text: excerpt
                 thumbnailImage {
                     ...thumbnailImage
@@ -94,7 +94,7 @@ fragment youMayAlsoLikeRelatedEntries on youMayAlsoLikeRelatedEntries_MatrixFiel
                 }
                 thumbnailAltText
             }
-            ... on pages_default_Entry {
+            ... on default_Entry {
                 text: excerpt
                 thumbnailImage {
                     ...thumbnailImage
@@ -116,7 +116,7 @@ fragment youMayAlsoLikeRelatedEntries on youMayAlsoLikeRelatedEntries_MatrixFiel
                 }
                 thumbnailAltText
             }
-            ... on events_external_Entry {
+            ... on external_Entry {
                 urlLink
                 text: eventExcerpt
                 thumbnailImage {
@@ -124,7 +124,7 @@ fragment youMayAlsoLikeRelatedEntries on youMayAlsoLikeRelatedEntries_MatrixFiel
                 }
                 thumbnailAltText
             }
-            ... on events_entryContentIsACraftPage_Entry {
+            ... on entryContentIsACraftPage_Entry {
                 page: eventPage {
                     uri
                 }
@@ -134,63 +134,63 @@ fragment youMayAlsoLikeRelatedEntries on youMayAlsoLikeRelatedEntries_MatrixFiel
                 }
                 thumbnailAltText
             }
-            ... on homepage_homepage_Entry {
+            ... on homepage_Entry {
                 text: excerpt
                 thumbnailImage {
                     ...thumbnailImage
                 }
                 thumbnailAltText
             }
-            ... on blogListing_blogListing_Entry {
+            ... on blogListing_Entry {
                 text: excerpt
                 thumbnailImage {
                     ...thumbnailImage
                 }
                 thumbnailAltText
             }
-            ... on ecosystemsLandingPage_ecosystemsLandingPage_Entry {
+            ... on ecosystemsLandingPage_Entry {
                 text: excerpt
                 thumbnailImage {
                     ...thumbnailImage
                 }
                 thumbnailAltText
             }
-            ... on homepage_homepage_Entry {
+            ... on homepage_Entry {
                 text: excerpt
                 thumbnailImage {
                     ...thumbnailImage
                 }
                 thumbnailAltText
             }
-            ... on newsListing_newsListing_Entry {
+            ... on newsListing_Entry {
                 text: excerpt
                 thumbnailImage {
                     ...thumbnailImage
                 }
                 thumbnailAltText
             }
-            ... on pressReleasesListing_pressReleasesListing_Entry {
+            ... on pressReleasesListing_Entry {
                 text: excerpt
                 thumbnailImage {
                     ...thumbnailImage
                 }
                 thumbnailAltText
             }
-            ... on eventsListing_eventsListing_Entry {
+            ... on eventsListing_Entry {
                 text: excerpt
                 thumbnailImage {
                     ...thumbnailImage
                 }
                 thumbnailAltText
             }
-            ...on alumniListing_alumniListing_Entry {
+            ...on alumniListing_Entry {
                 text: excerpt
                 thumbnailImage {
                     ...thumbnailImage
                 }
                 thumbnailAltText
             }
-            ... on newsletterArchive_newsletterArchive_Entry {
+            ... on newsletterArchive_Entry {
                 text: excerpt
                 thumbnailImage {
                     ...thumbnailImage
@@ -199,7 +199,7 @@ fragment youMayAlsoLikeRelatedEntries on youMayAlsoLikeRelatedEntries_MatrixFiel
             }
         }
     }
-    ... on youMayAlsoLikeRelatedEntries_contentFromAnotherSource_BlockType {
+    ... on contentFromAnotherSource_Entry {
         url: resourceUrl
         thumbnailImage {
             ...thumbnailImage

@@ -8,7 +8,7 @@ query AlumniListing($site: [String]) {
         breadcrumbs: parent {
             ...breadcrumbs
         }
-        ... on alumniListing_alumniListing_Entry {
+        ... on alumniListing_Entry {
             excerpt
             thumbnailImage {
                 ...thumbnailImage

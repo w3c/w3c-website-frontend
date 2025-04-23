@@ -2,7 +2,7 @@ query GlobalNavigation ($site: [String], $limit: Int) {
     total: entryCount(section: "mainNavigation", type: "topLevelItem", site: $site, limit: $limit)
     entries(section: "mainNavigation", type: "topLevelItem", site: $site, limit: $limit) {
         title
-        ... on mainNavigation_topLevelItem_Entry {
+        ... on topLevelItem_Entry {
             isTitleLinkInternal: mainNavigationInternalOrExternalLink
             titleInternalLink: internalLink {
                 sectionHandle
@@ -18,11 +18,11 @@ query GlobalNavigation ($site: [String], $limit: Int) {
             }
             children {
                 title
-                ... on mainNavigation_externalLink_Entry {
+                ... on externalLink_Entry {
                     url: urlLink
                     startNewColumn
                 }
-                ... on mainNavigation_internalLink_Entry {
+                ... on internalLink_Entry {
                     startNewColumn
                     internalLink {
                         sectionHandle
