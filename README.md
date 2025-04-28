@@ -1,6 +1,6 @@
 # W3C frontend website
 
-Symfony frontend website for w3.org
+Frontend website for the main W3C website at w3.org, built in Symfony.
 
 ## Reporting issues
 
@@ -21,29 +21,22 @@ This document is a summary of what you need to know when working on this project
 
 ### Production
 Live:
-* https://www.w3.org
-* https://www.w3.org/_build_summary.json (very brief summary of latest deployment)
-
-### Staging
-* https://www-staging.w3.org
-* https://www-staging.w3.org/_build_summary.json
+* https://www.w3.org (summary of [latest deployment](https://www.w3.org/_build_summary.json))
 
 ### Development
-* https://www-dev.w3.org
-* https://www-dev.w3.org/_build_summary.json
+* https://www-dev.w3.org (summary of [latest deployment](https://www-dev.w3.org/_build_summary.json))
 
 Used to test new functionality / changes. Access to development is restricted by IP address.
 
 ### Local
-* http://localhost:8000/ (see [running application locally](#running-application-locally)) 
+* http://localhost:8000/ (Local PHP)
+* https://w3c-website-frontend.ddev.site (DDEV)
 
 ## Deployment
 
-The project uses [Deployer](https://deployer.org/) to perform deployment.
+The project uses [Deployer](https://deployer.org/) to publish updates to the websites.
 
-Please note this project uses a local instance of Deployer (installed via Composer), as opposed to a global version of Deployer.
-
-To run deployments please use:
+To run a deployment please use:
 
 ````
 vendor/bin/dep deploy <environment>
@@ -78,12 +71,15 @@ and running `composer update` in this project.
 You can also test changes either by deploying a branch to the staging environment for the design system, or by [testing a development branch on the frontend website](https://github.com/w3c/w3c-website-templates-bundle/blob/main/design-system.md#testing-a-development-branch-on-your-front-end-website). 
 
 ## Installation
-w
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
 
 More on the [Git workflow for this project](docs/git_workflow.md).
 
 ### Requirements
+
+* [DDEV](https://ddev.readthedocs.io/en/stable/) 
+
+or:
 
 * PHP 8.2+
 * [Composer](https://getcomposer.org/)
@@ -91,17 +87,53 @@ More on the [Git workflow for this project](docs/git_workflow.md).
 
 ### Clone the repository
 
-`git clone git@github.com:w3c/website-frontend.git`
-
-### Install Composer dependencies
+First clone the git repo to your local filesystem:
 
 ```bash
+git clone git@github.com:w3c/w3c-website-frontend.git
+```
+
+### Local PHP
+
+If you run PHP locally: 
+
+```shell
 composer install
 ```
 
-***Note:*** If you already have this project installed locally and you're having trouble seeing any changes, make sure you have cleared your Symfony cache using the `bin/console cache:clear` command.
+[Create an .env.local config file](#configuration) as described below.
+
+You can run the frontend application locally at http://localhost:8000/ by running:
+
+```
+symfony server:start
+```
+
+### DDEV
+
+To use DDEV as your local environment:
+
+```shell
+ddev start
+ddev composer install
+```
+
+[Create an .env.local config file](#configuration) as described below.
+
+To access the website on https://w3c-website-frontend.ddev.site
+
+```shell
+ddev launch
+```
+
+To access other local projects from within a DDEV container, for example the CMS API, use local DDEV URLs: 
+
+* CMS API: https://ddev-w3c-website-craft-web/api
+* Frontend: https://ddev-w3c-website-frontend-web
 
 ### Configuration
+
+In Symfony the `.env.local` file contains local overrides for `.env`. 
 
 Create a local env file:
 
@@ -110,29 +142,45 @@ touch .env.local
 ```
 
 And set:
-* APP_ENV (dev, staging, prod)
-* APP_URL
-* CRAFTCMS_API_URL
-* CRAFTCMS_API_READ_TOKEN
-* CRAFTCMS_API_PUBLISH_TOKEN 
+
+```dotenv
+# Application environment (dev, staging, prod)
+APP_ENV=dev
+APP_URL=https://w3c-website-frontend.ddev.site
+
+# Craft API
+CRAFTCMS_API_URL="https://ddev-w3c-website-craft-web/api"
+CRAFTCMS_API_READ_TOKEN=""
+CRAFTCMS_API_PUBLISH_TOKEN=""
+
+# Point assets to W3C CDN for local dev
+ASSETS_WEBSITE_2021=https://www.w3.org/assets/website-2021/
+```
+
+Set the Craft API URL to the Craft instance you want to read in content for your local development site.
+You can set this to production if you want to test how the local dev site will work with live content (we recommend only setting the API READ token on production).
 
 You can find your API Read and Publish tokens by going to the Craft CMS dashboard (see the [Craft repo](https://github.com/w3c/w3c-website-craft)).
 
-You can check what env files are being loaded in your environment by running `php bin/console debug:dotenv`
+You can check what env files are being loaded in your environment by running:
 
-### Running application locally
+```shell
+php bin/console debug:dotenv
 
-Before running the below command, please ensure you have the [Symfony CLI installed](https://symfony.com/download#step-1-install-symfony-cli)
-
-Once you have the Symfony CLI installed (or you have ensured you already have it installed), you can run the frontend application locally at http://localhost:8000/ by running
-
+## DDEV
+ddev console debug:dotenv
 ```
-symfony server:start
-```
-In your terminal
 
-***Note:*** A good way to test if something will break if you deploy it to live is to switch your local env’s CraftCMS API URL and Read and Publish tokens to the production CMS
-**(Please be careful about any changes you make in the Production CMS as they will be visible on the live site)**
+### Troubleshooting
+
+If you already have this project installed locally and you're having trouble seeing any changes, make sure you have cleared your Symfony cache:
+
+```shell
+bin/console cache:clear
+
+## DDEV
+ddev console cache:clear
+```
 
 ## Built with
 
