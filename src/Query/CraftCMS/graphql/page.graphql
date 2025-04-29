@@ -17,7 +17,7 @@ query Page($uri: [String], $site: [String]) {
         breadcrumbs: parent {
             ...breadcrumbs
         }
-        ... on default_Entry {
+        ... on pages_default_Entry {
             displayOnThisPageNavigation
             siblingNavigation: parent {
                 siblings: children {

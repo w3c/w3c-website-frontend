@@ -1,12 +1,5 @@
 query YouMayAlsoLike($id: [QueryArgument], $site: [String]) {
     entry(id: $id, site: $site, displayYouMayAlsoLikeListing: true) {
-        ... on default_Entry {
-            youMayAlsoLikeTitle
-            youMayAlsoLikeSectionIntroduction
-            youMayAlsoLikeRelatedEntries {
-                ...youMayAlsoLikeRelatedEntries
-            }
-        }
         ... on landingPage_Entry {
             youMayAlsoLikeTitle
             youMayAlsoLikeSectionIntroduction
@@ -25,7 +18,7 @@ query YouMayAlsoLike($id: [QueryArgument], $site: [String]) {
 }
 
 fragment youMayAlsoLikeRelatedEntries on youMayAlsoLikeRelatedEntries_MatrixField {
-    ... on youMayAlsoLikeRelatedEntries_contentFromTheCms_BlockType {
+    ... on contentFromTheCms_Entry {
         contentEntry {
             category: sectionHandle
             typeHandle
@@ -62,7 +55,7 @@ fragment youMayAlsoLikeRelatedEntries on youMayAlsoLikeRelatedEntries_MatrixFiel
                 }
                 thumbnailAltText
             }
-            ... on pressReleases_default_Entry {
+            ... on default_Entry {
                 year: postDate@formatDateTime(format: "Y")
                 text: excerpt
                 thumbnailImage {
@@ -70,7 +63,7 @@ fragment youMayAlsoLikeRelatedEntries on youMayAlsoLikeRelatedEntries_MatrixFiel
                 }
                 thumbnailAltText
             }
-            ... on pressReleases_importedEntries_Entry {
+            ... on importedEntries_Entry {
                 year: postDate@formatDateTime(format: "Y")
                 text: excerpt
                 thumbnailImage {
@@ -109,7 +102,7 @@ fragment youMayAlsoLikeRelatedEntries on youMayAlsoLikeRelatedEntries_MatrixFiel
                 }
                 thumbnailAltText
             }
-            ... on ecosystems_default_Entry {
+            ... on default_Entry {
                 text: excerpt
                 thumbnailImage {
                     ...thumbnailImage
