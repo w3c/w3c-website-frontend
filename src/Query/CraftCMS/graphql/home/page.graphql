@@ -25,7 +25,7 @@ query Home($site: [String]) {
                 url
             }
             homeFiftyFiftyComponents {
-                ...on homeFiftyFiftyComponents_fiftyFiftyComponent_BlockType {
+                ...on fiftyFiftyComponent_Entry {
                     showImageBeforeText
                     image {
                         ...contentImage
