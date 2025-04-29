@@ -14,7 +14,7 @@ query PressReleasesCollection($site: [String], $before: String, $after: String, 
             }
             thumbnailAltText
         }
-        ... on pressReleases_importedEntries_Entry {
+        ... on importedEntries_Entry {
             excerpt
             thumbnailImage {
                 ...thumbnailImage

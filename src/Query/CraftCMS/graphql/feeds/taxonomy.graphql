@@ -88,7 +88,7 @@ query taxonomy($site: [String], $category: [QueryArgument], $ecosystem: [QueryAr
                 ...defaultFlexibleComponents
             }
         }
-        ... on pressReleases_importedEntries_Entry {
+        ... on importedEntries_Entry {
             date: postDate
             year: postDate@formatDateTime(format: "Y")
             excerpt
