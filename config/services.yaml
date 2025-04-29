@@ -45,6 +45,8 @@ services:
         arguments:
             $apiUrl: '%env(resolve:CRAFTCMS_API_URL)%'
             $apiKey: '%env(resolve:CRAFTCMS_API_READ_TOKEN)%'
+            $apiKey: '%env(resolve:CRAFTCMS_API_READ_TOKEN)%'
+            $cookieValue: '%env(resolve:CRAFTCMS_API_COOKIE_VALUE)%'
 
     # Query manager to retrieve data from APIs
     strata.query_manager:
