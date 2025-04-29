@@ -1,5 +1,5 @@
 query Event($type: [QueryArgument], $start: [QueryArgument], $slug: [String], $site: [String]) {
-    entry(eventType: $type, startDatetime: $start, slug: $slug, type: "default", site: $site, section: "events") {
+    entry(eventType: $type, startDatetime: $start, slug: $slug, type: "events_default", site: $site, section: "events") {
         id
         uid
         status
