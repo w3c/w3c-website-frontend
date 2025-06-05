@@ -15,33 +15,25 @@ class CraftCMS extends GraphQL
      *
      * @param string $apiUrl
      * @param string $apiKey
-     * @param ?string $cookieValue w3csess auth cookie
      * @see config/services.yaml
      */
-    public function __construct(string $apiUrl, string $apiKey, ?string $cookieValue = null)
+    public function __construct(string $apiUrl, string $apiKey)
     {
         parent::__construct($apiUrl);
 
         // Set default auth token
-        $this->setAuthorization($apiKey, $cookieValue);
+        $this->setAuthorization($apiKey);
     }
 
     /**
      * Set API authorization token to use with all requests
      *
      * @param string $token
-     * @param ?string $cookieValue w3csess auth cookie
      */
-    public function setAuthorization(string $token, ?string $cookieValue = null)
+    public function setAuthorization(string $token)
     {
-        $options = [
-            'auth_bearer' => $token,
-        ];
-        if (null !== $cookieValue) {
-            $options['headers'] = [
-                'Cookie' => sprintf('w3csess=%s', $cookieValue)
-            ];
-        }
-        $this->setDefaultOptions($options);
+        $this->setDefaultOptions([
+            'auth_bearer' => $token
+        ]);
     }
 }

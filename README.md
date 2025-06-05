@@ -152,7 +152,6 @@ APP_URL=https://w3c-website-frontend.ddev.site
 CRAFTCMS_API_URL="https://ddev-w3c-website-craft-web/api"
 CRAFTCMS_API_READ_TOKEN=""
 CRAFTCMS_API_PUBLISH_TOKEN=""
-CRAFTCMS_API_COOKIE_VALUE=""
 
 # Point assets to W3C CDN for local dev
 ASSETS_WEBSITE_2021=https://www.w3.org/assets/website-2021/
