@@ -8,7 +8,7 @@ query NewslettersListing($site: [String]) {
         breadcrumbs: parent {
             ...breadcrumbs
         }
-        ... on newsletterArchive_newsletterArchive_Entry {
+        ... on newsletterArchive_Entry {
             excerpt
             thumbnailImage {
                 ...thumbnailImage

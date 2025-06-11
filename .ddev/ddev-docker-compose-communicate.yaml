@@ -1,0 +1,4 @@
+services:
+  web:
+    external_links:
+      - "ddev-router:w3c-website-craft.ddev.site/api"

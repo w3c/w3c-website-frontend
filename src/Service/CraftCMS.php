@@ -12,9 +12,10 @@ class CraftCMS extends GraphQL
      * CraftCmsApi constructor.
      *
      * Auto-populates constructor arguments from service definition
-     * @see config/services.yaml
+     *
      * @param string $apiUrl
      * @param string $apiKey
+     * @see config/services.yaml
      */
     public function __construct(string $apiUrl, string $apiKey)
     {

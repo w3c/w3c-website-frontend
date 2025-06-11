@@ -8,7 +8,7 @@ query PressReleasesListing($site: [String]) {
         breadcrumbs: parent {
             ...breadcrumbs
         }
-        ... on pressReleasesListing_pressReleasesListing_Entry {
+        ... on pressReleasesListing_Entry {
             excerpt
             thumbnailImage {
                 ...thumbnailImage

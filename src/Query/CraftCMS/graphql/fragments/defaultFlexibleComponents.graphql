@@ -1,14 +1,14 @@
 fragment defaultFlexibleComponents on defaultFlexibleComponents_MatrixField {
-    ... on defaultFlexibleComponents_textComponent_BlockType {
+    ... on textComponent_Entry {
         typeHandle
         contentField
     }
-    ... on defaultFlexibleComponents_blockquoteComponent_BlockType {
+    ... on blockquoteComponent_Entry {
         typeHandle
         quoteText
         citation
     }
-    ...on defaultFlexibleComponents_imageMediaComponent_BlockType {
+    ...on imageMediaComponent_Entry {
         typeHandle
         imageMedia {
             ...contentImage
@@ -17,7 +17,7 @@ fragment defaultFlexibleComponents on defaultFlexibleComponents_MatrixField {
         figureCaption
         informativeOrDecorative
     }
-    ...on defaultFlexibleComponents_videoMediaComponent_BlockType {
+    ...on videoMediaComponent_Entry {
         typeHandle
         videoTitle
         videoUrl {

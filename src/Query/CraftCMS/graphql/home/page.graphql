@@ -4,7 +4,7 @@ query Home($site: [String]) {
         postDate
         dateUpdated
         expiryDate
-        ... on homepage_homepage_Entry {
+        ... on homepage_Entry {
             heroIllustration {
                 url
                 mimeType
@@ -25,7 +25,7 @@ query Home($site: [String]) {
                 url
             }
             homeFiftyFiftyComponents {
-                ...on homeFiftyFiftyComponents_fiftyFiftyComponent_BlockType {
+                ...on fiftyFiftyComponent_Entry {
                     showImageBeforeText
                     image {
                         ...contentImage

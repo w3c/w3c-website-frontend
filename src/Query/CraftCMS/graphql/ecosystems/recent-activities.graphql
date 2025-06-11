@@ -30,14 +30,14 @@ query RecentActivities($site: [String], $ecosystemId: [QueryArgument], $endDatet
             thumbnailAltText
         }
     }
-    recentEvents: entries(section: "events", ecosystems: $ecosystemId, endDatetime: $endDatetime, limit: 4, orderBy: "endDate ASC") {
+    recentEvents: entries(section: "events", ecosystems: $ecosystemId, endDatetime: $endDatetime, limit: 4, orderBy: "endDatetime ASC") {
         ... on events_default_Entry {
             ...listingEvent
         }
-        ... on events_external_Entry {
+        ... on external_Entry {
             ...listingExternalEvent
         }
-        ... on events_entryContentIsACraftPage_Entry {
+        ... on entryContentIsACraftPage_Entry {
             ...listingPageEvent
         }
     }

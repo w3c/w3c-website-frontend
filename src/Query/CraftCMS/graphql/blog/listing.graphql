@@ -8,7 +8,7 @@ query BlogListing($site: [String]) {
         breadcrumbs: parent {
             ...breadcrumbs
         }
-        ... on blogListing_blogListing_Entry {
+        ... on blogListing_Entry {
             excerpt
             thumbnailImage {
                 ...thumbnailImage

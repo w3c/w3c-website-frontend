@@ -1,0 +1,7 @@
+# see https://symfony.com/doc/current/reference/configuration/framework.html
+framework:
+    http_client:
+        default_options:
+            # Disable SSL verification on local dev only
+            verify_host: false
+            verify_peer: false

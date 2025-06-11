@@ -13,7 +13,7 @@ query pressReleases($site: [String], $limit: Int) {
                 ...defaultFlexibleComponents
             }
         }
-        ... on pressReleases_importedEntries_Entry {
+        ... on importedEntries_Entry {
             excerpt
             pageContent
         }
