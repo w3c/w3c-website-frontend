@@ -45,7 +45,7 @@ fragment landingFlexibleComponents on landingFlexibleComponents_MatrixField {
         heading
         description
         iconCards {
-            ... on iconCards_Entry {
+            ... on iconCardsBlock_Entry {
                 icon {
                     ... on icon_Icon {
                         inline
