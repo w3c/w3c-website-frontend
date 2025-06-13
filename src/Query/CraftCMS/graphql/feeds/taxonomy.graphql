@@ -7,7 +7,7 @@ query taxonomy($site: [String], $category: [QueryArgument], $ecosystem: [QueryAr
         uri
         title
         ... on blogPosts_default_Entry {
-            authors {
+            authors: blogAuthors {
                 ... authors
             }
             date: postDate
@@ -38,7 +38,7 @@ query taxonomy($site: [String], $category: [QueryArgument], $ecosystem: [QueryAr
             }
         }
         ... on blogPosts_importedEntries_Entry {
-            authors {
+            authors: blogAuthors {
                 ... authors
             }
             date: postDate
@@ -173,7 +173,7 @@ fragment contentImage on AssetInterface {
     extension
 }
 
-fragment authors on authors_author_BlockType {
+fragment authors on author_Entry {
     name: authorName
     email: authorEmailAddress
 }

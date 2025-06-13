@@ -24,7 +24,7 @@ query BlogPost($year: [String], $slug: [String], $site: [String]) {
             }
             thumbnailAltText
             displayYouMayAlsoLikeListing
-            blogAuthors {
+            authors: blogAuthors {
                 ... on author_Entry {
                     name: authorName
                     email: authorEmailAddress
@@ -67,7 +67,7 @@ query BlogPost($year: [String], $slug: [String], $site: [String]) {
                 ...thumbnailImage
             }
             thumbnailAltText
-            blogAuthors {
+            authors: blogAuthors {
                 ... on author_Entry {
                     name: authorName
                     email: authorEmailAddress
