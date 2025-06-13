@@ -80,7 +80,6 @@ class Collection extends GraphQLQuery
             '[slug]' => '[slug]',
             '[url]' => new CallableData([$this, 'transformUrl'], '[slug]', '[year]'),
             '[title]' => '[title]',
-            '[author]' => '[author]',
             '[authors]' => '[authors]',
             '[category]' => new CallableData([$this, 'transformCategory'], '[categories]'),
             '[tags]' => new MapArray('[tags]', [

@@ -6,13 +6,7 @@ query BlogCollection($site: [String], $category: [QueryArgument], $tag: [QueryAr
         uri
         title
         ... on blogPosts_default_Entry {
-            authors {
-                ... on User {
-                    name
-                    email
-                }
-            }
-            blogAuthors {
+            authors: blogAuthors {
                 ... on author_Entry {
                     name: authorName
                     email: authorEmailAddress
@@ -35,13 +29,7 @@ query BlogCollection($site: [String], $category: [QueryArgument], $tag: [QueryAr
             thumbnailAltText
         }
         ... on blogPosts_importedEntries_Entry {
-            authors {
-                ... on User {
-                    name
-                    email
-                }
-            }
-            blogAuthors {
+            authors: blogAuthors {
                 ... on author_Entry {
                     name: authorName
                     email: authorEmailAddress
