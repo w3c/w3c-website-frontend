@@ -24,7 +24,7 @@ fragment ecosystemsBottomFlexibleComponents on ecosystemsBottomFlexibleComponent
     }
     ... on imageMediaComponent_Entry {
         typeHandle
-        image {
+        imageMedia {
             ...contentImage
         }
         altText
