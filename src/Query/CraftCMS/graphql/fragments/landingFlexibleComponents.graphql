@@ -60,7 +60,7 @@ fragment landingFlexibleComponents on landingFlexibleComponents_MatrixField {
     }
     ... on imageMediaComponent_Entry {
         typeHandle
-        image {
+        imageMedia {
             ...contentImage
         }
         altText

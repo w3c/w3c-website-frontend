@@ -32,7 +32,15 @@ fragment youMayAlsoLikeRelatedEntries on youMayAlsoLikeRelatedEntries_MatrixFiel
             title
             uri
             slug
+            ... on pages_default_Entry {
+                text: excerpt
+                thumbnailImage {
+                    ...thumbnailImage
+                }
+                thumbnailAltText
+            }
             ... on default_Entry {
+                year: postDate@formatDateTime(format: "Y")
                 text: excerpt
                 thumbnailImage {
                     ...thumbnailImage
@@ -55,14 +63,6 @@ fragment youMayAlsoLikeRelatedEntries on youMayAlsoLikeRelatedEntries_MatrixFiel
                 thumbnailAltText
             }
             ... on blogPosts_importedEntries_Entry {
-                year: postDate@formatDateTime(format: "Y")
-                text: excerpt
-                thumbnailImage {
-                    ...thumbnailImage
-                }
-                thumbnailAltText
-            }
-            ... on default_Entry {
                 year: postDate@formatDateTime(format: "Y")
                 text: excerpt
                 thumbnailImage {
@@ -94,23 +94,9 @@ fragment youMayAlsoLikeRelatedEntries on youMayAlsoLikeRelatedEntries_MatrixFiel
                 }
                 thumbnailAltText
             }
-            ... on default_Entry {
-                text: excerpt
-                thumbnailImage {
-                    ...thumbnailImage
-                }
-                thumbnailAltText
-            }
             ... on events_default_Entry {
                 year: startDatetime@formatDateTime(format: "Y")
                 text: eventExcerpt
-                thumbnailImage {
-                    ...thumbnailImage
-                }
-                thumbnailAltText
-            }
-            ... on default_Entry {
-                text: excerpt
                 thumbnailImage {
                     ...thumbnailImage
                 }
@@ -149,13 +135,6 @@ fragment youMayAlsoLikeRelatedEntries on youMayAlsoLikeRelatedEntries_MatrixFiel
                 thumbnailAltText
             }
             ... on ecosystemsLandingPage_Entry {
-                text: excerpt
-                thumbnailImage {
-                    ...thumbnailImage
-                }
-                thumbnailAltText
-            }
-            ... on homepage_Entry {
                 text: excerpt
                 thumbnailImage {
                     ...thumbnailImage
