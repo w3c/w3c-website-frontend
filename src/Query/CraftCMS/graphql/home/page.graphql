@@ -12,6 +12,9 @@ query Home($site: [String]) {
                 width
                 size
             }
+            heroVideo {
+                url
+            }
             pageLead
             heroCopy
             heroCallToActionButton {
