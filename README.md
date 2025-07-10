@@ -155,9 +155,9 @@ To access other local projects from within a DDEV container, for example the CMS
 * CMS API: https://ddev-w3c-website-craft-web/api
 * Frontend: https://ddev-w3c-website-frontend-web
 
-To access other local projects via the front-end, use their DDEV website URL, for example:
+To access the template bundle locally, use the localhost URL:
 
-* Template bundle: https://w3c-website-templates-bundle.ddev.site/
+* Template bundle: http://localhost:8001/
 
 ### Configuration
 
@@ -249,7 +249,7 @@ If you are making changes to the front-end assets, you'll need to point to a loc
 Use local assets:
 
 ```
-ASSETS_WEBSITE_2021=https://w3c-website-templates-bundle.ddev.site/dist/assets/website-2021/
+ASSETS_WEBSITE_2021=http://localhost:8001/dist/assets/
 ```
 
 #### Testing
