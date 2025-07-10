@@ -44,26 +44,26 @@ The following environments are setup:
 To run a deployment please use:
 
 ````
-vendor/bin/dep deploy <environment>
+./vendor/bin/dep deploy <environment>
 ````
 
 To deploy a specific branch use
 
 ````
-vendor/bin/dep deploy <environment> --branch=<branch_name>
+./vendor/bin/dep deploy <environment> --branch=<branch_name>
 ````
 
 E.g.
 
 ```
-vendor/bin/dep deploy development --branch=feature/my-branch-name
+./vendor/bin/dep deploy development --branch=feature/my-branch-name
 ```
 
 ### SSH access
 To connect to the server directly at the correct path for an environment's current release, run the following from the root of the project
 
 ````
-vendor/bin/dep ssh <environment>
+./vendor/bin/dep ssh <environment>
 ````
 
 ## Related W3C repos
@@ -84,6 +84,20 @@ You can also test changes either by deploying a branch to the staging environmen
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
 
 More on the [Git workflow for this project](docs/git_workflow.md).
+
+### SSH setup
+To deploy the website you need to add the following to your `~/.ssh/config` file:
+
+```
+Host *.w3.internal
+ProxyJump studio24@ssh-aws.w3.org
+```
+
+You can test this works by:
+
+```
+./vendor/bin/dep ssh development
+```
 
 ### Requirements
 
@@ -231,7 +245,7 @@ If you are making changes to the front-end assets, you'll need to point to a loc
 Use local assets:
 
 ```
-ASSETS_WEBSITE_2021=https://ddev-w3c-website-frontend-web/assets/website-2021/
+ASSETS_WEBSITE_2021=https://ddev-w3c-website-templates-bundle-web/assets/website-2021/
 ```
 
 #### Testing
