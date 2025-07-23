@@ -71,14 +71,46 @@ To connect to the server directly at the correct path for an environment's curre
 * [w3c/w3c-website-craft](https://github.com/w3c/w3c-website-craft) - Craft CMS installation (private repo)
 * [w3c/w3c-website-templates-bundle](https://github.com/w3c/w3c-website-templates-bundle) - Front-end templates
 
-## Updating HTML templates
+## W3C Design System
 
-The HTML templates are stored in [w3c-website-templates-bundle](https://github.com/w3c/w3c-website-templates-bundle)
+The HTML templates are stored in the W3C Design System ([w3c-website-templates-bundle](https://github.com/w3c/w3c-website-templates-bundle)). 
 
-These can be updated by deploying changes to the [design system](https://github.com/w3c/w3c-website-templates-bundle/blob/main/design-system.md) 
+Template and static assets (CSS/JS) can be updated by deploying changes to the design system 
 and running `composer update` in this project (w3c-website-frontend).
 
-You can also test changes either by deploying a branch to the staging environment for the design system, or by [testing a development branch on the frontend website](https://github.com/w3c/w3c-website-templates-bundle/blob/main/design-system.md#testing-a-development-branch-on-your-front-end-website). 
+### Testing development work
+
+You can test changes before they are made live by creating a Pull Request from a branch on the [w3c-website-templates-bundle](https://github.com/w3c/w3c-website-templates-bundle) repo.
+
+To use this in the frontend repo you need to load the HTML template via Composer and point to the built static assets via an environment variable.
+
+#### HTML templates
+
+Find the branch name to load in Composer via https://packagist.org/packages/w3c/website-templates-bundle
+
+Update your `composer.json` to use this branch.
+
+For example, for a branch called `feature/new` the composer.json will look like:
+
+```
+    "w3c/website-templates-bundle": "dev-feature/new"
+```
+
+Run `ddev composer update` to update the files loaded by Composer.
+ 
+Run `ddev console cache:clear` to clear your local Symfony cache.
+
+#### Static assets
+
+Update the `ASSETS_WEBSITE_2021` setting in `.env.local` to point to the built static assets for this PR.
+
+GitHub actions will create a custom assets folder based on the PR number which you can use in the frontend:
+
+```
+ASSETS_WEBSITE_2021=https://www-dev.w3.org/assets/website-2021-dev/pr-123/
+```
+
+Replace `pr-123` with your Pull Request number.
 
 ## Installation
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
@@ -238,19 +270,13 @@ Use production assets:
 ASSETS_WEBSITE_2021=https://www.w3.org/assets/website-2021/
 ```
 
-Use development assets:
-
-```
-ASSETS_WEBSITE_2021=https://dev.w3.org/assets/website-2021/
-```
-
-If you are making changes to the front-end assets, you'll need to point to a local location. 
-
-Use local assets:
+You can test frontend changes using your local front-end assets: 
 
 ```
 ASSETS_WEBSITE_2021=http://localhost:8001/dist/assets/
 ```
+
+See [testing development work](#testing-development-work) for instructions on how to test a branch in the design system on the frontend website.
 
 #### Testing
 
