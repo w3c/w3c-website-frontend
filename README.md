@@ -15,7 +15,7 @@ This document is a summary of what you need to know when working on this project
 * [Site URLs](#site-urls)
 * [Deployment](#deployment)
 * [Related W3C repos](#related-w3c-repos)
-* [Updating HTML templates](#updating-html-templates)
+* [Using the W3C Design System](#using-the-w3c-design-system)
 * [Installation](#installation)
 * [Built with](#built-with)
 
@@ -71,11 +71,11 @@ To connect to the server directly at the correct path for an environment's curre
 * [w3c/w3c-website-craft](https://github.com/w3c/w3c-website-craft) - Craft CMS installation (private repo)
 * [w3c/w3c-website-templates-bundle](https://github.com/w3c/w3c-website-templates-bundle) - Front-end templates
 
-## W3C Design System
+## Using the W3C Design System
 
-The HTML templates are stored in the W3C Design System ([w3c-website-templates-bundle](https://github.com/w3c/w3c-website-templates-bundle)). 
+HTML templates and global static assets (CSS/JS) are stored in the [W3C Design System](https://github.com/w3c/w3c-website-templates-bundle). 
 
-Template and static assets (CSS/JS) can be updated by deploying changes to the design system 
+The Design System can be updated by merging changes to the `main` branch of [w3c-website-templates-bundle](https://github.com/w3c/w3c-website-templates-bundle) 
 and running `composer update` in this project (w3c-website-frontend).
 
 ### Testing development work
@@ -100,6 +100,12 @@ Run `ddev composer update` to update the files loaded by Composer.
  
 Run `ddev console cache:clear` to clear your local Symfony cache.
 
+Make sure you switch back to the production setting in Composer before making your changes to the frontend repo live:
+
+```
+    "w3c/website-templates-bundle": "dev-main"
+```
+
 #### Static assets
 
 Update the `ASSETS_WEBSITE_2021` setting in `.env.local` to point to the built static assets for this PR.
@@ -110,7 +116,7 @@ GitHub actions will create a custom assets folder based on the PR number which y
 ASSETS_WEBSITE_2021=https://www-dev.w3.org/assets/website-2021-dev/pr-123/
 ```
 
-Replace `pr-123` with your Pull Request number.
+Replace `pr-123` with your PR number.
 
 ## Installation
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
