@@ -16,6 +16,8 @@ This document is a summary of what you need to know when working on this project
 * [Deployment](#deployment)
 * [Related W3C repos](#related-w3c-repos)
 * [Using the W3C Design System](#using-the-w3c-design-system)
+  * [Testing development work](#testing-development-work)
+  * [Local testing](#local-testing)
 * [Installation](#installation)
 * [Built with](#built-with)
 
@@ -99,55 +101,7 @@ It's recommended you make this a draft PR until you are ready to get this review
 
 When you push files to your branch on `w3c-website-templates-bundle` static assets are automatically uploaded to a CDN with a URL unique to your PR ([see below](#static-assets)).
 
-#### Local testing
-
-You can test both the HTML templates and static assets locally. The following instructions assume you are using DDEV 
-and have the `w3c-website-templates-bundle` repo cloned to `~/Sites/w3c/w3c-website-templates-bundle`
-
-The file [docker-compose.mounts.yaml](.ddev/docker-compose.mounts.yaml) mounts the local w3c-website-templates-bundle directory into the frontend Docker container at `/home/w3c-website-templates-bundle`
-
-##### HTML templates
-
-Add the local repository path to your `composer.json`:
-
-```
-ddev composer config repositories.local path "/home/w3c-website-templates-bundle/"
-ddev composer update
-```
-
-This should add the following to your `composer.json` file:
-
-```json
-"repositories": {
-  "local": {
-    "type": "path",
-    "url": "/home/w3c-website-templates-bundle/"
-  }
-}
-```
-
-You will need to remove this "repositories" configuration when you no longer want to use the local folder (e.g. if testing on development or when you go live).
-
-You can do this via:
-
-```shell
-ddev composer config repositories.local --unset
-ddev composer update
-```
-
-##### Static assets
-
-Update `.env.local`:
-
-```dotenv
-ASSETS_WEBSITE_2021=http://localhost:8001/dist/assets/
-```
-
-This assumes you are running the Design System locally via:
-
-```shell
-php -S localhost:8000 -t _dist
-```
+See [local testing](#local-testing) for how to test changes from a local version of the `w3c-website-templates-bundle` repo.
 
 #### HTML templates
 
@@ -204,6 +158,57 @@ You can select which CMS environment your frontend app uses via `CRAFTCMS_API_UR
 # Development CMS
 CRAFTCMS_API_URL="https://cms-dev.w3.org/api"
 ```
+
+### Local testing
+
+You can test HTML templates and static assets locally. The following instructions assume you are using DDEV
+and have the `w3c-website-templates-bundle` repo cloned to `~/Sites/w3c/w3c-website-templates-bundle`
+
+The file [docker-compose.mounts.yaml](.ddev/docker-compose.mounts.yaml) mounts the local w3c-website-templates-bundle directory into the frontend Docker container at `/home/w3c-website-templates-bundle`
+
+#### HTML templates
+
+Add the local repository path to your `composer.json`:
+
+```
+ddev composer config repositories.local path "/home/w3c-website-templates-bundle/"
+ddev composer update
+```
+
+This should add the following to your `composer.json` file:
+
+```json
+"repositories": {
+  "local": {
+    "type": "path",
+    "url": "/home/w3c-website-templates-bundle/"
+  }
+}
+```
+
+You will need to remove this "repositories" configuration when you no longer want to use the local folder (e.g. if testing on development or when you go live).
+
+You can do this via:
+
+```shell
+ddev composer config repositories.local --unset
+ddev composer update
+```
+
+#### Static assets
+
+Update `.env.local`:
+
+```dotenv
+ASSETS_WEBSITE_2021=http://localhost:8001/dist/assets/
+```
+
+This assumes you are running the Design System locally via:
+
+```shell
+php -S localhost:8000 -t _dist
+```
+
 
 ## Installation
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
