@@ -128,6 +128,13 @@ This should add the following to your `composer.json` file:
 
 You will need to remove this "repositories" configuration when you no longer want to use the local folder (e.g. if testing on development or when you go live).
 
+You can do this via:
+
+```shell
+ddev composer config repositories.local --unset
+ddev composer update
+```
+
 ##### Static assets
 
 Update `.env.local`:
