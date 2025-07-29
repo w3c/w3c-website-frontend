@@ -78,45 +78,88 @@ HTML templates and global static assets (CSS/JS) are stored in the [W3C Design S
 The Design System can be updated by merging changes to the `main` branch of [w3c-website-templates-bundle](https://github.com/w3c/w3c-website-templates-bundle) 
 and running `composer update` in this project (w3c-website-frontend).
 
+Static assets are automatically uploaded to a CDN and you can choose where to point these to via the `ASSETS_WEBSITE_2021` setting in `.env.local` 
+
+```
+# Production assets
+ASSETS_WEBSITE_2021=https://www.w3.org/assets/website-2021/
+```
+
 ### Testing development work
 
-You can test changes before they are made live by creating a Pull Request from a branch on the [w3c-website-templates-bundle](https://github.com/w3c/w3c-website-templates-bundle) repo.
+#### Use the same branch names across the 2 repos
 
-To use this in the frontend repo you need to load the HTML template via Composer and point to the built static assets via an environment variable.
+If you are making changes to the Design System and the W3C frontend website you need to make a branch for your work. 
+It is strongly recommended to use the same branch name on the `w3c-website-frontend` and `w3c-website-templates-bundle` repos.
+
+You also need to create a Pull Request on the `w3c-website-templates-bundle` repo for your new branch. 
+It's recommended you make this a draft PR until you are ready to get this reviewed.
+
+When you push files to your branch on `w3c-website-templates-bundle` static assets are automatically uploaded to a CDN with a URL unique to your PR ([see below](#static-assets)).
 
 #### HTML templates
 
-Find the branch name to load in Composer via https://packagist.org/packages/w3c/website-templates-bundle
+HTML templates are loaded in the frontend app via Composer.
+
+When using DDEV it is not currently possible to point to a local path to test local changes to HTML templates. You need to test via code you push to GitHub. 
+
+Find the version name to load in Composer via https://packagist.org/packages/w3c/website-templates-bundle
 
 Update your `composer.json` to use this branch.
 
-For example, for a branch called `feature/new` the composer.json will look like:
+For example, for a branch called `feature/new` the Composer version you want to load is `dev-feature/new`
+
+You can update your Composer file and the loaded package via: 
 
 ```
-    "w3c/website-templates-bundle": "dev-feature/new"
+composer require w3c/website-templates-bundle:dev-feature/new
 ```
 
-Run `ddev composer update` to update the files loaded by Composer.
- 
-Run `ddev console cache:clear` to clear your local Symfony cache.
+This will automatically clear the cache, which helps pick up the new templates. 
 
-Make sure you switch back to the production setting in Composer before making your changes to the frontend repo live:
+#### Before you go live
+
+The live website uses the `main` branch for static assets. 
+
+Make sure you switch back to this branch in Composer before merging your changes into the `main` branch of `w3c-website-frontend`:
 
 ```
-    "w3c/website-templates-bundle": "dev-main"
+composer require w3c/website-templates-bundle:dev-main
 ```
 
 #### Static assets
 
+Static assets are delivered in the frontend app via a CDN URL.
+
 Update the `ASSETS_WEBSITE_2021` setting in `.env.local` to point to the built static assets for this PR.
 
-GitHub actions will create a custom assets folder based on the PR number which you can use in the frontend:
+You can test local static assets via:
+
+```
+ASSETS_WEBSITE_2021=http://localhost:8001/dist/assets/
+```
+
+To test static assets pushed to the GitHub branch, you can use the custom CDN URL for the pull request:
 
 ```
 ASSETS_WEBSITE_2021=https://www-dev.w3.org/assets/website-2021-dev/pr-123/
 ```
 
-Replace `pr-123` with your PR number.
+Replace `123` with your PR number. You can find this on the [w3c/website-templates-bundle branches page](https://github.com/w3c/w3c-website-templates-bundle/branches).
+
+If you want to test if static assets have successfully uploaded to this PR URL you can test the URL: https://www-dev.w3.org/assets/website-2021-dev/pr-123/styles/core.css
+
+Which should return the core CSS file. It will return an access denied message if the file does not exist.
+
+#### CMS
+
+Finally, any CMS loaded content or assets is normally tested against the development CMS environment. 
+You can select which CMS environment your frontend app uses via `CRAFTCMS_API_URL` in your `.env.local` file. 
+
+```
+# Development CMS
+CRAFTCMS_API_URL="https://cms-dev.w3.org/api"
+```
 
 ## Installation
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
@@ -177,10 +220,13 @@ To use DDEV:
 
 ```shell
 ddev start
-ddev composer install
 ```
 
-[Create an .env.local config file](#configuration) as described below.
+Create your `.env.local` config file, see [configuration](#configuration), and then run:
+
+```shell
+ddev composer install
+```
 
 You can launch the website on https://w3c-website-frontend.ddev.site via:
 
@@ -246,19 +292,19 @@ Set the W3C API key
 Set the Craft API URL to the Craft instance you want to read in content for your local development site.
 You can set this to production if you want to test how the local dev site will work with live content (we recommend only setting the API_READ token when using the production API).
 
-Use production CMS:
+Production CMS:
 
 ```
 CRAFTCMS_API_URL="https://cms.w3.org/api"
 ```
 
-Use development CMS:
+Development CMS:
 
 ```
 CRAFTCMS_API_URL="https://cms-dev.w3.org/api"
 ```
 
-Use local CMS:
+Local CMS:
 
 ```
 CRAFTCMS_API_URL="https://ddev-w3c-website-craft-web/api"
@@ -270,13 +316,13 @@ You can find your API Read and Publish tokens by going to the Craft CMS dashboar
 
 The website assets are now loaded from a CDN, we recommend using production assets unless you are working on front-end changes.
 
-Use production assets:
+Production assets:
 
 ```
 ASSETS_WEBSITE_2021=https://www.w3.org/assets/website-2021/
 ```
 
-You can test frontend changes using your local front-end assets: 
+Local front-end assets: 
 
 ```
 ASSETS_WEBSITE_2021=http://localhost:8001/dist/assets/
@@ -304,6 +350,12 @@ bin/console cache:clear
 
 ## DDEV
 ddev console cache:clear
+```
+
+If this fails to run you can manually clear cache files via:
+
+```shell
+rm -rf var/cache/*
 ```
 
 ## Built with
