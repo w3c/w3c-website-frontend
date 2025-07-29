@@ -1,0 +1,4 @@
+services:
+  web:
+    volumes:
+      - "~/Sites/w3c/w3c-website-templates-bundle:/home/w3c-website-templates-bundle"

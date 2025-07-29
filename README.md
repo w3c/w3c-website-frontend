@@ -75,6 +75,8 @@ To connect to the server directly at the correct path for an environment's curre
 
 HTML templates and global static assets (CSS/JS) are stored in the [W3C Design System](https://github.com/w3c/w3c-website-templates-bundle). 
 
+### Production
+
 The Design System can be updated by merging changes to the `main` branch of [w3c-website-templates-bundle](https://github.com/w3c/w3c-website-templates-bundle) 
 and running `composer update` in this project (w3c-website-frontend).
 
@@ -97,11 +99,52 @@ It's recommended you make this a draft PR until you are ready to get this review
 
 When you push files to your branch on `w3c-website-templates-bundle` static assets are automatically uploaded to a CDN with a URL unique to your PR ([see below](#static-assets)).
 
+#### Local testing
+
+You can test both the HTML templates and static assets locally. The following instructions assume you are using DDEV 
+and have the `w3c-website-templates-bundle` repo cloned to `~/Sites/w3c/w3c-website-templates-bundle`
+
+The file [docker-compose.mounts.yaml](.ddev/docker-compose.mounts.yaml) mounts the local w3c-website-templates-bundle directory into the frontend Docker container at `/home/w3c-website-templates-bundle`
+
+##### HTML templates
+
+Add the local repository path to your `composer.json`:
+
+```
+ddev composer config repositories.local path "/home/w3c-website-templates-bundle/"
+ddev composer update
+```
+
+This should add the following to your `composer.json` file:
+
+```json
+"repositories": {
+  "local": {
+    "type": "path",
+    "url": "/home/w3c-website-templates-bundle/"
+  }
+}
+```
+
+You will need to remove this "repositories" configuration when you no longer want to use the local folder (e.g. if testing on development or when you go live).
+
+##### Static assets
+
+Update `.env.local`:
+
+```dotenv
+ASSETS_WEBSITE_2021=http://localhost:8001/dist/assets/
+```
+
+This assumes you are running the Design System locally via:
+
+```shell
+php -S localhost:8000 -t _dist
+```
+
 #### HTML templates
 
 HTML templates are loaded in the frontend app via Composer.
-
-When using DDEV it is not currently possible to point to a local path to test local changes to HTML templates. You need to test via code you push to GitHub. 
 
 Find the version name to load in Composer via https://packagist.org/packages/w3c/website-templates-bundle
 
@@ -132,12 +175,6 @@ composer require w3c/website-templates-bundle:dev-main
 Static assets are delivered in the frontend app via a CDN URL.
 
 Update the `ASSETS_WEBSITE_2021` setting in `.env.local` to point to the built static assets for this PR.
-
-You can test local static assets via:
-
-```
-ASSETS_WEBSITE_2021=http://localhost:8001/dist/assets/
-```
 
 To test static assets pushed to the GitHub branch, you can use the custom CDN URL for the pull request:
 
