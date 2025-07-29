@@ -166,6 +166,8 @@ and have the `w3c-website-templates-bundle` repo cloned to `~/Sites/w3c/w3c-webs
 
 The file [docker-compose.mounts.yaml](.ddev/docker-compose.mounts.yaml) mounts the local w3c-website-templates-bundle directory into the frontend Docker container at `/home/w3c-website-templates-bundle`
 
+You may need to run `ddev restart` to mount this folder.
+
 #### HTML templates
 
 Add the local repository path to your `composer.json`:
@@ -186,9 +188,10 @@ This should add the following to your `composer.json` file:
 }
 ```
 
-You will need to remove this "repositories" configuration when you no longer want to use the local folder (e.g. if testing on development or when you go live).
+> [!TIP]
+> Please note this local repository configuration should only be used locally (don't commit this change to git) since it won't work on development or production.
 
-You can do this via:
+To remove this "repositories" configuration run:
 
 ```shell
 ddev composer config repositories.local --unset
