@@ -14,66 +14,223 @@ This document is a summary of what you need to know when working on this project
 
 * [Site URLs](#site-urls)
 * [Deployment](#deployment)
+* [Related W3C repos](#related-w3c-repos)
+* [Using the W3C Design System](#using-the-w3c-design-system)
+  * [Testing development work](#testing-development-work)
+  * [Local testing](#local-testing)
 * [Installation](#installation)
 * [Built with](#built-with)
 
 ## Site URLs
 
 ### Production
-Live:
-* https://www.w3.org (summary of [latest deployment](https://www.w3.org/_build_summary.json))
+* https://www.w3.org
 
 ### Development
-* https://www-dev.w3.org (summary of [latest deployment](https://www-dev.w3.org/_build_summary.json))
+* https://www-dev.w3.org
 
 Used to test new functionality / changes. Access to development is restricted by IP address.
 
 ### Local
-* http://localhost:8000/ (Local PHP)
-* https://w3c-website-frontend.ddev.site (DDEV)
+* http://localhost:8000/ (via Symfony CLI)
+* https://w3c-website-frontend.ddev.site (via DDEV)
 
 ## Deployment
 
 The project uses [Deployer](https://deployer.org/) to publish updates to the websites.
 
+The following environments are setup:
+* production
+* development
+
 To run a deployment please use:
 
 ````
-vendor/bin/dep deploy <environment>
+./vendor/bin/dep deploy <environment>
 ````
 
 To deploy a specific branch use
 
 ````
-vendor/bin/dep deploy <environment> --branch=<branch_name>
+./vendor/bin/dep deploy <environment> --branch=<branch_name>
 ````
 
 E.g.
 
 ```
-vendor/bin/dep deploy development --branch=feature/my-branch-name
+./vendor/bin/dep deploy development --branch=feature/my-branch-name
 ```
 
 ### SSH access
-To connect to the server directly at the correct path for an environments current release, run the following from the root of the project
+To connect to the server directly at the correct path for an environment's current release, run the following from the root of the project
 
 ````
-vendor/bin/dep ssh <environment>
+./vendor/bin/dep ssh <environment>
 ````
 
-## Updating HTML templates
+## Related W3C repos
 
-The HTML templates are stored in [w3c-website-templates-bundle](https://github.com/w3c/w3c-website-templates-bundle)
+* [w3c/w3c-website-craft](https://github.com/w3c/w3c-website-craft) - Craft CMS installation (private repo)
+* [w3c/w3c-website-templates-bundle](https://github.com/w3c/w3c-website-templates-bundle) - Front-end templates
 
-These can be updated by deploying changes to the [design system](https://github.com/w3c/w3c-website-templates-bundle/blob/main/design-system.md) 
-and running `composer update` in this project.
+## Using the W3C Design System
 
-You can also test changes either by deploying a branch to the staging environment for the design system, or by [testing a development branch on the frontend website](https://github.com/w3c/w3c-website-templates-bundle/blob/main/design-system.md#testing-a-development-branch-on-your-front-end-website). 
+HTML templates and global static assets (CSS/JS) are stored in the [W3C Design System](https://github.com/w3c/w3c-website-templates-bundle). 
+
+### Production
+
+The Design System can be updated by merging changes to the `main` branch of [w3c-website-templates-bundle](https://github.com/w3c/w3c-website-templates-bundle) 
+and running `composer update` in this project (w3c-website-frontend).
+
+Static assets are automatically uploaded to a CDN and you can choose where to point these to via the `ASSETS_WEBSITE_2021` setting in `.env.local` 
+
+```
+# Production assets
+ASSETS_WEBSITE_2021=https://www.w3.org/assets/website-2021/
+```
+
+### Testing development work
+
+#### Use the same branch names across the 2 repos
+
+If you are making changes to the Design System and the W3C frontend website you need to make a branch for your work. 
+It is strongly recommended to use the same branch name on the `w3c-website-frontend` and `w3c-website-templates-bundle` repos.
+
+You also need to create a Pull Request on the `w3c-website-templates-bundle` repo for your new branch. 
+It's recommended you make this a draft PR until you are ready to get this reviewed.
+
+When you push files to your branch on `w3c-website-templates-bundle` static assets are automatically uploaded to a CDN with a URL unique to your PR ([see below](#static-assets)).
+
+See [local testing](#local-testing) for how to test changes from a local version of the `w3c-website-templates-bundle` repo.
+
+#### HTML templates
+
+HTML templates are loaded in the frontend app via Composer.
+
+Find the version name to load in Composer via https://packagist.org/packages/w3c/website-templates-bundle
+
+Update your `composer.json` to use this branch.
+
+For example, for a branch called `feature/new` the Composer version you want to load is `dev-feature/new`
+
+You can update your Composer file and the loaded package via: 
+
+```
+composer require w3c/website-templates-bundle:dev-feature/new
+```
+
+This will automatically clear the cache, which helps pick up the new templates. 
+
+#### Before you go live
+
+The live website uses the `main` branch for static assets. 
+
+Make sure you switch back to this branch in Composer before merging your changes into the `main` branch of `w3c-website-frontend`:
+
+```
+composer require w3c/website-templates-bundle:dev-main
+```
+
+#### Static assets
+
+Static assets are delivered in the frontend app via a CDN URL.
+
+Update the `ASSETS_WEBSITE_2021` setting in `.env.local` to point to the built static assets for this PR.
+
+To test static assets pushed to the GitHub branch, you can use the custom CDN URL for the pull request:
+
+```
+ASSETS_WEBSITE_2021=https://www-dev.w3.org/assets/website-2021-dev/pr-123/
+```
+
+Replace `123` with your PR number. You can find this on the [w3c/website-templates-bundle branches page](https://github.com/w3c/w3c-website-templates-bundle/branches).
+
+If you want to test if static assets have successfully uploaded to this PR URL you can test the URL: https://www-dev.w3.org/assets/website-2021-dev/pr-123/styles/core.css
+
+Which should return the core CSS file. It will return an access denied message if the file does not exist.
+
+#### CMS
+
+Finally, any CMS loaded content or assets is normally tested against the development CMS environment. 
+You can select which CMS environment your frontend app uses via `CRAFTCMS_API_URL` in your `.env.local` file. 
+
+```
+# Development CMS
+CRAFTCMS_API_URL="https://cms-dev.w3.org/api"
+```
+
+### Local testing
+
+You can test HTML templates and static assets locally. The following instructions assume you are using DDEV
+and have the `w3c-website-templates-bundle` repo cloned to `~/Sites/w3c/w3c-website-templates-bundle`
+
+The file [docker-compose.mounts.yaml](.ddev/docker-compose.mounts.yaml) mounts the local w3c-website-templates-bundle directory into the frontend Docker container at `/home/w3c-website-templates-bundle`
+
+You may need to run `ddev restart` to mount this folder.
+
+#### HTML templates
+
+Add the local repository path to your `composer.json`:
+
+```
+ddev composer config repositories.local path "/home/w3c-website-templates-bundle/"
+ddev composer update
+```
+
+This should add the following to your `composer.json` file:
+
+```json
+"repositories": {
+  "local": {
+    "type": "path",
+    "url": "/home/w3c-website-templates-bundle/"
+  }
+}
+```
+
+> [!TIP]
+> Please note this local repository configuration should only be used locally (don't commit this change to git) since it won't work on development or production.
+
+To remove this "repositories" configuration run:
+
+```shell
+ddev composer config repositories.local --unset
+ddev composer update
+```
+
+#### Static assets
+
+Update `.env.local`:
+
+```dotenv
+ASSETS_WEBSITE_2021=http://localhost:8001/dist/assets/
+```
+
+This assumes you are running the Design System locally via:
+
+```shell
+php -S localhost:8000 -t _dist
+```
+
 
 ## Installation
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
 
 More on the [Git workflow for this project](docs/git_workflow.md).
+
+### SSH setup
+To deploy the website you need to add the following to your `~/.ssh/config` file:
+
+```
+Host *.w3.internal
+ProxyJump studio24@ssh-aws.w3.org
+```
+
+You can test this works by:
+
+```
+./vendor/bin/dep ssh development
+```
 
 ### Requirements
 
@@ -111,16 +268,19 @@ symfony server:start
 
 ### DDEV
 
-To use DDEV as your local environment:
+To use DDEV:
 
 ```shell
 ddev start
+```
+
+Create your `.env.local` config file, see [configuration](#configuration), and then run:
+
+```shell
 ddev composer install
 ```
 
-[Create an .env.local config file](#configuration) as described below.
-
-To access the website on https://w3c-website-frontend.ddev.site
+You can launch the website on https://w3c-website-frontend.ddev.site via:
 
 ```shell
 ddev launch
@@ -131,9 +291,15 @@ To access other local projects from within a DDEV container, for example the CMS
 * CMS API: https://ddev-w3c-website-craft-web/api
 * Frontend: https://ddev-w3c-website-frontend-web
 
+To access the template bundle locally, use the localhost URL:
+
+* Template bundle: http://localhost:8001/
+
 ### Configuration
 
-In Symfony the `.env.local` file contains local overrides for `.env`. 
+#### .env.local
+
+In Symfony the `.env.local` file contains local overrides for `.env` and is not committed to source control.
 
 Create a local env file:
 
@@ -141,28 +307,84 @@ Create a local env file:
 touch .env.local
 ```
 
-And set:
+Studio 24 staff can create a copy of `.env.local.dist` and populate it with shared secrets from [1Password CLI](https://developer.1password.com/docs/cli/get-started#install):
+
+```
+op inject -i .env.local.dist -o .env.local
+```
+
+#### Environment variables
+
+And set the required environment variables. The example below is the recommended settings for DDEV, update these if you are using local PHP.
 
 ```dotenv
 # Application environment (dev, staging, prod)
 APP_ENV=dev
 APP_URL=https://w3c-website-frontend.ddev.site
 
+# W3C API API key
+# see https://w3c.github.io/w3c-api/
+W3C_API_KEY=""
+
 # Craft API
-CRAFTCMS_API_URL="https://ddev-w3c-website-craft-web/api"
+CRAFTCMS_API_URL="https://cms.w3.org/api"
 CRAFTCMS_API_READ_TOKEN=""
 CRAFTCMS_API_PUBLISH_TOKEN=""
 
-# Point assets to W3C CDN for local dev
+# W3C design system
 ASSETS_WEBSITE_2021=https://www.w3.org/assets/website-2021/
 ```
 
+#### W3C API
+
+Set the W3C API key
+
+#### Craft API 
+
 Set the Craft API URL to the Craft instance you want to read in content for your local development site.
-You can set this to production if you want to test how the local dev site will work with live content (we recommend only setting the API READ token on production).
+You can set this to production if you want to test how the local dev site will work with live content (we recommend only setting the API_READ token when using the production API).
+
+Production CMS:
+
+```
+CRAFTCMS_API_URL="https://cms.w3.org/api"
+```
+
+Development CMS:
+
+```
+CRAFTCMS_API_URL="https://cms-dev.w3.org/api"
+```
+
+Local CMS:
+
+```
+CRAFTCMS_API_URL="https://ddev-w3c-website-craft-web/api"
+```
 
 You can find your API Read and Publish tokens by going to the Craft CMS dashboard (see the [Craft repo](https://github.com/w3c/w3c-website-craft)).
 
-You can check what env files are being loaded in your environment by running:
+#### Website assets
+
+The website assets are now loaded from a CDN, we recommend using production assets unless you are working on front-end changes.
+
+Production assets:
+
+```
+ASSETS_WEBSITE_2021=https://www.w3.org/assets/website-2021/
+```
+
+Local front-end assets: 
+
+```
+ASSETS_WEBSITE_2021=http://localhost:8001/dist/assets/
+```
+
+See [testing development work](#testing-development-work) for instructions on how to test a branch in the design system on the frontend website.
+
+#### Testing
+
+You can check what environment variables are being loaded by running:
 
 ```shell
 php bin/console debug:dotenv
@@ -180,6 +402,12 @@ bin/console cache:clear
 
 ## DDEV
 ddev console cache:clear
+```
+
+If this fails to run you can manually clear cache files via:
+
+```shell
+rm -rf var/cache/*
 ```
 
 ## Built with
