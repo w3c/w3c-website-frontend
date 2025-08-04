@@ -166,6 +166,8 @@ and have the `w3c-website-templates-bundle` repo cloned to `~/Sites/w3c/w3c-webs
 
 The file [docker-compose.mounts.yaml](.ddev/docker-compose.mounts.yaml) mounts the local w3c-website-templates-bundle directory into the frontend Docker container at `/home/w3c-website-templates-bundle`
 
+The file [.symlink__design_system_assets](.ddev/homeadditions/.symlink__design_system_assets) symlinks `public/dist/assets` to the local w3c-website-templates-bundle directory.  
+
 You may need to run `ddev restart` to mount this folder.
 
 #### HTML templates
@@ -188,6 +190,8 @@ This should add the following to your `composer.json` file:
 }
 ```
 
+This will point the HTML templates at your local `w3c-website-templates-bundle` files.
+
 > [!TIP]
 > Please note this local repository configuration should only be used locally (don't commit this change to git) since it won't work on development or production.
 
@@ -203,15 +207,10 @@ ddev composer update
 Update `.env.local`:
 
 ```dotenv
-ASSETS_WEBSITE_2021=http://localhost:8001/dist/assets/
+ASSETS_WEBSITE_2021=https://w3c-website-frontend.ddev.site/dist/assets/
 ```
 
-This assumes you are running the Design System locally via:
-
-```shell
-php -S localhost:8000 -t _dist
-```
-
+This will point the static assets at your local `w3c-website-templates-bundle` files.
 
 ## Installation
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
@@ -374,13 +373,21 @@ Production assets:
 ASSETS_WEBSITE_2021=https://www.w3.org/assets/website-2021/
 ```
 
-Local front-end assets: 
+Testing assets via a Pull Request:
 
 ```
-ASSETS_WEBSITE_2021=http://localhost:8001/dist/assets/
+ASSETS_WEBSITE_2021=https://www-dev.w3.org/assets/website-2021-dev/pr-123/
 ```
 
 See [testing development work](#testing-development-work) for instructions on how to test a branch in the design system on the frontend website.
+
+Local front-end assets: 
+
+```
+ASSETS_WEBSITE_2021=https://w3c-website-frontend.ddev.site/dist/assets/
+```
+
+See [local testing](#local-testing) for more information on how to test changes to the design system locally.
 
 #### Testing
 
