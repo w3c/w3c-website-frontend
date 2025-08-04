@@ -1,2 +1,0 @@
-mkdir -p /var/www/html/public/dist
-ln -s /home/w3c-website-templates-bundle/public/dist/assets /var/www/html/public/dist/assets
