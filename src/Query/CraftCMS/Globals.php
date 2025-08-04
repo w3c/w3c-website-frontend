@@ -61,10 +61,12 @@ class Globals extends GraphQLQuery
      *
      * @return array
      */
+
+    // @TODO: Currently returns null
     public function getMapping(): MappingStrategyInterface|array
     {
         return [
-            '[testVariable]' => '[socialMedia]'
+            '[socialMedia]' => '[socialMedia]'
         ];
     }
 }
