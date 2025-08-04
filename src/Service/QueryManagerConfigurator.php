@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Service;
 
 use App\Query\CraftCMS\GlobalNavigation;
+use App\Query\CraftCMS\Globals;
 use App\Query\CraftCMS\SinglesBreadcrumbs;
 use Psr\Cache\CacheItemPoolInterface;
 use Psr\EventDispatcher\EventDispatcherInterface;
@@ -96,6 +97,9 @@ class QueryManagerConfigurator
 
         // Add global navigation
         $manager->add('navigation', new GlobalNavigation($this->router, $this->urlHelper, $this->site->siteHandle));
+
+        // Add globals
+        $manager->add('globals', new Globals($this->router, $this->urlHelper, $this->site->siteHandle));
 
         // Add breadcrumbs for Craft singles
         $manager->add('singles-breadcrumbs', new SinglesBreadcrumbs($this->router, $this->site->siteHandle));

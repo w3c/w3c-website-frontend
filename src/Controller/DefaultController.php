@@ -48,6 +48,8 @@ class DefaultController extends AbstractController
             'title'             => 'Debug page',
             'navigation'        => $manager->getCollection('navigation'),
             'navigation_cached' => $manager->isHit('navigation'),
+            'globals'           => $manager->getCollection('globals'),
+            'globals_cached' => $manager->isHit('globals'),
             'w3c_available'     => $manager->getQuery('w3c_healthcheck')->isHealthy(),
             'page'              => $manager->get('page'),
             'page_cached'       => $manager->isHit('page'),
@@ -81,6 +83,7 @@ class DefaultController extends AbstractController
         $manager->add('members', new Members());
 
         $navigation = $manager->getCollection('navigation');
+        $globals    = $manager->getCollection('globals');
 
         $page    = $manager->get('page');
         $recentActivities = $manager->getCollection('recent-activities');
@@ -105,6 +108,7 @@ class DefaultController extends AbstractController
             dump($page);
             dump($recentActivities);
             dump($members);
+            dump($globals);
         }
 
         // @todo this should not be hard-coded
@@ -112,7 +116,7 @@ class DefaultController extends AbstractController
 
         $response = $this->render(
             'pages/home.html.twig',
-            ['page' => $page, 'members' => $members, 'navigation' => $navigation]
+            ['page' => $page, 'members' => $members, 'navigation' => $navigation, 'globals' => $globals]
         );
         
         return $response;
@@ -148,6 +152,8 @@ class DefaultController extends AbstractController
 
         $navigation = $manager->getCollection('navigation');
 
+        $globals    = $manager->getCollection('globals');
+
         $manager->add('crosslinks', new YouMayAlsoLikeRelatedEntries($router, $site->siteHandle, (int)$page['id']));
         $crosslinks = $manager->get('crosslinks');
 
@@ -155,6 +161,7 @@ class DefaultController extends AbstractController
         $twig_variables = array(
           'navigation' => $navigation,
             'page' => $page,
+            'globals' => $globals,
             'crosslinks' => $crosslinks
         );
 
@@ -170,6 +177,7 @@ class DefaultController extends AbstractController
         return $this->render($template, [
             'site'          => $site,
             'navigation'    => $navigation,
+            'globals'       => $globals,
             'page'          => $page,
             'crosslinks'    => $crosslinks,
             'related_links' => array_key_exists('siblings', $page) ? $page['siblings'] : null

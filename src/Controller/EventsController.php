@@ -230,6 +230,7 @@ class EventsController extends AbstractController
         return $this->render('events/show.html.twig', [
             'site'          => $site,
             'navigation'    => $manager->getCollection('navigation'),
+            'globals'    => $manager->getCollection('globals'),
             'page'          => $page,
             'year'          => $year,
             'slug'          => $slug,
@@ -370,6 +371,7 @@ class EventsController extends AbstractController
         return $this->render('events/index.html.twig', [
             'site'          => $site,
             'navigation'    => $manager->getCollection('navigation'),
+            'globals'       => $manager->getCollection('globals'),
             'page'          => $page,
             'type_slug'     => $type,
             'category_slug' => $categorySlug,

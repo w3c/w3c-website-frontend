@@ -1,0 +1,12 @@
+query Globals($site:[String]) {
+  globalSet(site: $site) {
+    ... on footerSocials_GlobalSet {
+      socialMedia {
+      	... on socialMediaItem_Entry {
+          title
+          urlLink
+        }
+      }
+    }
+  }
+}
