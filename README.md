@@ -165,9 +165,7 @@ You can test HTML templates and static assets locally. The following instruction
 and have the `w3c-website-templates-bundle` repo cloned to `~/Sites/w3c/w3c-website-templates-bundle`
 
 The file [docker-compose.mounts.yaml](.ddev/docker-compose.mounts.yaml) mounts the local w3c-website-templates-bundle directory into the frontend Docker container at `/home/w3c-website-templates-bundle`
-
-The file [.symlink__design_system_assets](.ddev/homeadditions/.symlink__design_system_assets) symlinks `public/dist/assets` to the local w3c-website-templates-bundle directory.  
-
+ 
 You may need to run `ddev restart` to mount this folder.
 
 #### HTML templates
@@ -204,10 +202,17 @@ ddev composer update
 
 #### Static assets
 
+Create a symlink from `public/assets` to your local `w3c-website-templates-bundle` files.
+
+```php
+ddev ssh
+ln -s /home/w3c-website-templates-bundle/public/dist/assets /var/www/html/public/assets
+```
+
 Update `.env.local`:
 
 ```dotenv
-ASSETS_WEBSITE_2021=https://w3c-website-frontend.ddev.site/dist/assets/
+ASSETS_WEBSITE_2021=https://w3c-website-frontend.ddev.site/assets/
 ```
 
 This will point the static assets at your local `w3c-website-templates-bundle` files.
