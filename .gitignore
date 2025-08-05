@@ -48,4 +48,5 @@ test-cache-clear.php
 # Gets ignored so it doesn't go on the dev server on deployment
 config/packages/dev/http_client.yaml
 
-public/dist/*
+# Ignore design system assets symlink
+public/assets
