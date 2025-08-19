@@ -1,7 +1,7 @@
 {% if component.typeHandle == 'textComponent' %}
     {% embed '@W3CWebsiteTemplates/components/text.html.twig' %}
         {% block text %}
-            {{ component.contentField | i_to_em | raw }}
+            {{ component.contentField | i_to_em | formatTable | raw }}
         {% endblock %}
     {% endembed %}
 {% elseif component.typeHandle == 'blockquoteComponent' %}
