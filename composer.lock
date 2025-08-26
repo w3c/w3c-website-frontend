@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "6bb387355fd2681205230d99d843af3a",
+    "content-hash": "6d60850f0c680c03653cf56b6369dd04",
     "packages": [
         {
             "name": "brick/math",
@@ -9106,16 +9106,16 @@
         },
         {
             "name": "w3c/website-templates-bundle",
-            "version": "dev-feature/logo-hero-video",
+            "version": "dev-development",
             "source": {
                 "type": "git",
                 "url": "https://github.com/w3c/w3c-website-templates-bundle.git",
-                "reference": "8857d389e6cf9a7b2e837237ea121b2caecc9175"
+                "reference": "a5876f00311c94af3875818c8fac28e3a13e73d0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/w3c/w3c-website-templates-bundle/zipball/8857d389e6cf9a7b2e837237ea121b2caecc9175",
-                "reference": "8857d389e6cf9a7b2e837237ea121b2caecc9175",
+                "url": "https://api.github.com/repos/w3c/w3c-website-templates-bundle/zipball/a5876f00311c94af3875818c8fac28e3a13e73d0",
+                "reference": "a5876f00311c94af3875818c8fac28e3a13e73d0",
                 "shasum": ""
             },
             "require": {
@@ -9151,9 +9151,9 @@
             "description": "W3C Website Templates",
             "homepage": "https://github.com/w3c/w3c-website-templates-bundle",
             "support": {
-                "source": "https://github.com/w3c/w3c-website-templates-bundle/tree/feature/logo-hero-video"
+                "source": "https://github.com/w3c/w3c-website-templates-bundle/tree/development"
             },
-            "time": "2025-08-07T14:24:51+00:00"
+            "time": "2025-08-26T08:30:51+00:00"
         },
         {
             "name": "webmozart/assert",
