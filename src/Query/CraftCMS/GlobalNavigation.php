@@ -165,6 +165,8 @@ class GlobalNavigation extends GraphQLQuery
     {
         return [
             '[title]'      => '[title]',
+            '[language]'   => '[language]',
+            '[targetLinkLanguage]'   => '[targetLinkLanguage]',
             '[titleLink]' => new CallableData(
                 [$this, 'transformTitleLink'],
                 '[isTitleLinkInternal]',
@@ -175,6 +177,8 @@ class GlobalNavigation extends GraphQLQuery
             '[introLinks]' => new CallableData([$this, 'transformIntroLinks'], '[introLinks]'),
             '[children]'   => new MapArray('[children]', [
                 '[title]' => '[title]',
+                '[language]'   => '[language]',
+                '[targetLinkLanguage]'   => '[targetLinkLanguage]',
                 '[url]' => new CallableData([$this, 'transformChildLink'], '[url]', '[internalLink][0]'),
                 '[startNewColumn]' => '[startNewColumn]',
             ]),

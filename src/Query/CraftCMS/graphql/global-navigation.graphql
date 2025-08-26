@@ -2,6 +2,7 @@ query GlobalNavigation ($site: [String], $limit: Int) {
     total: entryCount(section: "mainNavigation", type: "topLevelItem", site: $site, limit: $limit)
     entries(section: "mainNavigation", type: "topLevelItem", site: $site, limit: $limit) {
         title
+        language
         ... on topLevelItem_Entry {
             isTitleLinkInternal: mainNavigationInternalOrExternalLink
             titleInternalLink: internalLink {
@@ -10,6 +11,7 @@ query GlobalNavigation ($site: [String], $limit: Int) {
                 slug
                 year: postDate@formatDateTime(format: "Y")
             }
+            targetLinkLanguage
             titleExternalLink: urlLink
             introText: mainNavigationDropdownIntroduction
             introLinks: mainNavigationIntroductionLinks {
@@ -18,12 +20,15 @@ query GlobalNavigation ($site: [String], $limit: Int) {
             }
             children {
                 title
+                language
                 ... on externalLink_Entry {
                     url: urlLink
                     startNewColumn
+                  	targetLinkLanguage
                 }
                 ... on internalLink_Entry {
                     startNewColumn
+                    targetLinkLanguage
                     internalLink {
                         sectionHandle
                         uri
