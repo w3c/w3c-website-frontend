@@ -194,7 +194,7 @@ class NewsController extends AbstractController
             'parent' => [
                 'title'  => $year,
                 'url'    => $this->generateUrl('app_news_archive', ['year' => $year]),
-                'parent' => [
+                'parent' => empty($singlesBreadcrumbs['news']) ? null : [
                     'title'  => $singlesBreadcrumbs['news']['title'],
                     'url'    => $singlesBreadcrumbs['news']['url'],
                     'parent' => $singlesBreadcrumbs['homepage']

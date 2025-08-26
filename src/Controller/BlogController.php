@@ -484,7 +484,7 @@ class BlogController extends AbstractController
             'parent' => [
                 'title'  => $year,
                 'url'    => $this->generateUrl('app_blog_archive', ['year' => $year]),
-                'parent' => [
+                'parent' => empty($singlesBreadcrumbs['blog']) ? null : [
                     'title'  => $singlesBreadcrumbs['blog']['title'],
                     'url'    => $singlesBreadcrumbs['blog']['url'],
                     'parent' => $singlesBreadcrumbs['homepage']
