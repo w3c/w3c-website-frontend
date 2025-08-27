@@ -61,6 +61,11 @@ E.g.
 ./vendor/bin/dep deploy development --branch=feature/my-branch-name
 ```
 
+
+### Note on development deployments
+
+If you're deploying work to the development server, please ensure that you have merged your work into the `development` branch first. This ensures that no work currently on development gets overwritten when a separate task is ready for review.
+
 ### SSH access
 To connect to the server directly at the correct path for an environment's current release, run the following from the root of the project
 
