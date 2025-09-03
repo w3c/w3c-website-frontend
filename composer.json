@@ -49,7 +49,7 @@
         "symfony/yaml": "7.1.*",
         "twig/extra-bundle": "^3.10",
         "twig/twig": "^3.10",
-        "w3c/website-templates-bundle": "dev-hotfix/+517-menu-target-lang"
+        "w3c/website-templates-bundle": "dev-main"
     },
     "require-dev": {
         "overtrue/phplint": "^9.4",
