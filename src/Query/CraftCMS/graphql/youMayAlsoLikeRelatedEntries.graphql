@@ -21,6 +21,27 @@ query YouMayAlsoLike($id: [QueryArgument], $site: [String]) {
                 ...youMayAlsoLikeRelatedEntries
             }
         }
+        ... on newsArticles_default_Entry {
+            youMayAlsoLikeTitle
+            youMayAlsoLikeSectionIntroduction
+            youMayAlsoLikeRelatedEntries {
+                ...youMayAlsoLikeRelatedEntries
+            }
+        }
+        ... on pressReleases_default_Entry {
+            youMayAlsoLikeTitle
+            youMayAlsoLikeSectionIntroduction
+            youMayAlsoLikeRelatedEntries {
+                ...youMayAlsoLikeRelatedEntries
+            }
+        }
+        ... on ecosystemsLandingPage_Entry {
+            youMayAlsoLikeTitle
+            youMayAlsoLikeSectionIntroduction
+            youMayAlsoLikeRelatedEntries {
+                ...youMayAlsoLikeRelatedEntries
+            }
+        }
     }
 }
 
