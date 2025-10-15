@@ -97,8 +97,9 @@ class YouMayAlsoLikeRelatedEntries extends GraphQLQuery
                 return $this->router->generate('app_ecosystem_show', ['slug' => $entry['slug']]);
             case 'events':
                 switch ($entry['typeHandle']) {
-                    case 'default':
+                    case 'events_default':
                         return $this->router->generate('app_events_show', [
+                            'type' => $entry['eventType'][0]['slug'],
                             'year' => $entry['year'],
                             'slug' => $entry['slug']
                         ]);
