@@ -34,6 +34,11 @@ blog:
 components:
     groups_list:
         title: 活跃组
+events:
+    archive:
+        title: W3C archived events
+        browse: Browse archives
+        label: Event archive
 error404:
     title: 页面丢失
     message: <p>很抱歉，您试图访问的页面并不存在。您可以参考下面的步骤来寻找您访问的页面：</p><ul><li>如果您是手动输入的 URL 网址,请您确认一下网址是否正确。</li><li>如果您在寻找某一特定主题的信息，请在<a href="/">W3C 主页上开始检索</a>。</li><li>请尝试用本页面顶端的搜索图标来搜寻网站。</li></ul>
