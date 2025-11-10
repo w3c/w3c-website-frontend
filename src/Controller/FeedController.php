@@ -541,7 +541,7 @@ class FeedController extends AbstractController
         $title,
         string $feedUrl,
         string $description,
-        string $pageUrl = null
+        ?string $pageUrl = null
     ): Response {
         $commentCounts = $this->getBlogCommentCounts($entries, $manager);
 

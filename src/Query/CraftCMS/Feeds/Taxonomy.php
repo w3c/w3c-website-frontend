@@ -21,9 +21,9 @@ class Taxonomy extends GraphQLQuery
     public function __construct(
         string $siteHandle,
         int $limit,
-        int $category = null,
-        int $ecosystem = null,
-        int $group = null
+        ?int $category = null,
+        ?int $ecosystem = null,
+        ?int $group = null
     ) {
         $this->setGraphQLFromFile(__DIR__ . '/../graphql/feeds/taxonomy.graphql')
              ->addFragmentFromFile(__DIR__ . '/../graphql/fragments/defaultFlexibleComponents.graphql')

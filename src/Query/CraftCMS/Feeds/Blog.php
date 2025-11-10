@@ -22,8 +22,8 @@ class Blog extends GraphQLQuery
     public function __construct(
         string $siteHandle,
         int $limit,
-        int $category = null,
-        int $tag = null
+        ?int $category = null,
+        ?int $tag = null
     ) {
         $this->setGraphQLFromFile(__DIR__ . '/../graphql/feeds/blog.graphql')
             ->addFragmentFromFile(__DIR__ . '/../graphql/fragments/defaultFlexibleComponents.graphql')

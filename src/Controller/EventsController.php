@@ -53,7 +53,7 @@ class EventsController extends AbstractController
         Request $request,
         RouterInterface $router,
         TranslatorInterface $translator,
-        string $type = null
+        ?string $type = null
     ): Response {
         // remove empty parameters
         $params = array_filter($request->query->all(), function ($value) {
@@ -92,7 +92,7 @@ class EventsController extends AbstractController
         Request $request,
         RouterInterface $router,
         TranslatorInterface $translator,
-        string $type = null
+        ?string $type = null
     ): Response {
         // remove empty parameters
         $params = array_merge(
