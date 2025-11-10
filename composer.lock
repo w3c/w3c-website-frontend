@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "6cf0ffcd545877001e8e6804278b6a62",
+    "content-hash": "1c269fb8b2d45ca0608fc09dde8da03d",
     "packages": [
         {
             "name": "brick/math",
@@ -189,16 +189,16 @@
         },
         {
             "name": "composer/package-versions-deprecated",
-            "version": "1.11.99.5",
+            "version": "1.11.99.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/composer/package-versions-deprecated.git",
-                "reference": "b4f54f74ef3453349c24a845d22392cd31e65f1d"
+                "reference": "7413f0b55a051e89485c5cb9f765fe24bb02a7b6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/composer/package-versions-deprecated/zipball/b4f54f74ef3453349c24a845d22392cd31e65f1d",
-                "reference": "b4f54f74ef3453349c24a845d22392cd31e65f1d",
+                "url": "https://api.github.com/repos/composer/package-versions-deprecated/zipball/7413f0b55a051e89485c5cb9f765fe24bb02a7b6",
+                "reference": "7413f0b55a051e89485c5cb9f765fe24bb02a7b6",
                 "shasum": ""
             },
             "require": {
@@ -242,7 +242,7 @@
             "description": "Composer plugin that provides efficient querying for installed package versions (no runtime IO)",
             "support": {
                 "issues": "https://github.com/composer/package-versions-deprecated/issues",
-                "source": "https://github.com/composer/package-versions-deprecated/tree/1.11.99.5"
+                "source": "https://github.com/composer/package-versions-deprecated/tree/1.11.99.1"
             },
             "funding": [
                 {
@@ -258,7 +258,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2022-01-17T14:14:24+00:00"
+            "time": "2020-11-11T10:22:58+00:00"
         },
         {
             "name": "dflydev/dot-access-data",
@@ -765,28 +765,28 @@
         },
         {
             "name": "exercise/htmlpurifier-bundle",
-            "version": "5.2",
+            "version": "5.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Exercise/HTMLPurifierBundle.git",
-                "reference": "d7cb1c8c8d30ac820ec3504df769485f93abf66a"
+                "reference": "a5399a26512e66bb8ccedc3278f34258ae05eabd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Exercise/HTMLPurifierBundle/zipball/d7cb1c8c8d30ac820ec3504df769485f93abf66a",
-                "reference": "d7cb1c8c8d30ac820ec3504df769485f93abf66a",
+                "url": "https://api.github.com/repos/Exercise/HTMLPurifierBundle/zipball/a5399a26512e66bb8ccedc3278f34258ae05eabd",
+                "reference": "a5399a26512e66bb8ccedc3278f34258ae05eabd",
                 "shasum": ""
             },
             "require": {
                 "ezyang/htmlpurifier": "~4.14",
                 "php": "^8.1",
-                "symfony/config": "^5.4 || ^6.0 || ^7.0 || ^8.0",
-                "symfony/dependency-injection": "^5.4 || ^6.0 || ^7.0 || ^8.0",
-                "symfony/http-kernel": "^5.4 || ^6.0 || ^7.0 || ^8.0"
+                "symfony/config": "^5.4 || ^6.0 || ^7.0",
+                "symfony/dependency-injection": "^5.4 || ^6.0 || ^7.0",
+                "symfony/http-kernel": "^5.4 || ^6.0 || ^7.0"
             },
             "require-dev": {
-                "symfony/form": "^5.4 || ^6.0 || ^7.0 || ^8.0",
-                "symfony/phpunit-bridge": "^7.3",
+                "symfony/form": "^5.4 || ^6.0 || ^7.0",
+                "symfony/phpunit-bridge": "^7.0.1",
                 "twig/twig": "^2.4.4 || ^3.0"
             },
             "type": "symfony-bundle",
@@ -820,9 +820,9 @@
             ],
             "support": {
                 "issues": "https://github.com/Exercise/HTMLPurifierBundle/issues",
-                "source": "https://github.com/Exercise/HTMLPurifierBundle/tree/5.2"
+                "source": "https://github.com/Exercise/HTMLPurifierBundle/tree/5.1"
             },
-            "time": "2025-11-10T09:59:18+00:00"
+            "time": "2025-06-04T09:23:15+00:00"
         },
         {
             "name": "ezyang/htmlpurifier",
@@ -7359,16 +7359,16 @@
         },
         {
             "name": "symfony/proxy-manager-bridge",
-            "version": "v6.4.28",
+            "version": "v6.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/proxy-manager-bridge.git",
-                "reference": "9ecac7f98ad685d474394dbd06dab29bab4e18a6"
+                "reference": "801c4590eacf0dc40d73135dbe79ad71effd6d04"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/proxy-manager-bridge/zipball/9ecac7f98ad685d474394dbd06dab29bab4e18a6",
-                "reference": "9ecac7f98ad685d474394dbd06dab29bab4e18a6",
+                "url": "https://api.github.com/repos/symfony/proxy-manager-bridge/zipball/801c4590eacf0dc40d73135dbe79ad71effd6d04",
+                "reference": "801c4590eacf0dc40d73135dbe79ad71effd6d04",
                 "shasum": ""
             },
             "require": {
@@ -7406,7 +7406,7 @@
             "description": "Provides integration for ProxyManager with various Symfony components",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/proxy-manager-bridge/tree/v6.4.28"
+                "source": "https://github.com/symfony/proxy-manager-bridge/tree/v6.4.0"
             },
             "funding": [
                 {
@@ -7418,15 +7418,11 @@
                     "type": "github"
                 },
                 {
-                    "url": "https://github.com/nicolas-grekas",
-                    "type": "github"
-                },
-                {
                     "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-11-02T18:11:54+00:00"
+            "time": "2023-11-01T12:07:38+00:00"
         },
         {
             "name": "symfony/routing",
@@ -10033,15 +10029,15 @@
         },
         {
             "name": "phpstan/phpstan",
-            "version": "2.1.31",
+            "version": "1.12.32",
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/ead89849d879fe203ce9292c6ef5e7e76f867b96",
-                "reference": "ead89849d879fe203ce9292c6ef5e7e76f867b96",
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/2770dcdf5078d0b0d53f94317e06affe88419aa8",
+                "reference": "2770dcdf5078d0b0d53f94317e06affe88419aa8",
                 "shasum": ""
             },
             "require": {
-                "php": "^7.4|^8.0"
+                "php": "^7.2|^8.0"
             },
             "conflict": {
                 "phpstan/phpstan-shim": "*"
@@ -10082,7 +10078,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-10-10T14:14:11+00:00"
+            "time": "2025-09-30T10:16:31+00:00"
         },
         {
             "name": "phpunit/php-code-coverage",
@@ -10530,21 +10526,21 @@
         },
         {
             "name": "rector/rector",
-            "version": "2.2.7",
+            "version": "1.2.10",
             "source": {
                 "type": "git",
                 "url": "https://github.com/rectorphp/rector.git",
-                "reference": "022038537838bc8a4e526af86c2d6e38eaeff7ef"
+                "reference": "40f9cf38c05296bd32f444121336a521a293fa61"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/rectorphp/rector/zipball/022038537838bc8a4e526af86c2d6e38eaeff7ef",
-                "reference": "022038537838bc8a4e526af86c2d6e38eaeff7ef",
+                "url": "https://api.github.com/repos/rectorphp/rector/zipball/40f9cf38c05296bd32f444121336a521a293fa61",
+                "reference": "40f9cf38c05296bd32f444121336a521a293fa61",
                 "shasum": ""
             },
             "require": {
-                "php": "^7.4|^8.0",
-                "phpstan/phpstan": "^2.1.26"
+                "php": "^7.2|^8.0",
+                "phpstan/phpstan": "^1.12.5"
             },
             "conflict": {
                 "rector/rector-doctrine": "*",
@@ -10569,7 +10565,6 @@
                 "MIT"
             ],
             "description": "Instant Upgrade and Automated Refactoring of any PHP code",
-            "homepage": "https://getrector.com/",
             "keywords": [
                 "automation",
                 "dev",
@@ -10578,7 +10573,7 @@
             ],
             "support": {
                 "issues": "https://github.com/rectorphp/rector/issues",
-                "source": "https://github.com/rectorphp/rector/tree/2.2.7"
+                "source": "https://github.com/rectorphp/rector/tree/1.2.10"
             },
             "funding": [
                 {
@@ -10586,7 +10581,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-10-29T15:46:12+00:00"
+            "time": "2024-11-08T13:59:10+00:00"
         },
         {
             "name": "roave/security-advisories",
@@ -12567,26 +12562,26 @@
         },
         {
             "name": "squizlabs/php_codesniffer",
-            "version": "4.0.1",
+            "version": "3.13.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/PHPCSStandards/PHP_CodeSniffer.git",
-                "reference": "0525c73950de35ded110cffafb9892946d7771b5"
+                "reference": "0ca86845ce43291e8f5692c7356fccf3bcf02bf4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PHPCSStandards/PHP_CodeSniffer/zipball/0525c73950de35ded110cffafb9892946d7771b5",
-                "reference": "0525c73950de35ded110cffafb9892946d7771b5",
+                "url": "https://api.github.com/repos/PHPCSStandards/PHP_CodeSniffer/zipball/0ca86845ce43291e8f5692c7356fccf3bcf02bf4",
+                "reference": "0ca86845ce43291e8f5692c7356fccf3bcf02bf4",
                 "shasum": ""
             },
             "require": {
                 "ext-simplexml": "*",
                 "ext-tokenizer": "*",
                 "ext-xmlwriter": "*",
-                "php": ">=7.2.0"
+                "php": ">=5.4.0"
             },
             "require-dev": {
-                "phpunit/phpunit": "^8.4.0 || ^9.3.4 || ^10.5.32 || 11.3.3 - 11.5.28 || ^11.5.31"
+                "phpunit/phpunit": "^4.0 || ^5.0 || ^6.0 || ^7.0 || ^8.0 || ^9.3.4"
             },
             "bin": [
                 "bin/phpcbf",
@@ -12611,7 +12606,7 @@
                     "homepage": "https://github.com/PHPCSStandards/PHP_CodeSniffer/graphs/contributors"
                 }
             ],
-            "description": "PHP_CodeSniffer tokenizes PHP files and detects violations of a defined set of coding standards.",
+            "description": "PHP_CodeSniffer tokenizes PHP, JavaScript and CSS files and detects violations of a defined set of coding standards.",
             "homepage": "https://github.com/PHPCSStandards/PHP_CodeSniffer",
             "keywords": [
                 "phpcs",
@@ -12642,7 +12637,7 @@
                     "type": "thanks_dev"
                 }
             ],
-            "time": "2025-11-10T16:43:36+00:00"
+            "time": "2025-11-04T16:30:35+00:00"
         },
         {
             "name": "staabm/side-effects-detector",
