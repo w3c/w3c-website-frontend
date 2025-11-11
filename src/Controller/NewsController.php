@@ -82,7 +82,6 @@ class NewsController extends AbstractController
 
         return $this->render('news/index.html.twig', [
             'site'       => $site,
-            'navigation' => $manager->getCollection('navigation'),
             'page'       => $page,
             'entries'    => $collection,
             'pagination' => $collection->getPagination(),
@@ -132,7 +131,7 @@ class NewsController extends AbstractController
                 $currentPage
             )
         );
-        
+
         [$page, $collection, $archives] = $this->buildListing($manager, $site, $router, $translator);
         $singlesBreadcrumbs  = $manager->get('singles-breadcrumbs');
         $page['breadcrumbs'] = [
@@ -150,7 +149,6 @@ class NewsController extends AbstractController
 
         return $this->render('news/index.html.twig', [
             'site'       => $site,
-            'navigation' => $manager->getCollection('navigation'),
             'page'       => $page,
             'entries'    => $collection,
             'pagination' => $collection->getPagination(),
@@ -215,7 +213,6 @@ class NewsController extends AbstractController
         // @todo use news article template
         return $this->render('news/show.html.twig', [
             'site'       => $site,
-            'navigation' => $manager->getCollection('navigation'),
             'page'       => $page,
             'crosslinks' => $crosslinks,
         ]);

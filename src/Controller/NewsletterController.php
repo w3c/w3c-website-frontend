@@ -79,7 +79,6 @@ class NewsletterController extends AbstractController
 
         return $this->render('newsletters/index.html.twig', [
             'site'       => $site,
-            'navigation' => $manager->getCollection('navigation'),
             'page'       => $page,
             'entries'    => $collection,
             'pagination' => $collection->getPagination(),
