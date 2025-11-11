@@ -46,14 +46,18 @@ class EventsController extends AbstractController
      * @throws QueryManagerException
      */
     #[Route(path: '/')]
-    #[Route(path: '/{type}/', name: 'app_events_index_type', requirements: ['type' => 'ac|conferences|happenings|talks|tpac|workshops'])]
+    #[Route(
+        path: '/{type}/',
+        name: 'app_events_index_type',
+        requirements: ['type' => 'ac|conferences|happenings|talks|tpac|workshops']
+    )]
     public function index(
         QueryManager $manager,
         Site $site,
         Request $request,
         RouterInterface $router,
         TranslatorInterface $translator,
-        string $type = null
+        ?string $type = null
     ): Response {
         // remove empty parameters
         $params = array_filter($request->query->all(), function ($value) {
@@ -84,7 +88,11 @@ class EventsController extends AbstractController
      * @throws QueryManagerException
      */
     #[Route(path: '/{year}/', requirements: ['year' => '\d\d\d\d'])]
-    #[Route(path: '/{type}/{year}/', name: 'app_events_archive_type', requirements: ['type' => 'ac|conferences|happenings|talks|tpac|workshops', 'year' => '\d\d\d\d'])]
+    #[Route(
+        path: '/{type}/{year}/',
+        name: 'app_events_archive_type',
+        requirements: ['type' => 'ac|conferences|happenings|talks|tpac|workshops', 'year' => '\d\d\d\d']
+    )]
     public function archive(
         int $year,
         QueryManager $manager,
@@ -92,7 +100,7 @@ class EventsController extends AbstractController
         Request $request,
         RouterInterface $router,
         TranslatorInterface $translator,
-        string $type = null
+        ?string $type = null
     ): Response {
         // remove empty parameters
         $params = array_merge(
@@ -126,7 +134,10 @@ class EventsController extends AbstractController
      * @throws QueryManagerException
      * @throws Exception
      */
-    #[Route(path: '/{type}/{year}/{slug}.ics', requirements: ['type' => 'ac|conferences|happenings|talks|tpac|workshops', 'year' => '\d\d\d\d'])]
+    #[Route(
+        path: '/{type}/{year}/{slug}.ics',
+        requirements: ['type' => 'ac|conferences|happenings|talks|tpac|workshops', 'year' => '\d\d\d\d']
+    )]
     public function ical(
         string $type,
         int $year,
@@ -168,7 +179,10 @@ class EventsController extends AbstractController
      * @throws QueryManagerException
      * @throws Exception
      */
-    #[Route(path: '/{type}/{year}/{slug}/', requirements: ['type' => 'ac|conferences|happenings|talks|tpac|workshops', 'year' => '\d\d\d\d'])]
+    #[Route(
+        path: '/{type}/{year}/{slug}/',
+        requirements: ['type' => 'ac|conferences|happenings|talks|tpac|workshops', 'year' => '\d\d\d\d']
+    )]
     public function show(
         string $type,
         int $year,
