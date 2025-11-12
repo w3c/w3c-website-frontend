@@ -1,8 +1,8 @@
 {% extends '@!W3CWebsiteTemplates/base.html.twig' %}
 
-{% block lang_nav %}{{ lang_nav(site.locale)|raw }}{% endblock %}
+{% block lang_nav %}{{ lang_nav(site.locale|default(default_locale))|raw }}{% endblock %}
 
-{% block global_nav %}{{ global_nav(site.locale)|raw }}{% endblock %}
+{% block global_nav %}{{ global_nav(site.locale|default(default_locale))|raw }}{% endblock %}
 
 {% block closing_body_scripts %}
     <script src="{{ asset('js/translations-sorting.js', 'website-2021') }}"></script>
