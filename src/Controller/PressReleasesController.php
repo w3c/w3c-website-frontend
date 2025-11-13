@@ -80,7 +80,6 @@ class PressReleasesController extends AbstractController
 
         return $this->render('press-releases/index.html.twig', [
             'site'       => $site,
-            'navigation' => $manager->getCollection('navigation'),
             'page'       => $page,
             'entries'    => $collection,
             'pagination' => $collection->getPagination(),
@@ -144,7 +143,6 @@ class PressReleasesController extends AbstractController
 
         return $this->render('press-releases/index.html.twig', [
             'site'       => $site,
-            'navigation' => $manager->getCollection('navigation'),
             'page'       => $page,
             'entries'    => $collection,
             'pagination' => $collection->getPagination(),
@@ -209,7 +207,6 @@ class PressReleasesController extends AbstractController
 
         return $this->render('press-releases/show.html.twig', [
             'site'       => $site,
-            'navigation' => $manager->getCollection('navigation'),
             'page'       => $page,
             'crosslinks' => $crosslinks,
         ]);

@@ -151,7 +151,6 @@ class EcosystemController extends AbstractController
 
         return $this->render('ecosystems/show.html.twig', [
             'site'       => $site,
-            'navigation' => $manager->getCollection('navigation'),
             'page'       => $page,
         ]);
     }

@@ -4,25 +4,37 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
-use DateTimeImmutable;
+use App\Query\CraftCMS\GlobalNavigation;
+use Strata\Data\Exception\GraphQLQueryException;
 use Strata\Data\Exception\QueryManagerException;
 use Strata\Data\Query\QueryManager;
 use Strata\Frontend\Site;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\UrlHelper;
 use Symfony\Component\HttpKernel\Attribute\Cache;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Routing\RouterInterface;
 
 #[Route(path: '/_fragments')]
 class FragmentsController extends AbstractController
 {
     /**
      * @throws QueryManagerException
+     * @throws GraphQLQueryException
      */
     #[Cache(expires: 'tomorrow', public: true)]
     #[Route(path: '/global-nav/')]
-    public function globalNav(QueryManager $manager): Response
-    {
+    public function globalNav(
+        QueryManager $manager,
+        RouterInterface $router,
+        UrlHelper $urlHelper,
+        Site $site
+    ): Response {
+        $manager->add(
+            'navigation',
+            new GlobalNavigation($router, $urlHelper, $site->siteHandle)
+        );
         $navigation = $manager->getCollection('navigation');
 
         return $this->render(

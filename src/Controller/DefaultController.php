@@ -46,8 +46,6 @@ class DefaultController extends AbstractController
 
         $response = $this->render('debug/test.html.twig', [
             'title'             => 'Debug page',
-            'navigation'        => $manager->getCollection('navigation'),
-            'navigation_cached' => $manager->isHit('navigation'),
             'w3c_available'     => $manager->getQuery('w3c_healthcheck')->isHealthy(),
             'page'              => $manager->get('page'),
             'page_cached'       => $manager->isHit('page'),
@@ -80,8 +78,6 @@ class DefaultController extends AbstractController
         $manager->add('recent-activities', new RecentActivities($site->siteHandle, $router));
         $manager->add('members', new Members());
 
-        $navigation = $manager->getCollection('navigation');
-
         $page    = $manager->get('page');
         $recentActivities = $manager->getCollection('recent-activities');
 
@@ -112,9 +108,9 @@ class DefaultController extends AbstractController
 
         $response = $this->render(
             'pages/home.html.twig',
-            ['page' => $page, 'members' => $members, 'navigation' => $navigation]
+            ['page' => $page, 'members' => $members]
         );
-        
+
         return $response;
     }
 
@@ -146,14 +142,11 @@ class DefaultController extends AbstractController
             throw $this->createNotFoundException('Page not found');
         }
 
-        $navigation = $manager->getCollection('navigation');
-
         $manager->add('crosslinks', new YouMayAlsoLikeRelatedEntries($router, $site->siteHandle, (int)$page['id']));
         $crosslinks = $manager->get('crosslinks');
 
         //Only for testing purposes in dev
         $twig_variables = array(
-          'navigation' => $navigation,
             'page' => $page,
             'crosslinks' => $crosslinks
         );
@@ -169,7 +162,6 @@ class DefaultController extends AbstractController
 
         return $this->render($template, [
             'site'          => $site,
-            'navigation'    => $navigation,
             'page'          => $page,
             'crosslinks'    => $crosslinks,
             'related_links' => array_key_exists('siblings', $page) ? $page['siblings'] : null

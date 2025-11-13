@@ -53,7 +53,6 @@ class StaffController extends AbstractController
 
         return $this->render('staff/alumni.html.twig', [
             'site'       => $site,
-            'navigation' => $manager->getCollection('navigation'),
             'page'       => $page,
             'alumni'     => $collection,
         ]);
