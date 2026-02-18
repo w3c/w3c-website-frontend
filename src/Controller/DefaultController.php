@@ -10,6 +10,7 @@ use App\Query\CraftCMS\Page;
 use App\Query\CraftCMS\YouMayAlsoLikeRelatedEntries;
 use App\Query\W3C\Healthcheck;
 use App\Query\W3C\Home\Members;
+use Exception;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
 use Strata\Data\Cache\CacheLifetime;
 use Strata\Data\Exception\GraphQLQueryException;
@@ -89,7 +90,11 @@ class DefaultController extends AbstractController
         }
 
         // Get all members having a logo (there may be several pages)
-        $members = $manager->getCollection('members');
+        try {
+            $members = $manager->getCollection('members');
+        } catch (Exception $e) {
+            $members = [];
+        }
         $memberPagination = $members->getPagination();
         $members = $members->getCollection();
         for ($i = 2; $i <= $memberPagination->getTotalPages(); $i++) {
@@ -177,7 +182,7 @@ class DefaultController extends AbstractController
      */
     #[\Symfony\Component\HttpKernel\Attribute\Cache(expires: 'tomorrow', public: true)]
     #[Route(path: '/global-nav/')]
-    public function globalNav(QueryManager $manager): \Symfony\Component\HttpFoundation\Response
+    public function globalNav(QueryManager $manager): Response
     {
         $navigation = $manager->getCollection('navigation');
 
@@ -194,7 +199,7 @@ class DefaultController extends AbstractController
      */
     #[\Symfony\Component\HttpKernel\Attribute\Cache(expires: 'tomorrow', public: true)]
     #[Route(path: '/lang-nav/')]
-    public function langNav(Site $site): \Symfony\Component\HttpFoundation\Response
+    public function langNav(Site $site): Response
     {
         return $this->render(
             '@W3CWebsiteTemplates/components/styles/lang_nav.html.twig',

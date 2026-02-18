@@ -10,6 +10,7 @@ use App\Query\W3C\Ecosystem\BizdevLead;
 use App\Query\W3C\Ecosystem\Evangelists;
 use App\Query\W3C\Ecosystem\Groups;
 use App\Query\W3C\Ecosystem\Members;
+use Exception;
 use Strata\Data\Exception\GraphQLQueryException;
 use Strata\Data\Exception\QueryManagerException;
 use Strata\Data\Query\QueryManager;
@@ -50,9 +51,21 @@ class EcosystemController extends AbstractController
 
         $recentActivities = $manager->get('recent-activities');
         $testimonials     = $manager->getCollection('testimonials');
-        $evangelists      = $manager->getCollection('evangelists');
-        $groups           = $manager->getCollection('groups');
-        $members          = $manager->getCollection('members');
+        try {
+            $evangelists = $manager->getCollection('evangelists');
+        } catch (Exception $e) {
+            $evangelists = [];
+        }
+        try {
+            $groups = $manager->getCollection('groups');
+        } catch (Exception $e) {
+            $groups = [];
+        }
+        try {
+             $members = $manager->getCollection('members');
+        } catch (Exception $e) {
+            $members = [];
+        }
 
         $order = ['working group'   => 0,
                   'interest group'  => 1,
