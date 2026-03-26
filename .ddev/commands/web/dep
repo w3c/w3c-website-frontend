@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+## Description: Run Deployer CLI commands
+## Usage: dep [flags] [args]
+## Example: "ddev dep deploy staging"
+## ExecRaw: true
+## AutocompleteTerms: ["deploy","list","rollback","q"]
+
+if ! composer show | grep deployer/deployer --quiet; then
+    echo "The dep command is only available if you install Deployer via Composer."
+else
+    ./vendor/bin/dep "$@"
+fi
