@@ -49,7 +49,7 @@
         "symfony/yaml": "7.1.*",
         "twig/extra-bundle": "^3.10",
         "twig/twig": "^3.10",
-        "w3c/website-templates-bundle": "dev-main"
+        "w3c/website-templates-bundle": "dev-feature/ckeditor-customisation"
     },
     "require-dev": {
         "overtrue/phplint": "^9.4",
@@ -123,6 +123,12 @@
         "symfony": {
             "allow-contrib": false,
             "require": "7.1.*"
+        }
+    },
+    "repositories": {
+        "local": {
+            "type": "path",
+            "url": "/home/w3c-website-templates-bundle/"
         }
     }
 }

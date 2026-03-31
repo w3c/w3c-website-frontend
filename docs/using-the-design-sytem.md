@@ -9,10 +9,14 @@ and running `composer update` in this project (w3c-website-frontend).
 
 Static assets are automatically uploaded to a CDN and you can choose where to point these to via the `ASSETS_WEBSITE_2021` setting in `.env.local`
 
+For example:
+
 ```
 # Production assets
 ASSETS_WEBSITE_2021=https://www.w3.org/assets/website-2021/
 ```
+
+You can SSH to the development or production servers via [SSH](../README.md#ssh-access).
 
 ## Testing development work
 
@@ -21,12 +25,20 @@ ASSETS_WEBSITE_2021=https://www.w3.org/assets/website-2021/
 If you are making changes to the Design System and the W3C frontend website you need to make a branch for your work.
 It is strongly recommended to use the same branch name on the `w3c-website-frontend` and `w3c-website-templates-bundle` repos.
 
-You also need to create a Pull Request on the `w3c-website-templates-bundle` repo for your new branch.
+### Create a Pull Request to test static assets
+
+When a PR is created on the `w3c-website-templates-bundle` repo this pushes static assets to a CDN with a URL unique for your PR.
+This allows you to test static assets before merging them into the `main` branch.
+
 It's recommended you make this a draft PR until you are ready to get this reviewed.
 
-When you push files to your branch on `w3c-website-templates-bundle` static assets are automatically uploaded to a CDN with a URL unique to your PR ([see below](#static-assets)).
+When a PR is opened a GitHub action automatically posts a comment to the PR with the URL to the assets published to the CDN.
 
-See [local testing](#local-testing) for how to test changes from a local version of the `w3c-website-templates-bundle` repo.
+> Assets published to https://www-dev.w3.org/assets/website-2021-dev/pr-123/ and available via Composer package `w3c/website-templates-bundle:dev-feature/branch-name`
+
+See:
+- More details on [static assets](#static-assets).
+- [Local testing](#local-testing) for how to test changes from a local version of the `w3c-website-templates-bundle` repo.
 
 ### HTML templates
 
