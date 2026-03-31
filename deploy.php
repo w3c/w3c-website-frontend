@@ -30,7 +30,7 @@ set('php_fpm_version', '8.2');
  */
 host('production')
     ->set('labels', ['stage' => 'production'])
-    ->set('hostname', 'w')
+    ->set('hostname', 'leda.w3.internal')
     ->set('deploy_path', '/var/www/frontend')
     ->set('log_files', [
         'var/log/*.log',
@@ -49,6 +49,7 @@ host('development')
         '/var/log/apache2/www.w3.org_error_ssl.log',
     ])
     ->set('url', 'https://www-dev.w3.org');
+
 
 
 /**
