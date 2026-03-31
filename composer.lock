@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "272289a55de45636974dedf21f833cda",
+    "content-hash": "108f1b6ae1174afa6f695cce8812bc74",
     "packages": [
         {
             "name": "brick/math",
@@ -9414,10 +9414,16 @@
         {
             "name": "w3c/website-templates-bundle",
             "version": "dev-feature/ckeditor-customisation",
-            "dist": {
-                "type": "path",
-                "url": "/home/w3c-website-templates-bundle",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/w3c/w3c-website-templates-bundle.git",
                 "reference": "bb0512b075acf86ffb0ebdeeff6d0b11aaa79f8b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/w3c/w3c-website-templates-bundle/zipball/bb0512b075acf86ffb0ebdeeff6d0b11aaa79f8b",
+                "reference": "bb0512b075acf86ffb0ebdeeff6d0b11aaa79f8b",
+                "shasum": ""
             },
             "require": {
                 "chrisguitarguy/request-id-bundle": "^4.2 || ^5.0 || ^6.0",
@@ -9445,14 +9451,16 @@
                     "W3C\\WebsiteTemplatesBundle\\": "src/"
                 }
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "W3C-20150513"
             ],
             "description": "W3C Website Templates",
             "homepage": "https://github.com/w3c/w3c-website-templates-bundle",
-            "transport-options": {
-                "relative": false
-            }
+            "support": {
+                "source": "https://github.com/w3c/w3c-website-templates-bundle/tree/feature/ckeditor-customisation"
+            },
+            "time": "2026-03-27T18:42:57+00:00"
         },
         {
             "name": "webmozart/assert",

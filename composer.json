@@ -124,11 +124,5 @@
             "allow-contrib": false,
             "require": "7.3.*"
         }
-    },
-    "repositories": {
-        "local": {
-            "type": "path",
-            "url": "/home/w3c-website-templates-bundle/"
-        }
     }
 }
