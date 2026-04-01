@@ -17,3 +17,19 @@ framework:
     #fragments: true
     php_errors:
         log: true
+
+    cache:
+        directory: '%kernel.project_dir%/var/storage/cache/'
+        pools:
+            filesystem_cache_pool:
+                adapter: cache.adapter.filesystem
+                tags: true
+
+    http_client:
+        scoped_clients:
+            fragments.client:
+                base_uri: '%env(APP_URL)%'
+                caching:
+                    cache_pool: filesystem_cache_pool
+                headers:
+                    User-Agent: 'W3C-Sf-Frontend-Fragments/1.0'

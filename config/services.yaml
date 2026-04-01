@@ -55,3 +55,7 @@ services:
     strata.site:
         class: Strata\Frontend\Site
         configurator: [ '@App\Service\SiteConfigurator', 'configure' ]
+
+    W3C\WebsiteTemplatesBundle\Extensions\Twig\GetFromFrontendExtension:
+        arguments:
+            $client: '@fragments.client'
