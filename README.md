@@ -25,19 +25,17 @@ This document is a summary of what you need to know when working on this project
 
 ## Site URLs
 
-Please note, W3C has a `development` environment, not staging.
-
 ### Production
 * https://www.w3.org
 
-### Development
+### Staging
 * https://www-dev.w3.org
 
-Used to test new functionality / changes. Access to development is restricted by IP address.
+Used to test new functionality / changes. Access to staging (www-dev) is restricted by IP address.
 
-### Local
-* http://localhost:8000/ (via Symfony CLI)
+### Local dev
 * https://w3c-website-frontend.ddev.site (via DDEV)
+* http://localhost:8000/ (via Symfony CLI)
 
 ## SSH access
 To connect to the server directly at the correct path for the current release, run the following from the root of the project
@@ -102,12 +100,12 @@ Host *.w3.internal
 ProxyJump studio24@ssh-aws.w3.org
 ````
 
-If you deploy via DDEV this is automatically set up for you.
+If you connect to SSH via DDEV this is automatically set up for you.
 
 You can test this works by:
 
 ```
-ddev dep ssh development
+ddev dep ssh staging
 ```
 
 The W3C team also need to ensure your SSH key is set up for the `studio24` user.
@@ -244,13 +242,13 @@ Production assets:
 ASSETS_WEBSITE_2021=https://www.w3.org/assets/website-2021/
 ```
 
-Testing assets via a Pull Request:
+Testing assets via a Pull Request (in this example PR #123):
 
 ```
 ASSETS_WEBSITE_2021=https://www-dev.w3.org/assets/website-2021-dev/pr-123/
 ```
 
-See [testing development work](#testing-development-work) for instructions on how to test a branch in the design system on the frontend website.
+See [testing development work on the design system](docs/using-the-design-sytem.md#testing-development-work) for instructions on how to test a branch in the design system on the frontend website.
 
 Local front-end assets: 
 

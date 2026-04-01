@@ -39,8 +39,8 @@ host('production')
     ])
     ->set('url', 'https://www.w3.org');
 
-host('development')
-    ->set('labels', ['stage' => 'development'])
+host('staging')
+    ->set('labels', ['stage' => 'staging'])
     ->set('hostname', 'thebe.w3.internal')
     ->set('deploy_path', '/var/www/frontend-dev')
     ->set('log_files', [
