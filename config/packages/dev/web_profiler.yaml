@@ -6,3 +6,4 @@ framework:
     profiler:
         only_exceptions: false
         collect: '%env(bool:ENABLE_DEV_PROFILER)%'
+        collect_serializer_data: true
