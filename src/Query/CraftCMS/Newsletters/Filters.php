@@ -52,7 +52,7 @@ class Filters extends GraphQLQuery
         ];
     }
 
-    public function transformArchives(string $first = null, string $last = null): array
+    public function transformArchives(?string $first = null, ?string $last = null): array
     {
         if (!$first) {
             return [];

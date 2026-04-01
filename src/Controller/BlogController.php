@@ -66,7 +66,7 @@ class BlogController extends AbstractController
             throw $this->createNotFoundException();
         }
         $search = $request->query->get('search');
-        
+
         $manager->add('page', new Listing($site->siteHandle));
         $manager->add(
             'collection',
@@ -100,7 +100,6 @@ class BlogController extends AbstractController
 
         return $this->render('blog/index.html.twig', [
             'site'       => $site,
-            'navigation' => $manager->getCollection('navigation'),
             'page'       => $page,
             'entries'    => $collection,
             'pagination' => $collection->getPagination(),
@@ -177,7 +176,6 @@ class BlogController extends AbstractController
 
         return $this->render('blog/index.html.twig', [
             'site'       => $site,
-            'navigation' => $manager->getCollection('navigation'),
             'page'       => $page,
             'entries'    => $collection,
             'pagination' => $collection->getPagination(),
@@ -274,7 +272,6 @@ class BlogController extends AbstractController
 
         return $this->render('blog/index.html.twig', [
             'site'       => $site,
-            'navigation' => $manager->getCollection('navigation'),
             'page'       => $page,
             'entries'    => $collection,
             'pagination' => $collection->getPagination(),
@@ -364,7 +361,6 @@ class BlogController extends AbstractController
 
         return $this->render('blog/index.html.twig', [
             'site'       => $site,
-            'navigation' => $manager->getCollection('navigation'),
             'page'       => $page,
             'entries'    => $collection,
             'pagination' => $collection->getPagination(),
@@ -505,7 +501,6 @@ class BlogController extends AbstractController
 
         return $this->render('blog/show.html.twig', [
             'site'          => $site,
-            'navigation'    => $manager->getCollection('navigation'),
             'page'          => $page,
             'crosslinks'    => $crosslinks,
             'comments'      => $topLevelComms,

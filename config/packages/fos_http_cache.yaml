@@ -18,5 +18,5 @@ fos_http_cache:
                 headers:
                     cache_control:
                         public: true
-                        s_maxage: 86400
+                        s_maxage: 7776000
                     etag: true

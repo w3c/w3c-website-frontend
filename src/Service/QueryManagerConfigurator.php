@@ -38,7 +38,6 @@ class QueryManagerConfigurator
     private bool $enableCache;
     private HttpClientInterface $httpClient;
     private RouterInterface $router;
-    private UrlHelper $urlHelper;
 
     public function __construct(
         W3C $w3cApi,
@@ -49,7 +48,6 @@ class QueryManagerConfigurator
         ContainerBagInterface $params,
         HttpClientInterface $httpClient,
         RouterInterface $router,
-        UrlHelper $urlHelper
     ) {
         $this->w3CApi = $w3cApi;
         $this->craftCmsApi = $craftCmsApi;
@@ -59,7 +57,6 @@ class QueryManagerConfigurator
         $this->enableCache = (bool) $params->get('app.cacheEnable');
         $this->httpClient = $httpClient;
         $this->router = $router;
-        $this->urlHelper = $urlHelper;
     }
 
     /**
@@ -81,7 +78,7 @@ class QueryManagerConfigurator
 
         // Use Sf's HTTP client
         $manager->setHttpClient($this->httpClient);
-        
+
         // Event dispatcher
         $manager->getDataProvider('craft')->setEventDispatcher($this->eventDispatcher);
 
@@ -93,9 +90,6 @@ class QueryManagerConfigurator
         }
 
         // Please note queries added here are not affected by preview mode disabling the cache
-
-        // Add global navigation
-        $manager->add('navigation', new GlobalNavigation($this->router, $this->urlHelper, $this->site->siteHandle));
 
         // Add breadcrumbs for Craft singles
         $manager->add('singles-breadcrumbs', new SinglesBreadcrumbs($this->router, $this->site->siteHandle));

@@ -99,6 +99,8 @@ class Page extends GraphQLQuery
             }
         }
 
+        usort($siblings, fn($sibling1, $sibling2) => strcmp($sibling1['title'], $sibling2['title']));
+
         return $siblings;
     }
 

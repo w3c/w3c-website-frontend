@@ -38,8 +38,8 @@ class Collection extends GraphQLQuery
     public function __construct(
         RouterInterface $router,
         string $siteHandle,
-        string $before = null,
-        string $after = null,
+        ?string $before = null,
+        ?string $after = null,
         int $limit = 10,
         int $page = 1,
         int $cacheLifetime = CacheLifetime::HOUR

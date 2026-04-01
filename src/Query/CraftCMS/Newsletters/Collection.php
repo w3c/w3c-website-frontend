@@ -39,7 +39,7 @@ class Collection extends GraphQLQuery
     public function __construct(
         RouterInterface $router,
         string $siteHandle,
-        int $year = null,
+        ?int $year = null,
         int $limit = 10,
         int $page = 1
     ) {

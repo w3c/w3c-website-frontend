@@ -21,6 +21,27 @@ query YouMayAlsoLike($id: [QueryArgument], $site: [String]) {
                 ...youMayAlsoLikeRelatedEntries
             }
         }
+        ... on newsArticles_default_Entry {
+            youMayAlsoLikeTitle
+            youMayAlsoLikeSectionIntroduction
+            youMayAlsoLikeRelatedEntries {
+                ...youMayAlsoLikeRelatedEntries
+            }
+        }
+        ... on pressReleases_default_Entry {
+            youMayAlsoLikeTitle
+            youMayAlsoLikeSectionIntroduction
+            youMayAlsoLikeRelatedEntries {
+                ...youMayAlsoLikeRelatedEntries
+            }
+        }
+        ... on ecosystemsLandingPage_Entry {
+            youMayAlsoLikeTitle
+            youMayAlsoLikeSectionIntroduction
+            youMayAlsoLikeRelatedEntries {
+                ...youMayAlsoLikeRelatedEntries
+            }
+        }
     }
 }
 
@@ -94,9 +115,20 @@ fragment youMayAlsoLikeRelatedEntries on youMayAlsoLikeRelatedEntries_MatrixFiel
                 }
                 thumbnailAltText
             }
+            ... on pressReleases_default_Entry {
+                year: postDate@formatDateTime(format: "Y")
+                text: excerpt
+                thumbnailImage {
+                    ...thumbnailImage
+                }
+                thumbnailAltText
+            }
             ... on events_default_Entry {
                 year: startDatetime@formatDateTime(format: "Y")
                 text: eventExcerpt
+                eventType {
+                    slug
+                }
                 thumbnailImage {
                     ...thumbnailImage
                 }

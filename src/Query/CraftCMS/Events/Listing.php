@@ -39,10 +39,10 @@ class Listing extends GraphQLQuery
     public function __construct(
         RouterInterface $router,
         string $siteHandle,
-        int $eventType = null,
-        int $category = null,
-        int $tag = null,
-        string $year = null,
+        ?int $eventType = null,
+        ?int $category = null,
+        ?int $tag = null,
+        ?string $year = null,
         int $limit = 10,
         int $page = 1
     ) {
