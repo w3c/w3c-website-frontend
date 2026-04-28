@@ -60,7 +60,7 @@ class ContentFromCraftTwigExtension extends AbstractExtension
             $div->setAttribute('tabindex', '0');
             $div->setAttribute('class', 'table-wrap');
 
-            // If a caption has been entered, move this out of <figcaption> (which can be removed) 
+            // If a caption has been entered, move this out of <figcaption> (which can be removed)
             // and into <caption>, which should be the first child element of <table>
             // Also set a globally-unique id on <caption>
             $figcaption = $figure->getElementsByTagName('figcaption')->item(0);
