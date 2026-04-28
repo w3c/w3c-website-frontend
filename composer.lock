@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "937e70c29f170b916ce59270028d72e2",
+    "content-hash": "c99729966edd8302246a04db3fe9a1ed",
     "packages": [
         {
             "name": "brick/math",
@@ -9418,16 +9418,16 @@
         },
         {
             "name": "w3c/website-templates-bundle",
-            "version": "dev-feature/ckeditor-customisation",
+            "version": "dev-main",
             "source": {
                 "type": "git",
                 "url": "https://github.com/w3c/w3c-website-templates-bundle.git",
-                "reference": "f16ef5836a7e5dc0763f16476c7057fe74c1469b"
+                "reference": "38d22e823fd329dd349d8d016ef6f73675589b3a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/w3c/w3c-website-templates-bundle/zipball/f16ef5836a7e5dc0763f16476c7057fe74c1469b",
-                "reference": "f16ef5836a7e5dc0763f16476c7057fe74c1469b",
+                "url": "https://api.github.com/repos/w3c/w3c-website-templates-bundle/zipball/38d22e823fd329dd349d8d016ef6f73675589b3a",
+                "reference": "38d22e823fd329dd349d8d016ef6f73675589b3a",
                 "shasum": ""
             },
             "require": {
@@ -9450,6 +9450,7 @@
                 "studio24/deployer-recipes": "^v2.1",
                 "studio24/design-system": "^2.0"
             },
+            "default-branch": true,
             "type": "symfony-bundle",
             "autoload": {
                 "psr-4": {
@@ -9463,9 +9464,9 @@
             "description": "W3C Website Templates",
             "homepage": "https://github.com/w3c/w3c-website-templates-bundle",
             "support": {
-                "source": "https://github.com/w3c/w3c-website-templates-bundle/tree/feature/ckeditor-customisation"
+                "source": "https://github.com/w3c/w3c-website-templates-bundle/tree/main"
             },
-            "time": "2026-04-02T13:19:40+00:00"
+            "time": "2026-03-25T10:32:14+00:00"
         },
         {
             "name": "webmozart/assert",
@@ -10072,11 +10073,11 @@
         },
         {
             "name": "phpstan/phpstan",
-            "version": "2.1.51",
+            "version": "2.1.52",
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/dc3b523c45e714c70de2ac5113b958223b55dc59",
-                "reference": "dc3b523c45e714c70de2ac5113b958223b55dc59",
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/08a34f8db7ca4daabff74a474fe13c0e56e2b4e5",
+                "reference": "08a34f8db7ca4daabff74a474fe13c0e56e2b4e5",
                 "shasum": ""
             },
             "require": {
@@ -10121,7 +10122,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2026-04-21T18:22:01+00:00"
+            "time": "2026-04-28T12:17:53+00:00"
         },
         {
             "name": "phpunit/php-code-coverage",

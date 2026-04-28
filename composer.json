@@ -50,7 +50,7 @@
         "symfony/yaml": "7.3.*",
         "twig/extra-bundle": "^3.22",
         "twig/twig": "^3.22",
-        "w3c/website-templates-bundle": "dev-feature/ckeditor-customisation"
+        "w3c/website-templates-bundle": "dev-main"
     },
     "require-dev": {
         "overtrue/phplint": "^9.6",
