@@ -8,6 +8,7 @@
     "require": {
         "php": "^8.2",
         "ext-ctype": "*",
+        "ext-dom": "*",
         "ext-iconv": "*",
         "ext-json": "*",
         "chrisguitarguy/request-id-bundle": "^v6.0",
