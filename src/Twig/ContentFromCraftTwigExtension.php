@@ -16,8 +16,12 @@ class ContentFromCraftTwigExtension extends AbstractExtension
         ];
     }
 
-    public function iToEm(string $text): array|string|null
+    public function iToEm(?string $text = ''): array|string|null
     {
+        if (null === $text) {
+            return '';
+        }
+
         // Replace <i> with <em>
         return preg_replace([
             '/<i>/i',
