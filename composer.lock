@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "348c0d94e6c986fc65efcfbdb09580b8",
+    "content-hash": "3879e12702d275e085374e25c262229f",
     "packages": [
         {
             "name": "brick/math",
@@ -527,64 +527,6 @@
                 }
             ],
             "time": "2025-03-06T22:45:56+00:00"
-        },
-        {
-            "name": "ekreative/health-check-bundle",
-            "version": "1.13.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/ekreative/health-check-bundle.git",
-                "reference": "ab6632064312539eb368b02515a4fc0932bc91fb"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/ekreative/health-check-bundle/zipball/ab6632064312539eb368b02515a4fc0932bc91fb",
-                "reference": "ab6632064312539eb368b02515a4fc0932bc91fb",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=8.0",
-                "symfony/framework-bundle": "^5.0|^6.0|^7.0"
-            },
-            "require-dev": {
-                "doctrine/doctrine-bundle": "^2",
-                "friendsofphp/php-cs-fixer": "^3.0",
-                "phpunit/phpunit": "^11",
-                "symfony/browser-kit": "^5.0|^6.0|^7.0",
-                "symfony/monolog-bundle": "^3.0|^4.0",
-                "symfony/phpunit-bridge": "^5.0|^6.0|^7.0",
-                "symfony/yaml": "^5.0|^6.0|^7.0"
-            },
-            "suggest": {
-                "ext-redis": "To use the Redis health check"
-            },
-            "type": "symfony-bundle",
-            "autoload": {
-                "psr-4": {
-                    "Ekreative\\HealthCheckBundle\\": "src/Ekreative/HealthCheckBundle/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Fred Cox",
-                    "email": "mcfedr@gmail.com"
-                }
-            ],
-            "description": "A bundle that provides a simple /healthcheck route",
-            "keywords": [
-                "doctrine",
-                "healthcheck",
-                "redis"
-            ],
-            "support": {
-                "issues": "https://github.com/ekreative/health-check-bundle/issues",
-                "source": "https://github.com/ekreative/health-check-bundle/tree/1.13.0"
-            },
-            "time": "2024-08-06T10:41:24+00:00"
         },
         {
             "name": "erusev/parsedown",
@@ -1615,6 +1557,88 @@
                 }
             ],
             "time": "2022-12-11T20:36:23+00:00"
+        },
+        {
+            "name": "macpaw/symfony-health-check-bundle",
+            "version": "v2.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/MacPaw/symfony-health-check-bundle.git",
+                "reference": "01f27b1ecbf4cb926c780824647a000d63bae07f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/MacPaw/symfony-health-check-bundle/zipball/01f27b1ecbf4cb926c780824647a000d63bae07f",
+                "reference": "01f27b1ecbf4cb926c780824647a000d63bae07f",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^8.1",
+                "symfony/framework-bundle": "^6.4 || ^7.4 || ^8.0"
+            },
+            "require-dev": {
+                "doctrine/mongodb-odm-bundle": "^4.4 || ^5.0",
+                "doctrine/orm": "^2.0 || ^3.0",
+                "ext-redis": "*",
+                "ext-relay": "*",
+                "phpstan/phpstan": "^2.1",
+                "phpunit/phpunit": "^10.5",
+                "predis/predis": "^2.2 || ^3.3",
+                "squizlabs/php_codesniffer": "^4.0",
+                "symfony/browser-kit": "^6.4 || ^7.4 || ^8.0",
+                "symfony/cache": "^6.4 || ^7.4 || ^8.0",
+                "symfony/yaml": "^6.4 || ^7.4 || ^8.0"
+            },
+            "suggest": {
+                "doctrine/mongodb-odm-bundle": "Required for DoctrineODMCheck - MongoDB health monitoring",
+                "doctrine/orm": "Required for DoctrineORMCheck - database health monitoring",
+                "ext-mongodb": "Required for DoctrineODMCheck - MongoDB driver extension",
+                "ext-redis": "Native PHP Redis extension for RedisCheck (alternative to predis)",
+                "ext-relay": "High-performance Redis extension for RedisCheck (alternative to ext-redis)",
+                "predis/predis": "Pure PHP Redis client for RedisCheck (alternative to ext-redis)",
+                "symfony/cache": "Required for RedisCheck - provides Redis connection factory"
+            },
+            "type": "symfony-bundle",
+            "autoload": {
+                "psr-4": {
+                    "SymfonyHealthCheckBundle\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Yozhef Hisem",
+                    "email": "hisemjo@gmail.com",
+                    "homepage": "https://macpaw.com/",
+                    "role": "Software Engineer"
+                },
+                {
+                    "name": "Ivan Hisem",
+                    "email": "2yonchi@gmail.com",
+                    "homepage": "https://macpaw.com/",
+                    "role": "Software Engineer"
+                }
+            ],
+            "description": "Symfony health check bundle",
+            "homepage": "https://github.com/MacPaw/symfony-health-check-bundle",
+            "keywords": [
+                "MacPaw",
+                "Symfony-Health-Check",
+                "Symfony-Health-Check-Bundle",
+                "Symfony-Health-Check-Doctrine",
+                "doctrine",
+                "healthcheck",
+                "monitoring",
+                "symfony"
+            ],
+            "support": {
+                "issues": "https://github.com/MacPaw/symfony-health-check-bundle/issues",
+                "source": "https://github.com/MacPaw/symfony-health-check-bundle/tree/v2.1.0"
+            },
+            "time": "2026-05-06T08:58:52+00:00"
         },
         {
             "name": "masterminds/html5",
@@ -9850,16 +9874,16 @@
         },
         {
             "name": "overtrue/phplint",
-            "version": "9.7.2",
+            "version": "9.7.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/overtrue/phplint.git",
-                "reference": "f9d3fb3c6b6af49fce0fa8d712da1c38da41fe65"
+                "reference": "69ec6707970ef95bdc6cd7489e407dbf9ff2981b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/overtrue/phplint/zipball/f9d3fb3c6b6af49fce0fa8d712da1c38da41fe65",
-                "reference": "f9d3fb3c6b6af49fce0fa8d712da1c38da41fe65",
+                "url": "https://api.github.com/repos/overtrue/phplint/zipball/69ec6707970ef95bdc6cd7489e407dbf9ff2981b",
+                "reference": "69ec6707970ef95bdc6cd7489e407dbf9ff2981b",
                 "shasum": ""
             },
             "require": {
@@ -9878,7 +9902,7 @@
             },
             "require-dev": {
                 "bamarni/composer-bin-plugin": "^1.4",
-                "jetbrains/phpstorm-stubs": "^2024.1 || ^2026.0",
+                "jetbrains/phpstorm-stubs": "^2024.1",
                 "php-parallel-lint/php-console-highlighter": "^1.0"
             },
             "bin": [
@@ -9924,7 +9948,7 @@
             ],
             "support": {
                 "issues": "https://github.com/overtrue/phplint/issues",
-                "source": "https://github.com/overtrue/phplint/tree/9.7.2"
+                "source": "https://github.com/overtrue/phplint/tree/9.7.1"
             },
             "funding": [
                 {
@@ -9932,7 +9956,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2026-06-03T05:26:18+00:00"
+            "time": "2025-11-29T07:48:19+00:00"
         },
         {
             "name": "phar-io/manifest",
@@ -10705,12 +10729,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Roave/SecurityAdvisories.git",
-                "reference": "45dcf8dcfe3ff6b2a5689e3a4c125732067ada3c"
+                "reference": "e87a6b92f5a78dab4061c1c933a8ada5a88d569e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Roave/SecurityAdvisories/zipball/45dcf8dcfe3ff6b2a5689e3a4c125732067ada3c",
-                "reference": "45dcf8dcfe3ff6b2a5689e3a4c125732067ada3c",
+                "url": "https://api.github.com/repos/Roave/SecurityAdvisories/zipball/e87a6b92f5a78dab4061c1c933a8ada5a88d569e",
+                "reference": "e87a6b92f5a78dab4061c1c933a8ada5a88d569e",
                 "shasum": ""
             },
             "conflict": {
@@ -10941,7 +10965,6 @@
                 "drupal/umami_analytics": "<1.0.1",
                 "duncanmcclean/guest-entries": "<3.1.2",
                 "dweeves/magmi": "<=0.7.24",
-                "easycorp/easyadmin-bundle": ">=4,<4.29.10|>=5,<5.0.10",
                 "ec-cube/ec-cube": "<2.4.4|>=2.11,<=2.17.1|>=3,<=3.0.18.0-patch4|>=4,<=4.3.1",
                 "ecodev/newsletter": "<=4",
                 "ectouch/ectouch": "<=2.7.2",
@@ -11787,7 +11810,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2026-06-03T09:41:34+00:00"
+            "time": "2026-05-31T20:27:34+00:00"
         },
         {
             "name": "sebastian/cli-parser",

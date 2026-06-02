@@ -15,5 +15,5 @@ return [
     Nelmio\CorsBundle\NelmioCorsBundle::class => ['all' => true],
     Exercise\HTMLPurifierBundle\ExerciseHTMLPurifierBundle::class => ['all' => true],
     Chrisguitarguy\RequestId\ChrisguitarguyRequestIdBundle::class => ['all' => true],
-    Ekreative\HealthCheckBundle\EkreativeHealthCheckBundle::class => ['all' => true],
+    SymfonyHealthCheckBundle\SymfonyHealthCheckBundle::class => ['all' => true],
 ];
