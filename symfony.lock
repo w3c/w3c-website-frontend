@@ -38,15 +38,6 @@
     "egulias/email-validator": {
         "version": "3.1.1"
     },
-    "ekreative/health-check-bundle": {
-        "version": "1.11",
-        "recipe": {
-            "repo": "github.com/symfony/recipes-contrib",
-            "branch": "main",
-            "version": "1.5",
-            "ref": "7d7bdbc46583debf6ffb4ebed6f827fa5b37e442"
-        }
-    },
     "erusev/parsedown": {
         "version": "1.7.4"
     },
@@ -94,6 +85,19 @@
     },
     "league/config": {
         "version": "v1.1.1"
+    },
+    "macpaw/symfony-health-check-bundle": {
+        "version": "2.1",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "main",
+            "version": "1.0",
+            "ref": "7bcf3b4de9b5271d0f389ce58ec6cce55f48ee6f"
+        },
+        "files": [
+            "config/packages/symfony_health_check.yaml",
+            "config/routes/symfony_health_check.yaml"
+        ]
     },
     "masterminds/html5": {
         "version": "2.7.4"

@@ -1523,12 +1523,16 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  *     enable_monolog?: bool|Param, // Whether or not to turn on the request ID processor for monolog // Default: true
  *     enable_twig?: bool|Param, // Whether or not to enable the twig `request_id()` function. Only works if TwigBundle is present. // Default: true
  * }
- * @psalm-type EkreativeHealthCheckConfig = array{
- *     redis?: list<scalar|Param|null>,
- *     optional_redis?: list<scalar|Param|null>,
- *     doctrine?: list<scalar|Param|null>,
- *     optional_doctrine?: list<scalar|Param|null>,
- *     doctrine_enabled?: bool|Param, // Default: true
+ * @psalm-type SymfonyHealthCheckConfig = array{
+ *     ping_error_response_code?: mixed, // Default: null
+ *     health_error_response_code?: mixed, // Default: null
+ *     redis_dsn?: mixed, // Default: null
+ *     health_checks?: list<array{ // Default: []
+ *         id?: scalar|Param|null,
+ *     }>,
+ *     ping_checks?: list<array{ // Default: []
+ *         id?: scalar|Param|null,
+ *     }>,
  * }
  * @psalm-type ConfigType = array{
  *     imports?: ImportsConfig,
@@ -1544,7 +1548,7 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  *     nelmio_cors?: NelmioCorsConfig,
  *     exercise_html_purifier?: ExerciseHtmlPurifierConfig,
  *     chrisguitarguy_request_id?: ChrisguitarguyRequestIdConfig,
- *     ekreative_health_check?: EkreativeHealthCheckConfig,
+ *     symfony_health_check?: SymfonyHealthCheckConfig,
  *     "when@dev"?: array{
  *         imports?: ImportsConfig,
  *         parameters?: ParametersConfig,
@@ -1562,7 +1566,7 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  *         nelmio_cors?: NelmioCorsConfig,
  *         exercise_html_purifier?: ExerciseHtmlPurifierConfig,
  *         chrisguitarguy_request_id?: ChrisguitarguyRequestIdConfig,
- *         ekreative_health_check?: EkreativeHealthCheckConfig,
+ *         symfony_health_check?: SymfonyHealthCheckConfig,
  *     },
  *     "when@prod"?: array{
  *         imports?: ImportsConfig,
@@ -1578,7 +1582,7 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  *         nelmio_cors?: NelmioCorsConfig,
  *         exercise_html_purifier?: ExerciseHtmlPurifierConfig,
  *         chrisguitarguy_request_id?: ChrisguitarguyRequestIdConfig,
- *         ekreative_health_check?: EkreativeHealthCheckConfig,
+ *         symfony_health_check?: SymfonyHealthCheckConfig,
  *     },
  *     "when@test"?: array{
  *         imports?: ImportsConfig,
@@ -1595,7 +1599,7 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  *         nelmio_cors?: NelmioCorsConfig,
  *         exercise_html_purifier?: ExerciseHtmlPurifierConfig,
  *         chrisguitarguy_request_id?: ChrisguitarguyRequestIdConfig,
- *         ekreative_health_check?: EkreativeHealthCheckConfig,
+ *         symfony_health_check?: SymfonyHealthCheckConfig,
  *     },
  *     ...<string, ExtensionType|array{ // extra keys must follow the when@%env% pattern or match an extension alias
  *         imports?: ImportsConfig,
