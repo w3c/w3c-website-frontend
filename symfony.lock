@@ -59,17 +59,11 @@
     "ezyang/htmlpurifier": {
         "version": "v4.13.0"
     },
-    "friendsofphp/proxy-manager-lts": {
-        "version": "v1.0.3"
-    },
     "friendsofsymfony/http-cache": {
         "version": "2.11.0"
     },
     "friendsofsymfony/http-cache-bundle": {
         "version": "2.11.2"
-    },
-    "laminas/laminas-code": {
-        "version": "4.2.1"
     },
     "laminas/laminas-escaper": {
         "version": "2.7.0"
@@ -600,9 +594,6 @@
     },
     "symfony/property-info": {
         "version": "v5.2.7"
-    },
-    "symfony/proxy-manager-bridge": {
-        "version": "v5.2.4"
     },
     "symfony/routing": {
         "version": "7.1",
