@@ -1,9 +1,9 @@
-#health:
-#    path: /healthcheck
-#    methods: GET
-#    controller: SymfonyHealthCheckBundle\Controller\HealthController::check
-
-ping:
+health:
     path: /healthcheck
     methods: GET
-    controller: SymfonyHealthCheckBundle\Controller\PingController::check
+    controller: SymfonyHealthCheckBundle\Controller\HealthController::check
+
+#ping:
+#    path: /ping
+#    methods: GET
+#    controller: SymfonyHealthCheckBundle\Controller\PingController::check

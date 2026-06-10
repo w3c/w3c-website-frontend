@@ -5,22 +5,28 @@
     "license": "proprietary",
     "minimum-stability": "dev",
     "prefer-stable": true,
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/Seros/RequestIdBundle.git"
+        }
+    ],
     "require": {
-        "php": "^8.2",
+        "php": ">=8.4.1",
         "ext-ctype": "*",
         "ext-dom": "*",
         "ext-iconv": "*",
         "ext-json": "*",
-        "chrisguitarguy/request-id-bundle": "^6.0",
+        "chrisguitarguy/request-id-bundle": "dev-support-symfony-8",
         "composer/package-versions-deprecated": "^1.11",
         "friendsofsymfony/http-cache-bundle": "^3.4",
-        "guzzlehttp/promises": "2.3",
+        "guzzlehttp/promises": "^2.5",
         "macpaw/symfony-health-check-bundle": "^2.1",
         "nelmio/cors-bundle": "^2.6",
         "nyholm/psr7": "^1.8",
         "phpdocumentor/reflection-docblock": "^6.0",
-        "sabre/vobject": "^4.5",
-        "strata/symfony-frontend": "^0.9",
+        "sabre/vobject": "^4.6",
+        "strata/symfony-frontend": "dev-feature/php-config",
         "symfony/asset": "*",
         "symfony/console": "*",
         "symfony/dotenv": "*",
@@ -32,12 +38,11 @@
         "symfony/intl": "*",
         "symfony/mailer": "*",
         "symfony/mime": "*",
-        "symfony/monolog-bundle": "^3.11",
+        "symfony/monolog-bundle": "^4.0",
         "symfony/notifier": "*",
         "symfony/process": "*",
         "symfony/property-access": "*",
         "symfony/property-info": "*",
-        "symfony/proxy-manager-bridge": "^6.4",
         "symfony/security-bundle": "*",
         "symfony/security-csrf": "*",
         "symfony/serializer": "*",
@@ -49,21 +54,21 @@
         "symfony/yaml": "*",
         "twig/extra-bundle": "^3.24",
         "twig/twig": "^3.24",
-        "w3c/website-templates-bundle": "dev-main"
+        "w3c/website-templates-bundle": "dev-sf8"
     },
     "require-dev": {
         "overtrue/phplint": "^9.7",
-        "phpunit/phpunit": "^11.5",
-        "rector/rector": "^2.3",
+        "phpunit/phpunit": "^13.2",
+        "rector/rector": "^2.4",
         "roave/security-advisories": "dev-latest",
         "squizlabs/php_codesniffer": "^4.0",
         "studio24/deployer-recipes": "^2.2",
         "symfony/browser-kit": "*",
         "symfony/css-selector": "*",
         "symfony/debug-bundle": "*",
-        "symfony/maker-bundle": "^1.67",
-        "symfony/panther": "^2.4",
-        "symfony/phpunit-bridge": "^8.0",
+        "symfony/maker-bundle": "^v1.67",
+        "symfony/panther": "^v2.4",
+        "symfony/phpunit-bridge": "*",
         "symfony/stopwatch": "*",
         "symfony/var-dumper": "*",
         "symfony/web-profiler-bundle": "*"
@@ -74,6 +79,9 @@
             "*": "dist"
         },
         "sort-packages": true,
+        "platform": {
+            "php": "8.4.1"
+        },
         "allow-plugins": {
             "composer/package-versions-deprecated": true,
             "symfony/flex": true,
@@ -122,7 +130,7 @@
     "extra": {
         "symfony": {
             "allow-contrib": false,
-            "require": "7.4.*"
+            "require": "8.1.*"
         }
     }
 }
