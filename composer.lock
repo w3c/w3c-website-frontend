@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "348c0d94e6c986fc65efcfbdb09580b8",
+    "content-hash": "bd9dd8dcf11bc23ff310d4a7f07f3260",
     "packages": [
         {
             "name": "brick/math",
@@ -9462,16 +9462,16 @@
         },
         {
             "name": "w3c/website-templates-bundle",
-            "version": "dev-main",
+            "version": "dev-feature/spacing-and-markup",
             "source": {
                 "type": "git",
                 "url": "https://github.com/w3c/w3c-website-templates-bundle.git",
-                "reference": "3b789c78c1d18bcd0f5ab337c92ffc285334a7de"
+                "reference": "4a7408b1eb3afd498d7db41eb1360769271a24f8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/w3c/w3c-website-templates-bundle/zipball/3b789c78c1d18bcd0f5ab337c92ffc285334a7de",
-                "reference": "3b789c78c1d18bcd0f5ab337c92ffc285334a7de",
+                "url": "https://api.github.com/repos/w3c/w3c-website-templates-bundle/zipball/4a7408b1eb3afd498d7db41eb1360769271a24f8",
+                "reference": "4a7408b1eb3afd498d7db41eb1360769271a24f8",
                 "shasum": ""
             },
             "require": {
@@ -9494,7 +9494,6 @@
                 "studio24/deployer-recipes": "^v2.1",
                 "studio24/design-system": "^2.0"
             },
-            "default-branch": true,
             "type": "symfony-bundle",
             "extra": {
                 "symfony": {
@@ -9514,9 +9513,9 @@
             "description": "W3C Website Templates",
             "homepage": "https://github.com/w3c/w3c-website-templates-bundle",
             "support": {
-                "source": "https://github.com/w3c/w3c-website-templates-bundle/tree/main"
+                "source": "https://github.com/w3c/w3c-website-templates-bundle/tree/feature/spacing-and-markup"
             },
-            "time": "2026-05-04T12:36:57+00:00"
+            "time": "2026-06-01T15:56:24+00:00"
         },
         {
             "name": "webmozart/assert",
@@ -13670,5 +13669,5 @@
         "ext-json": "*"
     },
     "platform-dev": {},
-    "plugin-api-version": "2.9.0"
+    "plugin-api-version": "2.6.0"
 }
