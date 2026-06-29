@@ -26,7 +26,7 @@
         "nyholm/psr7": "^1.8",
         "phpdocumentor/reflection-docblock": "^6.0",
         "sabre/vobject": "^4.6",
-        "strata/symfony-frontend": "dev-feature/php-config",
+        "strata/symfony-frontend": "^0.10",
         "symfony/asset": "*",
         "symfony/console": "*",
         "symfony/dotenv": "*",
