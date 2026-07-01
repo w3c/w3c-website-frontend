@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "6df72c2345eb17b893ddf44d7c9551c1",
+    "content-hash": "ef2a4d7ae16492330480ce0c6b21b236",
     "packages": [
         {
             "name": "brick/math",
@@ -9171,16 +9171,16 @@
         },
         {
             "name": "w3c/website-templates-bundle",
-            "version": "dev-sf8",
+            "version": "dev-main",
             "source": {
                 "type": "git",
                 "url": "https://github.com/w3c/w3c-website-templates-bundle.git",
-                "reference": "37f23d93c059fe2134a3756e7a40870fab711c5e"
+                "reference": "90f9e0c876f4b825dcbadac2d327956a5c3e4bdd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/w3c/w3c-website-templates-bundle/zipball/37f23d93c059fe2134a3756e7a40870fab711c5e",
-                "reference": "37f23d93c059fe2134a3756e7a40870fab711c5e",
+                "url": "https://api.github.com/repos/w3c/w3c-website-templates-bundle/zipball/90f9e0c876f4b825dcbadac2d327956a5c3e4bdd",
+                "reference": "90f9e0c876f4b825dcbadac2d327956a5c3e4bdd",
                 "shasum": ""
             },
             "require": {
@@ -9203,6 +9203,7 @@
                 "studio24/deployer-recipes": "^v2.1",
                 "studio24/design-system": "^2.0"
             },
+            "default-branch": true,
             "type": "symfony-bundle",
             "extra": {
                 "symfony": {
@@ -9222,9 +9223,9 @@
             "description": "W3C Website Templates",
             "homepage": "https://github.com/w3c/w3c-website-templates-bundle",
             "support": {
-                "source": "https://github.com/w3c/w3c-website-templates-bundle/tree/sf8"
+                "source": "https://github.com/w3c/w3c-website-templates-bundle/tree/main"
             },
-            "time": "2026-05-06T13:49:23+00:00"
+            "time": "2026-07-01T09:48:02+00:00"
         },
         {
             "name": "webmozart/assert",
@@ -9828,11 +9829,11 @@
         },
         {
             "name": "phpstan/phpstan",
-            "version": "2.2.2",
+            "version": "2.2.3",
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/e5cc34d491a90e79c216d824f60fe21fd4d93bd6",
-                "reference": "e5cc34d491a90e79c216d824f60fe21fd4d93bd6",
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/4048833dd47b377287818841877fb3087289509c",
+                "reference": "4048833dd47b377287818841877fb3087289509c",
                 "shasum": ""
             },
             "require": {
@@ -9888,7 +9889,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2026-06-05T09:00:01+00:00"
+            "time": "2026-06-30T21:15:26+00:00"
         },
         {
             "name": "phpunit/php-code-coverage",
@@ -10275,16 +10276,16 @@
         },
         {
             "name": "phpunit/phpunit",
-            "version": "13.2.1",
+            "version": "13.2.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "60da0ff1e10a0f72ee18a24117ec3b613a346bba"
+                "reference": "492c067e618de7b3c76105082c90f9d2833401b7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/60da0ff1e10a0f72ee18a24117ec3b613a346bba",
-                "reference": "60da0ff1e10a0f72ee18a24117ec3b613a346bba",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/492c067e618de7b3c76105082c90f9d2833401b7",
+                "reference": "492c067e618de7b3c76105082c90f9d2833401b7",
                 "shasum": ""
             },
             "require": {
@@ -10355,7 +10356,7 @@
             "support": {
                 "issues": "https://github.com/sebastianbergmann/phpunit/issues",
                 "security": "https://github.com/sebastianbergmann/phpunit/security/policy",
-                "source": "https://github.com/sebastianbergmann/phpunit/tree/13.2.1"
+                "source": "https://github.com/sebastianbergmann/phpunit/tree/13.2.2"
             },
             "funding": [
                 {
@@ -10363,7 +10364,7 @@
                     "type": "other"
                 }
             ],
-            "time": "2026-06-15T13:14:22+00:00"
+            "time": "2026-06-29T13:36:29+00:00"
         },
         {
             "name": "rector/rector",
@@ -10431,12 +10432,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Roave/SecurityAdvisories.git",
-                "reference": "36ba91e82e1b493faef2c13277d6bd2669ea9f31"
+                "reference": "9eb7881a3ed4824d580790ef7d52d9bf14dac23d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Roave/SecurityAdvisories/zipball/36ba91e82e1b493faef2c13277d6bd2669ea9f31",
-                "reference": "36ba91e82e1b493faef2c13277d6bd2669ea9f31",
+                "url": "https://api.github.com/repos/Roave/SecurityAdvisories/zipball/9eb7881a3ed4824d580790ef7d52d9bf14dac23d",
+                "reference": "9eb7881a3ed4824d580790ef7d52d9bf14dac23d",
                 "shasum": ""
             },
             "conflict": {
@@ -11048,7 +11049,7 @@
                 "paragonie/random_compat": "<2",
                 "paragonie/sodium_compat": "<1.24|>=2,<2.5",
                 "passbolt/passbolt_api": "<4.6.2",
-                "paymenter/paymenter": "<1.5",
+                "paymenter/paymenter": "<=1.5.4",
                 "paypal/adaptivepayments-sdk-php": "<=3.9.2",
                 "paypal/invoice-sdk-php": "<=3.9",
                 "paypal/merchant-sdk-php": "<3.12",
@@ -11538,7 +11539,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2026-06-26T23:29:05+00:00"
+            "time": "2026-06-30T19:37:35+00:00"
         },
         {
             "name": "sebastian/cli-parser",
