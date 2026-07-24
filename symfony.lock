@@ -38,15 +38,6 @@
     "egulias/email-validator": {
         "version": "3.1.1"
     },
-    "ekreative/health-check-bundle": {
-        "version": "1.11",
-        "recipe": {
-            "repo": "github.com/symfony/recipes-contrib",
-            "branch": "main",
-            "version": "1.5",
-            "ref": "7d7bdbc46583debf6ffb4ebed6f827fa5b37e442"
-        }
-    },
     "erusev/parsedown": {
         "version": "1.7.4"
     },
@@ -68,17 +59,11 @@
     "ezyang/htmlpurifier": {
         "version": "v4.13.0"
     },
-    "friendsofphp/proxy-manager-lts": {
-        "version": "v1.0.3"
-    },
     "friendsofsymfony/http-cache": {
         "version": "2.11.0"
     },
     "friendsofsymfony/http-cache-bundle": {
         "version": "2.11.2"
-    },
-    "laminas/laminas-code": {
-        "version": "4.2.1"
     },
     "laminas/laminas-escaper": {
         "version": "2.7.0"
@@ -94,6 +79,19 @@
     },
     "league/config": {
         "version": "v1.1.1"
+    },
+    "macpaw/symfony-health-check-bundle": {
+        "version": "2.1",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "main",
+            "version": "1.0",
+            "ref": "7bcf3b4de9b5271d0f389ce58ec6cce55f48ee6f"
+        },
+        "files": [
+            "config/packages/symfony_health_check.yaml",
+            "config/routes/symfony_health_check.yaml"
+        ]
     },
     "masterminds/html5": {
         "version": "2.7.4"
@@ -596,9 +594,6 @@
     },
     "symfony/property-info": {
         "version": "v5.2.7"
-    },
-    "symfony/proxy-manager-bridge": {
-        "version": "v5.2.4"
     },
     "symfony/routing": {
         "version": "7.1",
