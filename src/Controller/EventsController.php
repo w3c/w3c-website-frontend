@@ -49,7 +49,7 @@ class EventsController extends AbstractController
     #[Route(
         path: '/{type}/',
         name: 'app_events_index_type',
-        requirements: ['type' => 'ac|conferences|happenings|talks|tpac|workshops']
+        requirements: ['type' => 'ac|conferences|happenings|meetup|talks|tpac|workshops']
     )]
     public function index(
         QueryManager $manager,
@@ -91,7 +91,7 @@ class EventsController extends AbstractController
     #[Route(
         path: '/{type}/{year}/',
         name: 'app_events_archive_type',
-        requirements: ['type' => 'ac|conferences|happenings|talks|tpac|workshops', 'year' => '\d\d\d\d']
+        requirements: ['type' => 'ac|conferences|happenings|meetup|talks|tpac|workshops', 'year' => '\d\d\d\d']
     )]
     public function archive(
         int $year,
@@ -136,7 +136,7 @@ class EventsController extends AbstractController
      */
     #[Route(
         path: '/{type}/{year}/{slug}.ics',
-        requirements: ['type' => 'ac|conferences|happenings|talks|tpac|workshops', 'year' => '\d\d\d\d']
+        requirements: ['type' => 'ac|conferences|happenings|meetup|talks|tpac|workshops', 'year' => '\d\d\d\d']
     )]
     public function ical(
         string $type,
@@ -181,7 +181,7 @@ class EventsController extends AbstractController
      */
     #[Route(
         path: '/{type}/{year}/{slug}/',
-        requirements: ['type' => 'ac|conferences|happenings|talks|tpac|workshops', 'year' => '\d\d\d\d']
+        requirements: ['type' => 'ac|conferences|happenings|meetup|talks|tpac|workshops', 'year' => '\d\d\d\d']
     )]
     public function show(
         string $type,
