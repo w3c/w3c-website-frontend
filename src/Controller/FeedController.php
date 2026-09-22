@@ -16,6 +16,7 @@ use App\Query\CraftCMS\PressReleases\Listing as PressReleasesListing;
 use App\Query\CraftCMS\Taxonomies\CategoryInfo;
 use App\Query\CraftCMS\Taxonomies\GroupInfo;
 use App\Query\W3C\Group;
+use App\Query\W3C\W3CFunction;
 use DateTimeImmutable;
 use Exception;
 use Laminas\Feed\Writer\Entry;
@@ -272,12 +273,19 @@ class FeedController extends AbstractController
      * @throws RuntimeError
      * @throws SyntaxError
      */
-    #[Route(path: '/groups/{type}/{shortname}/feed/', requirements: ['type' => 'wg|ig|cg|bg|other'])]
+    #[Route(path: '/groups/{type}/{shortname}/feed/', requirements: ['type' => 'wg|ig|cg|bg|other|function'])]
     public function group(string $type, string $shortname, QueryManager $manager, UrlHelper $urlHelper): Response
     {
         $slug = $type . '-' . $shortname;
         $manager->add('group-info', new GroupInfo($this->site->siteHandle, $slug));
-        $manager->add('group', new Group($type, $shortname));
+
+        // For functions, we need to use a different query to get the group info, as they are not in the same endpoint
+        // as other groups.
+        if ($type === 'function') {
+            $manager->add('group', new W3CFunction($type, $shortname));
+        } else {
+            $manager->add('group', new Group($type, $shortname));
+        }
         $cmsGroup = $manager->get('group-info');
         $group    = $manager->get('group');
 
