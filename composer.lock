@@ -9175,12 +9175,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/w3c/w3c-website-templates-bundle.git",
-                "reference": "80f3fc6d60e81314e1040fe0a2481cadaeb97ffb"
+                "reference": "1328ec90bf91ccdf2eb890ab15df174df5dd27a9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/w3c/w3c-website-templates-bundle/zipball/80f3fc6d60e81314e1040fe0a2481cadaeb97ffb",
-                "reference": "80f3fc6d60e81314e1040fe0a2481cadaeb97ffb",
+                "url": "https://api.github.com/repos/w3c/w3c-website-templates-bundle/zipball/1328ec90bf91ccdf2eb890ab15df174df5dd27a9",
+                "reference": "1328ec90bf91ccdf2eb890ab15df174df5dd27a9",
                 "shasum": ""
             },
             "require": {
@@ -9224,7 +9224,7 @@
             "support": {
                 "source": "https://github.com/w3c/w3c-website-templates-bundle/tree/feature/spacing-and-markup"
             },
-            "time": "2026-09-16T10:29:55+00:00"
+            "time": "2026-09-22T14:42:42+00:00"
         },
         {
             "name": "webmozart/assert",
