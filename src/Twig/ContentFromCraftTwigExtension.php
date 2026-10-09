@@ -34,10 +34,11 @@ class ContentFromCraftTwigExtension extends AbstractExtension
 
     public function formatTable($content): string
     {
-        $html5 = new HTML5();
+        // Parser/serializer only: the parsed content lives in $dom
+        $parser = new HTML5();
 
         // Wrap the incoming snippet so we can safely query & replace
-        $dom =  $html5->loadHTML(
+        $dom =  $parser->loadHTML(
             '<!DOCTYPE html><meta charset="utf-8"><div id="__root__">'.$content.'</div>'
         );
 
@@ -78,7 +79,9 @@ class ContentFromCraftTwigExtension extends AbstractExtension
                     $captionId = 'table-caption-'.str_replace('.', '-', uniqid('', true));
                 }
 
-                $caption = $dom->createElement('caption', $captionContent);
+                // Set as text to escape "&"
+                $caption = $dom->createElement('caption');
+                $caption->textContent = $captionContent;
                 $caption->setAttribute('id', $captionId);
 
                 // Link the table to its caption for accessibility
@@ -100,9 +103,11 @@ class ContentFromCraftTwigExtension extends AbstractExtension
         }
 
         // Serialize only the content inside our temporary root
+        // Use the HTML5 serializer because DOMDocument's one would replace <br> with <br></br> which would in turn
+        // be transformed into <br><br> by the table_of_contents() code which parses the HTML again
         $out = '';
         foreach (iterator_to_array($root->childNodes) as $child) {
-            $out .= $dom->saveHTML($child);
+            $out .= $parser->saveHTML($child);
         }
 
         return $out;
