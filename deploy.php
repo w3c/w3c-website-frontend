@@ -23,7 +23,6 @@ set('disk_space_filesystem', '/var/www');
 // W3C AWS config
 set('http_user', 'www-data');
 set('remote_user', 'studio24');
-set('php_fpm_version', '8.4');
 
 /**
  * 3. Hosts
@@ -57,6 +56,3 @@ host('staging')
  *
  * Any custom deployment tasks to run
  */
-
-// PHP-FPM reload
-after('deploy', 'php-fpm:reload');
